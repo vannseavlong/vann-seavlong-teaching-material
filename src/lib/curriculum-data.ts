@@ -117,7 +117,7 @@ export const aaCurriculum: CurriculumData = {
         "Harder binomial expansion",
       ],
       contents: [
-        { title: "Lesson", status: "coming-soon" },
+        { title: "Lesson", status: "available", href: "/aa/unit-1/lesson" },
         { title: "Practice Problems", status: "coming-soon" },
       ],
     },
