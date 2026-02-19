@@ -7,7 +7,8 @@ The platform serves as a comprehensive guide and resource hub for Grade 11 IB st
 ## Tech Stack
 - **Framework:** Next.js 16 (App Router, TypeScript)
 - **Styling:** Tailwind CSS v4 (inline `@theme` tokens in `globals.css`)
-- **Location:** `/home/longcelot/TeachingMaterial/IB/teaching-material-ib/`
+- **Math rendering:** KaTeX v0.16 via `src/components/ui/Math.tsx` (`InlineMath`, `BlockMath`). CSS imported in `layout.tsx`.
+- **Location:** `/home/longcelot/TeachingMaterial/IB/teaching-material-ib/` // This depend on the machine that work on this.
 - **Package manager:** npm
 - **Build:** `npm run build` / **Dev:** `npm run dev`
 
@@ -29,6 +30,7 @@ teaching-material-ib/
 │   │   │   ├── FAQ.tsx         # Expandable FAQ accordion
 │   │   │   ├── Hero.tsx        # Hero banner
 │   │   │   ├── HighlightBox.tsx # Colored callout box
+│   │   │   ├── Math.tsx        # InlineMath + BlockMath (KaTeX SSR)
 │   │   │   ├── Section.tsx     # Section wrapper with label/title/intro
 │   │   │   ├── Tag.tsx         # Colored pill/badge
 │   │   │   └── TopicGrid.tsx   # Grid of topic items
@@ -47,6 +49,10 @@ teaching-material-ib/
 │   │   │   └── SectionFAQ.tsx
 │   │   └── curriculum/
 │   │       └── CurriculumPage.tsx  # Shared curriculum layout (AA & AI)
+│   ├── app/
+│   │   └── aa/
+│   │       └── unit-1/
+│   │           └── lesson/page.tsx  # AA Unit 1 Algebra — full lesson (DONE)
 │   └── lib/
 │       └── curriculum-data.ts  # Curriculum unit data + types
 └── ...
@@ -84,11 +90,10 @@ The "AA vs AI Decision Guide" — 9 sections converted from slide deck content:
 
 ### AA Curriculum (`/aa`)
 Full curriculum breakdown for Analysis & Approaches. Uses `CurriculumPage` component with `aaCurriculum` data. Includes 5 units, each with resource slots for:
-- Lesson Notes
-- Practice Problems
-- Mock Test
-- Exam Preparation
-- Answer Sheet
+- Lesson
+- Practice Problems + Answer Sheet after done
+
+Each AA and AI has Mock Test/Exam Preparation where owner can create 1 set or more set of paper. Each set has 3 paper following IB guide line standard
 
 ### AI Curriculum (`/ai`)
 Same structure as AA, using `aiCurriculum` data from `curriculum-data.ts`.
@@ -110,13 +115,68 @@ Same structure as AA, using `aiCurriculum` data from `curriculum-data.ts`.
 - Add to the `units` array in `curriculum-data.ts`
 - The `CurriculumPage` component will render them automatically
 
+## Lesson Page Convention (established with AA Unit 1)
+
+Every lesson page lives at `src/app/[pathway]/unit-[n]/lesson/page.tsx`.
+
+### Lesson Page Structure (follow this order):
+1. **`LessonHero`** — dark navy gradient; breadcrumb, unit number, SL/HL tags, title, description, hour counts.
+2. **`TableOfContents`** — sticky bar with anchor links; SL links in blue (`aa-bg`), HL links in red (`danger-bg`).
+3. **Topic sections** — one `LessonSection` per topic (SL topics first, then `HLDivider`, then HL topics).
+4. **`UnitSummary`** — key formula recap grid + navigation links back to curriculum.
+
+### Per-Topic Section Structure:
+Each topic section should contain (in this order):
+- `HighlightBox variant="blue"` — key idea / definition in plain language.
+- `FormulaBox` (dark navy) — all relevant formulas in `FormulaRow` format.
+- Visual aid — a simple diagram, table, or step flow using Tailwind grid/flex (no external image files).
+- `WorkedExample` — step-by-step solution using `StepBox` components.
+- `Practice` — always-visible problem + collapsible solution via native `<details>`.
+
+### Helper components (defined inside each lesson page file):
+| Component | Purpose |
+|-----------|---------|
+| `FormulaBox` | Dark navy card holding formula rows |
+| `FormulaRow` | `{label, math}` — label + `InlineMath` in a row |
+| `StepBox` | Numbered step with blue circle badge |
+| `WorkedExample` | Blue-bordered card with "Worked Example" label |
+| `Practice` | Yellow-bordered card; problem always visible, solution in `<details>` |
+| `LessonSection` | Local section wrapper (replaces shared `Section`; controls alt bg) |
+| `SLTag` / `HLTag` | Blue / red pill indicating audience |
+| `HLDivider` | Full-width red banner separating SL from HL content |
+
+### Math rendering:
+- Use `InlineMath` for math within text.
+- Use `BlockMath` for standalone equations.
+- Both are server-side rendered via KaTeX — no 'use client' needed.
+- Import from `@/components/ui/Math`.
+
+### Updating curriculum-data.ts when a lesson is complete:
+Change the `contents` entry for that unit:
+```ts
+{ title: "Lesson", status: "available", href: "/aa/unit-N/lesson" }
+```
+
+## Progress Tracker
+| Path | Lesson | Practice | Mock |
+|------|--------|----------|------|
+| AA Unit 1: Algebra | ✅ Done | ⏳ Coming | ⏳ Coming |
+| AA Unit 2: Functions | ⏳ | ⏳ | ⏳ |
+| AA Unit 3: Trigonometry | ⏳ | ⏳ | ⏳ |
+| AA Unit 4: Geometry & Vectors | ⏳ | ⏳ | ⏳ |
+| AA Unit 5: Statistics & Probability | ⏳ | ⏳ | ⏳ |
+| AA Unit 6: Calculus | ⏳ | ⏳ | ⏳ |
+| AI Unit 1: Number & Algebra | ⏳ | ⏳ | ⏳ |
+| AI Unit 2: Functions & Modelling | ⏳ | ⏳ | ⏳ |
+| AI Unit 3: Geometry | ⏳ | ⏳ | ⏳ |
+| AI Unit 4: Statistics & Probability | ⏳ | ⏳ | ⏳ |
+| AI Unit 5: Calculus & Technology | ⏳ | ⏳ | ⏳ |
+
 ## Future Plans
-- Break down each unit into individual lesson pages
+- Complete lesson pages for all units (follow the AA Unit 1 convention above)
 - Add practice problem sets with answer sheets
 - Add mock tests per unit and full mock exams
 - Add exam preparation guides
-- All content pages will follow the resource pattern: Lesson → Practice → Mock → Exam Prep → Answers
+- All content pages follow the pattern: Lesson → Practice → Mock → Exam Prep → Answers
 
-## Original Static File
-The original single-file HTML version is kept at:
-`/home/longcelot/TeachingMaterial/IB/ib-math-aa-vs-ai.html`
+
