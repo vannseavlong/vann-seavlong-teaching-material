@@ -52,7 +52,11 @@ teaching-material-ib/
 │   ├── app/
 │   │   └── aa/
 │   │       └── unit-1/
-│   │           └── lesson/page.tsx  # AA Unit 1 Algebra — full lesson (DONE)
+│   │           ├── lesson/page.tsx          # AA Unit 1 Algebra — full lesson (DONE)
+│   │           └── practice/
+│   │               └── [id]/
+│   │                   ├── page.tsx          # Server wrapper (metadata + notFound guard)
+│   │                   └── PracticeClient.tsx # Interactive client component (DONE: ids 1–3)
 │   └── lib/
 │       └── curriculum-data.ts  # Curriculum unit data + types
 └── ...
@@ -157,10 +161,69 @@ Change the `contents` entry for that unit:
 { title: "Lesson", status: "available", href: "/aa/unit-N/lesson" }
 ```
 
+---
+
+## Practice Page Convention (established with AA Unit 1, ids 1–3)
+
+Every per-topic practice page lives at `src/app/[pathway]/unit-[n]/practice/[id]/`.
+The `id` corresponds to the topic order in `slTopics` (1-indexed).
+
+### File structure per practice:
+| File | Role |
+|------|------|
+| `page.tsx` | Server component — exports `generateMetadata`, `generateStaticParams`, calls `notFound()` for unknown ids, renders `<PracticeClient id={id} />` |
+| `PracticeClient.tsx` | `"use client"` — all interactive state, problem cards, key generation |
+
+### Practice UX flow:
+1. Student reads each problem (KaTeX rendered) and enters a **short/final answer** in a text box.
+2. A sticky progress bar shows how many problems have been answered.
+3. A **topic navigator** strip links between all practice topics for that unit.
+4. Once all boxes are filled, the **Finish Practice & Get Key** button activates.
+5. On click — the practice's **permanent reveal key** is displayed (stored in `PRACTICE_DATA`, not generated at runtime).
+6. A key-entry field appears; student types the key to **unlock** the model-answer comparison view.
+7. The comparison shows their answer (left) alongside the model answer with KaTeX (right).
+8. **Entered answers are in-memory React state** — they are erased when the student navigates away, but the key works every time they finish the practice.
+
+### Practice data structure (inside `PracticeClient.tsx`):
+```ts
+type Problem = {
+  id: number;
+  question: string;
+  math?: string;           // KaTeX expression for the expression to work on
+  parts?: { label: string; math: string }[];
+  answer: string;          // plain-text model answer
+  answerMath?: string;     // KaTeX model answer
+  difficulty: "basic" | "standard" | "challenge";
+};
+
+type PracticeSet = {
+  id: string;              // matches URL [id]
+  topicNumber: number;
+  title: string;
+  tagline: string;
+  /** Permanent reveal key — hard-to-guess string stored in source, NOT runtime-generated */
+  revealKey: string;
+  problems: Problem[];
+};
+
+const PRACTICE_DATA: Record<string, PracticeSet> = { "1": ..., "2": ..., "3": ... };
+```
+
+### Adding more practice topics to a unit:
+1. Add a new entry to `PRACTICE_DATA` in `PracticeClient.tsx` with the next `id`. **Generate a new hard-to-guess `revealKey`** (10-char alphanumeric, e.g. `"K9TZ4WRX2M"`).
+2. Add `{ id: "N" }` to `generateStaticParams()` in `page.tsx`.
+3. Add `id` to the `TITLES` map in `page.tsx`.
+4. No changes to `curriculum-data.ts` needed (the entry point `/unit-N/practice/1` stays the same).
+
+### Updating curriculum-data.ts when practice is ready:
+```ts
+{ title: "Practice Problems", status: "available", href: "/aa/unit-N/practice/1" }
+```
+
 ## Progress Tracker
 | Path | Lesson | Practice | Mock |
 |------|--------|----------|------|
-| AA Unit 1: Algebra | ✅ Done | ⏳ Coming | ⏳ Coming |
+| AA Unit 1: Algebra | ✅ Done | ✅ Topics 1–3 (indices, surds, quadratics) | ⏳ Coming |
 | AA Unit 2: Functions | ⏳ | ⏳ | ⏳ |
 | AA Unit 3: Trigonometry | ⏳ | ⏳ | ⏳ |
 | AA Unit 4: Geometry & Vectors | ⏳ | ⏳ | ⏳ |
