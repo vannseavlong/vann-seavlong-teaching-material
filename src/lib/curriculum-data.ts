@@ -118,7 +118,7 @@ export const aaCurriculum: CurriculumData = {
       ],
       contents: [
         { title: "Lesson", status: "available", href: "/aa/unit-1/lesson" },
-        { title: "Practice Problems", status: "coming-soon" },
+        { title: "Practice Problems", status: "available", href: "/aa/unit-1/practice/1" },
       ],
     },
     {
