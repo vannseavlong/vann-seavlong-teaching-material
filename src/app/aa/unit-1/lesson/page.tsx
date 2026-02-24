@@ -387,68 +387,107 @@ function SurdsSection() {
       label="Topic 2"
       title="Surds"
       tag={<SLTag />}
-      intro="A surd is an irrational number written as a root that cannot be simplified to a rational number. Surds appear frequently in exact answers for IB problems."
+      intro="A surd is an irrational root that cannot be simplified to a rational number. Surds include square roots, cube roots, and nth roots — all linked to fractional indices. Exact surd form is always required for IB answers."
       alt
     >
       <HighlightBox variant="blue">
         <p className="font-semibold text-navy-900 mb-1">What is a surd?</p>
         <p className="text-slate-500 text-sm">
-          <InlineMath math="\sqrt{9} = 3" /> is NOT a surd (it simplifies to a
-          whole number). But <InlineMath math="\sqrt{5}" />,{" "}
-          <InlineMath math="\sqrt{7}" />, <InlineMath math="\sqrt{12}" /> are
-          surds — they are irrational and must be left in root form for exact
-          answers.
+          <InlineMath math="\sqrt{9} = 3" /> is NOT a surd (it simplifies to a rational number).
+          But <InlineMath math="\sqrt{5}" />, <InlineMath math="\sqrt[3]{7}" />, and{" "}
+          <InlineMath math="\sqrt[4]{3}" /> are surds — irrational values left in root form.
+          Every surd links directly to a fractional index:{" "}
+          <InlineMath math="\sqrt[n]{a} = a^{1/n}" />.
         </p>
       </HighlightBox>
 
-      <FormulaBox title="Surd Rules">
-        <FormulaRow label="Simplify" math="\sqrt{ab} = \sqrt{a}\,\sqrt{b}" />
+      {/* ── Formula Group 1: Square root rules ── */}
+      <FormulaBox title="Square Root (√) Rules">
+        <FormulaRow label="Product" math="\sqrt{ab} = \sqrt{a}\,\sqrt{b}" />
         <FormulaRow label="Self-multiply" math="\sqrt{a} \times \sqrt{a} = a" />
-        <FormulaRow label="Combine (same root)" math="p\sqrt{n} \pm q\sqrt{n} = (p \pm q)\sqrt{n}" />
-        <FormulaRow label="Rationalise denominator" math="\dfrac{k}{\sqrt{a}} = \dfrac{k\sqrt{a}}{a}" />
-        <FormulaRow label="Rationalise (conjugate)" math="\dfrac{k}{p - \sqrt{q}} = \dfrac{k(p + \sqrt{q})}{p^2 - q}" />
+        <FormulaRow label="Combine (same radicand)" math="p\sqrt{n} \pm q\sqrt{n} = (p \pm q)\sqrt{n}" />
+        <FormulaRow label="Rationalise — simple" math="\dfrac{k}{\sqrt{a}} = \dfrac{k\sqrt{a}}{a}" />
+        <FormulaRow label="Rationalise — conjugate" math="\dfrac{k}{p - \sqrt{q}} = \dfrac{k\bigl(p + \sqrt{q}\bigr)}{p^2 - q}" />
       </FormulaBox>
 
-      {/* Visual: simplify steps diagram */}
+      {/* ── Formula Group 2: Cube root rules ── */}
+      <FormulaBox title="Cube Root (∛) Rules">
+        <FormulaRow label="Product" math="\sqrt[3]{ab} = \sqrt[3]{a}\,\sqrt[3]{b}" />
+        <FormulaRow label="Self-triple" math="\left(\sqrt[3]{a}\right)^3 = a" />
+        <FormulaRow label="Simplify perfect cube factor" math="\sqrt[3]{a^3 b} = a\,\sqrt[3]{b}" />
+        <FormulaRow label="Rationalise cube root" math="\dfrac{k}{\sqrt[3]{a}} = \dfrac{k\,\sqrt[3]{a^2}}{a}" />
+      </FormulaBox>
+
+      {/* ── Formula Group 3: Nth root rules ── */}
+      <FormulaBox title="Nth Root Rules">
+        <FormulaRow label="Index connection" math="\sqrt[n]{a} = a^{1/n}" />
+        <FormulaRow label="Product rule" math="\sqrt[n]{ab} = \sqrt[n]{a}\,\sqrt[n]{b}" />
+        <FormulaRow label="Power rule" math="\sqrt[n]{a^m} = a^{m/n} = \left(\sqrt[n]{a}\right)^m" />
+        <FormulaRow label="Nested root" math="\sqrt[m]{\sqrt[n]{a}} = \sqrt[mn]{a} = a^{1/(mn)}" />
+      </FormulaBox>
+
+      {/* Visual: simplification strategy */}
       <div className="bg-white border border-slate-200 rounded-xl p-6 my-5">
         <p className="text-xs font-bold uppercase tracking-wider text-aa-primary mb-4">
-          How to simplify a surd — visual method
+          Simplification strategy — find the largest perfect-power factor
         </p>
-        <div className="flex flex-col sm:flex-row items-center gap-3 text-center text-sm">
-          <div className="bg-aa-bg rounded-lg px-4 py-3 flex-1">
-            <p className="font-mono font-bold text-navy-900">√72</p>
-            <p className="text-xs text-slate-500 mt-1">Start</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
+          <div>
+            <p className="font-semibold text-navy-900 mb-2">Square root</p>
+            <div className="space-y-1">
+              <p className="text-slate-500"><InlineMath math="\sqrt{72} = \sqrt{36 \times 2}" /></p>
+              <p className="text-slate-500"><InlineMath math="= \sqrt{36} \times \sqrt{2}" /></p>
+              <p className="font-bold text-navy-900"><InlineMath math="= 6\sqrt{2}" /></p>
+            </div>
           </div>
-          <span className="text-aa-primary font-bold text-lg">→</span>
-          <div className="bg-aa-bg rounded-lg px-4 py-3 flex-1">
-            <p className="font-mono font-bold text-navy-900">√(36 × 2)</p>
-            <p className="text-xs text-slate-500 mt-1">Find largest perfect-square factor</p>
-          </div>
-          <span className="text-aa-primary font-bold text-lg">→</span>
-          <div className="bg-aa-bg rounded-lg px-4 py-3 flex-1">
-            <p className="font-mono font-bold text-navy-900">√36 × √2</p>
-            <p className="text-xs text-slate-500 mt-1">Split using √(ab) = √a · √b</p>
-          </div>
-          <span className="text-aa-primary font-bold text-lg">→</span>
-          <div className="bg-navy-900 text-white rounded-lg px-4 py-3 flex-1">
-            <p className="font-mono font-bold">6√2</p>
-            <p className="text-xs text-aa-light mt-1">Simplified</p>
+          <div>
+            <p className="font-semibold text-navy-900 mb-2">Cube root</p>
+            <div className="space-y-1">
+              <p className="text-slate-500"><InlineMath math="\sqrt[3]{54} = \sqrt[3]{27 \times 2}" /></p>
+              <p className="text-slate-500"><InlineMath math="= \sqrt[3]{27} \times \sqrt[3]{2}" /></p>
+              <p className="font-bold text-navy-900"><InlineMath math="= 3\sqrt[3]{2}" /></p>
+            </div>
           </div>
         </div>
       </div>
 
-      <WorkedExample title="Simplify: 6 / (√3 − 1)">
+      {/* ── All worked examples come AFTER all formula groups ── */}
+
+      <WorkedExample title="Square roots — rationalise 6 / (√3 − 1)">
         <StepBox n={1}>
-          Identify the conjugate of the denominator: the conjugate of{" "}
-          <InlineMath math="\sqrt{3} - 1" /> is <InlineMath math="\sqrt{3} + 1" />.
+          Identify the conjugate of <InlineMath math="\sqrt{3} - 1" />:{" "}
+          it is <InlineMath math="\sqrt{3} + 1" />.
         </StepBox>
         <StepBox n={2}>
-          Multiply numerator and denominator by the conjugate:
+          Multiply top and bottom by the conjugate:
           <BlockMath math="\frac{6}{\sqrt{3}-1} \times \frac{\sqrt{3}+1}{\sqrt{3}+1} = \frac{6(\sqrt{3}+1)}{(\sqrt{3})^2 - 1^2}" />
         </StepBox>
         <StepBox n={3}>
           Denominator becomes <InlineMath math="3 - 1 = 2" />:
           <BlockMath math="\frac{6(\sqrt{3}+1)}{2} = 3(\sqrt{3}+1) = \boxed{3\sqrt{3}+3}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Cube roots — simplify ∛54 and rationalise 4 / ∛3">
+        <StepBox n={1}>
+          Simplify <InlineMath math="\sqrt[3]{54}" /> by factoring out the largest perfect-cube factor:
+          <BlockMath math="\sqrt[3]{54} = \sqrt[3]{27 \times 2} = \sqrt[3]{27} \cdot \sqrt[3]{2} = 3\sqrt[3]{2}" />
+        </StepBox>
+        <StepBox n={2}>
+          Rationalise <InlineMath math="\dfrac{4}{\sqrt[3]{3}}" /> — multiply top and bottom by{" "}
+          <InlineMath math="\sqrt[3]{3^2} = \sqrt[3]{9}" />:
+          <BlockMath math="\frac{4}{\sqrt[3]{3}} \times \frac{\sqrt[3]{9}}{\sqrt[3]{9}} = \frac{4\sqrt[3]{9}}{\sqrt[3]{27}} = \frac{4\sqrt[3]{9}}{3} = \boxed{\dfrac{4\sqrt[3]{9}}{3}}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Nth roots — simplify ⁵√(32x¹⁰) and evaluate 27^(2/3)">
+        <StepBox n={1}>
+          Apply the product and power rules for <InlineMath math="\sqrt[5]{32x^{10}}" />:
+          <BlockMath math="\sqrt[5]{32x^{10}} = \sqrt[5]{32} \cdot \sqrt[5]{x^{10}} = \sqrt[5]{2^5} \cdot x^{10/5} = 2 \cdot x^2 = \boxed{2x^2}" />
+        </StepBox>
+        <StepBox n={2}>
+          Evaluate <InlineMath math="27^{2/3}" /> using the index–root connection:
+          <BlockMath math="27^{2/3} = \left(\sqrt[3]{27}\right)^2 = 3^2 = \boxed{9}" />
         </StepBox>
       </WorkedExample>
 
@@ -469,6 +508,267 @@ function SurdsSection() {
           </>
         }
       />
+
+      <Practice
+        problem={
+          <>
+            (a) Simplify <InlineMath math="\sqrt[3]{16} \cdot \sqrt[3]{4}" />.{" "}
+            (b) Hence rationalise <InlineMath math="\dfrac{6}{\sqrt[3]{4}}" />.
+          </>
+        }
+        answer={
+          <>
+            <p><strong>(a)</strong> Use the product rule for cube roots:</p>
+            <BlockMath math="\sqrt[3]{16} \cdot \sqrt[3]{4} = \sqrt[3]{64} = 4" />
+            <p><strong>(b)</strong> Multiply by <InlineMath math="\dfrac{\sqrt[3]{16}}{\sqrt[3]{16}}" /> (since <InlineMath math="\sqrt[3]{4} \cdot \sqrt[3]{16} = \sqrt[3]{64} = 4" />):</p>
+            <BlockMath math="\frac{6}{\sqrt[3]{4}} \times \frac{\sqrt[3]{16}}{\sqrt[3]{16}} = \frac{6\sqrt[3]{16}}{4} = \boxed{\frac{3\sqrt[3]{16}}{2}}" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Simplify <InlineMath math="\sqrt[4]{81a^{12}}" /> where{" "}
+            <InlineMath math="a > 0" />. Write your answer without a radical sign.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="\sqrt[4]{81a^{12}} = \sqrt[4]{81} \cdot \sqrt[4]{a^{12}} = \sqrt[4]{3^4} \cdot a^{12/4} = 3 \cdot a^3 = \boxed{3a^3}" />
+          </>
+        }
+      />
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          ── Formula Group 4: Rationalising — Advanced Conjugates & Higher Roots ──
+          ══════════════════════════════════════════════════════════════════════ */}
+
+      <HighlightBox variant="blue">
+        <p className="font-semibold text-navy-900 mb-2">
+          Why conjugates work — the &ldquo;completing the factor&rdquo; idea
+        </p>
+        <div className="text-slate-500 text-sm space-y-2">
+          <p>
+            Multiplying <InlineMath math="(a - b)" /> by <InlineMath math="(a + b)" /> gives{" "}
+            <InlineMath math="a^2 - b^2" /> — rational when a and b are surds. This{" "}
+            <em>difference of squares</em> identity removes the surd from the denominator.
+          </p>
+          <p>
+            For cube roots: <InlineMath math="(a - b)(a^2 + ab + b^2) = a^3 - b^3" />.
+            Multiplying <InlineMath math="(\sqrt[3]{A} - \sqrt[3]{B})" /> by its triple-term
+            factor gives <InlineMath math="A - B" /> — rational if A and B are rational.
+          </p>
+          <p>
+            For any nth root: if the denominator contains <InlineMath math="\sqrt[n]{a^k}" />,
+            multiply by <InlineMath math="\sqrt[n]{a^{n-k}}" /> to produce{" "}
+            <InlineMath math="\sqrt[n]{a^n} = a" />. The key principle is always:{" "}
+            <em>complete the missing factor so the exponent totals n</em>.
+          </p>
+        </div>
+      </HighlightBox>
+
+      {/* ── Formula Group 4 ── */}
+      <FormulaBox title="Conjugate Identities Used in Rationalising">
+        <FormulaRow label="A — Difference of squares" math="(a - b)(a + b) = a^2 - b^2" />
+        <FormulaRow label="A — Classic rationalise" math="\dfrac{k}{a - b} = \dfrac{k(a + b)}{a^2 - b^2}" />
+        <FormulaRow label="B — Cube difference identity" math="(a - b)(a^2 + ab + b^2) = a^3 - b^3" />
+        <FormulaRow label="B — Cube sum identity" math="(a + b)(a^2 - ab + b^2) = a^3 + b^3" />
+        <FormulaRow label="C — nth power difference (concept)" math="a^n - b^n = (a - b)\!\left(a^{n-1} + a^{n-2}b + \cdots + b^{n-1}\right)" />
+        <FormulaRow label="D — nth root missing power" math="\dfrac{k}{\sqrt[n]{a^k}} = \dfrac{k\,\sqrt[n]{a^{n-k}}}{a} \quad\bigl(\text{since }\sqrt[n]{a^k} \cdot \sqrt[n]{a^{n-k}} = a\bigr)" />
+      </FormulaBox>
+
+      {/* Visual: rationalisation quick-reference table */}
+      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden my-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-aa-primary px-6 pt-5 pb-3">
+          Rationalisation quick-reference — which factor to multiply by
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left border-collapse">
+            <thead>
+              <tr className="bg-navy-900 text-white">
+                <th className="px-5 py-3 font-semibold">Denominator type</th>
+                <th className="px-5 py-3 font-semibold">Multiply by</th>
+                <th className="px-5 py-3 font-semibold">Denominator becomes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { denom: "a - b", factor: "a + b", result: "a^2 - b^2" },
+                { denom: "a^2 + ab + b^2", factor: "a - b", result: "a^3 - b^3" },
+                { denom: "\\sqrt[3]{a}", factor: "\\sqrt[3]{a^2}", result: "a" },
+                { denom: "\\sqrt[n]{a^k}", factor: "\\sqrt[n]{a^{n-k}}", result: "\\sqrt[n]{a^n} = a" },
+              ].map(({ denom, factor, result }, i) => (
+                <tr key={i} className={i % 2 === 0 ? "bg-aa-bg" : "bg-white"}>
+                  <td className="px-5 py-3 text-navy-900"><InlineMath math={denom} /></td>
+                  <td className="px-5 py-3 font-semibold text-aa-primary"><InlineMath math={factor} /></td>
+                  <td className="px-5 py-3 text-navy-900"><InlineMath math={result} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* ── Worked examples for Group 4 — all after all formula groups ── */}
+
+      <WorkedExample title="Classic conjugate — rationalise 1 / (3 − √5)">
+        <StepBox n={1}>
+          Identify the conjugate of <InlineMath math="3 - \sqrt{5}" />:{" "}
+          it is <InlineMath math="3 + \sqrt{5}" />.
+        </StepBox>
+        <StepBox n={2}>
+          Multiply top and bottom by the conjugate:
+          <BlockMath math="\frac{1}{3 - \sqrt{5}} \times \frac{3 + \sqrt{5}}{3 + \sqrt{5}} = \frac{3 + \sqrt{5}}{3^2 - (\sqrt{5})^2}" />
+        </StepBox>
+        <StepBox n={3}>
+          Denominator: <InlineMath math="9 - 5 = 4" />:
+          <BlockMath math="= \boxed{\dfrac{3 + \sqrt{5}}{4}}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Cube conjugate — rationalise 1 / (∛2 − 1)">
+        <div className="flex items-center gap-2 mb-4">
+          <HLTag />
+          <span className="text-xs text-slate-500">Uses the cube difference identity — HL depth</span>
+        </div>
+        <StepBox n={1}>
+          Let <InlineMath math="a = \sqrt[3]{2},\; b = 1" />. The denominator is <InlineMath math="a - b" />.
+          The matching triple-term factor is <InlineMath math="a^2 + ab + b^2 = \sqrt[3]{4} + \sqrt[3]{2} + 1" />.
+        </StepBox>
+        <StepBox n={2}>
+          Multiply top and bottom by <InlineMath math="\sqrt[3]{4} + \sqrt[3]{2} + 1" />:
+          <BlockMath math="\frac{1}{\sqrt[3]{2}-1} \times \frac{\sqrt[3]{4}+\sqrt[3]{2}+1}{\sqrt[3]{4}+\sqrt[3]{2}+1}" />
+        </StepBox>
+        <StepBox n={3}>
+          Apply <InlineMath math="(a-b)(a^2+ab+b^2) = a^3 - b^3" />:
+          <BlockMath math="\text{Denominator} = (\sqrt[3]{2})^3 - 1^3 = 2 - 1 = 1" />
+        </StepBox>
+        <StepBox n={4}>
+          <BlockMath math="= \boxed{\sqrt[3]{4} + \sqrt[3]{2} + 1}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Missing factor form — rationalise 1 / (a² + ab + b²)">
+        <div className="flex items-center gap-2 mb-4">
+          <HLTag />
+          <span className="text-xs text-slate-500">
+            General symbolic form — applies when a, b are cube roots of rationals
+          </span>
+        </div>
+        <StepBox n={1}>
+          Recognise that <InlineMath math="a^2 + ab + b^2" /> is the triple-term factor in the cube
+          identity. The <em>missing factor</em> that completes it to a cube is <InlineMath math="(a - b)" />.
+        </StepBox>
+        <StepBox n={2}>
+          Multiply top and bottom by <InlineMath math="(a - b)" />:
+          <BlockMath math="\frac{1}{a^2+ab+b^2} \times \frac{a-b}{a-b} = \frac{a-b}{(a-b)(a^2+ab+b^2)}" />
+        </StepBox>
+        <StepBox n={3}>
+          Apply <InlineMath math="(a-b)(a^2+ab+b^2) = a^3 - b^3" />:
+          <BlockMath math="= \dfrac{a-b}{a^3-b^3}" />
+          If <InlineMath math="a = \sqrt[3]{p},\; b = \sqrt[3]{q}" />, then{" "}
+          <InlineMath math="a^3 - b^3 = p - q" /> is rational, giving{" "}
+          <InlineMath math="\boxed{\dfrac{\sqrt[3]{p}-\sqrt[3]{q}}{p - q}}" />.
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="nth root rationalisation — rationalise 1 / ⁴√(x³)">
+        <StepBox n={1}>
+          Identify: <InlineMath math="n = 4,\; k = 3" />. The missing power is{" "}
+          <InlineMath math="n - k = 1" />, so multiply by{" "}
+          <InlineMath math="\sqrt[4]{x^1} = \sqrt[4]{x}" />.
+        </StepBox>
+        <StepBox n={2}>
+          Multiply top and bottom by <InlineMath math="\sqrt[4]{x}" />:
+          <BlockMath math="\frac{1}{\sqrt[4]{x^3}} \times \frac{\sqrt[4]{x}}{\sqrt[4]{x}} = \frac{\sqrt[4]{x}}{\sqrt[4]{x^3} \cdot \sqrt[4]{x}} = \frac{\sqrt[4]{x}}{\sqrt[4]{x^4}}" />
+        </StepBox>
+        <StepBox n={3}>
+          Denominator: <InlineMath math="\sqrt[4]{x^4} = x" />:
+          <BlockMath math="= \boxed{\dfrac{\sqrt[4]{x}}{x}}" />
+        </StepBox>
+      </WorkedExample>
+
+      {/* ── Practice problems for Group 4 ── */}
+
+      <Practice
+        problem={
+          <>
+            Rationalise <InlineMath math="\dfrac{5}{2 - \sqrt{3}}" />. Give your answer
+            in the form <InlineMath math="a + b\sqrt{3}" />.
+          </>
+        }
+        answer={
+          <>
+            <p>Multiply by the conjugate <InlineMath math="(2 + \sqrt{3})" />:</p>
+            <BlockMath math="\frac{5}{2-\sqrt{3}} \times \frac{2+\sqrt{3}}{2+\sqrt{3}} = \frac{5(2+\sqrt{3})}{4 - 3} = \frac{5(2+\sqrt{3})}{1}" />
+            <BlockMath math="= \boxed{10 + 5\sqrt{3}}" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Rationalise <InlineMath math="\dfrac{1}{\sqrt[3]{5} - 2}" />.
+            Give your answer in simplified surd form.
+          </>
+        }
+        answer={
+          <>
+            <p>
+              Write <InlineMath math="2 = \sqrt[3]{8}" />, so let{" "}
+              <InlineMath math="a = \sqrt[3]{5},\; b = \sqrt[3]{8}" />.
+            </p>
+            <p>
+              Triple-term factor:{" "}
+              <InlineMath math="a^2 + ab + b^2 = \sqrt[3]{25} + \sqrt[3]{40} + \sqrt[3]{64} = \sqrt[3]{25} + 2\sqrt[3]{5} + 4" />{" "}
+              (since <InlineMath math="\sqrt[3]{40} = \sqrt[3]{8}\cdot\sqrt[3]{5} = 2\sqrt[3]{5}" /> and{" "}
+              <InlineMath math="\sqrt[3]{64} = 4" />).
+            </p>
+            <BlockMath math="\frac{1}{\sqrt[3]{5}-2} \times \frac{\sqrt[3]{25}+2\sqrt[3]{5}+4}{\sqrt[3]{25}+2\sqrt[3]{5}+4} = \frac{\sqrt[3]{25}+2\sqrt[3]{5}+4}{5-8}" />
+            <BlockMath math="= \boxed{-\dfrac{\sqrt[3]{25}+2\sqrt[3]{5}+4}{3}}" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Rationalise <InlineMath math="\dfrac{1}{\sqrt[3]{p} - \sqrt[3]{q}}" /> symbolically
+            (where <InlineMath math="p \neq q" />). Express with a rational denominator.{" "}
+            <em>(Hint: use the cube difference identity.)</em>
+          </>
+        }
+        answer={
+          <>
+            <p>
+              The matching triple-term factor is{" "}
+              <InlineMath math="\sqrt[3]{p^2} + \sqrt[3]{pq} + \sqrt[3]{q^2}" />.
+            </p>
+            <BlockMath math="\frac{1}{\sqrt[3]{p}-\sqrt[3]{q}} \times \frac{\sqrt[3]{p^2}+\sqrt[3]{pq}+\sqrt[3]{q^2}}{\sqrt[3]{p^2}+\sqrt[3]{pq}+\sqrt[3]{q^2}}" />
+            <p>Denominator: <InlineMath math="(\sqrt[3]{p})^3 - (\sqrt[3]{q})^3 = p - q" /> (rational).</p>
+            <BlockMath math="= \boxed{\dfrac{\sqrt[3]{p^2}+\sqrt[3]{pq}+\sqrt[3]{q^2}}{p-q}}" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Rationalise <InlineMath math="\dfrac{3}{\sqrt[5]{x^2}}" /> where <InlineMath math="x > 0" />.
+          </>
+        }
+        answer={
+          <>
+            <p>
+              <InlineMath math="n = 5,\; k = 2,\; n - k = 3" />. Multiply by{" "}
+              <InlineMath math="\sqrt[5]{x^3}/\sqrt[5]{x^3}" />:
+            </p>
+            <BlockMath math="\frac{3}{\sqrt[5]{x^2}} \times \frac{\sqrt[5]{x^3}}{\sqrt[5]{x^3}} = \frac{3\sqrt[5]{x^3}}{\sqrt[5]{x^5}} = \frac{3\sqrt[5]{x^3}}{x} = \boxed{\dfrac{3\sqrt[5]{x^3}}{x}}" />
+          </>
+        }
+      />
     </LessonSection>
   );
 }
@@ -482,21 +782,44 @@ function QuadraticsSection() {
       label="Topic 3"
       title="Quadratic Equations"
       tag={<SLTag />}
-      intro="A quadratic equation has the form ax² + bx + c = 0. Every quadratic has exactly two solutions (real or complex). You must know three methods: factoring, completing the square, and the quadratic formula."
+      intro="A quadratic equation has the form ax² + bx + c = 0. Beyond the standard formula, two powerful shortcuts — the reduced discriminant Δ' and the coefficient-sum rules — can identify roots almost instantly. Knowing all methods is essential for IB exam efficiency."
     >
       <HighlightBox variant="blue">
-        <p className="font-semibold text-navy-900 mb-2">The Discriminant</p>
+        <p className="font-semibold text-navy-900 mb-2">Strategy: read the discriminant first</p>
         <p className="text-slate-500 text-sm">
-          Before solving, compute <InlineMath math="\Delta = b^2 - 4ac" /> to
-          know what type of roots to expect.
+          Always compute <InlineMath math="\Delta = b^2 - 4ac" /> before solving to know how many
+          real roots exist. When <InlineMath math="b" /> is even, use the reduced discriminant{" "}
+          <InlineMath math="\Delta' = (b/2)^2 - ac" /> for neater arithmetic. Also check if{" "}
+          <InlineMath math="a+b+c=0" /> or <InlineMath math="a-b+c=0" /> for instant roots.
         </p>
       </HighlightBox>
 
-      <FormulaBox title="Quadratic Formula & Discriminant">
+      {/* ── Formula Group ── */}
+      <FormulaBox title="Quadratic Formula, Discriminant & Shortcuts">
         <FormulaRow label="Standard form" math="ax^2 + bx + c = 0" />
         <FormulaRow label="Quadratic formula" math="x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}" />
         <FormulaRow label="Discriminant" math="\Delta = b^2 - 4ac" />
+        <FormulaRow label="Reduced discriminant (b even)" math="\Delta' = \left(\dfrac{b}{2}\right)^2 - ac \;\Longrightarrow\; x = \dfrac{-\dfrac{b}{2} \pm \sqrt{\Delta'}}{a}" />
+        <FormulaRow label="Shortcut: a + b + c = 0" math="x_1 = 1,\quad x_2 = \dfrac{c}{a}" />
+        <FormulaRow label="Shortcut: a - b + c = 0" math="x_1 = -1,\quad x_2 = -\dfrac{c}{a}" />
+        <FormulaRow label="Vieta's formulae" math="x_1 + x_2 = -\dfrac{b}{a}, \qquad x_1 x_2 = \dfrac{c}{a}" />
       </FormulaBox>
+
+      <HighlightBox variant="yellow">
+        <p className="font-semibold text-navy-900 mb-2">Why do the coefficient-sum shortcuts work?</p>
+        <div className="text-slate-500 text-sm space-y-2">
+          <p>
+            <strong>Case a + b + c = 0:</strong> Substitute <InlineMath math="x = 1" />:{" "}
+            <InlineMath math="a(1)^2 + b(1) + c = a+b+c = 0" /> ✓ so <InlineMath math="x=1" /> is always a root.
+            By Vieta&apos;s product rule <InlineMath math="x_1 x_2 = c/a" />, the other root is <InlineMath math="x_2 = c/a" />.
+          </p>
+          <p>
+            <strong>Case a - b + c = 0:</strong> Substitute <InlineMath math="x = -1" />:{" "}
+            <InlineMath math="a(-1)^2 + b(-1) + c = a-b+c = 0" /> ✓ so <InlineMath math="x=-1" /> is always a root.
+            By Vieta&apos;s product rule, the other root is <InlineMath math="x_2 = -c/a" />.
+          </p>
+        </div>
+      </HighlightBox>
 
       {/* Visual: discriminant table */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
@@ -513,22 +836,66 @@ function QuadraticsSection() {
         ))}
       </div>
 
-      <WorkedExample title="Solve: 3x² + 7x − 6 = 0">
+      {/* ── All worked examples come AFTER all formula groups ── */}
+
+      <WorkedExample title="Standard formula: Solve 3x² + 7x − 6 = 0">
         <StepBox n={1}>
-          Identify coefficients: <InlineMath math="a=3,\; b=7,\; c=-6" />
+          Identify: <InlineMath math="a=3,\; b=7,\; c=-6" />
         </StepBox>
         <StepBox n={2}>
-          Calculate the discriminant:
-          <BlockMath math="\Delta = 7^2 - 4(3)(-6) = 49 + 72 = 121" />
-          Since <InlineMath math="\Delta > 0" />, there are two distinct real roots.
+          Discriminant:
+          <BlockMath math="\Delta = 7^2 - 4(3)(-6) = 49 + 72 = 121 > 0" />
+          Two distinct real roots.
         </StepBox>
         <StepBox n={3}>
           Apply the quadratic formula:
           <BlockMath math="x = \frac{-7 \pm \sqrt{121}}{6} = \frac{-7 \pm 11}{6}" />
         </StepBox>
         <StepBox n={4}>
-          <BlockMath math="x = \frac{4}{6} = \frac{2}{3} \qquad \text{or} \qquad x = \frac{-18}{6} = \boxed{-3}" />
-          Solutions: <InlineMath math="x = \tfrac{2}{3}" /> or <InlineMath math="x = -3" />.
+          <BlockMath math="x = \frac{4}{6} = \frac{2}{3} \qquad \text{or} \qquad x = \frac{-18}{6} = -3" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Reduced discriminant (Δ'): Solve 3x² + 4x − 7 = 0">
+        <p className="text-sm text-slate-500 mb-4">
+          Since <InlineMath math="b = 4" /> is even, using <InlineMath math="\Delta'" /> avoids square-rooting a large number.
+        </p>
+        <StepBox n={1}>
+          Let <InlineMath math="b' = b/2 = 2" />. Compute the reduced discriminant:
+          <BlockMath math="\Delta' = (b')^2 - ac = 4 - (3)(-7) = 4 + 21 = 25" />
+        </StepBox>
+        <StepBox n={2}>
+          Apply the reduced formula <InlineMath math="x = \dfrac{-b' \pm \sqrt{\Delta'}}{a}" />:
+          <BlockMath math="x = \frac{-2 \pm \sqrt{25}}{3} = \frac{-2 \pm 5}{3}" />
+        </StepBox>
+        <StepBox n={3}>
+          <BlockMath math="x = \frac{3}{3} = 1 \qquad \text{or} \qquad x = \frac{-7}{3}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Shortcut a + b + c = 0: Solve 2x² − 5x + 3 = 0">
+        <StepBox n={1}>
+          Check the coefficient sum: <InlineMath math="a + b + c = 2 + (-5) + 3 = 0" /> ✓
+        </StepBox>
+        <StepBox n={2}>
+          So <InlineMath math="x = 1" /> is immediately one root. Apply Vieta&apos;s product rule:
+          <BlockMath math="x_1 \cdot x_2 = \frac{c}{a} = \frac{3}{2} \;\Longrightarrow\; x_2 = \frac{3}{2}" />
+        </StepBox>
+        <StepBox n={3}>
+          Solutions: <InlineMath math="x = 1" /> or <InlineMath math="x = \dfrac{3}{2}" /> — found with no formula needed.
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Shortcut a − b + c = 0: Solve 3x² + 5x + 2 = 0">
+        <StepBox n={1}>
+          Check: <InlineMath math="a - b + c = 3 - 5 + 2 = 0" /> ✓
+        </StepBox>
+        <StepBox n={2}>
+          So <InlineMath math="x = -1" /> is one root. Apply Vieta&apos;s product rule:
+          <BlockMath math="x_1 \cdot x_2 = \frac{c}{a} = \frac{2}{3} \;\Longrightarrow\; (-1) \cdot x_2 = \frac{2}{3} \;\Longrightarrow\; x_2 = -\frac{2}{3}" />
+        </StepBox>
+        <StepBox n={3}>
+          Solutions: <InlineMath math="x = -1" /> or <InlineMath math="x = -\dfrac{2}{3}" />.
         </StepBox>
       </WorkedExample>
 
@@ -545,6 +912,513 @@ function QuadraticsSection() {
             <BlockMath math="\Delta = 9 + 16 = 25" />
             <BlockMath math="x = \frac{3 \pm 5}{4}" />
             <BlockMath math="x = 2 \quad \text{or} \quad x = -\frac{1}{2}" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Solve <InlineMath math="5x^2 - 6x + 1 = 0" /> using the coefficient-sum
+            shortcut. Verify both roots using Vieta&apos;s formulae.
+          </>
+        }
+        answer={
+          <>
+            <p>Check: <InlineMath math="a + b + c = 5 - 6 + 1 = 0" /> ✓</p>
+            <p>So <InlineMath math="x_1 = 1" /> and <InlineMath math="x_2 = c/a = 1/5" />.</p>
+            <p>Verify with Vieta&apos;s:</p>
+            <BlockMath math="x_1 + x_2 = 1 + \frac{1}{5} = \frac{6}{5} = -\frac{b}{a} = \frac{6}{5}\;\checkmark" />
+            <BlockMath math="x_1 x_2 = 1 \times \frac{1}{5} = \frac{1}{5} = \frac{c}{a}\;\checkmark" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Use the reduced discriminant to solve{" "}
+            <InlineMath math="2x^2 - 8x + 6 = 0" />.
+          </>
+        }
+        answer={
+          <>
+            <p><InlineMath math="b = -8" /> is even, so <InlineMath math="b' = -4" />.</p>
+            <BlockMath math="\Delta' = (-4)^2 - (2)(6) = 16 - 12 = 4" />
+            <BlockMath math="x = \frac{-(-4) \pm \sqrt{4}}{2} = \frac{4 \pm 2}{2}" />
+            <BlockMath math="x = 3 \quad \text{or} \quad x = 1" />
+          </>
+        }
+      />
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          ── HL Extension — Quadratic Equations (HL Depth)
+          ══════════════════════════════════════════════════════════════════════ */}
+
+      <div className="flex items-center gap-3 my-8 p-5 bg-danger-bg border-2 border-danger-light rounded-xl">
+        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-danger-primary flex items-center justify-center">
+          <span className="text-white text-sm font-extrabold">HL</span>
+        </div>
+        <div>
+          <p className="font-bold text-navy-900 text-lg">HL Extension — Quadratic Equations</p>
+          <p className="text-sm text-slate-500">
+            The following five sub-sections extend Topic 3 to full IB AA HL depth. SL students may continue to Topic 4.
+          </p>
+        </div>
+      </div>
+
+      {/* ══ HL Section 1: Discriminant — Deep Analysis ══════════════════════ */}
+
+      <HighlightBox variant="red">
+        <div className="flex items-center gap-2 mb-3">
+          <HLTag />
+          <p className="font-semibold text-navy-900">HL 1 — Discriminant: Deep Analysis</p>
+        </div>
+        <div className="text-slate-500 text-sm space-y-2">
+          <p>
+            The discriminant <InlineMath math="\Delta = b^2 - 4ac" /> links algebra to geometry: it
+            tells you exactly how the parabola <InlineMath math="y = ax^2 + bx + c" /> intersects the
+            x-axis. <InlineMath math="\Delta > 0" /> means the curve crosses twice;{" "}
+            <InlineMath math="\Delta = 0" /> means the vertex touches the x-axis; and{" "}
+            <InlineMath math="\Delta < 0" /> means the parabola lives entirely above or below it.
+          </p>
+          <p>
+            The <em>axis of symmetry</em> <InlineMath math="x = -\tfrac{b}{2a}" /> is always
+            mid-way between any two real roots. When <InlineMath math="\Delta = 0" />, the double
+            root sits precisely at this axis.
+          </p>
+        </div>
+      </HighlightBox>
+
+      <FormulaBox title="Discriminant Classification">
+        <FormulaRow label="Δ > 0 — two distinct real roots" math="x_{1,2} = \dfrac{-b \pm \sqrt{\Delta}}{2a},\quad x_1 \neq x_2" />
+        <FormulaRow label="Δ = 0 — one repeated root" math="x = -\dfrac{b}{2a} \quad \text{(vertex on x-axis)}" />
+        <FormulaRow label="Δ < 0 — complex conjugate pair" math="x = \dfrac{-b \pm i\sqrt{-\Delta}}{2a},\quad x \notin \mathbb{R}" />
+        <FormulaRow label="Axis of symmetry (always)" math="x = -\dfrac{b}{2a}" />
+        <FormulaRow label="Number of x-intercepts" math="\Delta > 0\!\!: 2 \quad \Delta = 0\!\!: 1 \quad \Delta < 0\!\!: 0" />
+      </FormulaBox>
+
+      {/* Visual: Discriminant table */}
+      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden my-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-danger-text px-6 pt-5 pb-3">
+          Discriminant — graph behaviour summary
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left border-collapse">
+            <thead>
+              <tr className="bg-navy-900 text-white">
+                <th className="px-5 py-3 font-semibold">Δ value</th>
+                <th className="px-5 py-3 font-semibold">Graph behaviour</th>
+                <th className="px-5 py-3 font-semibold">Root type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { delta: "\\Delta > 0", graph: "Crosses x-axis twice", roots: "2 distinct real roots" },
+                { delta: "\\Delta = 0", graph: "Touches x-axis (tangent at vertex)", roots: "1 repeated real root" },
+                { delta: "\\Delta < 0", graph: "No x-intercept", roots: "2 complex conjugate roots" },
+              ].map(({ delta, graph, roots }, i) => (
+                <tr key={i} className={i % 2 === 0 ? "bg-danger-bg" : "bg-white"}>
+                  <td className="px-5 py-3 font-semibold text-danger-text"><InlineMath math={delta} /></td>
+                  <td className="px-5 py-3 text-slate-600">{graph}</td>
+                  <td className="px-5 py-3 text-navy-900 font-medium">{roots}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <WorkedExample title="Nature of roots — analyse 2x² − 4x + 5 = 0">
+        <div className="flex items-center gap-2 mb-4"><HLTag /></div>
+        <StepBox n={1}>
+          Identify: <InlineMath math="a = 2,\; b = -4,\; c = 5" />
+        </StepBox>
+        <StepBox n={2}>
+          Compute the discriminant:
+          <BlockMath math="\Delta = (-4)^2 - 4(2)(5) = 16 - 40 = -24" />
+        </StepBox>
+        <StepBox n={3}>
+          Since <InlineMath math="\Delta = -24 < 0" />, the equation has{" "}
+          <strong>two complex conjugate roots</strong>. The parabola has no x-intercepts and lies
+          entirely above the x-axis (since <InlineMath math="a = 2 > 0" />).
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Parameter problem — find k for equal roots in x² + kx + 9 = 0">
+        <div className="flex items-center gap-2 mb-4"><HLTag /></div>
+        <StepBox n={1}>
+          Equal (repeated) roots require <InlineMath math="\Delta = 0" />:
+          <BlockMath math="\Delta = k^2 - 4(1)(9) = k^2 - 36 = 0" />
+        </StepBox>
+        <StepBox n={2}>
+          <BlockMath math="k^2 = 36 \;\Longrightarrow\; k = \pm 6" />
+        </StepBox>
+        <StepBox n={3}>
+          For <InlineMath math="k = 6" />: double root at <InlineMath math="x = -3" />.
+          For <InlineMath math="k = -6" />: double root at <InlineMath math="x = 3" />.
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            Find the values of <InlineMath math="k" /> for which{" "}
+            <InlineMath math="x^2 + kx + 4 = 0" /> has two distinct real roots.
+          </>
+        }
+        answer={
+          <>
+            <p>Require <InlineMath math="\Delta > 0" />:</p>
+            <BlockMath math="k^2 - 16 > 0 \;\Longrightarrow\; (k-4)(k+4) > 0" />
+            <BlockMath math="\boxed{k < -4 \;\text{ or }\; k > 4}" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Without solving, classify the roots of{" "}
+            <InlineMath math="4x^2 - 4x + 1 = 0" />.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="\Delta = (-4)^2 - 4(4)(1) = 16 - 16 = 0" />
+            <p>
+              <InlineMath math="\Delta = 0" /> → one repeated real root at{" "}
+              <InlineMath math="x = -\dfrac{-4}{2 \cdot 4} = \dfrac{1}{2}" />.
+            </p>
+          </>
+        }
+      />
+
+      {/* ══ HL Section 2: Completing the Square — Deriving the Formula ══════ */}
+
+      <HighlightBox variant="red">
+        <div className="flex items-center gap-2 mb-3">
+          <HLTag />
+          <p className="font-semibold text-navy-900">HL 2 — Completing the Square: Deriving the Quadratic Formula</p>
+        </div>
+        <p className="text-slate-500 text-sm">
+          The quadratic formula is not magic — it is derived by completing the square on the
+          general equation <InlineMath math="ax^2 + bx + c = 0" />. Understanding this derivation
+          deepens your mastery of the vertex form <InlineMath math="a(x - h)^2 + k" /> and proves
+          why <InlineMath math="\Delta = b^2 - 4ac" /> appears under the square root.
+        </p>
+      </HighlightBox>
+
+      <FormulaBox title="Steps to Complete the Square on ax² + bx + c = 0">
+        <FormulaRow label="Step 1 — divide by a" math="x^2 + \dfrac{b}{a}\,x + \dfrac{c}{a} = 0" />
+        <FormulaRow label="Step 2 — isolate x terms" math="x^2 + \dfrac{b}{a}\,x = -\dfrac{c}{a}" />
+        <FormulaRow label="Step 3 — add (b/2a)² to both sides" math="\left(x + \dfrac{b}{2a}\right)^2 = \dfrac{b^2}{4a^2} - \dfrac{c}{a} = \dfrac{b^2 - 4ac}{4a^2}" />
+        <FormulaRow label="Step 4 — take square root" math="x + \dfrac{b}{2a} = \pm\dfrac{\sqrt{b^2 - 4ac}}{2a}" />
+        <FormulaRow label="Step 5 — final formula" math="x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}" />
+      </FormulaBox>
+
+      <WorkedExample title="Derivation — derive the quadratic formula from ax² + bx + c = 0">
+        <div className="flex items-center gap-2 mb-4"><HLTag /></div>
+        <StepBox n={1}>
+          Divide every term by <InlineMath math="a" /> (valid since <InlineMath math="a \neq 0" />):
+          <BlockMath math="x^2 + \frac{b}{a}x + \frac{c}{a} = 0" />
+        </StepBox>
+        <StepBox n={2}>
+          Move the constant to the right:
+          <BlockMath math="x^2 + \frac{b}{a}x = -\frac{c}{a}" />
+        </StepBox>
+        <StepBox n={3}>
+          Add <InlineMath math="\left(\dfrac{b}{2a}\right)^2" /> to both sides to complete the square:
+          <BlockMath math="x^2 + \frac{b}{a}x + \frac{b^2}{4a^2} = \frac{b^2}{4a^2} - \frac{c}{a}" />
+          <BlockMath math="\left(x + \frac{b}{2a}\right)^2 = \frac{b^2 - 4ac}{4a^2}" />
+        </StepBox>
+        <StepBox n={4}>
+          Take the square root of both sides:
+          <BlockMath math="x + \frac{b}{2a} = \pm\frac{\sqrt{b^2 - 4ac}}{2a}" />
+        </StepBox>
+        <StepBox n={5}>
+          Subtract <InlineMath math="\dfrac{b}{2a}" />:
+          <BlockMath math="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \qquad \blacksquare" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Vertex form — rewrite 3x² + 12x + 7 and find the vertex">
+        <div className="flex items-center gap-2 mb-4"><HLTag /></div>
+        <StepBox n={1}>
+          Factor 3 from the quadratic and linear terms:
+          <BlockMath math="3x^2 + 12x + 7 = 3(x^2 + 4x) + 7" />
+        </StepBox>
+        <StepBox n={2}>
+          Complete the square inside: half of 4 is 2, so add and subtract 4:
+          <BlockMath math="= 3\bigl[(x+2)^2 - 4\bigr] + 7" />
+        </StepBox>
+        <StepBox n={3}>
+          Expand and collect:
+          <BlockMath math="= 3(x+2)^2 - 12 + 7 = \boxed{3(x+2)^2 - 5}" />
+        </StepBox>
+        <p className="text-sm text-slate-500 mt-3">
+          Vertex: <InlineMath math="(-2,\,-5)" />, axis of symmetry <InlineMath math="x = -2" />,
+          minimum value <InlineMath math="-5" /> (since <InlineMath math="a = 3 > 0" />).
+        </p>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            Express <InlineMath math="x^2 - 6x + 11" /> in vertex form <InlineMath math="(x - h)^2 + k" />.
+            State the vertex and minimum value.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="x^2 - 6x + 11 = (x - 3)^2 - 9 + 11 = \boxed{(x-3)^2 + 2}" />
+            <p>Vertex: <InlineMath math="(3,\,2)" />. Minimum value: <strong>2</strong> at <InlineMath math="x = 3" />.</p>
+          </>
+        }
+      />
+
+      {/* ══ HL Section 3: Vieta's Formulae — Full System ════════════════════ */}
+
+      <HighlightBox variant="red">
+        <div className="flex items-center gap-2 mb-3">
+          <HLTag />
+          <p className="font-semibold text-navy-900">HL 3 — Vieta&apos;s Formulae: Full System</p>
+        </div>
+        <div className="text-slate-500 text-sm space-y-2">
+          <p>
+            If <InlineMath math="\alpha" /> and <InlineMath math="\beta" /> are the roots of{" "}
+            <InlineMath math="ax^2 + bx + c = 0" />, then by factoring{" "}
+            <InlineMath math="a(x - \alpha)(x - \beta) = 0" /> and comparing coefficients:
+          </p>
+          <p>
+            <InlineMath math="\alpha + \beta = -\dfrac{b}{a}" /> and{" "}
+            <InlineMath math="\alpha\beta = \dfrac{c}{a}" />.
+          </p>
+          <p>
+            These let you find quadratics from roots, evaluate symmetric expressions like{" "}
+            <InlineMath math="\alpha^2 + \beta^2" /> without solving, and solve parameter problems efficiently.
+          </p>
+        </div>
+      </HighlightBox>
+
+      <FormulaBox title="Vieta's Formulae — Full System">
+        <FormulaRow label="Sum of roots" math="\alpha + \beta = -\dfrac{b}{a}" />
+        <FormulaRow label="Product of roots" math="\alpha\beta = \dfrac{c}{a}" />
+        <FormulaRow label="Quadratic from known roots" math="x^2 - (\alpha + \beta)\,x + \alpha\beta = 0" />
+        <FormulaRow label="Symmetric identity" math="\alpha^2 + \beta^2 = (\alpha + \beta)^2 - 2\alpha\beta" />
+        <FormulaRow label="Difference identity" math="(\alpha - \beta)^2 = (\alpha + \beta)^2 - 4\alpha\beta = \dfrac{\Delta}{a^2}" />
+      </FormulaBox>
+
+      <WorkedExample title="Form the quadratic with roots 2 and −3">
+        <div className="flex items-center gap-2 mb-4"><HLTag /></div>
+        <StepBox n={1}>
+          Compute sum and product:
+          <BlockMath math="\alpha + \beta = 2 + (-3) = -1, \qquad \alpha\beta = 2 \times (-3) = -6" />
+        </StepBox>
+        <StepBox n={2}>
+          Apply the reconstruction formula:
+          <BlockMath math="x^2 - (-1)x + (-6) = 0" />
+          <BlockMath math="\boxed{x^2 + x - 6 = 0}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Parameter problem — α, β roots of x² − 5x + k = 0, and α² + β² = 13. Find k.">
+        <div className="flex items-center gap-2 mb-4"><HLTag /></div>
+        <StepBox n={1}>
+          From Vieta&apos;s formulae with <InlineMath math="a=1,\; b=-5,\; c=k" />:
+          <BlockMath math="\alpha + \beta = 5, \qquad \alpha\beta = k" />
+        </StepBox>
+        <StepBox n={2}>
+          Apply the symmetric identity:
+          <BlockMath math="\alpha^2 + \beta^2 = (\alpha + \beta)^2 - 2\alpha\beta = 25 - 2k" />
+        </StepBox>
+        <StepBox n={3}>
+          Set equal to 13 and solve:
+          <BlockMath math="25 - 2k = 13 \;\Longrightarrow\; 2k = 12 \;\Longrightarrow\; \boxed{k = 6}" />
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            The sum of roots is 3 and the product is <InlineMath math="-10" />.
+            Write down the quadratic equation with these roots.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="x^2 - (\alpha+\beta)x + \alpha\beta = 0 \;\Longrightarrow\; \boxed{x^2 - 3x - 10 = 0}" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            <InlineMath math="\alpha" /> and <InlineMath math="\beta" /> are roots of{" "}
+            <InlineMath math="2x^2 - 7x + 3 = 0" />. Find <InlineMath math="\alpha^2 + \beta^2" />.
+          </>
+        }
+        answer={
+          <>
+            <p>From Vieta&apos;s: <InlineMath math="\alpha+\beta = \tfrac{7}{2},\; \alpha\beta = \tfrac{3}{2}" /></p>
+            <BlockMath math="\alpha^2 + \beta^2 = \left(\frac{7}{2}\right)^2 - 2\left(\frac{3}{2}\right) = \frac{49}{4} - 3 = \boxed{\frac{37}{4}}" />
+          </>
+        }
+      />
+
+      {/* ══ HL Section 4: Quadratics with Complex Roots ═════════════════════ */}
+
+      <HighlightBox variant="red">
+        <div className="flex items-center gap-2 mb-3">
+          <HLTag />
+          <p className="font-semibold text-navy-900">HL 4 — Quadratics with Complex Roots</p>
+        </div>
+        <div className="text-slate-500 text-sm space-y-2">
+          <p>
+            When <InlineMath math="\Delta < 0" />, the square root in the quadratic formula
+            produces <InlineMath math="\sqrt{\text{negative}}" />. We write{" "}
+            <InlineMath math="\sqrt{-1} = i" />, so <InlineMath math="\sqrt{-n} = i\sqrt{n}" />.
+          </p>
+          <p>
+            Complex roots always come in <em>conjugate pairs</em>:{" "}
+            <InlineMath math="x = p + qi" /> and <InlineMath math="x = p - qi" />.
+            This means if all coefficients are real, you cannot have just one complex root.
+          </p>
+        </div>
+      </HighlightBox>
+
+      <FormulaBox title="Complex Root Formula (Δ < 0)">
+        <FormulaRow label="General complex roots" math="x = \dfrac{-b \pm i\sqrt{-\Delta}}{2a} \quad (\Delta = b^2 - 4ac < 0)" />
+        <FormulaRow label="Real part" math="\text{Re}(x) = -\dfrac{b}{2a}" />
+        <FormulaRow label="Imaginary part" math="\text{Im}(x) = \pm\dfrac{\sqrt{-\Delta}}{2a}" />
+        <FormulaRow label="Conjugate pair property" math="x_1 = \overline{x_2} \quad \text{(always, when coefficients are real)}" />
+      </FormulaBox>
+
+      <WorkedExample title="Complex roots — solve x² + 4x + 13 = 0">
+        <div className="flex items-center gap-2 mb-4"><HLTag /></div>
+        <StepBox n={1}>
+          Compute discriminant:
+          <BlockMath math="\Delta = 4^2 - 4(1)(13) = 16 - 52 = -36 < 0" />
+        </StepBox>
+        <StepBox n={2}>
+          Apply the formula with <InlineMath math="\sqrt{-36} = 6i" />:
+          <BlockMath math="x = \frac{-4 \pm \sqrt{-36}}{2} = \frac{-4 \pm 6i}{2}" />
+        </StepBox>
+        <StepBox n={3}>
+          <BlockMath math="x = \boxed{-2 + 3i} \quad \text{or} \quad x = \boxed{-2 - 3i}" />
+          Note the roots are complex conjugates: <InlineMath math="\text{Re} = -2,\; |\text{Im}| = 3" />.
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            Solve <InlineMath math="x^2 + 2x + 10 = 0" />. Express roots in the form{" "}
+            <InlineMath math="a + bi" />.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="\Delta = 4 - 40 = -36" />
+            <BlockMath math="x = \frac{-2 \pm \sqrt{-36}}{2} = \frac{-2 \pm 6i}{2} = \boxed{-1 \pm 3i}" />
+          </>
+        }
+      />
+
+      {/* ══ HL Section 5: Transformations of Quadratic Graphs ════════════════ */}
+
+      <HighlightBox variant="red">
+        <div className="flex items-center gap-2 mb-3">
+          <HLTag />
+          <p className="font-semibold text-navy-900">HL 5 — Transformations of Quadratic Graphs</p>
+        </div>
+        <p className="text-slate-500 text-sm">
+          Vertex form <InlineMath math="y = a(x - h)^2 + k" /> encodes all four transformations of
+          the parent parabola <InlineMath math="y = x^2" /> directly. Reading off{" "}
+          <InlineMath math="a" />, <InlineMath math="h" />, <InlineMath math="k" /> lets you
+          describe or sketch the graph without expanding.
+        </p>
+      </HighlightBox>
+
+      <FormulaBox title="Vertex Form — Transformations">
+        <FormulaRow label="Vertex form" math="y = a(x - h)^2 + k" />
+        <FormulaRow label="Vertex" math="(h,\; k)" />
+        <FormulaRow label="Axis of symmetry" math="x = h" />
+        <FormulaRow label="Minimum (a > 0)" math="y_{\min} = k \text{ at } x = h" />
+        <FormulaRow label="Maximum (a < 0)" math="y_{\max} = k \text{ at } x = h" />
+        <FormulaRow label="a: stretch / reflect" math="|a| > 1\text{: narrower};\quad 0 < |a| < 1\text{: wider};\quad a < 0\text{: reflected}" />
+      </FormulaBox>
+
+      {/* Visual: transformation table */}
+      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden my-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-danger-text px-6 pt-5 pb-3">
+          How each parameter transforms y = x²
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left border-collapse">
+            <thead>
+              <tr className="bg-navy-900 text-white">
+                <th className="px-5 py-3 font-semibold">Parameter</th>
+                <th className="px-5 py-3 font-semibold">Example</th>
+                <th className="px-5 py-3 font-semibold">Effect on graph</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { param: "a > 1", eg: "a = 3", effect: "Vertical stretch — narrower parabola" },
+                { param: "0 < a < 1", eg: "a = ½", effect: "Vertical compression — wider parabola" },
+                { param: "a < 0", eg: "a = −2", effect: "Reflection in x-axis — opens downward" },
+                { param: "h > 0", eg: "h = 4", effect: "Translate right by 4 units" },
+                { param: "h < 0", eg: "h = −3", effect: "Translate left by 3 units" },
+                { param: "k > 0", eg: "k = 5", effect: "Translate up by 5 units" },
+                { param: "k < 0", eg: "k = −2", effect: "Translate down by 2 units" },
+              ].map(({ param, eg, effect }, i) => (
+                <tr key={i} className={i % 2 === 0 ? "bg-danger-bg" : "bg-white"}>
+                  <td className="px-5 py-3 font-mono font-semibold text-navy-900">{param}</td>
+                  <td className="px-5 py-3 text-danger-text font-semibold">{eg}</td>
+                  <td className="px-5 py-3 text-slate-600">{effect}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <WorkedExample title="Describe the transformation from y = x² to y = −2(x − 3)² + 5">
+        <div className="flex items-center gap-2 mb-4"><HLTag /></div>
+        <p className="text-sm text-slate-500 mb-4">
+          Read off <InlineMath math="a = -2,\; h = 3,\; k = 5" /> directly from vertex form.
+        </p>
+        <StepBox n={1}>
+          <strong>a = −2:</strong> Reflect in the x-axis and apply a vertical stretch of factor 2
+          (parabola opens downward, narrower than <InlineMath math="y = x^2" />).
+        </StepBox>
+        <StepBox n={2}>
+          <strong>h = 3:</strong> Translate right by 3 units.
+        </StepBox>
+        <StepBox n={3}>
+          <strong>k = 5:</strong> Translate up by 5 units.
+        </StepBox>
+        <StepBox n={4}>
+          Vertex: <InlineMath math="(3,\,5)" />. Maximum value{" "}
+          <InlineMath math="5" /> (since <InlineMath math="a < 0" />).
+          Axis of symmetry: <InlineMath math="x = 3" />.
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            For <InlineMath math="y = 3(x + 2)^2 - 1" />, state the vertex, axis of symmetry,
+            minimum value, and describe the transformation from <InlineMath math="y = x^2" />.
+          </>
+        }
+        answer={
+          <>
+            <p>Read off: <InlineMath math="a = 3,\; h = -2,\; k = -1" />.</p>
+            <p>Vertex: <InlineMath math="(-2,\,-1)" />. Axis: <InlineMath math="x = -2" />. Minimum: <InlineMath math="-1" />.</p>
+            <p>Transformation from <InlineMath math="y = x^2" />: vertical stretch by 3 (narrower), translate left 2 units, translate down 1 unit.</p>
           </>
         }
       />
