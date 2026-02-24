@@ -132,22 +132,24 @@ Every lesson page lives at `src/app/[pathway]/unit-[n]/lesson/page.tsx`.
 ### Per-Topic Section Structure:
 Each topic section should contain (in this order):
 - `HighlightBox variant="blue"` — key idea / definition in plain language.
-- `FormulaBox` (dark navy) — all relevant formulas in `FormulaRow` format.
+- **All `FormulaBox` groups** (dark navy) — each formula group has its own titled `FormulaBox`. Multiple formula groups are stacked before any examples. Rule: **all formulas first, all examples after**.
 - Visual aid — a simple diagram, table, or step flow using Tailwind grid/flex (no external image files).
-- `WorkedExample` — step-by-step solution using `StepBox` components.
-- `Practice` — always-visible problem + collapsible solution via native `<details>`.
+- **All `WorkedExample`** blocks — one per major formula group/technique, appearing only after ALL formula groups.
+- `Practice` — always-visible problem + collapsible solution via native `<details>`. Add multiple `Practice` blocks when there are multiple formula groups (one practice per technique group minimum).
 
 ### Helper components (defined inside each lesson page file):
 | Component | Purpose |
 |-----------|---------|
-| `FormulaBox` | Dark navy card holding formula rows |
-| `FormulaRow` | `{label, math}` — label + `InlineMath` in a row |
+| `FormulaBox` | Dark navy card holding formula rows; use separate titled boxes per formula group |
+| `FormulaRow` | `{label, math}` — plain-text label + `InlineMath` formula in a row |
 | `StepBox` | Numbered step with blue circle badge |
 | `WorkedExample` | Blue-bordered card with "Worked Example" label |
 | `Practice` | Yellow-bordered card; problem always visible, solution in `<details>` |
 | `LessonSection` | Local section wrapper (replaces shared `Section`; controls alt bg) |
 | `SLTag` / `HLTag` | Blue / red pill indicating audience |
 | `HLDivider` | Full-width red banner separating SL from HL content |
+
+**`HLTag` inside `WorkedExample`:** Place `<HLTag />` + description `<span>` at the top of a `WorkedExample`'s children (before `StepBox` 1) when the example covers HL-depth content within an otherwise SL section. Established in Topic 2 Group 4.
 
 ### Math rendering:
 - Use `InlineMath` for math within text.
@@ -219,6 +221,62 @@ const PRACTICE_DATA: Record<string, PracticeSet> = { "1": ..., "2": ..., "3": ..
 ```ts
 { title: "Practice Problems", status: "available", href: "/aa/unit-N/practice/1" }
 ```
+
+## AA Unit 1 — Lesson Content Reference
+
+### Topic 1: Laws of Indices
+One `FormulaBox` (9 rows: multiply, divide, power of power, power of product, power of quotient, zero index, negative index, unit fraction index, general fractional index). One `WorkedExample` (simplify with mixed laws). One `Practice`.
+
+### Topic 2: Surds
+Four `FormulaBox` groups — all appear before any examples:
+
+| Group | Title | Formulas covered |
+|-------|-------|-----------------|
+| 1 | Square Root (√) Rules | Product, self-multiply, combine same radicand, rationalise simple, rationalise conjugate |
+| 2 | Cube Root (∛) Rules | Product, self-triple `(∛a)³=a`, simplify perfect-cube factor, rationalise `k/∛a` |
+| 3 | Nth Root Rules | Index connection `ⁿ√a=a^(1/n)`, product, power `ⁿ√(aᵐ)=a^(m/n)`, nested root |
+| 4 | Conjugate Identities | A: diff of squares + classic rationalise; B: cube sum/diff identities; C: nth power difference (concept); D: nth root exponent method |
+
+7 `WorkedExample`s (3 for groups 1–3 + 4 for group 4). Group 4 WE2 & WE3 carry `HLTag` (cube identity / missing factor form). 7 `Practice` problems (3 + 4).
+
+### Topic 3: Quadratic Equations
+**SL content:** One `FormulaBox` (7 rows: standard form, quadratic formula, Δ, Δ' reduced discriminant, a+b+c=0 shortcut, a−b+c=0 shortcut, Vieta's formulae). Yellow `HighlightBox` explains WHY shortcuts work. 4 `WorkedExample`s. 3 `Practice` problems.
+
+**HL Extension** (5 sub-sections, each with `HLTag`, appended after SL content, preceded by a red inline HL banner):
+
+| Sub-section | FormulaBox content | Examples | Practice |
+|-------------|-------------------|----------|----------|
+| HL 1 — Discriminant Deep Analysis | Δ>0/=0/<0 classification, axis of symmetry, x-intercept count | WE: nature of roots (2x²−4x+5); parameter k for equal roots | 2 (k for real roots; classify without solving) |
+| HL 2 — Completing the Square (Derivation) | 5 derivation steps ax²+bx+c→quadratic formula | WE: full derivation; vertex form 3x²+12x+7 | 1 (vertex form + minimum) |
+| HL 3 — Vieta's Full System | Sum α+β=−b/a, product αβ=c/a, reconstruct quadratic, α²+β² identity, (α−β)² identity | WE: form quadratic from roots 2,−3; α²+β²=13 parameter problem | 2 (quadratic from sum/product; evaluate α²+β²) |
+| HL 4 — Complex Roots | Complex root formula, Re/Im parts, conjugate pair property | WE: x²+4x+13=0 → −2±3i | 1 (x²+2x+10=0 in a+bi form) |
+| HL 5 — Transformations of Quadratic Graphs | Vertex form y=a(x−h)²+k, vertex, axis, min/max, a-stretch/reflect rule | WE: describe y=−2(x−3)²+5 from y=x² | 1 (vertex, axis, min, describe transformation) |
+
+### Topic 4: Completing the Square
+One `FormulaBox` (2 rows: for x²+bx+c and ax²+bx+c). Visual step-flow diagram. One `WorkedExample`. One `Practice`.
+
+### Topic 5: Sequences & Series
+Two dark-navy cards side by side (AP and GP) — each card contains general term + sum formulas. Yellow `HighlightBox` on convergence. Two `WorkedExample`s (AP and GP). One `Practice`.
+
+### Topic 6: Logarithms
+One `FormulaBox` (7 rows: product, quotient, power, identity, zero rule, change of base, inverse). Visual log↔exponential switch. One `WorkedExample`. One `Practice`.
+
+### Topic 7: Binomial Expansion
+One `FormulaBox` (expansion, binomial coefficient, general term). Pascal's Triangle visual. One `WorkedExample` (tabular expansion). One `Practice`.
+
+### HL Topic 1: Proof by Induction
+Red `HighlightBox` (4-step method). Domino analogy visual. One `WorkedExample` (sum of integers). One `Practice` (sum of squares).
+
+### HL Topic 2: Complex Numbers
+Red `HighlightBox` (powers of i). Two side-by-side dark cards (Cartesian form + Polar/Euler form). Argand diagram (ASCII). One `WorkedExample`. One `Practice`.
+
+### HL Topic 3: Advanced Sequences & Series
+One `FormulaBox` (sigma notation + standard sum results for r, r², r³). Red `HighlightBox` on splitting sums. One `WorkedExample`. One `Practice`.
+
+### HL Topic 4: Harder Binomial Expansion
+Red `HighlightBox` (general binomial series). One `FormulaBox` (negative/fractional index patterns). Validity check visual. One `WorkedExample`. One `Practice`.
+
+---
 
 ## Progress Tracker
 | Path | Lesson | Practice | Mock |
