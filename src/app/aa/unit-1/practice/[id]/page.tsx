@@ -8,6 +8,7 @@ const TITLES: Record<string, string> = {
   "1": "Laws of Indices",
   "2": "Surds",
   "3": "Quadratic Equations",
+  "4": "Chemistry G10 — NaHCO₃ Experiment",
 };
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
@@ -46,5 +47,5 @@ export default async function PracticePage({
 // ─── Static params (only ids 1–3 are built) ───────────────────────────────────
 
 export function generateStaticParams() {
-  return [{ id: "1" }, { id: "2" }, { id: "3" }];
+  return [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
 }

@@ -27,6 +27,19 @@ type Problem = {
   answerMath?: string;
   /** Difficulty label */
   difficulty: "basic" | "standard" | "challenge";
+  /** When true, renders a multi-line textarea instead of a single-line input */
+  longAnswer?: boolean;
+};
+
+type ExperimentContext = {
+  title: string;
+  /** Lines of plain text describing the experiment setup */
+  setup: string[];
+  /** Optional data table shown in the context box */
+  table?: {
+    headers: string[];
+    rows: string[][];
+  };
 };
 
 type PracticeSet = {
@@ -40,6 +53,8 @@ type PracticeSet = {
    */
   revealKey: string;
   problems: Problem[];
+  /** Optional experiment context box rendered above the problem list */
+  experimentContext?: ExperimentContext;
 };
 
 // ─── Practice Data ────────────────────────────────────────────────────────────
@@ -494,6 +509,312 @@ const PRACTICE_DATA: Record<string, PracticeSet> = {
       },
     ],
   },
+
+  "4": {
+    id: "4",
+    topicNumber: 4,
+    title: "Chemistry G10 — NaHCO₃ Decomposition",
+    tagline: "Analyse a thermal decomposition experiment: calculate percent yield, interpret data, and evaluate sources of experimental error.",
+    revealKey: "P3NX7DCWQ1",
+    experimentContext: {
+      title: "Thermal Decomposition of Sodium Bicarbonate",
+      setup: [
+        "Balanced equation: 2 NaHCO₃(s) → Na₂CO₃(s) + H₂O(g) + CO₂(g)",
+        "A student heats a sample of NaHCO₃ in an open crucible until no further change in mass is observed.",
+        "Molar masses used: NaHCO₃ = 84.0 g/mol  |  Na₂CO₃ = 106.0 g/mol",
+      ],
+      table: {
+        headers: ["Measurement", "Recorded Value"],
+        rows: [
+          ["Mass of empty crucible", "20.00 g"],
+          ["Mass of crucible + NaHCO₃ (before heating)", "25.00 g"],
+          ["Mass of crucible + solid residue (after heating)", "23.10 g"],
+          ["Theoretical yield of Na₂CO₃ (from stoichiometry)", "3.08 g"],
+          ["Actual mass of solid residue (Na₂CO₃)", "3.10 g"],
+        ],
+      },
+    },
+    problems: [
+      {
+        id: 1,
+        question:
+          "Define percent yield. Write the formula, then calculate the percent yield for this experiment. Show all working and explain what the result tells you about the experiment.",
+        longAnswer: true,
+        difficulty: "basic",
+        hint: "Percent yield = (actual yield ÷ theoretical yield) × 100%. Use the residue mass and the theoretical yield from the table.",
+        answer: `Percent yield is the ratio of the actual yield to the theoretical yield, expressed as a percentage. It measures how efficiently a reaction produces the expected product compared to the stoichiometric maximum.
+
+Formula:
+  % yield = (actual yield / theoretical yield) × 100%
+
+Calculation:
+  % yield = (3.10 g / 3.08 g) × 100%
+           = 100.6%
+
+Interpretation:
+A percent yield of 100.6% means the actual solid residue measured is slightly heavier than the stoichiometric prediction. A yield above 100% is physically impossible in a perfect experiment — it indicates an experimental error that has artificially increased the measured mass of the product. The most likely cause is that the product Na₂CO₃ absorbed a small amount of atmospheric moisture before weighing, or that not all NaHCO₃ fully decomposed, leaving some unreacted solid in the residue.`,
+      },
+      {
+        id: 2,
+        question:
+          "Using the raw data in the table, calculate: (a) the initial mass of NaHCO₃ used, and (b) the mass of gas lost during the reaction. Identify the gas(es) that escaped and explain why they were able to escape.",
+        longAnswer: true,
+        difficulty: "basic",
+        hint: "Subtract crucible masses to find each mass. Gas lost = (mass of crucible + NaHCO₃) − (mass of crucible + residue after heating).",
+        answer: `(a) Initial mass of NaHCO₃:
+  = (mass of crucible + NaHCO₃) − (mass of empty crucible)
+  = 25.00 g − 20.00 g
+  = 5.00 g
+
+(b) Mass of gas lost:
+  = (mass of crucible + NaHCO₃) − (mass of crucible + residue after heating)
+  = 25.00 g − 23.10 g
+  = 1.90 g
+
+Gases that escaped:
+The decomposition produces H₂O (water vapour) and CO₂ (carbon dioxide gas). Both products exist in the gaseous state at the high temperature of the experiment. Because the crucible is open to the atmosphere, both gases escape freely into the surroundings and are no longer part of the crucible when it is weighed — accounting for the 1.90 g mass loss.
+
+Na₂CO₃ (sodium carbonate) remains as a stable ionic solid in the crucible and does NOT escape.`,
+      },
+      {
+        id: 3,
+        question:
+          "The percent yield is 100.6%. Is a percent yield above 100% physically possible? Explain your reasoning. Then identify the single most likely experimental error that caused this result and explain how it produced a yield above 100%.",
+        longAnswer: true,
+        difficulty: "standard",
+        hint: "A yield > 100% means the measured product mass exceeds the theoretical maximum. Think about what could ADD mass to the solid residue.",
+        answer: `Physical possibility:
+A percent yield above 100% is physically impossible in a perfect experiment. The theoretical yield represents the maximum mass of product obtainable from the given amount of reactant, based on conservation of mass and stoichiometry. You cannot obtain more product than the theoretical maximum.
+
+Therefore, a yield of 100.6% indicates an experimental error that has artificially increased the measured mass of the solid residue.
+
+Most likely experimental error:
+The sample was not heated long enough to drive off all the water vapour (and possibly unreacted NaHCO₃). If heating stops too early:
+• Some NaHCO₃ remains undecomposed in the crucible.
+• Some water is still adsorbed onto the Na₂CO₃ product.
+Both of these add extra mass to the solid residue beyond what pure dry Na₂CO₃ would weigh, making the actual yield appear greater than the theoretical yield.
+
+(Note: Na₂CO₃ is also hygroscopic — it can re-absorb moisture from the air if left cooling in an open environment before weighing, which would similarly inflate the recorded mass.)`,
+      },
+      {
+        id: 4,
+        question:
+          "From the balanced equation 2NaHCO₃ → Na₂CO₃ + H₂O + CO₂, identify which products are responsible for the mass loss observed in an open crucible. For each product you identify, explain WHY it contributes to the mass loss. Then explain why Na₂CO₃ does NOT contribute to the mass loss.",
+        longAnswer: true,
+        difficulty: "standard",
+        answer: `Products responsible for mass loss:
+H₂O (water vapour) and CO₂ (carbon dioxide gas).
+
+Why H₂O contributes to mass loss:
+At the temperature of the experiment, water is produced as steam (gas phase). In an open crucible, this vapour escapes freely into the surrounding atmosphere. Since it leaves the system being weighed, its mass is no longer recorded — causing the crucible's mass to decrease.
+
+Why CO₂ contributes to mass loss:
+CO₂ is a gas at all temperatures in this experiment. Like water vapour, it escapes from the open crucible into the atmosphere immediately upon formation. Its mass is therefore lost from the weighed system.
+
+Why Na₂CO₃ does NOT contribute to mass loss:
+Na₂CO₃ (sodium carbonate) is an ionic solid with a very high melting point (~851 °C). At the temperatures used in this experiment, it remains entirely in the solid state inside the crucible. Because it does not evaporate or escape, its full mass is retained and measured when the crucible is re-weighed.
+
+Summary: only volatile gaseous products (H₂O and CO₂) escape an open system, causing the observed mass loss of 1.90 g.`,
+      },
+      {
+        id: 5,
+        question:
+          "Show the complete step-by-step stoichiometric calculation to determine the theoretical yield of Na₂CO₃ when 5.00 g of NaHCO₃ is fully decomposed. State all molar masses used and show every step clearly.",
+        longAnswer: true,
+        difficulty: "standard",
+        hint: "Steps: (1) molar mass of NaHCO₃, (2) moles of NaHCO₃, (3) apply the 2 : 1 mole ratio from the equation, (4) molar mass of Na₂CO₃, (5) mass of Na₂CO₃.",
+        answer: `Balanced equation: 2 NaHCO₃ → Na₂CO₃ + H₂O + CO₂
+
+Step 1 — Molar mass of NaHCO₃:
+  M(NaHCO₃) = Na + H + C + 3×O
+             = 23.0 + 1.0 + 12.0 + 3(16.0)
+             = 84.0 g/mol
+
+Step 2 — Moles of NaHCO₃:
+  n(NaHCO₃) = mass / M = 5.00 / 84.0 = 0.05952 mol
+
+Step 3 — Mole ratio (from the balanced equation):
+  2 mol NaHCO₃ produces 1 mol Na₂CO₃
+  ∴ n(Na₂CO₃) = 0.05952 / 2 = 0.02976 mol
+
+Step 4 — Molar mass of Na₂CO₃:
+  M(Na₂CO₃) = 2(23.0) + 12.0 + 3(16.0)
+             = 46.0 + 12.0 + 48.0
+             = 106.0 g/mol
+
+Step 5 — Theoretical yield:
+  mass(Na₂CO₃) = n × M = 0.02976 × 106.0 ≈ 3.15 g
+
+Note: the value 3.08 g given in the table uses slightly different atomic mass values or rounding conventions. Always state which atomic masses you are using and show each step to make your reasoning auditable.`,
+      },
+      {
+        id: 6,
+        question:
+          "A student says: 'This experiment proves that the law of conservation of mass is wrong — the crucible gets lighter after heating.' Evaluate this claim. In your answer, define what system must be considered for conservation of mass to hold, and use the data from the table to demonstrate that mass is conserved.",
+        longAnswer: true,
+        difficulty: "standard",
+        answer: `Evaluation of the claim:
+The student's claim is INCORRECT. The law of conservation of mass is not violated. The error is in how the student defines the 'system'.
+
+What conservation of mass requires:
+Conservation of mass states that in a closed system, the total mass of the reactants equals the total mass of the products — mass cannot be created or destroyed. The key requirement is a CLOSED system, where nothing enters or leaves.
+
+Why the crucible appears to lose mass:
+The crucible is an OPEN system. The gaseous products H₂O (vapour) and CO₂ escape into the surrounding atmosphere during heating. Because they leave the crucible, they are no longer included when the crucible is re-weighed. This gives the false impression that mass has disappeared.
+
+Demonstrating conservation using the data:
+  Mass of NaHCO₃ at the start       = 5.00 g
+  Mass of solid residue (Na₂CO₃)    = 3.10 g
+  Mass of gas lost (H₂O + CO₂)      = 1.90 g
+
+  Total mass of products = 3.10 + 1.90 = 5.00 g ✓
+
+When we account for ALL products — both the solid that remains and the gases that escaped — the total equals the original mass of NaHCO₃. Conservation of mass holds perfectly; we simply need to include the entire system.`,
+      },
+      {
+        id: 7,
+        question:
+          "Suggest TWO specific improvements a student should make to this experiment to obtain a more accurate percent yield. For each improvement, name the technique, describe how to carry it out, and explain precisely how it reduces the experimental error.",
+        longAnswer: true,
+        difficulty: "challenge",
+        hint: "Think about: (1) incomplete decomposition — how do you know when the reaction is truly finished? (2) the hygroscopic nature of Na₂CO₃ — what happens to its mass when exposed to air?",
+        answer: `Improvement 1: Heat to constant mass
+
+Technique: After the initial heating, allow the crucible to cool, record the mass, then heat again for a further 2–3 minutes. Repeat this cycle until two consecutive readings agree to within ±0.01 g.
+
+How it reduces error: Stopping heating too early leaves unreacted NaHCO₃ or residual water adsorbed on the Na₂CO₃ in the crucible. Both add extra mass beyond that of pure dry Na₂CO₃, inflating the actual yield and producing a percent yield above 100%. Heating to constant mass ensures the reaction has gone to completion and all water vapour and CO₂ have been fully driven off, so the mass recorded truly represents only the Na₂CO₃ product.
+
+---
+
+Improvement 2: Cool in a desiccator before weighing
+
+Technique: After heating, transfer the hot crucible immediately into a desiccator (a sealed container holding a drying agent such as silica gel or anhydrous calcium chloride) and allow it to cool to room temperature before placing it on the balance.
+
+How it reduces error: Na₂CO₃ is hygroscopic — it readily absorbs water vapour from the air. If the crucible cools in the open laboratory, the product absorbs moisture, increasing its mass beyond that of pure anhydrous Na₂CO₃. This would make the actual yield appear greater than it should be, causing the percent yield to exceed 100%. Cooling in a desiccator prevents any moisture absorption, so the mass recorded is that of dry Na₂CO₃ alone, giving a more accurate and reliable percent yield.`,
+      },
+      {
+        id: 8,
+        question:
+          "When re-checking data, a student notices the recorded mass of the empty crucible appears to have 'decreased' slightly between two consecutive measurements, before any chemicals were added. Identify the most likely reason for this apparent mass decrease, and explain how this type of error affects the reliability of experimental results.",
+        longAnswer: true,
+        difficulty: "basic",
+        hint: "Think about what could make a balance give a different reading for the same object — consider both instrument errors and physical conditions of the crucible.",
+        answer: `Most likely reason: The balance was 'zeroed' (tared) incorrectly.
+
+If the electronic balance was not properly re-zeroed before the second measurement, or if something was resting on the balance pan when it was tared, the balance will display a value offset from the true mass — even for an unchanged object. This produces an apparent change in mass that is actually an instrument error, not a real physical change.
+
+How this affects reliability:
+This is a systematic error — it shifts all readings from that balance by the same offset amount. Any mass calculated using an incorrectly tared balance (such as the mass of NaHCO₃ or the mass of the solid residue) will carry this same offset error, making all derived quantities (including percent yield) inaccurate.
+
+Alternative likely cause: The crucible was still hot from a previous heating. Hot objects create convection currents above the balance pan, which exert a small upward or downward force on the pan, giving an unstable or artificially low reading. Crucibles must always be cooled to room temperature (ideally in a desiccator) before being placed on the balance.
+
+Note: The ceramic material of the crucible does NOT evaporate under normal lab conditions, and a dirty crucible would typically add mass rather than reduce it.`,
+      },
+      {
+        id: 9,
+        question:
+          "A student heats the crucible containing NaHCO₃ and records the mass of the residue. Describe the procedure they should then follow to confirm that all NaHCO₃ has fully decomposed. Explain why this procedure is necessary and what a constant mass reading confirms about the reaction.",
+        longAnswer: true,
+        difficulty: "standard",
+        hint: "What happens to the mass if the reaction is not yet complete? How do you know when it is done?",
+        answer: `Correct procedure — heating to constant mass:
+
+1. After the initial heating, transfer the crucible to a desiccator and allow it to cool completely to room temperature.
+2. Weigh the cooled crucible and record the mass.
+3. Return the crucible to the heat source and heat again for a further 2–3 minutes.
+4. Cool again in the desiccator, then re-weigh.
+5. Repeat steps 3–4 until two successive mass readings agree to within ±0.01 g.
+
+Why this is necessary:
+If the reaction is incomplete, some NaHCO₃ remains undecomposed in the crucible. On re-heating, that residual NaHCO₃ continues to break down, releasing more H₂O vapour and CO₂ — so the mass will still be decreasing. Stopping after only one heating risks recording a mass that is too high (because undecomposed NaHCO₃ is heavier than the Na₂CO₃ it would become).
+
+What constant mass confirms:
+When the mass no longer changes between successive heatings, it confirms:
+• All NaHCO₃ has been fully converted to Na₂CO₃.
+• All water vapour and CO₂ have been completely driven off.
+• The mass recorded represents only dry, pure Na₂CO₃.
+
+This gives the most accurate actual yield and therefore the most reliable percent yield calculation.`,
+      },
+      {
+        id: 10,
+        question:
+          "Using the balanced equation 2NaHCO₃ → Na₂CO₃ + H₂O + CO₂ and the mole ratio, calculate how many moles of CO₂ gas are produced when 2.0 moles of NaHCO₃ are completely decomposed. Show your mole ratio reasoning clearly, and state how many moles of H₂O and Na₂CO₃ are also produced.",
+        longAnswer: true,
+        difficulty: "basic",
+        hint: "Read the coefficients directly from the balanced equation. The ratio NaHCO₃ : CO₂ is 2 : 1.",
+        answer: `Balanced equation: 2 NaHCO₃ → Na₂CO₃ + H₂O + CO₂
+
+Mole ratios from the equation:
+  NaHCO₃ : Na₂CO₃ : H₂O : CO₂ = 2 : 1 : 1 : 1
+
+Given: n(NaHCO₃) = 2.0 mol
+
+Calculating each product:
+
+  n(CO₂) = n(NaHCO₃) × (1/2) = 2.0 × 0.5 = 1.0 mol
+
+  n(H₂O) = n(NaHCO₃) × (1/2) = 2.0 × 0.5 = 1.0 mol
+
+  n(Na₂CO₃) = n(NaHCO₃) × (1/2) = 2.0 × 0.5 = 1.0 mol
+
+Summary:
+  2.0 mol NaHCO₃ produces:
+  • 1.0 mol CO₂
+  • 1.0 mol H₂O
+  • 1.0 mol Na₂CO₃
+
+The key principle: every 2 moles of NaHCO₃ that decompose produce exactly 1 mole of each product. The 2 : 1 ratio means you always halve the moles of NaHCO₃ to find the moles of any single product.`,
+      },
+      {
+        id: 11,
+        question:
+          "A student finds that their actual yield of Na₂CO₃ is significantly lower than the theoretical yield, giving a percent yield well below 100%. Identify ONE likely procedural error that directly causes a lower actual yield, and explain precisely how that error results in less product being measured.",
+        longAnswer: true,
+        difficulty: "standard",
+        hint: "Think about what could physically remove product from the crucible, or what could cause the initial mass of NaHCO₃ to be overestimated.",
+        answer: `Most likely procedural error: Splattering (popping) of solid out of the crucible during heating.
+
+What happens:
+When NaHCO₃ is heated too rapidly or at too high a temperature, the sudden violent release of CO₂ and H₂O vapour can cause the solid to 'pop' or splatter. Small particles of the solid product Na₂CO₃ are ejected from the crucible and land on the bench or the outside of the crucible, where they are not weighed as part of the final residue.
+
+How it lowers the actual yield:
+The mass of solid residue measured after heating only includes the Na₂CO₃ remaining inside the crucible. The ejected particles are lost. This makes the recorded actual yield smaller than the true amount of Na₂CO₃ produced:
+
+  % yield = (actual yield / theoretical yield) × 100%
+
+With a smaller numerator, the percent yield drops well below 100%.
+
+How to prevent it: Begin heating gently with a low flame, then gradually increase the temperature. This allows gases to escape slowly rather than explosively.
+
+---
+
+Also valid: The reactant NaHCO₃ was slightly damp when first weighed.
+If the 5.00 g of 'NaHCO₃' actually contained absorbed water, the true mass of NaHCO₃ is less than 5.00 g. The theoretical yield (calculated from 5.00 g) is therefore an overestimate. The actual yield, produced from the smaller true amount of NaHCO₃, will be lower than the inflated theoretical yield, giving a percent yield below 100%.`,
+      },
+      {
+        id: 12,
+        question:
+          "State which piece of laboratory equipment is most appropriate for measuring the mass of the crucible to a precision of 0.01 g. Explain why this instrument is chosen for this experiment, and briefly explain why a graduated cylinder, beaker, and spring scale are each unsuitable.",
+        longAnswer: true,
+        difficulty: "basic",
+        answer: `Most appropriate instrument: Electronic Analytical Balance
+
+Why it is chosen:
+An electronic analytical balance can measure mass to a precision of 0.01 g (or better, 0.001 g on higher-grade models). It provides a stable digital readout that is easy to read without parallax error, and it can be re-zeroed (tared) to subtract the mass of the container. In this experiment, small changes in mass — such as the 1.90 g of gas lost or the difference between actual and theoretical yield — must be measured accurately to calculate a meaningful percent yield. Only an analytical balance has the required precision.
+
+Why the other options are unsuitable:
+
+• Beaker: A beaker is a glass container used to hold or heat liquids. It is not a measuring instrument and cannot determine mass.
+
+• Graduated Cylinder: A graduated cylinder measures the volume of liquids, not mass. It is irrelevant to a mass-based experiment.
+
+• Spring Scale: A spring scale measures the force of gravity acting on an object (i.e., weight in Newtons or approximate mass in grams). Its precision is typically far too low (often ±5–50 g) to detect the small mass differences in this experiment. It is also sensitive to the local value of gravitational acceleration and gives inconsistent readings if the object swings.
+
+Conclusion: Only the electronic analytical balance has both the precision and the direct mass-reading capability needed for accurate yield calculations.`,
+      },
+    ],
+  },
 };
 
 const DIFFICULTY_COLORS: Record<Problem["difficulty"], string> = {
@@ -690,6 +1011,67 @@ export default function PracticeClient({ id }: { id: string }) {
       {/* ── Problems ── */}
       <section className="py-12 px-6">
         <div className="max-w-[900px] mx-auto space-y-8">
+
+          {/* Experiment context box */}
+          {practice.experimentContext && (
+            <div className="bg-white rounded-2xl border-2 border-slate-200 overflow-hidden">
+              <div className="bg-navy-900 px-6 py-4">
+                <p className="text-xs font-bold uppercase tracking-wider text-aa-light mb-1">
+                  Experiment Context
+                </p>
+                <p className="text-white font-bold text-lg">
+                  {practice.experimentContext.title}
+                </p>
+              </div>
+              <div className="px-6 py-5 space-y-3">
+                {practice.experimentContext.setup.map((line, i) => (
+                  <p key={i} className="text-sm text-navy-900 font-medium">
+                    {line}
+                  </p>
+                ))}
+                {practice.experimentContext.table && (
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full text-sm border-collapse">
+                      <thead>
+                        <tr>
+                          {practice.experimentContext.table.headers.map((h, i) => (
+                            <th
+                              key={i}
+                              className="bg-navy-900 text-white font-semibold px-4 py-2.5 text-left border border-navy-700"
+                            >
+                              {h}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {practice.experimentContext.table.rows.map((row, ri) => (
+                          <tr key={ri} className={ri % 2 === 0 ? "bg-white" : "bg-slate-50"}>
+                            {row.map((cell, ci) => (
+                              <td
+                                key={ci}
+                                className={`px-4 py-2.5 border border-slate-200 text-sm ${
+                                  ci === 0
+                                    ? "font-medium text-navy-900"
+                                    : "text-navy-900 font-semibold"
+                                }`}
+                              >
+                                {cell}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                <p className="text-xs text-slate-400 pt-1">
+                  Read this context carefully before answering each question below.
+                </p>
+              </div>
+            </div>
+          )}
+
           {practice.problems.map((problem, idx) => (
             <ProblemCard
               key={problem.id}
@@ -995,20 +1377,37 @@ function ProblemCard({
           <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
             Your answer
           </label>
-          <input
-            type="text"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            disabled={disabled}
-            placeholder="Type your final or short answer here…"
-            className={`w-full border-2 rounded-xl px-4 py-3 text-navy-900 font-medium outline-none transition-colors resize-none ${
-              disabled
-                ? "bg-slate-50 border-slate-100 text-slate-400 cursor-not-allowed"
-                : hasAnswer
-                ? "border-aa-light focus:border-aa-primary bg-aa-bg"
-                : "border-slate-200 focus:border-aa-primary bg-white"
-            }`}
-          />
+          {problem.longAnswer ? (
+            <textarea
+              rows={6}
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              disabled={disabled}
+              placeholder="Write your full explanation here. Include definitions, calculations, and reasoning…"
+              className={`w-full border-2 rounded-xl px-4 py-3 text-navy-900 font-medium outline-none transition-colors resize-y leading-relaxed ${
+                disabled
+                  ? "bg-slate-50 border-slate-100 text-slate-400 cursor-not-allowed"
+                  : hasAnswer
+                  ? "border-aa-light focus:border-aa-primary bg-aa-bg"
+                  : "border-slate-200 focus:border-aa-primary bg-white"
+              }`}
+            />
+          ) : (
+            <input
+              type="text"
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              disabled={disabled}
+              placeholder="Type your final or short answer here…"
+              className={`w-full border-2 rounded-xl px-4 py-3 text-navy-900 font-medium outline-none transition-colors ${
+                disabled
+                  ? "bg-slate-50 border-slate-100 text-slate-400 cursor-not-allowed"
+                  : hasAnswer
+                  ? "border-aa-light focus:border-aa-primary bg-aa-bg"
+                  : "border-slate-200 focus:border-aa-primary bg-white"
+              }`}
+            />
+          )}
           {hasAnswer && !disabled && (
             <p className="text-xs text-ai-primary mt-1.5 font-medium">
               ✓ Answer recorded
@@ -1092,33 +1491,60 @@ function AnswerCompareCard({
         </div>
       )}
 
-      {/* Comparison grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
-        {/* Student answer */}
-        <div className="px-6 py-5">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-            Your Answer
-          </p>
-          <p className="text-navy-900 font-medium min-h-[1.5rem]">
-            {studentAnswer.trim() || (
-              <span className="text-slate-300 italic">No answer entered</span>
+      {/* Comparison grid — side-by-side for short answers, stacked for long answers */}
+      {problem.longAnswer ? (
+        <div className="divide-y divide-slate-100">
+          {/* Student answer */}
+          <div className="px-6 py-5">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+              Your Answer
+            </p>
+            {studentAnswer.trim() ? (
+              <pre className="whitespace-pre-wrap font-sans text-sm text-navy-900 leading-relaxed bg-slate-50 rounded-xl px-4 py-3 border border-slate-200">
+                {studentAnswer.trim()}
+              </pre>
+            ) : (
+              <p className="text-slate-300 italic text-sm">No answer entered</p>
             )}
-          </p>
+          </div>
+          {/* Model answer */}
+          <div className="px-6 py-5 bg-ai-bg">
+            <p className="text-xs font-bold uppercase tracking-wider text-ai-primary mb-3">
+              Model Answer
+            </p>
+            <pre className="whitespace-pre-wrap font-sans text-sm text-navy-900 leading-relaxed bg-white rounded-xl px-4 py-3 border border-ai-light">
+              {problem.answer}
+            </pre>
+          </div>
         </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+          {/* Student answer */}
+          <div className="px-6 py-5">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+              Your Answer
+            </p>
+            <p className="text-navy-900 font-medium min-h-6">
+              {studentAnswer.trim() || (
+                <span className="text-slate-300 italic">No answer entered</span>
+              )}
+            </p>
+          </div>
 
-        {/* Model answer */}
-        <div className="px-6 py-5 bg-ai-bg">
-          <p className="text-xs font-bold uppercase tracking-wider text-ai-primary mb-2">
-            Model Answer
-          </p>
-          <p className="text-navy-900 font-medium mb-2">{problem.answer}</p>
-          {problem.answerMath && (
-            <div className="text-navy-900">
-              <InlineMath math={problem.answerMath} />
-            </div>
-          )}
+          {/* Model answer */}
+          <div className="px-6 py-5 bg-ai-bg">
+            <p className="text-xs font-bold uppercase tracking-wider text-ai-primary mb-2">
+              Model Answer
+            </p>
+            <p className="text-navy-900 font-medium mb-2">{problem.answer}</p>
+            {problem.answerMath && (
+              <div className="text-navy-900">
+                <InlineMath math={problem.answerMath} />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
