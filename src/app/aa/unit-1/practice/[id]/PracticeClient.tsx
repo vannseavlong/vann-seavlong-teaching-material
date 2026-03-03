@@ -40,6 +40,8 @@ type ExperimentContext = {
     headers: string[];
     rows: string[][];
   };
+  /** When true, renders the mass-vs-heating-cycle graph below the data table */
+  showMassTimeGraph?: boolean;
 };
 
 type PracticeSet = {
@@ -523,6 +525,7 @@ const PRACTICE_DATA: Record<string, PracticeSet> = {
         "A student heats a sample of NaHCO₃ in an open crucible until no further change in mass is observed.",
         "Molar masses used: NaHCO₃ = 84.0 g/mol  |  Na₂CO₃ = 106.0 g/mol",
       ],
+      showMassTimeGraph: true,
       table: {
         headers: ["Measurement", "Recorded Value"],
         rows: [
@@ -813,6 +816,107 @@ Why the other options are unsuitable:
 
 Conclusion: Only the electronic analytical balance has both the precision and the direct mass-reading capability needed for accurate yield calculations.`,
       },
+
+      // ── Graph-reading questions (refer to the Mass vs Heating Cycle graph) ──
+
+      {
+        id: 13,
+        question:
+          "Refer to the graph. At which heating cycle does the mass first reach a constant value? State the final stable mass of the residue and explain what this tells you about the state of the reaction at that point.",
+        longAnswer: true,
+        difficulty: "basic",
+        answer: `Reading from the graph:
+The mass between cycles 3 and 4 is approximately 23.12 g and 23.10 g respectively — a difference of only 0.02 g, which is within the accepted tolerance of ±0.02 g for constant mass.
+
+Constant mass is first achieved at cycle 3 (or confirmed between cycles 3 and 4).
+
+Final stable mass of the residue = 23.10 g
+
+What this tells us about the reaction:
+When the mass no longer changes between consecutive heatings, it means all the NaHCO₃ has been fully converted to Na₂CO₃ — no further H₂O vapour or CO₂ is being produced and escaping. The residue at this point consists entirely of dry, pure Na₂CO₃. Any further heating will produce no additional mass change, confirming the reaction is complete.`,
+      },
+      {
+        id: 14,
+        question:
+          "The graph shows the mass decreasing with each heating cycle, then levelling off. Explain, with reference to the decomposition reaction 2NaHCO₃ → Na₂CO₃ + H₂O + CO₂, why the mass decreases during each heating and why it eventually stops decreasing.",
+        longAnswer: true,
+        difficulty: "standard",
+        hint: "Connect the mass decrease to the gases produced. Connect the levelling off to the completion of the reaction.",
+        answer: `Why the mass decreases with each heating cycle:
+
+Each time the crucible is heated, the thermal decomposition reaction continues:
+  2 NaHCO₃(s) → Na₂CO₃(s) + H₂O(g) + CO₂(g)
+
+The products H₂O (water vapour) and CO₂ (carbon dioxide gas) both escape from the open crucible into the atmosphere. Because these gases leave the system being weighed, each heating removes mass from the crucible. The steeper the drop between two cycles, the more NaHCO₃ was still reacting during that heating.
+
+Looking at the graph:
+• Cycle 0 → 1: drop of 1.20 g — most NaHCO₃ is reacting; large gas loss.
+• Cycle 1 → 2: drop of 0.50 g — less NaHCO₃ remaining.
+• Cycle 2 → 3: drop of 0.18 g — nearly all decomposed.
+• Cycle 3 → 4: drop of 0.02 g — reaction is essentially complete.
+
+Why the mass eventually stops decreasing:
+
+Once all the NaHCO₃ has been completely converted to Na₂CO₃, there is no more reactant left to decompose. No further H₂O or CO₂ can be produced, so no more mass escapes on re-heating. The residue — now entirely Na₂CO₃ — is thermally stable at the temperatures used in this experiment. The mass therefore reaches a true constant value (23.10 g) and further heating produces no change.`,
+      },
+      {
+        id: 15,
+        question:
+          "A student stops the experiment after cycle 1 only (mass of crucible + contents = 23.80 g) and uses this as their actual yield of Na₂CO₃. Calculate the percent yield they would report. Explain clearly why this value is misleading and what it reveals about the contents of the crucible at that stage.",
+        longAnswer: true,
+        difficulty: "challenge",
+        hint: "First find the mass of residue at cycle 1 by subtracting the empty crucible mass. Then apply the percent yield formula. Think about what the residue actually contains at cycle 1.",
+        answer: `Step 1 — Mass of residue at cycle 1:
+  = (mass of crucible + residue at cycle 1) − (mass of empty crucible)
+  = 23.80 g − 20.00 g
+  = 3.80 g
+
+Step 2 — Percent yield using the cycle 1 mass:
+  % yield = (actual yield / theoretical yield) × 100%
+           = (3.80 / 3.08) × 100%
+           = 123.4%
+
+Why this is misleading:
+
+A percent yield of 123.4% is physically impossible for a pure product — you cannot obtain more product than the theoretical maximum. This value is misleading because:
+
+1. The residue at cycle 1 is NOT pure Na₂CO₃. The graph shows the mass is still falling at cycle 1 (it continues to decrease through cycles 2, 3, and 4), which means unreacted NaHCO₃ is still present in the crucible alongside the Na₂CO₃ already formed.
+
+2. NaHCO₃ (molar mass 84.0 g/mol) is heavier than Na₂CO₃ (molar mass 106.0 g/mol per 2 formula units, or 53.0 g per equivalent). The presence of unreacted NaHCO₃ adds extra mass to the residue, inflating the apparent 'actual yield' far beyond what the pure product would weigh.
+
+3. The student has treated a partially decomposed mixture as if it were the finished product, producing a nonsensical result.
+
+Conclusion: Only the final constant mass (23.10 g → 3.10 g residue) represents the true actual yield of Na₂CO₃.`,
+      },
+      {
+        id: 16,
+        question:
+          "Using only the graph (without referring to the data table), calculate the total mass of gases (H₂O + CO₂ combined) released during the entire experiment. Show clearly which values you read from the graph. Then compare your answer with the result from Question 2 and comment on whether they agree.",
+        longAnswer: true,
+        difficulty: "standard",
+        answer: `Reading from the graph:
+
+  Initial mass of crucible + NaHCO₃ (cycle 0)      = 25.00 g
+  Final stable mass of crucible + residue (cycle 4) = 23.10 g
+
+Calculation — total mass of gases released:
+  Mass of gases = initial mass − final stable mass
+                = 25.00 g − 23.10 g
+                = 1.90 g
+
+This 1.90 g represents the combined mass of all H₂O vapour and CO₂ gas that escaped from the open crucible over the four heating cycles.
+
+Comparison with Question 2:
+
+In Question 2, the mass of gas lost was calculated directly from the data table:
+  (mass of crucible + NaHCO₃) − (mass of crucible + residue after heating)
+  = 25.00 − 23.10 = 1.90 g
+
+Both methods give exactly the same answer: 1.90 g.
+
+Comment:
+The two values agree perfectly because the graph and the data table record the same experimental measurements — the initial mass before any heating (25.00 g) and the final stable mass after all heating cycles are complete (23.10 g). This consistency confirms that the graph accurately represents the data, and that 1.90 g of H₂O + CO₂ was released in total during the decomposition of 5.00 g of NaHCO₃.`,
+      },
     ],
   },
 };
@@ -830,6 +934,160 @@ const DIFFICULTY_LABELS: Record<Problem["difficulty"], string> = {
 };
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
+
+function MassTimeGraph() {
+  // Plot geometry
+  const xLeft = 80, xRight = 520, yTop = 22, yBottom = 258;
+  const yMin = 22.5, yMax = 25.5;
+  const yHeight = yBottom - yTop;
+  const yScale = yHeight / (yMax - yMin); // px per gram
+
+  const toY = (mass: number) => yBottom - (mass - yMin) * yScale;
+
+  const data = [
+    { cycle: 0, mass: 25.00 },
+    { cycle: 1, mass: 23.80 },
+    { cycle: 2, mass: 23.30 },
+    { cycle: 3, mass: 23.12 },
+    { cycle: 4, mass: 23.10 },
+  ];
+
+  const xPositions = [80, 190, 300, 410, 520];
+  const points = data.map((d, i) => ({ ...d, x: xPositions[i], y: toY(d.mass) }));
+  const polyline = points.map((p) => `${p.x},${p.y}`).join(" ");
+
+  const yGridLines = [22.5, 23.0, 23.5, 24.0, 24.5, 25.0, 25.5];
+  const constY = toY(23.10);
+
+  return (
+    <div className="mt-5 border-t border-slate-200 pt-5">
+      <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+        Graph — Mass of Crucible + Contents vs. Heating Cycle
+      </p>
+      <p className="text-xs text-slate-400 mb-3">
+        Each point represents the mass recorded after one complete heat → cool → weigh cycle.
+        Use this graph to answer Questions 13–16.
+      </p>
+
+      <div className="overflow-x-auto">
+        <svg
+          viewBox="0 0 580 295"
+          className="w-full"
+          style={{ minWidth: "360px", maxWidth: "640px" }}
+          aria-label="Mass vs heating cycle graph for NaHCO₃ decomposition experiment"
+        >
+          {/* Plot background */}
+          <rect
+            x={xLeft} y={yTop}
+            width={xRight - xLeft} height={yBottom - yTop}
+            fill="#f8fafc" rx="4" stroke="#e2e8f0" strokeWidth="1"
+          />
+
+          {/* Horizontal grid lines */}
+          {yGridLines.map((mass) => (
+            <g key={mass}>
+              <line
+                x1={xLeft} y1={toY(mass)} x2={xRight} y2={toY(mass)}
+                stroke="#e2e8f0"
+                strokeWidth={Number.isInteger(mass) ? "1" : "0.5"}
+                strokeDasharray="4,3"
+              />
+              <text
+                x={xLeft - 7} y={toY(mass) + 4}
+                textAnchor="end" fontSize="10"
+                fill="#94a3b8" fontFamily="monospace"
+              >
+                {mass.toFixed(1)}
+              </text>
+            </g>
+          ))}
+
+          {/* Axes */}
+          <line x1={xLeft} y1={yTop} x2={xLeft} y2={yBottom} stroke="#94a3b8" strokeWidth="1.5" />
+          <line x1={xLeft} y1={yBottom} x2={xRight} y2={yBottom} stroke="#94a3b8" strokeWidth="1.5" />
+
+          {/* Tick marks on x-axis */}
+          {xPositions.map((x, i) => (
+            <line key={i} x1={x} y1={yBottom} x2={x} y2={yBottom + 5} stroke="#94a3b8" strokeWidth="1.5" />
+          ))}
+
+          {/* Y-axis label */}
+          <text
+            transform={`rotate(-90 18 ${(yTop + yBottom) / 2})`}
+            x="18" y={(yTop + yBottom) / 2}
+            textAnchor="middle" fontSize="11" fill="#64748b"
+          >
+            Mass (g)
+          </text>
+
+          {/* Constant-mass reference line */}
+          <line
+            x1={xLeft} y1={constY} x2={xRight} y2={constY}
+            stroke="#16a34a" strokeWidth="1.5" strokeDasharray="8,4"
+          />
+          <text x={xRight + 5} y={constY + 4} fontSize="9" fill="#16a34a" fontWeight="700">
+            23.10 g
+          </text>
+
+          {/* Data line */}
+          <polyline
+            points={polyline}
+            fill="none"
+            stroke="#1d4ed8"
+            strokeWidth="2.5"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+          />
+
+          {/* Data points + mass labels */}
+          {points.map((p, i) => (
+            <g key={i}>
+              <circle cx={p.x} cy={p.y} r="5" fill="#1d4ed8" stroke="white" strokeWidth="2" />
+              <text
+                x={p.x} y={p.y - 11}
+                textAnchor="middle" fontSize="10"
+                fill="#1e3a8a" fontWeight="700" fontFamily="monospace"
+              >
+                {p.mass.toFixed(2)}
+              </text>
+            </g>
+          ))}
+
+          {/* X-axis cycle labels */}
+          {xPositions.map((x, i) => (
+            <text key={i} x={x} y={yBottom + 18} textAnchor="middle" fontSize="11" fill="#64748b">
+              {i}
+            </text>
+          ))}
+
+          {/* X-axis title */}
+          <text
+            x={(xLeft + xRight) / 2} y={yBottom + 34}
+            textAnchor="middle" fontSize="11" fill="#64748b"
+          >
+            Heating Cycle
+          </text>
+
+          {/* Legend */}
+          <g transform="translate(95, 30)">
+            <line x1="0" y1="5" x2="24" y2="5" stroke="#1d4ed8" strokeWidth="2.5" />
+            <circle cx="12" cy="5" r="4" fill="#1d4ed8" stroke="white" strokeWidth="1.5" />
+            <text x="29" y="9" fontSize="10" fill="#334155">Measured mass</text>
+          </g>
+          <g transform="translate(95, 48)">
+            <line x1="0" y1="5" x2="24" y2="5" stroke="#16a34a" strokeWidth="1.5" strokeDasharray="6,3" />
+            <text x="29" y="9" fontSize="10" fill="#334155">Constant mass (23.10 g)</text>
+          </g>
+        </svg>
+      </div>
+
+      <p className="text-xs text-slate-400 mt-1.5">
+        Green dashed line = final stable mass once constant mass is achieved.
+        Blue line = measured mass after each heating cycle.
+      </p>
+    </div>
+  );
+}
 
 function DifficultyBadge({ level }: { level: Problem["difficulty"] }) {
   return (
@@ -1065,8 +1323,9 @@ export default function PracticeClient({ id }: { id: string }) {
                     </table>
                   </div>
                 )}
+                {practice.experimentContext.showMassTimeGraph && <MassTimeGraph />}
                 <p className="text-xs text-slate-400 pt-1">
-                  Read this context carefully before answering each question below.
+                  Read this context carefully — including the graph above — before answering each question below.
                 </p>
               </div>
             </div>
