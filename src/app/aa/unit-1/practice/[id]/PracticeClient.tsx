@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { InlineMath, BlockMath } from "@/components/ui/Math";
 
@@ -29,6 +29,8 @@ type Problem = {
   difficulty: "basic" | "standard" | "challenge";
   /** When true, renders a multi-line textarea instead of a single-line input */
   longAnswer?: boolean;
+  /** Optional ID for a pattern visual diagram rendered below the problem description */
+  patternVisualId?: string;
 };
 
 type ExperimentContext = {
@@ -919,6 +921,372 @@ The two values agree perfectly because the graph and the data table record the s
       },
     ],
   },
+
+  "5": {
+    id: "5",
+    topicNumber: 5,
+    title: "Sequences & Patterns",
+    tagline: "Spot the rule from visual patterns, then build formulas for arithmetic and geometric sequences.",
+    revealKey: "M7QR2VX9KP",
+    problems: [
+      // ── Visual pattern problems ──────────────────────────────────────────
+      {
+        id: 1,
+        question:
+          "The diagrams show dot arrangements forming triangular figures. Use the pattern to answer all parts.",
+        patternVisualId: "triangular-dots",
+        parts: [
+          { label: "(a)", math: "\\text{How many dots are in Figure 5?}" },
+          { label: "(b)", math: "\\text{Write a formula for } T(n), \\text{ the number of dots in Figure } n." },
+          { label: "(c)", math: "\\text{Which figure contains exactly 120 dots?}" },
+        ],
+        hint: "The 1st differences are 2, 3, 4, 5, … so they increase by 1 each time. Try expressing T(n) using two consecutive integers.",
+        answer: "(a) 15   (b) T(n) = n(n+1)/2   (c) Figure 15",
+        answerMath:
+          "(a)\\ T(5)=15 \\quad" +
+          "(b)\\ T(n)=\\dfrac{n(n+1)}{2} \\quad" +
+          "(c)\\ \\dfrac{n(n+1)}{2}=120 \\Rightarrow n(n+1)=240 \\Rightarrow n=15",
+        difficulty: "basic",
+      },
+      {
+        id: 2,
+        question:
+          "Matchstick squares are arranged in a row as shown. Figure 1 uses 4 matchsticks and Figure 2 uses 7 matchsticks.",
+        patternVisualId: "matchstick-rows",
+        parts: [
+          { label: "(a)", math: "\\text{Find the number of matchsticks in Figure 3 and Figure 4.}" },
+          {
+            label: "(b)",
+            math: "\\text{Write a formula for } M(n), \\text{ the number of matchsticks for } n \\text{ squares in a row.}",
+          },
+          {
+            label: "(c)",
+            math: "\\text{Abigail has 100 matchsticks. Find the maximum number of complete squares she can build.}",
+          },
+        ],
+        hint: "Each new square shares one vertical stick with the previous square, so only 3 extra sticks are needed per square after the first.",
+        answer: "(a) M(3)=10, M(4)=13   (b) M(n)=3n+1   (c) 33 squares",
+        answerMath:
+          "(a)\\ 10,\\,13 \\quad" +
+          "(b)\\ M(n)=3n+1 \\quad" +
+          "(c)\\ 3n+1 \\leq 100 \\Rightarrow n \\leq 33",
+        difficulty: "basic",
+      },
+      // ── Table / difference pattern ───────────────────────────────────────
+      {
+        id: 3,
+        question: "The table shows the first few terms of a sequence.",
+        tableData: {
+          caption: "Look at the first differences",
+          headers: ["n", "1", "2", "3", "4", "5", "6"],
+          rows: [
+            ["u(n)", "2", "6", "12", "20", "30", "?"],
+            ["1st diff", "—", "4", "6", "8", "10", "?"],
+          ],
+        },
+        parts: [
+          { label: "(a)", math: "\\text{Write down the two missing entries in the table.}" },
+          { label: "(b)", math: "\\text{Find a formula for } u(n)." },
+          { label: "(c)", math: "\\text{Find the value of } n \\text{ for which } u(n)=110." },
+        ],
+        hint: "The 1st differences are even numbers 4, 6, 8, 10, … (constant 2nd difference). This means u(n) is quadratic — try factorising n(n+?) form.",
+        answer: "(a) 42, 12  (b) u(n) = n(n+1)   (c) n = 10",
+        answerMath:
+          "(a)\\ u(6)=42,\\text{ diff}=12 \\quad" +
+          "(b)\\ u(n)=n(n+1) \\quad" +
+          "(c)\\ n(n+1)=110 \\Rightarrow n=10",
+        difficulty: "basic",
+      },
+      {
+        id: 4,
+        question:
+          "A sequence has first and second differences as shown in the table.",
+        tableData: {
+          caption: "Sequence with constant second differences",
+          headers: ["n", "1", "2", "3", "4", "5"],
+          rows: [
+            ["u(n)", "1", "5", "13", "25", "41"],
+            ["1st diff", "—", "4", "8", "12", "16"],
+            ["2nd diff", "—", "—", "4", "4", "4"],
+          ],
+        },
+        parts: [
+          { label: "(a)", math: "\\text{What does the constant second difference tell you about the type of sequence?}" },
+          { label: "(b)", math: "\\text{Find the general term } u(n)." },
+          { label: "(c)", math: "\\text{Find the value of } n \\text{ for which } u(n)=265." },
+        ],
+        hint: "Constant 2nd difference → quadratic u(n)=an²+bn+c. Set up 3 equations from u(1), u(2), u(3) and solve the system.",
+        answer: "(a) Quadratic sequence   (b) u(n) = 2n²−2n+1   (c) n = 12",
+        answerMath:
+          "(a)\\ \\text{quadratic} \\quad" +
+          "(b)\\ u(n)=2n^2-2n+1 \\quad" +
+          "(c)\\ 2n^2-2n+1=265 \\Rightarrow n=12",
+        difficulty: "challenge",
+      },
+      // ── Arithmetic sequence ──────────────────────────────────────────────
+      {
+        id: 5,
+        question:
+          "A theatre has rows of seats. The first row has 12 seats and each subsequent row has 3 more seats than the row before it.",
+        parts: [
+          { label: "(a)", math: "\\text{Find the number of seats in the 15th row.}" },
+          { label: "(b)", math: "\\text{Find the total number of seats in the first 20 rows.}" },
+          { label: "(c)", math: "\\text{Which row first has more than 60 seats?}" },
+        ],
+        hint: "This is an AP with a=12, d=3. Use u(n)=a+(n−1)d and S(n)=(n/2)(2a+(n−1)d).",
+        answer: "(a) 54   (b) 810   (c) Row 18",
+        answerMath:
+          "(a)\\ u_{15}=12+14\\times3=54 \\quad" +
+          "(b)\\ S_{20}=\\tfrac{20}{2}(24+57)=810 \\quad" +
+          "(c)\\ \\text{Row }18",
+        difficulty: "standard",
+      },
+      // ── Geometric sequence ───────────────────────────────────────────────
+      {
+        id: 6,
+        question:
+          "A bacteria colony starts with 200 bacteria. The population triples every hour.",
+        parts: [
+          { label: "(a)", math: "\\text{Find the number of bacteria after 4 hours.}" },
+          { label: "(b)", math: "\\text{Write a formula for } B(n), \\text{ the count after } n \\text{ full hours.}" },
+          {
+            label: "(c)",
+            math: "\\text{Find the first integer } n \\text{ for which the population exceeds 5 000 000.}",
+          },
+        ],
+        hint: "GP with a=200, r=3. For part (c), take log of both sides: n log 3 > log 25000.",
+        answer: "(a) 16 200   (b) B(n) = 200 × 3ⁿ   (c) n = 10",
+        answerMath:
+          "(a)\\ 200\\times3^4=16200 \\quad" +
+          "(b)\\ B(n)=200\\times3^n \\quad" +
+          "(c)\\ n=10",
+        difficulty: "standard",
+      },
+      // ── Sum to infinity ──────────────────────────────────────────────────
+      {
+        id: 7,
+        question:
+          "A ball is dropped from a height of 8 m. After each bounce it rises to 75% of the previous height. Assume the ball bounces indefinitely.",
+        parts: [
+          { label: "(a)", math: "\\text{Find the height reached after the 4th bounce (3 s.f.).}" },
+          {
+            label: "(b)",
+            math: "\\text{Find the total vertical distance (up and down combined) travelled before the ball comes to rest.}",
+          },
+        ],
+        hint: "After the initial 8 m fall, each bounce cycle = up + down = 2 × (current height). The up-distances form a GP: 6, 4.5, 3.375, … Use S∞ = a/(1−r).",
+        answer: "(a) ≈ 2.53 m   (b) 56 m",
+        answerMath:
+          "(a)\\ 8\\times0.75^4\\approx2.53\\text{ m} \\quad" +
+          "(b)\\ 8+2\\cdot\\dfrac{8\\times0.75}{1-0.75}=8+48=56\\text{ m}",
+        difficulty: "standard",
+      },
+      // ── Logic / pattern in powers ────────────────────────────────────────
+      {
+        id: 8,
+        question:
+          "The table shows the units digits of the first five powers of 7.",
+        tableData: {
+          caption: "Units digits of powers of 7",
+          headers: ["Power", "7¹", "7²", "7³", "7⁴", "7⁵"],
+          rows: [
+            ["Value", "7", "49", "343", "2401", "16807"],
+            ["Units digit", "7", "9", "3", "1", "7"],
+          ],
+        },
+        parts: [
+          { label: "(a)", math: "\\text{State the repeating cycle of units digits and its length.}" },
+          { label: "(b)", math: "\\text{Find the units digit of } 7^{100}." },
+          { label: "(c)", math: "\\text{Find the units digit of } 7^{2026}." },
+        ],
+        hint: "Divide the exponent by the cycle length. A remainder of 0 means use the last digit in the cycle.",
+        answer: "(a) Cycle [7, 9, 3, 1], length 4   (b) 1   (c) 9",
+        answerMath:
+          "(a)\\ [7,9,3,1]\\text{ — length }4 \\quad" +
+          "(b)\\ 100\\div4=25\\text{ r}0 \\Rightarrow 1 \\quad" +
+          "(c)\\ 2026\\div4=506\\text{ r}2 \\Rightarrow 9",
+        difficulty: "standard",
+      },
+      // ── Challenge: AP vs GP comparison ──────────────────────────────────
+      {
+        id: 9,
+        question:
+          "An arithmetic sequence and a geometric sequence share the same first term a₁ = 4 and second term a₂ = 12.",
+        parts: [
+          { label: "(a)", math: "\\text{Write down the first four terms of each sequence.}" },
+          {
+            label: "(b)",
+            math:
+              "\\text{Determine algebraically whether the two sequences share any common term beyond the second.}",
+          },
+        ],
+        hint: "AP: u(n)=8n−4. GP: v(n)=4×3^(n−1). Set them equal and analyse 2n−1=3^(n−1) for integer n>2 — compare linear vs exponential growth.",
+        answer: "(a) AP: 4,12,20,28; GP: 4,12,36,108   (b) No further common terms beyond n=2",
+        answerMath:
+          "(a)\\ \\text{AP: }4,12,20,28 \\quad \\text{GP: }4,12,36,108 \\quad" +
+          "(b)\\ \\text{For }n>2,\\; 3^{n-1}\\text{ grows faster than }2n-1 \\Rightarrow \\text{no common term}",
+        difficulty: "challenge",
+      },
+      // ── Challenge: infinite shrinking squares ────────────────────────────
+      {
+        id: 10,
+        question:
+          "A unit square has side length 1. A second square is formed by joining the midpoints of the sides of the first, and the process continues indefinitely.",
+        parts: [
+          { label: "(a)", math: "\\text{Show that each inner square has half the area of the outer square.}" },
+          { label: "(b)", math: "\\text{Find the sum of the areas of all squares to infinity.}" },
+          { label: "(c)", math: "\\text{Find the sum of the perimeters of all squares to infinity.}" },
+        ],
+        hint: "Pythagoras: if the outer side = s, the inner side = s/√2, so inner area = s²/2. For (c) the perimeters are 4, 4/√2, 4/2, … a GP with r=1/√2. Rationalise the denominator of S∞.",
+        answer: "(b) Total area = 2   (c) Total perimeter = 8 + 4√2",
+        answerMath:
+          "(b)\\ S_{\\infty}=\\dfrac{1}{1-\\frac{1}{2}}=2 \\quad" +
+          "(c)\\ S_{\\infty}=\\dfrac{4}{1-\\frac{1}{\\sqrt{2}}}=8+4\\sqrt{2}",
+        difficulty: "challenge",
+      },
+    ],
+  },
+};
+
+// ─── Pattern Visual Components ───────────────────────────────────────────────
+
+/**
+ * Triangular dot pattern — shows T(1)=1 through T(4)=10 in equilateral-style rows.
+ * The label below each figure shows the running count so students can verify their
+ * pattern recognition before answering.
+ */
+function TriangularDotsVisual() {
+  type Dot = [number, number];
+  const figures: Array<{ n: number; t: number; cx: number; dots: Dot[] }> = [
+    { n: 1, t: 1,  cx: 70,  dots: [[70, 110]] },
+    { n: 2, t: 3,  cx: 200, dots: [[200, 91], [189, 110], [211, 110]] },
+    {
+      n: 3, t: 6, cx: 340,
+      dots: [[340, 72], [329, 91], [351, 91], [318, 110], [340, 110], [362, 110]],
+    },
+    {
+      n: 4, t: 10, cx: 490,
+      dots: [
+        [490, 53],
+        [479, 72], [501, 72],
+        [468, 91], [490, 91], [512, 91],
+        [457, 110], [479, 110], [501, 110], [523, 110],
+      ],
+    },
+  ];
+
+  return (
+    <div className="mt-4 border border-slate-200 rounded-xl bg-slate-50 p-3 overflow-x-auto">
+      <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+        Pattern Diagrams — dots arranged in triangular figures
+      </p>
+      <svg
+        viewBox="0 0 580 152"
+        className="w-full"
+        style={{ minWidth: "380px", maxWidth: "640px" }}
+        aria-label="Triangular dot patterns for figures 1 through 4"
+      >
+        {/* Dividers between figures */}
+        {[140, 270, 415].map((x, i) => (
+          <line key={i} x1={x} y1={22} x2={x} y2={138} stroke="#e2e8f0" strokeWidth="1" strokeDasharray="3,3" />
+        ))}
+        {figures.map((fig) => (
+          <g key={fig.n}>
+            <text x={fig.cx} y={17} textAnchor="middle" fontSize="10" fill="#64748b" fontStyle="italic">
+              Figure {fig.n}
+            </text>
+            {fig.dots.map(([x, y], i) => (
+              <circle key={i} cx={x} cy={y} r="7" fill="#1d4ed8" />
+            ))}
+            <text x={fig.cx} y={138} textAnchor="middle" fontSize="10" fill="#1e3a8a" fontWeight="700">
+              T({fig.n}) = {fig.t}
+            </text>
+          </g>
+        ))}
+      </svg>
+      <p className="text-xs text-slate-400 mt-1">T(n) = total dots in Figure n.</p>
+    </div>
+  );
+}
+
+/**
+ * Matchstick rows visual — shows 3 figures of squares-in-a-row built from matchsticks.
+ * Figures 1–3 are drawn; the count labels show known values so students can find the
+ * pattern and extend it to Figure 4 and beyond.
+ */
+function MatchstickRowsVisual() {
+  const sqSize = 40;
+  const yTop = 55, yBot = 95;
+  const figs = [
+    { n: 1, x0: 50,  label: "M(1) = 4",  cx: 70  },
+    { n: 2, x0: 175, label: "M(2) = 7",  cx: 215 },
+    { n: 3, x0: 330, label: "M(3) = ?",  cx: 390 },
+  ];
+
+  return (
+    <div className="mt-4 border border-slate-200 rounded-xl bg-slate-50 p-3 overflow-x-auto">
+      <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+        Matchstick Diagrams — squares arranged in a row
+      </p>
+      <svg
+        viewBox="0 0 500 148"
+        className="w-full"
+        style={{ minWidth: "320px", maxWidth: "600px" }}
+        aria-label="Matchstick diagrams for 1, 2, and 3 squares in a row"
+      >
+        {/* Dividers */}
+        {[140, 290].map((x, i) => (
+          <line key={i} x1={x} y1={20} x2={x} y2={132} stroke="#e2e8f0" strokeWidth="1" strokeDasharray="3,3" />
+        ))}
+        {figs.map((fig) => {
+          const { n, x0, cx, label } = fig;
+          const sticks: React.ReactElement[] = [];
+          // Vertical sticks: n+1
+          for (let k = 0; k <= n; k++) {
+            sticks.push(
+              <line key={`v${k}`} x1={x0 + k * sqSize} y1={yTop} x2={x0 + k * sqSize} y2={yBot}
+                stroke="#b45309" strokeWidth="3.5" strokeLinecap="round" />
+            );
+          }
+          // Top horizontal sticks: n
+          for (let k = 0; k < n; k++) {
+            sticks.push(
+              <line key={`th${k}`} x1={x0 + k * sqSize} y1={yTop} x2={x0 + (k + 1) * sqSize} y2={yTop}
+                stroke="#b45309" strokeWidth="3.5" strokeLinecap="round" />
+            );
+          }
+          // Bottom horizontal sticks: n
+          for (let k = 0; k < n; k++) {
+            sticks.push(
+              <line key={`bh${k}`} x1={x0 + k * sqSize} y1={yBot} x2={x0 + (k + 1) * sqSize} y2={yBot}
+                stroke="#b45309" strokeWidth="3.5" strokeLinecap="round" />
+            );
+          }
+          return (
+            <g key={n}>
+              <text x={cx} y={17} textAnchor="middle" fontSize="10" fill="#64748b" fontStyle="italic">
+                Figure {n}
+              </text>
+              {sticks}
+              <text x={cx} y={128} textAnchor="middle" fontSize="10" fill="#92400e" fontWeight="700">
+                {label}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+      <p className="text-xs text-slate-400 mt-1">
+        Each line segment represents one matchstick. Count the sticks and look for the pattern.
+      </p>
+    </div>
+  );
+}
+
+// ─── Lookup for pattern visuals (keyed by patternVisualId) ───────────────────
+
+const PATTERN_VISUALS: Record<string, () => React.ReactElement> = {
+  "triangular-dots": TriangularDotsVisual,
+  "matchstick-rows": MatchstickRowsVisual,
 };
 
 const DIFFICULTY_COLORS: Record<Problem["difficulty"], string> = {
@@ -1617,6 +1985,10 @@ function ProblemCard({
             </table>
           </div>
         )}
+
+        {/* Pattern visual diagram (if specified) */}
+        {problem.patternVisualId && PATTERN_VISUALS[problem.patternVisualId] &&
+          React.createElement(PATTERN_VISUALS[problem.patternVisualId])}
 
         {/* Hint */}
         {problem.hint && (
