@@ -31,6 +31,12 @@
   --color-slate-200: #e2e8f0;
   --color-slate-500: #4a5568;
 
+  --color-phys-primary: #c2410c;
+  --color-phys-dark: #7c2d12;
+  --color-phys-light: #fdba74;
+  --color-phys-bg: #fff7ed;
+  --color-phys-text: #7c2d12;
+
   --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
