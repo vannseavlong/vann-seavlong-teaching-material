@@ -951,6 +951,302 @@ function QuadraticsSection() {
         }
       />
 
+      {/* ── Factor Form ── */}
+      <FormulaBox title="Factor Form (Factored Form)">
+        <FormulaRow label="Standard factor form" math="a(x - x_1)(x - x_2) = 0" />
+        <FormulaRow label="Zero product property" math="\text{If } AB = 0,\text{ then } A = 0 \text{ or } B = 0" />
+        <FormulaRow label="Solutions from factors" math="x = x_1 \quad \text{or} \quad x = x_2" />
+      </FormulaBox>
+
+      <WorkedExample title="Solve using factor form: 2x² − 5x − 3 = 0">
+        <StepBox n={1}>
+          First factor the quadratic: find two numbers that <InlineMath math="ac = 2 \times (-3) = -6" /> and sum to <InlineMath math="b = -5" />.
+        </StepBox>
+        <StepBox n={2}>
+          Numbers: <InlineMath math="1" /> and <InlineMath math="-6" /> (since <InlineMath math="1 + (-6) = -5" />).
+          <BlockMath math="2x^2 - 6x + x - 3 = 0 \;\Longrightarrow\; 2x(x - 3) + 1(x - 3) = 0" />
+        </StepBox>
+        <StepBox n={3}>
+          Factor completely:
+          <BlockMath math="(2x + 1)(x - 3) = 0" />
+        </StepBox>
+        <StepBox n={4}>
+          Apply zero product property:
+          <BlockMath math="2x + 1 = 0 \;\Longrightarrow\; x = -\frac{1}{2} \quad \text{or} \quad x - 3 = 0 \;\Longrightarrow\; x = 3" />
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            Solve <InlineMath math="x^2 - 7x + 12 = 0" /> by factoring.
+          </>
+        }
+        answer={
+          <>
+            <p>Find two numbers that multiply to <InlineMath math="12" /> and sum to <InlineMath math="-7" />: <InlineMath math="-3" /> and <InlineMath math="-4" />.</p>
+            <BlockMath math="(x - 3)(x - 4) = 0" />
+            <BlockMath math="x = 3 \quad \text{or} \quad x = 4" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Solve <InlineMath math="3x^2 + 11x - 4 = 0" /> using the zero product property.
+          </>
+        }
+        answer={
+          <>
+            <p>Find numbers for <InlineMath math="3 \times (-4) = -12" /> summing to <InlineMath math="11" />: <InlineMath math="12" /> and <InlineMath math="-1" />.</p>
+            <BlockMath math="3x^2 + 12x - x - 4 = 0 \;\Longrightarrow\; (3x - 1)(x + 4) = 0" />
+            <BlockMath math="x = \frac{1}{3} \quad \text{or} \quad x = -4" />
+          </>
+        }
+      />
+
+      {/* ── Vertex Form (Completed Square) ── */}
+      <FormulaBox title="Vertex Form (Completed Square Form)">
+        <FormulaRow label="Vertex form" math="a(x - h)^2 + k = 0" />
+        <FormulaRow label="Vertex coordinates" math="h = -\frac{b}{2a}, \quad k = f(h)" />
+        <FormulaRow label="Axis of symmetry" math="x = h = -\frac{b}{2a}" />
+        <FormulaRow label="Solve by taking square root" math="a(x - h)^2 = -k \;\Longrightarrow\; (x - h)^2 = -\frac{k}{a}" />
+      </FormulaBox>
+
+      <HighlightBox variant="blue">
+        <p className="font-semibold text-navy-900 mb-2">Why does vertex form help?</p>
+        <p className="text-slate-500 text-sm">
+          When written as <InlineMath math="a(x - h)^2 + k = 0" />, you isolate the squared term and take square roots — avoiding the quadratic formula entirely. The vertex <InlineMath math="(h, k)" /> also gives you the maximum/minimum point of the parabola.
+        </p>
+      </HighlightBox>
+
+      <WorkedExample title="Solve using vertex form: x² + 6x + 5 = 0">
+        <StepBox n={1}>
+          Start with <InlineMath math="x^2 + 6x + 5" />. Complete the square for the <InlineMath math="x" /> terms:
+          <BlockMath math="x^2 + 6x = (x + 3)^2 - 9" />
+        </StepBox>
+        <StepBox n={2}>
+          Substitute back:
+          <BlockMath math="(x + 3)^2 - 9 + 5 = 0 \;\Longrightarrow\; (x + 3)^2 - 4 = 0" />
+        </StepBox>
+        <StepBox n={3}>
+          Isolate the squared term:
+          <BlockMath math="(x + 3)^2 = 4" />
+        </StepBox>
+        <StepBox n={4}>
+          Take square roots (remember ±):
+          <BlockMath math="x + 3 = \pm 2 \;\Longrightarrow\; x = -3 + 2 \text{ or } x = -3 - 2" />
+        </StepBox>
+        <StepBox n={5}>
+          <BlockMath math="x = -1 \quad \text{or} \quad x = -5" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Vertex form with a ≠ 1: 2x² + 8x + 3 = 0">
+        <StepBox n={1}>
+          Factor out the coefficient of <InlineMath math="x^2" /> from the first two terms:
+          <BlockMath math="2(x^2 + 4x) + 3 = 0" />
+        </StepBox>
+        <StepBox n={2}>
+          Complete the square inside the parentheses:
+          <BlockMath math="2\big[(x + 2)^2 - 4\big] + 3 = 0" />
+        </StepBox>
+        <StepBox n={3}>
+          Distribute and simplify:
+          <BlockMath math="2(x + 2)^2 - 8 + 3 = 0 \;\Longrightarrow\; 2(x + 2)^2 - 5 = 0" />
+        </StepBox>
+        <StepBox n={4}>
+          Isolate and solve:
+          <BlockMath math="2(x + 2)^2 = 5 \;\Longrightarrow\; (x + 2)^2 = \frac{5}{2}" />
+          <BlockMath math="x + 2 = \pm \sqrt{\frac{5}{2}} = \pm \frac{\sqrt{10}}{2}" />
+        </StepBox>
+        <StepBox n={5}>
+          <BlockMath math="x = -2 \pm \frac{\sqrt{10}}{2}" />
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            Solve <InlineMath math="x^2 + 4x - 2 = 0" /> by completing the square.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="x^2 + 4x = (x + 2)^2 - 4" />
+            <BlockMath math="(x + 2)^2 - 4 - 2 = 0 \;\Longrightarrow\; (x + 2)^2 = 6" />
+            <BlockMath math="x + 2 = \pm\sqrt{6} \;\Longrightarrow\; x = -2 \pm \sqrt{6}" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Solve <InlineMath math="3x^2 - 12x + 8 = 0" /> using vertex form. Find the vertex of the parabola as well.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="3(x^2 - 4x) + 8 = 0" />
+            <BlockMath math="3[(x - 2)^2 - 4] + 8 = 0" />
+            <BlockMath math="3(x - 2)^2 - 12 + 8 = 0 \;\Longrightarrow\; 3(x - 2)^2 = 4" />
+            <BlockMath math="(x - 2)^2 = \frac{4}{3}" />
+            <BlockMath math="x - 2 = \pm \frac{2}{\sqrt{3}} = \pm \frac{2\sqrt{3}}{3}" />
+            <BlockMath math="x = 2 \pm \frac{2\sqrt{3}}{3}" />
+            <p className="mt-3">Vertex: <InlineMath math="(h, k) = (2, -4)" /> (since <InlineMath math="k = f(2) = 3(4) - 24 + 8 = -4" />)</p>
+          </>
+        }
+      />
+
+      {/* ── Additional SL Methods: Factor Form & Vertex Form ── */}
+
+      <FormulaBox title="Factor Form (Factored Quadratic)">
+        <FormulaRow label="Factored form" math="a(x - x_1)(x - x_2) = 0" />
+        <FormulaRow label="Zero product property" math="\text{If } ab = 0,\text{ then } a = 0 \text{ or } b = 0" />
+        <FormulaRow label="Solutions" math="x = x_1 \quad \text{or} \quad x = x_2" />
+      </FormulaBox>
+
+      <WorkedExample title="Solve using factor form: 2x² − 8x + 6 = 0">
+        <StepBox n={1}>
+          Factor out the GCF first: <InlineMath math="2(x^2 - 3x + 3) = 0" />. Divide by 2:{" "}
+          <InlineMath math="x^2 - 3x + 3 = 0" />.
+        </StepBox>
+        <StepBox n={2}>
+          Try to factor: look for two numbers that <strong>multiply to +3</strong> and{" "}
+          <strong>add to −3</strong>. No integer pair works, so this quadratic cannot be factored over ℤ.
+        </StepBox>
+        <StepBox n={3}>
+          Instead, split the middle term: <InlineMath math="x^2 - x - 2x + 3" />.
+          <BlockMath math="x(x-1) - 2(x - \frac{3}{2})" /> — not cleanly factorable. Use the quadratic formula instead.
+        </StepBox>
+        <StepBox n={4}>
+          Applying the formula: <InlineMath math="x = \frac{3 \pm \sqrt{9-12}}{2} = \frac{3 \pm i\sqrt{3}}{2}" />
+          <span className="ml-2 text-sm text-slate-500">(complex roots — cannot factor over ℝ)</span>
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Factor and solve: x² − 5x + 6 = 0">
+        <StepBox n={1}>
+          Find two numbers that multiply to +6 and add to −5: <InlineMath math="-2" /> and{" "}
+          <InlineMath math="-3" />.
+        </StepBox>
+        <StepBox n={2}>
+          Write in factor form: <InlineMath math="(x - 2)(x - 3) = 0" />
+        </StepBox>
+        <StepBox n={3}>
+          Apply zero product property:
+          <BlockMath math="x - 2 = 0 \;\Longrightarrow\; x = 2 \quad \text{or} \quad x - 3 = 0 \;\Longrightarrow\; x = 3" />
+        </StepBox>
+        <StepBox n={4}>
+          Verify: <InlineMath math="2 + 3 = 5" /> and <InlineMath math="2 \times 3 = 6" /> ✓
+        </StepBox>
+      </WorkedExample>
+
+      <FormulaBox title="Vertex Form (Completed Square)">
+        <FormulaRow label="Vertex form" math="a(x - h)^2 + k = 0" />
+        <FormulaRow label="Vertex (h, k)" math="h = -\frac{b}{2a}, \quad k = f(h)" />
+        <FormulaRow label="Axis of symmetry" math="x = h = -\frac{b}{2a}" />
+        <FormulaRow label="Solve by isolating x²" math="a(x-h)^2 = -k \;\Longrightarrow\; (x-h)^2 = -\frac{k}{a}" />
+      </FormulaBox>
+
+      <WorkedExample title="Solve using vertex form: x² + 6x + 5 = 0">
+        <StepBox n={1}>
+          Complete the square: take half of <InlineMath math="b = 6" />, square it:{" "}
+          <InlineMath math="(6/2)^2 = 9" />. Add and subtract 9:
+          <BlockMath math="x^2 + 6x + 9 - 9 + 5 = 0" />
+          <BlockMath math="(x+3)^2 - 4 = 0" />
+        </StepBox>
+        <StepBox n={2}>
+          Now in vertex form: <InlineMath math="(x + 3)^2 - 4 = 0" /> where{" "}
+          <InlineMath math="h = -3,\; k = -4" />.
+        </StepBox>
+        <StepBox n={3}>
+          Isolate the square and take square roots:
+          <BlockMath math="(x+3)^2 = 4" />
+          <BlockMath math="x + 3 = \pm 2" />
+        </StepBox>
+        <StepBox n={4}>
+          <BlockMath math="x = -3 + 2 = -1 \quad \text{or} \quad x = -3 - 2 = -5" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Vertex form with negative a: 2x² − 12x + 11 = 0">
+        <StepBox n={1}>
+          Factor out 2 from the x-terms: <InlineMath math="2(x^2 - 6x) + 11 = 0" />
+        </StepBox>
+        <StepBox n={2}>
+          Complete the square inside parentheses:{" "}
+          <InlineMath math="(6/2)^2 = 9" />
+          <BlockMath math="2(x^2 - 6x + 9 - 9) + 11 = 0" />
+          <BlockMath math="2[(x-3)^2 - 9] + 11 = 0" />
+        </StepBox>
+        <StepBox n={3}>
+          Expand and simplify:
+          <BlockMath math="2(x-3)^2 - 18 + 11 = 0" />
+          <BlockMath math="2(x-3)^2 - 7 = 0" />
+        </StepBox>
+        <StepBox n={4}>
+          Solve: <InlineMath math="2(x-3)^2 = 7" />
+          <BlockMath math="(x-3)^2 = \frac{7}{2}" />
+          <BlockMath math="x - 3 = \pm \sqrt{\frac{7}{2}} = \pm \frac{\sqrt{14}}{2}" />
+          <BlockMath math="x = 3 \pm \frac{\sqrt{14}}{2}" />
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            Factor and solve using zero product property:{" "}
+            <InlineMath math="x^2 + 7x + 12 = 0" />
+          </>
+        }
+        answer={
+          <>
+            <p>Find two numbers that multiply to +12 and add to +7: 3 and 4.</p>
+            <BlockMath math="(x + 3)(x + 4) = 0" />
+            <BlockMath math="x = -3 \quad \text{or} \quad x = -4" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Use the vertex (completed square) method to solve:{" "}
+            <InlineMath math="x^2 - 4x - 5 = 0" />
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="x^2 - 4x + 4 - 4 - 5 = 0" />
+            <BlockMath math="(x-2)^2 - 9 = 0" />
+            <BlockMath math="(x-2)^2 = 9" />
+            <BlockMath math="x - 2 = \pm 3" />
+            <BlockMath math="x = 5 \quad \text{or} \quad x = -1" />
+          </>
+        }
+      />
+
+      <Practice
+        problem={
+          <>
+            Solve <InlineMath math="3x^2 + 12x + 9 = 0" /> by completing the square.
+          </>
+        }
+        answer={
+          <>
+            <p>Divide by 3 first: <InlineMath math="x^2 + 4x + 3 = 0" /></p>
+            <BlockMath math="x^2 + 4x + 4 - 4 + 3 = 0" />
+            <BlockMath math="(x+2)^2 - 1 = 0" />
+            <BlockMath math="(x+2)^2 = 1" />
+            <BlockMath math="x + 2 = \pm 1" />
+            <BlockMath math="x = -1 \quad \text{or} \quad x = -3" />
+          </>
+        }
+      />
+
       {/* ══════════════════════════════════════════════════════════════════════
           ── HL Extension — Quadratic Equations (HL Depth)
           ══════════════════════════════════════════════════════════════════════ */}
