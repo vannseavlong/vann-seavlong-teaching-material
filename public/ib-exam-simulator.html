@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IB Math AI SL — eAssessment Simulator</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ib-blue: #003DA5;
+      --ib-blue-mid: #1a5cb8;
+      --ib-blue-light: #eef2ff;
+      --bg: #f0f2f5;
+      --white: #ffffff;
+      --green: #28a745;
+      --green-bg: #d4edda;
+      --orange: #e07b00;
+      --red: #dc3545;
+      --grey: #dee2e6;
+      --text: #212529;
+      --text-muted: #6c757d;
+      --border: #dee2e6;
+      --yellow-bg: #fffbf0;
+      --yellow-border: #ffc107;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* ── SCREEN MANAGEMENT ── */
+    .screen { display: none !important; }
+    .screen.active { display: block !important; }
+    #screen-setup.active,
+    #screen-loading.active { display: flex !important; }
+    #screen-exam.active { display: flex !important; }
+
+    /* ════════════════════════════════════
+       SETUP SCREEN
+    ════════════════════════════════════ */
+    #screen-setup {
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #001f5b 0%, #003DA5 60%, #1a5cb8 100%);
+    }
+
+    .setup-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem 2.25rem;
+      width: 100%;
+      max-width: 560px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .setup-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .ib-logo-big {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background: var(--ib-blue);
+      color: white;
+      font-weight: 900;
+      font-size: 1.4rem;
+      border-radius: 12px;
+      margin-bottom: 0.875rem;
+      letter-spacing: 1px;
+    }
+
+    .setup-header h1 { font-size: 1.4rem; color: var(--ib-blue); font-weight: 700; }
+    .setup-header p { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem; }
+
+    .form-group { margin-bottom: 1.25rem; }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.82rem;
+      margin-bottom: 0.4rem;
+      color: #344054;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    input[type="password"], input[type="text"], select {
+      width: 100%;
+      padding: 0.6rem 0.875rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      font-family: inherit;
+    }
+    input:focus, select:focus {
+      border-color: var(--ib-blue);
+      box-shadow: 0 0 0 3px rgba(0,61,165,0.12);
+    }
+
+    .radio-group { display: flex; gap: 0.625rem; flex-wrap: wrap; }
+
+    .radio-option { flex: 1; min-width: 110px; }
+    .radio-option input[type="radio"] { display: none; }
+    .radio-option label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.65rem 0.5rem;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.78rem;
+      text-align: center;
+      transition: all 0.15s;
+      color: var(--text-muted);
+      gap: 2px;
+    }
+    .radio-option label .r-title { font-size: 0.875rem; font-weight: 700; color: var(--text); }
+    .radio-option label .r-sub { font-size: 0.72rem; color: var(--text-muted); }
+    .radio-option input:checked + label {
+      border-color: var(--ib-blue);
+      background: var(--ib-blue-light);
+      color: var(--ib-blue);
+    }
+    .radio-option input:checked + label .r-title { color: var(--ib-blue); }
+
+    .hint-text {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .btn-generate {
+      width: 100%;
+      padding: 0.875rem;
+      background: var(--ib-blue);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      margin-top: 0.5rem;
+      letter-spacing: 0.3px;
+    }
+    .btn-generate:hover { background: var(--ib-blue-mid); }
+    .btn-generate:active { transform: scale(0.99); }
+    .btn-generate:disabled { background: #adb5bd; cursor: not-allowed; }
+
+    /* ════════════════════════════════════
+       LOADING SCREEN
+    ════════════════════════════════════ */
+    #screen-loading {
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      background: linear-gradient(135deg, #001f5b 0%, #003DA5 100%);
+    }
+
+    .spinner {
+      width: 52px;
+      height: 52px;
+      border: 4px solid rgba(255,255,255,0.2);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-title { font-size: 1.2rem; font-weight: 700; color: white; }
+    .loading-sub { font-size: 0.875rem; color: rgba(255,255,255,0.7); text-align: center; max-width: 320px; }
+    .loading-status { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: -0.5rem; }
+
+    /* ════════════════════════════════════
+       EXAM SCREEN
+    ════════════════════════════════════ */
+    #screen-exam {
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* TOP BAR */
+    .exam-topbar {
+      background: var(--ib-blue);
+      color: white;
+      padding: 0 1.25rem;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      flex-shrink: 0;
+    }
+
+    .topbar-left { display: flex; align-items: center; gap: 0.875rem; }
+
+    .ib-badge {
+      background: white;
+      color: var(--ib-blue);
+      font-weight: 900;
+      font-size: 0.7rem;
+      padding: 3px 7px;
+      border-radius: 5px;
+      letter-spacing: 1px;
+    }
+
+    .topbar-exam-title { font-weight: 700; font-size: 0.9rem; }
+    .topbar-exam-sub { font-size: 0.7rem; opacity: 0.7; }
+    .topbar-right { display: flex; align-items: center; gap: 0.75rem; }
+
+    .topbar-progress {
+      font-size: 0.78rem;
+      opacity: 0.75;
+      display: none;
+    }
+    @media (min-width: 600px) { .topbar-progress { display: block; } }
+
+    .btn-formulas {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-formulas:hover { background: rgba(255,255,255,0.25); }
+
+    .exam-timer {
+      font-family: 'Courier New', monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.15);
+      padding: 0.25rem 0.8rem;
+      border-radius: 6px;
+      letter-spacing: 2px;
+      min-width: 90px;
+      text-align: center;
+    }
+    .exam-timer.warn { background: rgba(220,53,69,0.85); animation: blink 1s infinite; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.65; } }
+
+    /* BODY = NAV + MAIN */
+    .exam-body {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* NAVIGATOR SIDEBAR */
+    .exam-nav {
+      width: 176px;
+      min-width: 176px;
+      background: white;
+      border-right: 1px solid var(--border);
+      padding: 1rem 0.75rem;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    @media (max-width: 640px) {
+      .exam-nav { width: 60px; min-width: 60px; }
+      .nav-dot-info { display: none; }
+    }
+
+    .nav-section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .nav-dots { display: flex; flex-direction: column; gap: 0.375rem; }
+
+    .nav-dot {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 0.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      text-align: left;
+      width: 100%;
+      transition: background 0.1s;
+    }
+    .nav-dot:hover { background: var(--bg); }
+    .nav-dot.is-current { background: var(--ib-blue-light); }
+
+    .dot-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .state-unanswered .dot-circle { background: #e9ecef; color: #6c757d; }
+    .state-current .dot-circle    { background: var(--ib-blue); color: white; }
+    .state-answered .dot-circle   { background: var(--green); color: white; }
+    .state-flagged .dot-circle    { background: var(--orange); color: white; }
+
+    .nav-dot-info { flex: 1; overflow: hidden; }
+    .nav-dot-topic { font-size: 0.67rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-dot-marks { font-size: 0.73rem; font-weight: 600; color: var(--text); }
+
+    .nav-legend {
+      margin-top: 1.25rem;
+      padding-top: 0.875rem;
+      border-top: 1px solid var(--border);
+    }
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.67rem;
+      color: var(--text-muted);
+    }
+    .legend-circle {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    @media (max-width: 640px) { .nav-legend { display: none; } }
+
+    /* MAIN QUESTION AREA */
+    .exam-main {
+      flex: 1;
+      padding: 1.5rem 2rem 2rem;
+      overflow-y: auto;
+    }
+    @media (max-width: 640px) { .exam-main { padding: 1rem; } }
+
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .q-number { font-size: 1.1rem; font-weight: 700; color: var(--ib-blue); }
+    .q-max-mark { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+    .q-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; }
+    .tag {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .tag-topic { background: #e8eaf6; color: #283593; border-color: #c5cae9; }
+    .tag-marks { background: var(--ib-blue); color: white; border-color: var(--ib-blue); }
+    .tag-flagged { background: #fff3e0; color: #e65100; border-color: #ffb74d; }
+
+    .context-box {
+      background: var(--ib-blue-light);
+      border-left: 4px solid var(--ib-blue);
+      padding: 0.875rem 1.125rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: #1a2e6e;
+    }
+
+    .stem-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.125rem 1.25rem;
+      margin-bottom: 1.125rem;
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+
+    /* Markdown tables inside stem */
+    .md-table {
+      border-collapse: collapse;
+      margin: 0.75rem auto;
+      font-size: 0.85rem;
+      width: auto;
+    }
+    .md-table th, .md-table td {
+      border: 1.5px solid #adb5bd;
+      padding: 0.3rem 0.875rem;
+      text-align: center;
+    }
+    .md-table th { background: #f1f3f5; font-weight: 700; }
+
+    .formulas-hint {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .formulas-hint-label { font-size: 0.72rem; color: var(--text-muted); }
+    .formula-pill {
+      font-size: 0.7rem;
+      background: #e8eaf6;
+      color: #283593;
+      border: 1px solid #c5cae9;
+      padding: 1px 7px;
+      border-radius: 20px;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* PARTS */
+    .parts-stack { display: flex; flex-direction: column; gap: 0.875rem; }
+
+    .part-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 1.125rem;
+      transition: border-color 0.15s;
+    }
+    .part-card:focus-within { border-color: #a8c4f5; }
+
+    .part-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .part-label-badge {
+      width: 28px;
+      height: 28px;
+      background: var(--ib-blue-light);
+      border: 2px solid #a8c4f5;
+      color: var(--ib-blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .part-text { flex: 1; font-size: 0.875rem; line-height: 1.65; }
+
+    .part-marks-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #f1f3f5;
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .answer-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    textarea.answer-box {
+      width: 100%;
+      padding: 0.625rem 0.875rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      line-height: 1.55;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      color: var(--text);
+    }
+    textarea.answer-box:focus {
+      border-color: var(--ib-blue);
+      box-shadow: 0 0 0 3px rgba(0,61,165,0.1);
+    }
+    textarea.answer-box.answered {
+      border-color: var(--green);
+      background: rgba(40,167,69,0.03);
+    }
+
+    /* MARKSCHEME */
+    .ms-block {
+      margin-top: 0.75rem;
+      background: var(--yellow-bg);
+      border: 1.5px solid var(--yellow-border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      display: none;
+    }
+    .ms-block.show { display: block; }
+    .ms-header { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #856404; margin-bottom: 0.375rem; }
+    .ms-body { font-size: 0.85rem; line-height: 1.65; color: #533f03; white-space: pre-wrap; }
+
+    /* BOTTOM BAR */
+    .exam-bottombar {
+      background: white;
+      border-top: 1px solid var(--border);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.625rem;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .bar-group { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+
+    .btn {
+      padding: 0.45rem 0.9rem;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: white;
+      color: var(--text);
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .btn:hover { border-color: var(--ib-blue); color: var(--ib-blue); background: var(--ib-blue-light); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn:disabled:hover { border-color: var(--border); color: var(--text); background: white; }
+
+    .btn-flag-action { border-color: var(--orange); color: var(--orange); }
+    .btn-flag-action:hover, .btn-flag-action.active { background: var(--orange); color: white; border-color: var(--orange); }
+
+    .btn-ms-action { border-color: var(--yellow-border); background: var(--yellow-bg); color: #856404; }
+    .btn-ms-action:hover { background: var(--yellow-border); color: white; border-color: var(--yellow-border); }
+
+    .btn-submit-action {
+      background: var(--green);
+      color: white;
+      border-color: var(--green);
+      padding: 0.45rem 1.125rem;
+    }
+    .btn-submit-action:hover { background: #218838; border-color: #218838; color: white; }
+
+    /* ════════════════════════════════════
+       FORMULA PANEL (slide-out)
+    ════════════════════════════════════ */
+    .formula-panel {
+      position: fixed;
+      right: 0;
+      top: 54px;
+      bottom: 54px;
+      width: 290px;
+      background: white;
+      border-left: 1px solid var(--border);
+      z-index: 190;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+    }
+    .formula-panel.open { transform: translateX(0); }
+
+    .fp-header {
+      background: var(--ib-blue);
+      color: white;
+      padding: 0.75rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .fp-close {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+      padding: 2px;
+    }
+
+    .fp-body { flex: 1; overflow-y: auto; padding: 1rem; }
+
+    .fp-section { margin-bottom: 1.25rem; }
+    .fp-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .fp-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+      margin-bottom: 0.3rem;
+      font-size: 0.78rem;
+    }
+    .fp-name { color: var(--text-muted); min-width: 90px; flex-shrink: 0; font-size: 0.72rem; }
+    .fp-math { font-family: 'Courier New', monospace; color: var(--ib-blue); font-size: 0.77rem; font-weight: 600; }
+
+    /* ════════════════════════════════════
+       RESULTS SCREEN
+    ════════════════════════════════════ */
+    #screen-results { min-height: 100vh; padding: 2rem 1rem; }
+
+    .results-wrap { max-width: 860px; margin: 0 auto; }
+
+    .results-hero {
+      background: linear-gradient(135deg, var(--ib-blue) 0%, var(--ib-blue-mid) 100%);
+      color: white;
+      border-radius: 14px;
+      padding: 2rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+    .results-hero h1 { font-size: 1.4rem; font-weight: 700; }
+    .results-hero p { opacity: 0.75; font-size: 0.875rem; margin-top: 0.25rem; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.875rem;
+      margin-bottom: 1.25rem;
+    }
+    @media (max-width: 500px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .stat-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.25rem 0.875rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .stat-val { font-size: 2rem; font-weight: 800; color: var(--ib-blue); line-height: 1; }
+    .stat-lbl { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.35rem; }
+
+    .results-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-reveal-all {
+      background: var(--yellow-bg);
+      border: 2px solid var(--yellow-border);
+      color: #856404;
+      padding: 0.625rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.15s;
+    }
+    .btn-reveal-all:hover { background: var(--yellow-border); color: white; }
+    .btn-reveal-all:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .btn-new-exam {
+      background: var(--ib-blue);
+      color: white;
+      padding: 0.625rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.875rem;
+      border: none;
+      transition: background 0.15s;
+    }
+    .btn-new-exam:hover { background: var(--ib-blue-mid); }
+
+    .results-qs { display: flex; flex-direction: column; gap: 1.125rem; }
+
+    .rq-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.25rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .rq-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 0.875rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.875rem;
+      gap: 0.75rem;
+    }
+    .rq-title { font-weight: 700; color: var(--ib-blue); font-size: 0.95rem; }
+    .rq-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+
+    .rq-context {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: #f8f9fa;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      margin-bottom: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .rq-part { margin-bottom: 1rem; }
+    .rq-part:last-child { margin-bottom: 0; }
+
+    .rq-part-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.375rem;
+    }
+    .rq-part-label { font-size: 0.82rem; font-weight: 700; color: #495057; }
+    .status-answered { font-size: 0.7rem; background: var(--green-bg); color: #155724; padding: 1px 8px; border-radius: 20px; font-weight: 600; }
+    .status-blank { font-size: 0.7rem; background: #f8d7da; color: #721c24; padding: 1px 8px; border-radius: 20px; font-weight: 600; }
+    .rq-part-q { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.375rem; }
+
+    .answer-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 560px) { .answer-compare { grid-template-columns: 1fr; } }
+
+    .ans-col { background: #f8f9fa; border-radius: 7px; padding: 0.625rem 0.75rem; }
+    .ans-col.model-col { background: var(--yellow-bg); border: 1.5px solid var(--yellow-border); }
+    .ans-col-label { font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .ans-col.model-col .ans-col-label { color: #856404; }
+    .ans-col-body { font-size: 0.82rem; line-height: 1.55; white-space: pre-wrap; }
+    .ans-blank { color: #adb5bd; font-style: italic; }
+
+    .student-answer-preview {
+      background: #f8f9fa;
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.82rem;
+      color: var(--text);
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    /* SAVE BUTTON */
+    .btn-save-action {
+      border-color: var(--ib-blue);
+      color: var(--ib-blue);
+      background: var(--ib-blue-light);
+    }
+    .btn-save-action:hover { background: var(--ib-blue); color: white; }
+
+    /* ════════════════════════════════════
+       SAVED EXAM LIBRARY (setup screen)
+    ════════════════════════════════════ */
+    .library-divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 1.5rem 0 1.125rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .library-divider::before,
+    .library-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .library-empty {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 0.875rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 1.5px dashed var(--border);
+    }
+
+    .saved-exam-card {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0.875rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+      background: #f8f9fa;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .saved-exam-card:hover { border-color: #a8c4f5; background: var(--ib-blue-light); }
+
+    .saved-exam-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--ib-blue);
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .saved-exam-info { flex: 1; min-width: 0; }
+    .saved-exam-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .saved-exam-meta { font-size: 0.7rem; color: var(--text-muted); margin-top: 1px; }
+
+    .saved-exam-actions { display: flex; gap: 0.375rem; flex-shrink: 0; }
+
+    .btn-sm {
+      padding: 0.3rem 0.625rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1.5px solid;
+      transition: all 0.15s;
+    }
+    .btn-sm-load {
+      background: var(--ib-blue);
+      color: white;
+      border-color: var(--ib-blue);
+    }
+    .btn-sm-load:hover { background: var(--ib-blue-mid); }
+    .btn-sm-dl {
+      background: white;
+      color: var(--text-muted);
+      border-color: var(--border);
+    }
+    .btn-sm-dl:hover { border-color: var(--ib-blue); color: var(--ib-blue); }
+    .btn-sm-del {
+      background: white;
+      color: #dc3545;
+      border-color: #f5c6cb;
+    }
+    .btn-sm-del:hover { background: #dc3545; color: white; border-color: #dc3545; }
+
+    .load-file-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.4rem 0.75rem;
+      border: 1.5px dashed var(--border);
+      border-radius: 8px;
+      transition: all 0.15s;
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+    .load-file-label:hover { border-color: var(--ib-blue); color: var(--ib-blue); background: var(--ib-blue-light); }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 70px;
+      right: 18px;
+      background: #333;
+      color: white;
+      padding: 0.5rem 0.875rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      z-index: 999;
+      animation: toastAnim 2.8s forwards;
+      pointer-events: none;
+    }
+    @keyframes toastAnim {
+      0% { opacity: 0; transform: translateY(8px); }
+      12% { opacity: 1; transform: translateY(0); }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     SETUP SCREEN
+════════════════════════════════════════ -->
+<div id="screen-setup" class="screen active">
+  <div class="setup-card">
+    <div class="setup-header">
+      <div class="ib-logo-big">IB</div>
+      <h1>IB Math AI SL Simulator</h1>
+      <p>eAssessment practice — questions generated by Claude AI</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="inp-key">Anthropic API Key</label>
+      <input type="password" id="inp-key" placeholder="sk-ant-api03-…" autocomplete="off" spellcheck="false">
+      <div class="hint-text">Stored in sessionStorage only. Never sent anywhere except <code>api.anthropic.com</code>.</div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Paper Type</label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="paper" id="r-p1" value="paper1" checked>
+          <label for="r-p1">
+            <span class="r-title">Paper 1</span>
+            <span class="r-sub">Short response</span>
+          </label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="paper" id="r-p2" value="paper2">
+          <label for="r-p2">
+            <span class="r-title">Paper 2</span>
+            <span class="r-sub">Extended response</span>
+          </label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="paper" id="r-rev" value="revision">
+          <label for="r-rev">
+            <span class="r-title">Revision Sprint</span>
+            <span class="r-sub">Mixed types</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="inp-topic">Topic Focus</label>
+      <select id="inp-topic">
+        <option value="all">All Topics (T1 – T5)</option>
+        <option value="T1">T1 — Number &amp; Algebra</option>
+        <option value="T2">T2 — Functions &amp; Modelling</option>
+        <option value="T3">T3 — Geometry &amp; Trigonometry</option>
+        <option value="T4">T4 — Statistics &amp; Probability</option>
+        <option value="T5">T5 — Calculus &amp; Technology</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Number of Questions</label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="qcount" id="r-q5" value="5">
+          <label for="r-q5"><span class="r-title">5</span><span class="r-sub">~30 min</span></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="qcount" id="r-q8" value="8" checked>
+          <label for="r-q8"><span class="r-title">8</span><span class="r-sub">~50 min</span></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="qcount" id="r-q12" value="12">
+          <label for="r-q12"><span class="r-title">12</span><span class="r-sub">~90 min</span></label>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-generate" id="btn-generate" onclick="startGeneration()">
+      Generate Exam &rarr;
+    </button>
+
+    <!-- ── SAVED EXAM LIBRARY ── -->
+    <div class="library-divider">Saved Exam Library</div>
+    <div id="library-list">
+      <!-- populated by JS -->
+    </div>
+    <label class="load-file-label" title="Load a previously downloaded .json exam file">
+      📂 Load exam from file (.json)
+      <input type="file" accept=".json" style="display:none" onchange="handleFileLoad(this)">
+    </label>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     LOADING SCREEN
+════════════════════════════════════════ -->
+<div id="screen-loading" class="screen">
+  <div class="spinner"></div>
+  <div class="loading-title">Generating your exam…</div>
+  <div class="loading-sub">Claude AI is crafting real-world questions with full markschemes. This takes about 15–25 seconds.</div>
+  <div class="loading-status" id="loading-config"></div>
+</div>
+
+<!-- ════════════════════════════════════════
+     EXAM SCREEN
+════════════════════════════════════════ -->
+<div id="screen-exam" class="screen">
+
+  <!-- Top bar -->
+  <div class="exam-topbar">
+    <div class="topbar-left">
+      <span class="ib-badge">IB</span>
+      <div>
+        <div class="topbar-exam-title" id="tb-title">IB Math AI SL</div>
+        <div class="topbar-exam-sub" id="tb-sub">Calculator permitted</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-progress" id="tb-progress"></span>
+      <button class="btn-formulas" onclick="toggleFormulas()">📐 Formulas</button>
+      <div class="exam-timer" id="exam-timer">01:30:00</div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="exam-body">
+
+    <!-- Navigator -->
+    <div class="exam-nav">
+      <div class="nav-section-label">Questions</div>
+      <div class="nav-dots" id="nav-dots"></div>
+      <div class="nav-legend">
+        <div class="legend-row"><div class="legend-circle" style="background:#e9ecef"></div>Unanswered</div>
+        <div class="legend-row"><div class="legend-circle" style="background:var(--ib-blue)"></div>Current</div>
+        <div class="legend-row"><div class="legend-circle" style="background:var(--green)"></div>Answered</div>
+        <div class="legend-row"><div class="legend-circle" style="background:var(--orange)"></div>Flagged</div>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="exam-main" id="exam-main"></div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="exam-bottombar">
+    <div class="bar-group">
+      <button class="btn" id="btn-prev" onclick="navigate(-1)">&#8592; Prev</button>
+      <button class="btn" id="btn-next" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+    <div class="bar-group">
+      <button class="btn btn-flag-action" id="btn-flag" onclick="toggleFlag()">🚩 Flag</button>
+      <button class="btn btn-ms-action" id="btn-ms" onclick="toggleMarkscheme()" style="display:none">👁 Markscheme</button>
+    </div>
+    <div class="bar-group">
+      <button class="btn btn-save-action" onclick="saveExam()" title="Save this exam for reuse">💾 Save Exam</button>
+      <button class="btn btn-submit-action" onclick="confirmSubmit()">Submit Exam</button>
+    </div>
+  </div>
+</div>
+
+<!-- Formula panel (overlay) -->
+<div class="formula-panel" id="formula-panel">
+  <div class="fp-header">
+    📐 IB AI SL Formula Sheet
+    <button class="fp-close" onclick="toggleFormulas()">✕</button>
+  </div>
+  <div class="fp-body">
+
+    <div class="fp-section">
+      <div class="fp-section-title">T1 — Number &amp; Algebra</div>
+      <div class="fp-row"><span class="fp-name">Arith. term</span><span class="fp-math">u_n = u_1 + (n−1)d</span></div>
+      <div class="fp-row"><span class="fp-name">Arith. sum</span><span class="fp-math">S_n = n/2·(2u_1+(n−1)d)</span></div>
+      <div class="fp-row"><span class="fp-name">Geo. term</span><span class="fp-math">u_n = u_1·r^(n−1)</span></div>
+      <div class="fp-row"><span class="fp-name">Geo. sum</span><span class="fp-math">S_n = u_1(r^n−1)/(r−1)</span></div>
+      <div class="fp-row"><span class="fp-name">Geo. inf.</span><span class="fp-math">S_∞ = u_1/(1−r), |r|&lt;1</span></div>
+      <div class="fp-row"><span class="fp-name">Compound int.</span><span class="fp-math">FV = PV(1+r/n)^(nt)</span></div>
+      <div class="fp-row"><span class="fp-name">Depreciation</span><span class="fp-math">V_n = V_0(1−r)^n</span></div>
+      <div class="fp-row"><span class="fp-name">Annuity FV</span><span class="fp-math">FV = R·((1+i)^n−1)/i</span></div>
+      <div class="fp-row"><span class="fp-name">Annuity PV</span><span class="fp-math">PV = R·(1−(1+i)^-n)/i</span></div>
+    </div>
+
+    <div class="fp-section">
+      <div class="fp-section-title">T2 — Functions &amp; Modelling</div>
+      <div class="fp-row"><span class="fp-name">Exponential</span><span class="fp-math">f(x) = a·b^x + c</span></div>
+      <div class="fp-row"><span class="fp-name">Logistic</span><span class="fp-math">f(x) = L/(1+Ce^(−kx))</span></div>
+      <div class="fp-row"><span class="fp-name">Sinusoidal</span><span class="fp-math">f(x) = a·sin(bx+c)+d</span></div>
+      <div class="fp-row"><span class="fp-name">Period</span><span class="fp-math">T = 2π/b</span></div>
+      <div class="fp-row"><span class="fp-name">Log change-base</span><span class="fp-math">log_a(b) = ln(b)/ln(a)</span></div>
+      <div class="fp-row"><span class="fp-name">Inverse</span><span class="fp-math">swap x↔y, solve for y</span></div>
+    </div>
+
+    <div class="fp-section">
+      <div class="fp-section-title">T3 — Geometry &amp; Trigonometry</div>
+      <div class="fp-row"><span class="fp-name">Sine rule</span><span class="fp-math">a/sinA = b/sinB = c/sinC</span></div>
+      <div class="fp-row"><span class="fp-name">Cosine rule</span><span class="fp-math">c² = a²+b²−2ab·cosC</span></div>
+      <div class="fp-row"><span class="fp-name">Area △</span><span class="fp-math">A = ½ab·sinC</span></div>
+      <div class="fp-row"><span class="fp-name">Arc length</span><span class="fp-math">l = rθ (θ in radians)</span></div>
+      <div class="fp-row"><span class="fp-name">Sector area</span><span class="fp-math">A = ½r²θ</span></div>
+      <div class="fp-row"><span class="fp-name">Vol. cone</span><span class="fp-math">V = ⅓πr²h</span></div>
+      <div class="fp-row"><span class="fp-name">Vol. sphere</span><span class="fp-math">V = 4/3·πr³</span></div>
+      <div class="fp-row"><span class="fp-name">SA sphere</span><span class="fp-math">A = 4πr²</span></div>
+      <div class="fp-row"><span class="fp-name">Voronoi</span><span class="fp-math">perpendicular bisectors</span></div>
+    </div>
+
+    <div class="fp-section">
+      <div class="fp-section-title">T4 — Statistics &amp; Probability</div>
+      <div class="fp-row"><span class="fp-name">Pearson r</span><span class="fp-math">r = S_xy / √(S_xx·S_yy)</span></div>
+      <div class="fp-row"><span class="fp-name">Regression</span><span class="fp-math">ŷ = ax + b  (use GDC)</span></div>
+      <div class="fp-row"><span class="fp-name">Normal</span><span class="fp-math">X ~ N(μ, σ²)</span></div>
+      <div class="fp-row"><span class="fp-name">Standardise</span><span class="fp-math">Z = (X−μ)/σ</span></div>
+      <div class="fp-row"><span class="fp-name">E(X)</span><span class="fp-math">Σ x·P(X = x)</span></div>
+      <div class="fp-row"><span class="fp-name">Var(X)</span><span class="fp-math">E(X²) − [E(X)]²</span></div>
+      <div class="fp-row"><span class="fp-name">Binomial</span><span class="fp-math">X ~ B(n, p)</span></div>
+      <div class="fp-row"><span class="fp-name">P(X=r)</span><span class="fp-math">C(n,r)·p^r·(1−p)^(n−r)</span></div>
+      <div class="fp-row"><span class="fp-name">χ² statistic</span><span class="fp-math">χ² = Σ(f_o − f_e)²/f_e</span></div>
+      <div class="fp-row"><span class="fp-name">Expected freq.</span><span class="fp-math">f_e = (row total·col total)/n</span></div>
+    </div>
+
+    <div class="fp-section">
+      <div class="fp-section-title">T5 — Calculus</div>
+      <div class="fp-row"><span class="fp-name">Power rule</span><span class="fp-math">d/dx(x^n) = nx^(n−1)</span></div>
+      <div class="fp-row"><span class="fp-name">Chain rule</span><span class="fp-math">dy/dx = (dy/du)·(du/dx)</span></div>
+      <div class="fp-row"><span class="fp-name">d/dx(e^x)</span><span class="fp-math">e^x</span></div>
+      <div class="fp-row"><span class="fp-name">d/dx(ln x)</span><span class="fp-math">1/x</span></div>
+      <div class="fp-row"><span class="fp-name">∫ power</span><span class="fp-math">x^(n+1)/(n+1) + C</span></div>
+      <div class="fp-row"><span class="fp-name">∫ e^x</span><span class="fp-math">e^x + C</span></div>
+      <div class="fp-row"><span class="fp-name">Trap. rule</span><span class="fp-math">h/2·(y_0+2y_1+…+y_n)</span></div>
+      <div class="fp-row"><span class="fp-name">Area</span><span class="fp-math">∫_a^b |f(x)| dx  (GDC)</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     RESULTS SCREEN
+════════════════════════════════════════ -->
+<div id="screen-results" class="screen">
+  <div class="results-wrap">
+
+    <div class="results-hero">
+      <h1>Exam Complete</h1>
+      <p id="res-subtitle">IB Math AI SL</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val" id="res-attempted">–</div>
+        <div class="stat-lbl">Questions Attempted</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="res-marks">–</div>
+        <div class="stat-lbl">Total Marks Available</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="res-time">–</div>
+        <div class="stat-lbl">Time Used</div>
+      </div>
+    </div>
+
+    <div class="results-actions">
+      <button class="btn-reveal-all" id="btn-reveal-all" onclick="revealAll()">
+        👁 Reveal All Markschemes
+      </button>
+      <button class="btn-new-exam" onclick="saveExam()" style="background:#28a745;border-color:#28a745" title="Save to library and download JSON">
+        💾 Save Exam
+      </button>
+      <button class="btn-new-exam" onclick="newExam()">↩ New Exam</button>
+    </div>
+
+    <div class="results-qs" id="results-qs"></div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+// ── STATE ──────────────────────────────────────────────────────────
+const S = {
+  apiKey: '',
+  exam: null,          // parsed JSON from API
+  cur: 0,              // current question index
+  answers: {},         // { "1_a": "...", "1_b": "..." }
+  flagged: new Set(),
+  timeLeft: 90 * 60,   // seconds
+  timerID: null,
+  startTime: null,
+  submitted: false,
+  msVisible: false,    // per-question markscheme toggle (post-submit)
+  allMsVisible: false, // results screen
+};
+
+// ── BOOT ───────────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  const saved = sessionStorage.getItem('ib_sim_key');
+  if (saved) document.getElementById('inp-key').value = saved;
+  renderLibrary();
+});
+
+// ── SCREEN SWITCH ──────────────────────────────────────────────────
+function show(id) {
+  document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ── GENERATION ─────────────────────────────────────────────────────
+async function startGeneration() {
+  const key = document.getElementById('inp-key').value.trim();
+  if (!key) { alert('Please enter your Anthropic API key.'); return; }
+  if (!key.startsWith('sk-ant')) {
+    if (!confirm('The API key doesn\'t start with "sk-ant-". Continue anyway?')) return;
+  }
+
+  S.apiKey = key;
+  sessionStorage.setItem('ib_sim_key', key);
+
+  const paper  = document.querySelector('input[name="paper"]:checked').value;
+  const topic  = document.getElementById('inp-topic').value;
+  const qcount = parseInt(document.querySelector('input[name="qcount"]:checked').value, 10);
+
+  show('screen-loading');
+  const cfgEl = document.getElementById('loading-config');
+  cfgEl.textContent = qcount + ' questions · ' + paperLabel(paper) + ' · Topic: ' + topic;
+
+  try {
+    const prompt = buildPrompt(paper, topic, qcount);
+    const raw = await callClaude(key, prompt);
+
+    let exam;
+    try {
+      exam = JSON.parse(raw);
+    } catch (_) {
+      const m = raw.match(/\{[\s\S]*\}/);
+      if (!m) throw new Error('API response was not valid JSON. Raw:\n' + raw.slice(0, 400));
+      exam = JSON.parse(m[0]);
+    }
+
+    if (!exam.questions || !Array.isArray(exam.questions) || exam.questions.length === 0) {
+      throw new Error('Exam JSON is missing a "questions" array.');
+    }
+
+    // Normalise
+    exam.questions.forEach((q, i) => {
+      q.id = q.id ?? (i + 1);
+      q.parts = q.parts ?? [];
+    });
+
+    S.exam      = exam;
+    S.cur       = 0;
+    S.answers   = {};
+    S.flagged   = new Set();
+    S.submitted = false;
+    S.msVisible = false;
+    S.timeLeft  = 90 * 60;
+    S.startTime = Date.now();
+
+    initExam();
+    show('screen-exam');
+    startTimer();
+    saveToLibrary(exam); // auto-save to localStorage
+
+  } catch (err) {
+    show('screen-setup');
+    alert('Failed to generate exam:\n\n' + err.message);
+    console.error(err);
+  }
+}
+
+function paperLabel(p) {
+  return { paper1:'Paper 1 (short response)', paper2:'Paper 2 (extended)', revision:'Revision Sprint' }[p] || p;
+}
+
+// ── API CALL ───────────────────────────────────────────────────────
+async function callClaude(key, prompt) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 8000,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+
+  if (!res.ok) {
+    let msg = 'HTTP ' + res.status;
+    try { const d = await res.json(); msg = d.error?.message || msg; } catch(_) {}
+    throw new Error(msg);
+  }
+
+  const data = await res.json();
+  return data.content[0].text;
+}
+
+// ── PROMPT BUILDER ─────────────────────────────────────────────────
+function buildPrompt(paper, topic, qcount) {
+  const paperSpec = {
+    paper1: `Paper 1 (short-response): Each question is STANDALONE with its own real-world context. Each question has 4–7 marks total split across 2–4 parts labelled (a),(b),(c). Questions are independent of each other. GDC required throughout.`,
+    paper2: `Paper 2 (extended-response): Each question is a MULTI-PART problem (a)(b)(c)(d) built around ONE coherent real-world scenario that deepens with each part. Each question has 12–18 marks total. Difficulty increases within each question. GDC required.`,
+    revision: `Revision Sprint (mixed): A mix of ${Math.ceil(qcount*0.6)} short-response questions (4–6 marks each) and ${Math.floor(qcount*0.4)} extended questions (8–12 marks each). GDC required.`
+  }[paper];
+
+  const topicSpec = topic === 'all'
+    ? `Spread questions across all five IB AI SL topics: T1 Number & Algebra (MUST include compound interest or annuities), T2 Functions & Modelling, T3 Geometry & Trigonometry, T4 Statistics & Probability (MUST include at least one normal distribution OR chi-squared test OR regression question), T5 Calculus.`
+    : `All questions must be from topic ${topic} only. Vary the sub-topics within ${topic}.`;
+
+  const approxMarks = qcount * 6;
+
+  return `You are an expert IB Mathematics: Applications and Interpretation SL examiner with 15+ years of experience writing official papers for the IBO. Your task is to generate a complete exam.
+
+PAPER FORMAT
+${paperSpec}
+
+TOPIC REQUIREMENT
+${topicSpec}
+
+MANDATORY REQUIREMENTS
+1. REAL-WORLD CONTEXTS: Every question must use a named, specific real-world scenario — a named person, organisation, or country. Never use abstract contexts like "a student" without a name. Use diverse global contexts (Africa, Asia, Europe, Americas).
+2. STATISTICS: At least one question must involve statistics (regression line + Pearson r, OR normal distribution probabilities, OR chi-squared test of independence).
+3. FINANCIAL MATHS: At least one question must involve financial mathematics (compound interest, depreciation, loan repayments, or annuities).
+4. MARK LABELS: Every part question string must END with the mark count in square brackets, e.g. "[2 marks]".
+5. IB MARKSCHEME CODES: Use M1 (method mark), A1 (accuracy mark), R1 (reasoning/justification), ft (follow-through from earlier error), AG (answer given — prove it).
+6. TOTAL: ${qcount} questions totalling approximately ${approxMarks} marks.
+7. MATH NOTATION: Use Unicode and plain text for all maths (x², √x, ≤, ≥, ±, π, μ, σ, ², ³, ⁻¹ etc). Do NOT use LaTeX dollar signs or backslash commands.
+
+OUTPUT FORMAT
+Output ONLY a single valid JSON object. Do NOT wrap it in markdown code fences (no \`\`\`json). Do NOT add any text before { or after }. The response must begin with { and end with }.
+
+JSON SCHEMA (follow exactly):
+{
+  "examTitle": "IB Mathematics: Applications and Interpretation SL — Paper 1",
+  "paperType": "${paper}",
+  "totalMarks": ${approxMarks},
+  "questions": [
+    {
+      "id": 1,
+      "topic": "T4",
+      "topicName": "Statistics & Probability",
+      "totalMarks": 6,
+      "type": "short-response",
+      "context": "Dr. Amara Osei, a nutritionist at Korle Bu Teaching Hospital in Accra, Ghana, records the daily sugar intake (g) and resting heart rate (bpm) for 8 adult patients.",
+      "stem": "The data is shown in the table below.\\n\\n| Patient | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |\\n|---|---|---|---|---|---|---|---|---|\\n| Sugar intake (g) | 40 | 55 | 62 | 70 | 85 | 91 | 105 | 120 |\\n| Heart rate (bpm) | 62 | 67 | 70 | 74 | 79 | 82 | 88 | 94 |",
+      "parts": [
+        {
+          "label": "a",
+          "question": "Find the Pearson product-moment correlation coefficient, r, for this data. [2 marks]",
+          "marks": 2,
+          "markscheme": "Using GDC: r = 0.999 (or r ≈ 1) [A2]\\nAccept 0.998 to 1.000"
+        },
+        {
+          "label": "b",
+          "question": "Comment on the value of r in the context of the study. [2 marks]",
+          "marks": 2,
+          "markscheme": "Very strong positive (linear) correlation [A1]\\nAs sugar intake increases, the resting heart rate also increases [R1]"
+        },
+        {
+          "label": "c",
+          "question": "Find the equation of the regression line of heart rate on sugar intake. [2 marks]",
+          "marks": 2,
+          "markscheme": "Using GDC: y = 0.302x + 49.5 [A1A1]\\nAccept equivalent; if only one coefficient correct [A1]"
+        }
+      ],
+      "formulasNeeded": ["Pearson r formula", "Regression line y = ax + b"]
+    }
+  ]
+}
+
+IMPORTANT: Generate exactly ${qcount} questions following the same structure. Make each question unique, interesting, and realistic. Vary the real-world contexts. Now generate the full exam JSON:`;
+}
+
+// ── INIT EXAM ──────────────────────────────────────────────────────
+function initExam() {
+  const e = S.exam;
+  document.getElementById('tb-title').textContent  = e.examTitle || 'IB Math AI SL';
+  document.getElementById('tb-sub').textContent    = paperLabel(e.paperType) + ' · ' + (e.totalMarks || '?') + ' marks · GDC permitted';
+  buildNav();
+  renderQ(0);
+}
+
+// ── NAVIGATOR ──────────────────────────────────────────────────────
+function buildNav() {
+  const wrap = document.getElementById('nav-dots');
+  wrap.innerHTML = '';
+  S.exam.questions.forEach((q, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'nav-dot';
+    btn.id = 'nd-' + i;
+    btn.onclick = () => renderQ(i);
+    btn.innerHTML =
+      '<div class="dot-circle">' + (i + 1) + '</div>' +
+      '<div class="nav-dot-info">' +
+        '<div class="nav-dot-topic">' + esc(q.topic) + ' · ' + esc(q.topicName) + '</div>' +
+        '<div class="nav-dot-marks">' + q.totalMarks + ' marks</div>' +
+      '</div>';
+    wrap.appendChild(btn);
+  });
+  refreshNav();
+}
+
+function refreshNav() {
+  const qs = S.exam.questions;
+  qs.forEach((q, i) => {
+    const el = document.getElementById('nd-' + i);
+    if (!el) return;
+    const answered = isAnswered(q);
+    const flagged  = S.flagged.has(q.id);
+    const current  = i === S.cur;
+    el.className = 'nav-dot ' + (current ? 'is-current' : '') +
+      ' ' + (current ? 'state-current' : flagged ? 'state-flagged' : answered ? 'state-answered' : 'state-unanswered');
+  });
+  const progress = (S.cur + 1) + ' / ' + S.exam.questions.length;
+  document.getElementById('tb-progress').textContent = 'Question ' + progress;
+}
+
+function isAnswered(q) {
+  return q.parts.some(p => {
+    const v = S.answers[q.id + '_' + p.label];
+    return v && v.trim().length > 0;
+  });
+}
+
+// ── RENDER QUESTION ────────────────────────────────────────────────
+function renderQ(idx) {
+  S.cur = idx;
+  const q = S.exam.questions[idx];
+  const main = document.getElementById('exam-main');
+  main.scrollTop = 0;
+  main.innerHTML = buildQHTML(q, idx);
+
+  // Wire up textareas
+  q.parts.forEach(p => {
+    const ta = document.getElementById('ta-' + q.id + '-' + p.label);
+    if (!ta) return;
+    const key = q.id + '_' + p.label;
+    if (S.answers[key]) {
+      ta.value = S.answers[key];
+      ta.classList.toggle('answered', ta.value.trim().length > 0);
+    }
+    ta.addEventListener('input', () => {
+      S.answers[key] = ta.value;
+      ta.classList.toggle('answered', ta.value.trim().length > 0);
+      refreshNav();
+    });
+  });
+
+  // Flag button
+  const fb = document.getElementById('btn-flag');
+  const fl = S.flagged.has(q.id);
+  fb.classList.toggle('active', fl);
+  fb.textContent = fl ? '🚩 Remove Flag' : '🚩 Flag';
+
+  // Nav buttons
+  document.getElementById('btn-prev').disabled = idx === 0;
+  document.getElementById('btn-next').disabled = idx === S.exam.questions.length - 1;
+
+  // Markscheme button (post-submit only)
+  const msBtn = document.getElementById('btn-ms');
+  msBtn.style.display = S.submitted ? 'inline-flex' : 'none';
+  if (S.submitted && S.msVisible) {
+    q.parts.forEach(p => {
+      const el = document.getElementById('ms-' + q.id + '-' + p.label);
+      if (el) el.classList.add('show');
+    });
+    msBtn.textContent = '🙈 Hide Markscheme';
+  } else {
+    msBtn.textContent = '👁 Markscheme';
+  }
+
+  refreshNav();
+}
+
+function buildQHTML(q, idx) {
+  const contextHTML = q.context
+    ? '<div class="context-box">' + esc(q.context) + '</div>'
+    : '';
+
+  const stemHTML = q.stem
+    ? '<div class="stem-box">' + parseStem(q.stem) + '</div>'
+    : '';
+
+  const formulasHTML = q.formulasNeeded && q.formulasNeeded.length
+    ? '<div class="formulas-hint">' +
+      '<span class="formulas-hint-label">📐 Formulas needed:</span>' +
+      q.formulasNeeded.map(f => '<span class="formula-pill">' + esc(f) + '</span>').join('') +
+      '</div>'
+    : '';
+
+  const partsHTML = q.parts.map(p => {
+    const rows = Math.max(3, p.marks + 1);
+    return '<div class="part-card">' +
+      '<div class="part-top">' +
+        '<div class="part-label-badge">' + esc(p.label) + '</div>' +
+        '<div class="part-text">' + esc(p.question) + '</div>' +
+        '<div class="part-marks-tag">[' + p.marks + ' mark' + (p.marks > 1 ? 's' : '') + ']</div>' +
+      '</div>' +
+      '<div class="answer-label">Your working &amp; answer</div>' +
+      '<textarea class="answer-box" id="ta-' + q.id + '-' + p.label + '" rows="' + rows + '" ' +
+        'placeholder="Show all working here…">' +
+      '</textarea>' +
+      '<div class="ms-block" id="ms-' + q.id + '-' + p.label + '">' +
+        '<div class="ms-header">📋 Markscheme</div>' +
+        '<div class="ms-body">' + esc(p.markscheme) + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  return '<div class="q-header">' +
+    '<div>' +
+      '<div class="q-number">Question ' + (idx + 1) + '</div>' +
+      '<div class="q-max-mark">[Maximum mark: ' + q.totalMarks + ']</div>' +
+    '</div>' +
+    '<div class="q-tags">' +
+      '<span class="tag tag-topic">' + esc(q.topic) + '</span>' +
+      '<span class="tag tag-topic">' + esc(q.topicName) + '</span>' +
+      (S.flagged.has(q.id) ? '<span class="tag tag-flagged">🚩 Flagged</span>' : '') +
+      '<span class="tag tag-marks">' + q.totalMarks + ' marks</span>' +
+    '</div>' +
+  '</div>' +
+  contextHTML +
+  stemHTML +
+  formulasHTML +
+  '<div class="parts-stack">' + partsHTML + '</div>' +
+  '<div style="height:1.5rem"></div>';
+}
+
+// ── STEM PARSER (markdown tables → HTML) ───────────────────────────
+function parseStem(raw) {
+  // Normalise escaped newlines
+  const text = raw.replace(/\\n/g, '\n');
+  const lines = text.split('\n');
+  const out = [];
+  let tableRows = [];
+  let inTable = false;
+
+  function flushTable() {
+    if (!tableRows.length) return;
+    let h = '<table class="md-table">';
+    tableRows.forEach((row, ri) => {
+      const tag = ri === 0 ? 'th' : 'td';
+      h += '<tr>' + row.map(c => '<' + tag + '>' + c + '</' + tag + '>').join('') + '</tr>';
+    });
+    h += '</table>';
+    out.push(h);
+    tableRows = [];
+    inTable = false;
+  }
+
+  lines.forEach(raw_line => {
+    const line = raw_line.trim();
+    if (line.startsWith('|')) {
+      inTable = true;
+      if (/^\|[\s|:−-]+\|?$/.test(line)) return; // separator row
+      const cells = line.split('|').slice(1, -1).map(c => esc(c.trim()));
+      tableRows.push(cells);
+    } else {
+      if (inTable) flushTable();
+      if (line) out.push('<p style="margin:0.2rem 0">' + esc(line) + '</p>');
+    }
+  });
+  if (inTable) flushTable();
+
+  return out.join('');
+}
+
+// ── NAVIGATION ─────────────────────────────────────────────────────
+function navigate(delta) {
+  const next = S.cur + delta;
+  if (next >= 0 && next < S.exam.questions.length) renderQ(next);
+}
+
+// ── FLAG ───────────────────────────────────────────────────────────
+function toggleFlag() {
+  const q = S.exam.questions[S.cur];
+  if (S.flagged.has(q.id)) {
+    S.flagged.delete(q.id);
+    toast('Flag removed');
+  } else {
+    S.flagged.add(q.id);
+    toast('Flagged for review');
+  }
+  renderQ(S.cur); // re-render to update tag
+}
+
+// ── MARKSCHEME (exam screen, post-submit) ──────────────────────────
+function toggleMarkscheme() {
+  S.msVisible = !S.msVisible;
+  const q = S.exam.questions[S.cur];
+  q.parts.forEach(p => {
+    const el = document.getElementById('ms-' + q.id + '-' + p.label);
+    if (el) el.classList.toggle('show', S.msVisible);
+  });
+  document.getElementById('btn-ms').textContent = S.msVisible ? '🙈 Hide Markscheme' : '👁 Markscheme';
+}
+
+// ── TIMER ──────────────────────────────────────────────────────────
+function startTimer() {
+  const el = document.getElementById('exam-timer');
+  S.timerID = setInterval(() => {
+    S.timeLeft--;
+    if (S.timeLeft <= 0) {
+      clearInterval(S.timerID);
+      toast('⏰ Time is up! Auto-submitting…');
+      doSubmit();
+      return;
+    }
+    const h = Math.floor(S.timeLeft / 3600);
+    const m = Math.floor((S.timeLeft % 3600) / 60);
+    const s = S.timeLeft % 60;
+    el.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
+    el.classList.toggle('warn', S.timeLeft <= 600); // warn at 10 min
+  }, 1000);
+}
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+// ── SUBMIT ─────────────────────────────────────────────────────────
+function confirmSubmit() {
+  const unanswered = S.exam.questions.filter(q => !isAnswered(q)).length;
+  const flagCnt    = S.flagged.size;
+  let msg = 'Submit your exam now?';
+  if (unanswered) msg += '\n\n⚠ ' + unanswered + ' question(s) unanswered.';
+  if (flagCnt)    msg += '\n🚩 ' + flagCnt + ' question(s) still flagged for review.';
+  if (confirm(msg)) doSubmit();
+}
+
+function doSubmit() {
+  clearInterval(S.timerID);
+  S.submitted = true;
+
+  const used   = 90 * 60 - S.timeLeft;
+  const h = Math.floor(used / 3600);
+  const m = Math.floor((used % 3600) / 60);
+  const s = used % 60;
+
+  const attempted = S.exam.questions.filter(q => isAnswered(q)).length;
+
+  document.getElementById('res-subtitle').textContent  = S.exam.examTitle || 'IB Math AI SL';
+  document.getElementById('res-attempted').textContent = attempted + '/' + S.exam.questions.length;
+  document.getElementById('res-marks').textContent     = S.exam.totalMarks || '?';
+  document.getElementById('res-time').textContent      = pad(h) + ':' + pad(m) + ':' + pad(s);
+
+  buildResultsQs(false);
+  show('screen-results');
+}
+
+// ── RESULTS ────────────────────────────────────────────────────────
+function buildResultsQs(withMs) {
+  const wrap = document.getElementById('results-qs');
+  wrap.innerHTML = S.exam.questions.map((q, qi) => {
+    const ctxHTML = q.context
+      ? '<div class="rq-context">' + esc(q.context) + '</div>'
+      : '';
+
+    const partsHTML = q.parts.map(p => {
+      const key = q.id + '_' + p.label;
+      const ans = S.answers[key] || '';
+      const hasAns = ans.trim().length > 0;
+
+      const contentHTML = withMs
+        ? '<div class="answer-compare">' +
+            '<div class="ans-col">' +
+              '<div class="ans-col-label">Your answer</div>' +
+              '<div class="ans-col-body">' +
+                (hasAns ? esc(ans) : '<span class="ans-blank">No answer given</span>') +
+              '</div>' +
+            '</div>' +
+            '<div class="ans-col model-col">' +
+              '<div class="ans-col-label">📋 Markscheme</div>' +
+              '<div class="ans-col-body">' + esc(p.markscheme) + '</div>' +
+            '</div>' +
+          '</div>'
+        : '<div class="student-answer-preview">' +
+            (hasAns ? esc(ans) : '<span class="ans-blank">No answer given</span>') +
+          '</div>';
+
+      return '<div class="rq-part">' +
+        '<div class="rq-part-header">' +
+          '<div class="rq-part-label">Part (' + esc(p.label) + ') · ' + p.marks + ' mark' + (p.marks > 1 ? 's' : '') + '</div>' +
+          '<span class="' + (hasAns ? 'status-answered' : 'status-blank') + '">' +
+            (hasAns ? '✓ Answered' : '✗ Blank') +
+          '</span>' +
+        '</div>' +
+        '<div class="rq-part-q">' + esc(p.question) + '</div>' +
+        contentHTML +
+      '</div>';
+    }).join('');
+
+    return '<div class="rq-card">' +
+      '<div class="rq-header">' +
+        '<div>' +
+          '<div class="rq-title">Question ' + (qi + 1) + ' — ' + esc(q.topicName) + '</div>' +
+          '<div class="rq-sub">[Maximum mark: ' + q.totalMarks + ']</div>' +
+        '</div>' +
+        '<span class="tag tag-topic">' + esc(q.topic) + '</span>' +
+      '</div>' +
+      ctxHTML +
+      partsHTML +
+    '</div>';
+  }).join('');
+}
+
+function revealAll() {
+  buildResultsQs(true);
+  const btn = document.getElementById('btn-reveal-all');
+  btn.textContent = '✓ Markschemes Revealed';
+  btn.disabled = true;
+}
+
+function newExam() {
+  S.exam = null;
+  S.submitted = false;
+  show('screen-setup');
+}
+
+// ── SAVE / LOAD / LIBRARY ──────────────────────────────────────────
+const LIBRARY_KEY = 'ib_exam_library';
+
+function saveToLibrary(exam) {
+  try {
+    const lib = getLibrary();
+    // Avoid exact duplicates (same title + same first question stem)
+    const firstStem = exam.questions?.[0]?.stem || '';
+    const isDup = lib.some(e =>
+      e.examTitle === exam.examTitle &&
+      (e.questions?.[0]?.stem || '') === firstStem
+    );
+    if (isDup) return;
+
+    const entry = {
+      ...exam,
+      _savedAt: new Date().toISOString(),
+      _id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    };
+    lib.unshift(entry); // newest first
+    // Keep max 20 exams to stay within localStorage limits
+    const trimmed = lib.slice(0, 20);
+    localStorage.setItem(LIBRARY_KEY, JSON.stringify(trimmed));
+  } catch (e) {
+    console.warn('Could not save to localStorage:', e);
+  }
+}
+
+function getLibrary() {
+  try {
+    return JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
+  } catch (_) {
+    return [];
+  }
+}
+
+// Called from the bottom-bar "💾 Save Exam" button
+function saveExam() {
+  if (!S.exam) { toast('No exam loaded.'); return; }
+  // Ensure it's in the library
+  saveToLibrary(S.exam);
+  renderLibrary();
+  // Also trigger a file download
+  downloadExamJSON(S.exam);
+  toast('✓ Saved to library + downloaded as JSON');
+}
+
+function downloadExamJSON(exam) {
+  const slug = (exam.examTitle || 'ib-exam')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+  const dateStr = new Date().toISOString().slice(0, 10);
+  const filename = slug + '-' + dateStr + '.json';
+
+  const blob = new Blob([JSON.stringify(exam, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = filename;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// Load exam from uploaded .json file
+function handleFileLoad(input) {
+  const file = input.files?.[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const exam = JSON.parse(e.target.result);
+      if (!exam.questions?.length) throw new Error('No questions found in file.');
+      exam.questions.forEach((q, i) => {
+        q.id = q.id ?? (i + 1);
+        q.parts = q.parts ?? [];
+      });
+      saveToLibrary(exam);
+      renderLibrary();
+      startExamFromData(exam);
+      toast('✓ Exam loaded from file');
+    } catch (err) {
+      alert('Could not load exam file:\n' + err.message);
+    }
+    input.value = ''; // reset so same file can be reloaded
+  };
+  reader.readAsText(file);
+}
+
+// Load exam from library by _id
+function loadFromLibrary(id) {
+  const lib  = getLibrary();
+  const exam = lib.find(e => e._id === id);
+  if (!exam) { toast('Exam not found in library.'); return; }
+  startExamFromData(exam);
+}
+
+function startExamFromData(exam) {
+  S.exam      = exam;
+  S.cur       = 0;
+  S.answers   = {};
+  S.flagged   = new Set();
+  S.submitted = false;
+  S.msVisible = false;
+  S.timeLeft  = 90 * 60;
+  S.startTime = Date.now();
+  initExam();
+  show('screen-exam');
+  startTimer();
+}
+
+function downloadFromLibrary(id) {
+  const lib  = getLibrary();
+  const exam = lib.find(e => e._id === id);
+  if (exam) downloadExamJSON(exam);
+}
+
+function deleteSavedExam(id) {
+  if (!confirm('Remove this exam from the library?')) return;
+  const lib = getLibrary().filter(e => e._id !== id);
+  localStorage.setItem(LIBRARY_KEY, JSON.stringify(lib));
+  renderLibrary();
+  toast('Exam removed from library');
+}
+
+function renderLibrary() {
+  const wrap = document.getElementById('library-list');
+  if (!wrap) return;
+  const lib = getLibrary();
+
+  if (lib.length === 0) {
+    wrap.innerHTML =
+      '<div class="library-empty">No saved exams yet.<br>Generate one and click 💾 Save Exam.</div>';
+    return;
+  }
+
+  wrap.innerHTML = lib.map(exam => {
+    const title   = exam.examTitle || 'IB Exam';
+    const date    = exam._savedAt
+      ? new Date(exam._savedAt).toLocaleDateString(undefined, { day:'numeric', month:'short', year:'numeric' })
+      : '—';
+    const qcount  = exam.questions?.length ?? 0;
+    const marks   = exam.totalMarks ?? '?';
+    const paper   = paperLabel(exam.paperType || '');
+    const id      = exam._id;
+
+    return '<div class="saved-exam-card">' +
+      '<div class="saved-exam-icon">📄</div>' +
+      '<div class="saved-exam-info">' +
+        '<div class="saved-exam-title">' + esc(title) + '</div>' +
+        '<div class="saved-exam-meta">' + esc(paper) + ' · ' + qcount + ' Q · ' + marks + ' marks · saved ' + esc(date) + '</div>' +
+      '</div>' +
+      '<div class="saved-exam-actions">' +
+        '<button class="btn-sm btn-sm-load" onclick="loadFromLibrary(\'' + id + '\')">▶ Start</button>' +
+        '<button class="btn-sm btn-sm-dl"  onclick="downloadFromLibrary(\'' + id + '\')" title="Download JSON">⬇</button>' +
+        '<button class="btn-sm btn-sm-del" onclick="deleteSavedExam(\'' + id + '\')" title="Delete">✕</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+// ── FORMULAS PANEL ─────────────────────────────────────────────────
+function toggleFormulas() {
+  document.getElementById('formula-panel').classList.toggle('open');
+}
+
+// Close panel on outside click
+document.addEventListener('click', e => {
+  const panel = document.getElementById('formula-panel');
+  if (!panel.classList.contains('open')) return;
+  if (!panel.contains(e.target) && !e.target.closest('.btn-formulas')) {
+    panel.classList.remove('open');
+  }
+});
+
+// ── UTILITIES ──────────────────────────────────────────────────────
+function esc(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/\n/g, '<br>');
+}
+
+function toast(msg) {
+  const old = document.querySelector('.toast');
+  if (old) old.remove();
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2800);
+}
+</script>
+</body>
+</html>
