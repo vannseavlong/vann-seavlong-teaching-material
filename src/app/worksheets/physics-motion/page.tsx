@@ -787,6 +787,101 @@ function Session2() {
           </table>
         </div>
       </SectionBlock>
+
+      <SectionBlock code="SECTION 2-5" title="Multi-Step Kinematic Problems" variant="purple">
+        <p className="text-sm text-slate-500 italic mb-3">These problems require selecting the correct kinematic equation — and may need two equations used in sequence. Show all working clearly.</p>
+
+        <Q n={50}>A train moving at 30 m/s applies brakes with a uniform deceleration of 2.5 m/s².</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) How long does it take to stop completely?</p>
+          <p>(b) What is the total stopping distance?</p>
+          <p>(c) What is the train&apos;s velocity after it has traveled 100 m from where the brakes were applied? <em>(Use Equation 3 — no time needed)</em></p>
+        </div>
+        <AnsLine label="(a) Formula &amp; working:" wide />
+        <AnsLine label="(a) Answer:" wide />
+        <AnsLine label="(b) Formula &amp; working:" wide />
+        <AnsLine label="(b) Answer:" wide />
+        <AnsLine label="(c) Working:" wide />
+        <AnsLine label="(c) Velocity at 100 m:" wide />
+
+        <Q n={51}>A sports car starts from rest, accelerates at 5 m/s² for 6 s, then cruises at constant velocity for 4 s, then brakes at 3 m/s² until it stops. Find the results for each phase separately, then combine.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) What is the velocity after the acceleration phase?</p>
+          <p>(b) How far does it travel during the constant-velocity phase?</p>
+          <p>(c) How long does it take to stop once braking begins?</p>
+          <p>(d) What is the total distance traveled across all three phases?</p>
+        </div>
+        <AnsLine label="(a) Velocity after Phase 1:" wide />
+        <AnsLine label="(b) Distance during Phase 2:" wide />
+        <AnsLine label="(c) Braking time (Phase 3):" wide />
+        <div className="ml-5 text-sm text-slate-500 italic mb-1">Phase 1 dist: _____ m &nbsp;|&nbsp; Phase 2 dist: _____ m &nbsp;|&nbsp; Phase 3 dist: _____ m</div>
+        <AnsLine label="(d) Total distance:" wide />
+
+        <Q n={52}>A ball is launched vertically upward at 24.5 m/s. Use <InlineMath math="g = 9.8\text{ m/s}^2" /> with upward as positive (<InlineMath math="a = -9.8\text{ m/s}^2" />).</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Find the maximum height. <em>(At the peak, <InlineMath math="v_f = 0" />. Use <InlineMath math="v_f^2 = v_i^2 + 2as" />)</em></p>
+          <p>(b) Find the time to reach maximum height.</p>
+          <p>(c) Find the ball&apos;s velocity 4 s after launch. State whether it is moving up or down and explain.</p>
+        </div>
+        <AnsLine label="(a) Max height:" wide />
+        <AnsLine label="(b) Time to reach peak:" wide />
+        <AnsLine label="(c) Velocity at t = 4 s:" wide />
+        <AnsLine label="    Moving up or down? Why:" wide />
+      </SectionBlock>
+
+      <SectionBlock code="SECTION 2-6" title="Displacement from V-T Graph Area" variant="orange">
+        <div className="bg-orange-50 border border-orange-200 rounded-xl px-5 py-4 mb-4">
+          <p className="font-bold text-orange-800 text-sm mb-2">Key Concept — Area Under a Velocity-Time Graph = Displacement</p>
+          <div className="grid grid-cols-2 gap-6 text-sm">
+            <div className="text-center">
+              <p className="font-semibold text-orange-700 mb-1">Constant Velocity → Rectangle</p>
+              <BlockMath math="\text{displacement} = v \times \Delta t" />
+            </div>
+            <div className="text-center">
+              <p className="font-semibold text-orange-700 mb-1">Uniform Accel/Decel → Triangle</p>
+              <BlockMath math="\text{displacement} = \tfrac{1}{2} \times \text{base} \times \text{height}" />
+            </div>
+          </div>
+          <p className="text-xs text-orange-700 mt-2 text-center italic">Trapezoid (speeding up/down between two non-zero velocities): use ½ × (v₁ + v₂) × Δt</p>
+        </div>
+
+        <Q n={53}>A cyclist&apos;s journey has three phases: Phase 1 — accelerates from 0 to 12 m/s in 8 s; Phase 2 — maintains 12 m/s for 10 s; Phase 3 — decelerates uniformly to rest in 6 s.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Calculate the displacement for each phase using the area method. Name the shape (triangle / rectangle).</p>
+          <p>(b) Find the total displacement.</p>
+          <p>(c) Find the average speed for the entire journey.</p>
+        </div>
+        <AnsLine label="(a) Phase 1 (shape: _____) displacement:" wide />
+        <AnsLine label="    Phase 2 (shape: _____) displacement:" wide />
+        <AnsLine label="    Phase 3 (shape: _____) displacement:" wide />
+        <AnsLine label="(b) Total displacement:" wide />
+        <AnsLine label="(c) Total time:" wide />
+        <AnsLine label="    Average speed:" wide />
+
+        <Q n={54}>A car&apos;s velocity-time waypoints are: (0 s, 0 m/s) → (5 s, 25 m/s) → (10 s, 25 m/s) → (14 s, 0 m/s). Sketch the graph, then use areas to find displacements.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Phase 1 (0–5 s): Triangle. Find displacement.</p>
+          <p>(b) Phase 2 (5–10 s): Rectangle. Find displacement.</p>
+          <p>(c) Phase 3 (10–14 s): Triangle. Find displacement.</p>
+          <p>(d) Find total displacement and average velocity for the 14 s journey.</p>
+        </div>
+        <GraphArea
+          title="Sketch Your V-T Graph Here — Plot all 4 waypoints and connect them"
+          xLabel="Time (s)"
+          yLabel="Velocity (m/s)"
+          xMax={14}
+          yMax={30}
+          xStep={2}
+          yStep={5}
+          height={250}
+          note="Waypoints: (0, 0) → (5, 25) → (10, 25) → (14, 0)"
+        />
+        <AnsLine label="(a) Phase 1 displacement:" wide />
+        <AnsLine label="(b) Phase 2 displacement:" wide />
+        <AnsLine label="(c) Phase 3 displacement:" wide />
+        <AnsLine label="(d) Total displacement:" wide />
+        <AnsLine label="    Average velocity:" wide />
+      </SectionBlock>
     </section>
   );
 }
@@ -1017,6 +1112,88 @@ function Session3() {
         <AnsLine label="Working:" wide />
         <AnsLine label="Answer:" wide />
       </SectionBlock>
+
+      <SectionBlock code="SECTION 3-5" title="Forces, Friction &amp; Newton's Laws Combined" variant="purple">
+        <p className="text-sm text-slate-500 italic mb-3">When multiple forces act on one object, calculate the NET force first, then apply F = ma. Always draw a force diagram before solving.</p>
+
+        <Q n={55}>An 1800 kg car engine produces a forward driving force of 4500 N. The friction force opposing motion is 1200 N.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) What is the net force on the car?</p>
+          <p>(b) What is the car&apos;s acceleration?</p>
+          <p>(c) Starting from rest, what is the car&apos;s velocity after 8 seconds?</p>
+          <p>(d) If the engine force doubled to 9000 N (same friction), what would the new acceleration be?</p>
+        </div>
+        <AnsLine label="(a) Net force:" wide />
+        <AnsLine label="(b) Acceleration:" wide />
+        <AnsLine label="(c) Velocity after 8 s:" wide />
+        <AnsLine label="(d) New acceleration:" wide />
+
+        <Q n={56}>A 70 kg person stands on a bathroom scale inside an elevator. Use <InlineMath math="g = 9.8\text{ m/s}^2" />. <em>(Hint: <InlineMath math="F_{\text{net}} = F_{\text{scale}} - W = ma" />, so <InlineMath math="F_{\text{scale}} = m(g + a)" /> upward, <InlineMath math="m(g - a)" /> downward)</em></Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) What does the scale read when the elevator is stationary?</p>
+          <p>(b) The elevator accelerates UPWARD at 3 m/s². What is the apparent weight?</p>
+          <p>(c) The elevator then accelerates DOWNWARD at 3 m/s². What does the scale read?</p>
+          <p>(d) If the cable snapped and the elevator fell freely (a = g downward), what would the scale show? Name this phenomenon.</p>
+        </div>
+        <AnsLine label="(a) Weight (stationary):" wide />
+        <AnsLine label="(b) Apparent weight (accel up):" wide />
+        <AnsLine label="(c) Apparent weight (accel down):" wide />
+        <AnsLine label="(d) Scale reading in free fall:" wide />
+        <AnsLine label="    Phenomenon name:" wide />
+
+        <Q n={57}>A 500 kg crate sits on a rough floor. Friction = 600 N throughout.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Worker A pushes with 1600 N. Find the net force and acceleration.</p>
+          <p>(b) Worker B joins, also pushing with 400 N in the same direction. Find the new net force and acceleration.</p>
+          <p>(c) Starting from rest with both workers, find the velocity after 5 s and the distance traveled.</p>
+        </div>
+        <AnsLine label="(a) Net force (A alone):" wide />
+        <AnsLine label="    Acceleration (A alone):" wide />
+        <AnsLine label="(b) Net force (A + B):" wide />
+        <AnsLine label="    Acceleration (A + B):" wide />
+        <AnsLine label="(c) Velocity after 5 s:" wide />
+        <AnsLine label="    Distance traveled:" wide />
+      </SectionBlock>
+
+      <SectionBlock code="SECTION 3-6" title="Impulse, Momentum &amp; Collisions" variant="orange">
+        <div className="bg-orange-50 border border-orange-200 rounded-xl px-5 py-4 mb-4">
+          <p className="font-bold text-orange-800 text-sm mb-2">New Formula — Impulse-Momentum Theorem</p>
+          <div className="text-center overflow-x-auto">
+            <BlockMath math="J = F \cdot \Delta t = \Delta p = m(v_f - v_i)" />
+          </div>
+          <p className="text-xs text-orange-700 mt-1 text-center italic">Impulse J (units: N·s or kg·m/s) = the force applied × the time it acts. It equals the change in momentum.</p>
+        </div>
+
+        <Q n={58}>A 0.5 kg soccer ball is kicked from rest and leaves the player&apos;s foot at 28 m/s. The contact time between foot and ball is 0.07 s.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Calculate the impulse applied to the ball.</p>
+          <p>(b) Calculate the average force the player&apos;s foot exerted on the ball.</p>
+        </div>
+        <AnsLine label="(a) Impulse = Δp:" wide />
+        <AnsLine label="(b) Average force:" wide />
+
+        <Q n={59}>A 1500 kg car moving at 20 m/s collides with and sticks to a stationary 1000 kg car (perfectly inelastic collision).</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Calculate the total momentum BEFORE the collision.</p>
+          <p>(b) Using conservation of momentum, find the combined velocity AFTER the collision.</p>
+          <p>(c) Calculate total kinetic energy before and after. <em>(<InlineMath math="KE = \tfrac{1}{2}mv^2" />)</em> Was kinetic energy conserved?</p>
+        </div>
+        <AnsLine label="(a) Total p_before:" wide />
+        <AnsLine label="(b) Combined velocity:" wide />
+        <AnsLine label="(c) KE before:" wide />
+        <AnsLine label="    KE after:" wide />
+        <AnsLine label="    Conserved? (Yes/No + explain):" wide />
+
+        <Q n={60}>A 0.4 kg rubber ball hits a wall at 15 m/s and bounces straight back at 12 m/s. Contact time = 0.05 s. Take toward the wall as positive.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Find the change in momentum. <em>(Careful with signs — the ball reverses direction!)</em></p>
+          <p>(b) Find the average force the wall exerts on the ball.</p>
+          <p>(c) By Newton&apos;s 3rd Law, what force does the ball exert on the wall? State its direction.</p>
+        </div>
+        <AnsLine label="(a) Δp = m(v_f − v_i):" wide />
+        <AnsLine label="(b) Force on ball (direction: _______):" wide />
+        <AnsLine label="(c) Force on wall (direction: _______):" wide />
+      </SectionBlock>
     </section>
   );
 }
@@ -1154,6 +1331,80 @@ function Session4() {
         <AnsLine label="Total distance (from table):" wide />
         <AnsLine label="Displacement:" wide />
       </SectionBlock>
+
+      <div className="bg-phys-primary text-white rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-8">
+        Exam-Level Challenge Problems
+      </div>
+
+      <SectionBlock code="PART 3" title="Multi-Concept Challenges" variant="purple">
+        <p className="text-sm text-slate-500 italic mb-4">Each problem combines concepts from multiple sessions. Show all working — formula selection, substitution, unit checking, and a clear final answer with units.</p>
+
+        <Q n={61}>A train journey has three phases: Phase 1 — accelerates from rest to 40 m/s in 20 s; Phase 2 — maintains 40 m/s for 30 s; Phase 3 — decelerates uniformly from 40 m/s to rest in 10 s.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Sketch the velocity-time graph. Label each phase and mark key time and velocity points.</p>
+          <p>(b) Find the acceleration in Phase 1 and the deceleration in Phase 3.</p>
+          <p>(c) Calculate displacement for each phase using the area method, then find total displacement.</p>
+          <p>(d) Find the average speed for the entire journey.</p>
+        </div>
+        <GraphArea
+          title="V-T Graph — Sketch Here (Phase 1: 0–20 s | Phase 2: 20–50 s | Phase 3: 50–60 s)"
+          xLabel="Time (s)"
+          yLabel="Velocity (m/s)"
+          xMax={60}
+          yMax={50}
+          xStep={10}
+          yStep={10}
+          height={260}
+        />
+        <AnsLine label="(b) Acceleration Phase 1:" wide />
+        <AnsLine label="    Deceleration Phase 3:" wide />
+        <AnsLine label="(c) Phase 1 displacement:" wide />
+        <AnsLine label="    Phase 2 displacement:" wide />
+        <AnsLine label="    Phase 3 displacement:" wide />
+        <AnsLine label="    Total displacement:" wide />
+        <AnsLine label="(d) Average speed:" wide />
+
+        <Q n={62}>A 3000 kg truck is traveling at 25 m/s when the driver applies the brakes. The braking force is 9000 N.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Find the deceleration. <em>(The braking force opposes motion — use F = ma, then rearrange.)</em></p>
+          <p>(b) Find the stopping distance. <em>(Use <InlineMath math="v_f^2 = v_i^2 + 2as" />, with <InlineMath math="v_f = 0" />)</em></p>
+          <p>(c) Find the stopping time.</p>
+          <p>(d) Calculate the truck&apos;s momentum just BEFORE braking, and state the momentum AFTER stopping.</p>
+        </div>
+        <AnsLine label="(a) Deceleration:" wide />
+        <AnsLine label="(b) Stopping distance:" wide />
+        <AnsLine label="(c) Stopping time:" wide />
+        <AnsLine label="(d) Momentum before braking:" wide />
+        <AnsLine label="    Momentum after stopping:" wide />
+
+        <Q n={63}>During a crash test, a 1200 kg car moving at 18 m/s strikes a rigid barrier and comes to rest in 0.15 s.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Find the car&apos;s change in momentum.</p>
+          <p>(b) Using the impulse-momentum theorem, find the average force the barrier exerts on the car.</p>
+          <p>(c) Find the deceleration. Express it as a multiple of g (use g = 9.8 m/s²). Comment on whether a passenger wearing a seatbelt might survive and why.</p>
+        </div>
+        <AnsLine label="(a) Δp:" wide />
+        <AnsLine label="(b) Average force:" wide />
+        <AnsLine label="(c) Deceleration:" wide />
+        <AnsLine label="    As multiple of g:" wide />
+        <AnsTextarea label="Discussion — survivable? Why?" />
+
+        <Q n={64}>A 2 kg lab cart starts from rest. Worker A applies a constant 10 N push; friction throughout = 2 N. After 5 s, the push stops and only friction acts until the cart stops.</Q>
+        <div className="text-sm text-slate-600 ml-5 mb-3 space-y-0.5">
+          <p>(a) Find the net force and acceleration during the push phase.</p>
+          <p>(b) Find the velocity at the end of the 5 s push and the distance traveled during the push.</p>
+          <p>(c) After the push stops, find the deceleration due to friction, the coasting distance, and the coasting time.</p>
+          <p>(d) Find the total distance from start to final stop.</p>
+        </div>
+        <AnsLine label="(a) Net force:" wide />
+        <AnsLine label="    Acceleration:" wide />
+        <AnsLine label="(b) Velocity after 5 s push:" wide />
+        <AnsLine label="    Distance during push:" wide />
+        <AnsLine label="(c) Deceleration (coasting):" wide />
+        <AnsLine label="    Coasting distance:" wide />
+        <AnsLine label="    Coasting time:" wide />
+        <AnsLine label="(d) Total distance:" wide />
+      </SectionBlock>
     </section>
   );
 }
@@ -1186,7 +1437,7 @@ export default function PhysicsMotionWorksheet() {
           </div>
           <div className="flex flex-wrap gap-3 items-center">
             <PrintButton />
-            <span className="text-xs text-white/40">49 questions across 4 sessions</span>
+            <span className="text-xs text-white/40">64 questions across 4 sessions</span>
           </div>
         </div>
       </div>

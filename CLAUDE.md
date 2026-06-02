@@ -283,7 +283,7 @@ Red `HighlightBox` (general binomial series). One `FormulaBox` (negative/fractio
 |------|--------|----------|------|
 | AA Unit 1: Algebra | ✅ Done | ✅ Topics 1–3 (indices, surds, quadratics) | ⏳ Coming |
 | AA Unit 2: Functions | ⏳ | ⏳ | ⏳ |
-| AA Unit 3: Trigonometry | ⏳ | ⏳ | ⏳ |
+| AA Unit 3: Trigonometry | ✅ Done | ⏳ | ⏳ |
 | AA Unit 4: Geometry & Vectors | ⏳ | ⏳ | ⏳ |
 | AA Unit 5: Statistics & Probability | ⏳ | ⏳ | ⏳ |
 | AA Unit 6: Calculus | ⏳ | ⏳ | ⏳ |

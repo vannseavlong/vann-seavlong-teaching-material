@@ -164,7 +164,7 @@ export const aaCurriculum: CurriculumData = {
         "Modelling with trigonometry",
       ],
       contents: [
-        { title: "Lesson", status: "coming-soon" },
+        { title: "Lesson", status: "available", href: "/aa/unit-3/lesson" },
         { title: "Practice Problems", status: "coming-soon" },
       ],
     },
