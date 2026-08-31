@@ -13,6 +13,7 @@ const mainNav: NavItem[] = [
   { label: "AA Curriculum", href: "/aa" },
   { label: "AI Curriculum", href: "/ai" },
   { label: "Worksheets", href: "/worksheets" },
+  { label: "Review", href: "/review" },
 ];
 
 export default function Navbar() {
