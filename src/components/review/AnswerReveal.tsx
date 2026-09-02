@@ -12,6 +12,8 @@ type AnswerRevealContextValue = {
   toggleGlobal: () => void;
   isOpen: (id: string) => boolean;
   toggleOne: (id: string) => void;
+  /** Force every answer open/closed (clears per-part overrides) — used by ExportPdfButton. */
+  setAllRevealed: (open: boolean) => void;
 };
 
 const AnswerRevealContext = createContext<AnswerRevealContextValue | null>(null);
@@ -29,21 +31,31 @@ export function AnswerRevealProvider({ children }: { children: ReactNode }) {
     setOverrides((prev) => ({ ...prev, [id]: !(prev[id] ?? globalOpen) }));
   };
 
+  const setAllRevealed = (open: boolean) => {
+    setGlobalOpen(open);
+    setOverrides({});
+  };
+
   const isOpen = (id: string) => overrides[id] ?? globalOpen;
 
   return (
-    <AnswerRevealContext.Provider value={{ globalOpen, toggleGlobal, isOpen, toggleOne }}>
+    <AnswerRevealContext.Provider value={{ globalOpen, toggleGlobal, isOpen, toggleOne, setAllRevealed }}>
       {children}
     </AnswerRevealContext.Provider>
   );
 }
 
-function useAnswerRevealContext() {
+/** Read/drive the reveal state from outside PaperKit — used by ExportPdfButton. */
+export function useAnswerReveal() {
   const ctx = useContext(AnswerRevealContext);
   if (!ctx) {
     throw new Error("Answer reveal components must be used within an AnswerRevealProvider");
   }
   return ctx;
+}
+
+function useAnswerRevealContext() {
+  return useAnswerReveal();
 }
 
 /** Global "Show All Answers / Hide All Answers" control — clears any individual overrides. */
@@ -53,7 +65,7 @@ export function ShowAllAnswersButton() {
     <button
       type="button"
       onClick={toggleGlobal}
-      className={`whitespace-nowrap text-xs px-3 py-1.5 rounded-full font-bold transition-colors ${
+      className={`print:hidden whitespace-nowrap text-xs px-3 py-1.5 rounded-full font-bold transition-colors ${
         globalOpen
           ? "bg-[#1e3a5f] text-white hover:bg-[#16304d]"
           : "bg-purple-700 text-white hover:bg-purple-800"
@@ -73,7 +85,7 @@ export function AnswerToggleButton({ id }: { id: string }) {
       type="button"
       onClick={() => toggleOne(id)}
       aria-expanded={open}
-      className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${
+      className={`print:hidden inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${
         open
           ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
           : "bg-purple-700 text-white hover:bg-purple-800"

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
 import PrintButton from "../../worksheets/physics-motion/PrintButton";
+import ExportPdfButton from "@/components/review/ExportPdfButton";
 import { AnswerRevealProvider } from "@/components/review/AnswerReveal";
 import {
   PartHeader,
@@ -55,6 +56,7 @@ export default function ReviewPaper2() {
             </div>
             <div className="flex flex-wrap gap-3 items-center">
               <PrintButton />
+              <ExportPdfButton />
               <span className="text-xs text-white/40">76 marks · 12 questions · ~90 min</span>
             </div>
           </div>
