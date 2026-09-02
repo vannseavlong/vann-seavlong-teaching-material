@@ -144,12 +144,17 @@ export function Note({ children }: { children: ReactNode }) {
 
 export function SummaryTable({ rows }: { rows: [string, string, string][] }) {
   return (
-    <section id="summary" className="scroll-mt-28 mt-16 pt-8 border-t border-slate-200">
+    <section
+      id="summary"
+      className="scroll-mt-28 mt-16 pt-8 border-t border-slate-200 export-question-hide"
+    >
       <div className="bg-[#1e3a5f] text-white rounded-lg px-5 py-3 mb-2 font-bold text-sm uppercase tracking-wider flex flex-wrap items-center justify-between gap-2">
         <span>Summary of Final Answers</span>
         <ShowAllAnswersButton />
       </div>
-      <p className="text-xs text-slate-400 italic mb-3">Answers are masked until you tap Show All Answers.</p>
+      <p className="text-xs text-slate-400 italic mb-3 print:hidden">
+        Answers are masked until you tap Show All Answers.
+      </p>
       <div className="overflow-x-auto">
         <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
           <thead>
@@ -180,7 +185,7 @@ export function SummaryTable({ rows }: { rows: [string, string, string][] }) {
 
 export function StickyPaperNav() {
   return (
-    <div className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+    <div className="print:hidden sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
       <div className="max-w-4xl mx-auto px-6 py-2 flex flex-wrap items-center gap-2">
         <div className="flex gap-2 overflow-x-auto">
           {[
@@ -207,7 +212,10 @@ export function StickyPaperNav() {
 export function PaperFooterNav({ paperLabel }: { paperLabel: string }) {
   return (
     <div className="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
-      <Link href="/review" className="text-sm text-slate-500 hover:text-purple-700 font-medium transition-colors">
+      <Link
+        href="/review"
+        className="print:hidden text-sm text-slate-500 hover:text-purple-700 font-medium transition-colors"
+      >
         ← All Review Papers
       </Link>
       <p className="text-xs text-slate-400">{paperLabel}</p>

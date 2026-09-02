@@ -33,4 +33,15 @@ export const reviewPapers: ReviewPaper[] = [
     href: "/review/paper-2",
     status: "available",
   },
+  {
+    id: "paper-3",
+    topic: "Sequences & Series",
+    course: "AI — Unit 1 Number & Algebra (Topic 5)",
+    title: "Sequences and Series — Full Review",
+    subtitle: "Practice Paper 3 — Exercise & Answer Sheet",
+    marks: 67,
+    questionCount: 13,
+    href: "/review/paper-3",
+    status: "available",
+  },
 ];

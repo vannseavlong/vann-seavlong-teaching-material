@@ -64,7 +64,22 @@ section[id] {
 }
 
 @media print {
+  /* Browsers drop background colors on print by default, which strips the
+     navy hero/header bars down to white — leaving their white/light text
+     unreadable. Force backgrounds + text colors to print as-authored. */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
   nav { display: none; }
   .hero { padding-top: 2rem; }
   section { break-inside: avoid; }
+
+  /* "Export Question" mode drops the answer-key summary table — masked dots
+     on paper serve no purpose once there's no button left to reveal them. */
+  html[data-print-mode="question"] .export-question-hide {
+    display: none !important;
+  }
 }
