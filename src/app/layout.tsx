@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import "katex/dist/katex.min.css";
 import Navbar from "@/components/layout/Navbar";
@@ -21,6 +22,16 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        {/* Floating calculator widget (https://bubble-calculator.web.app) */}
+        <Script
+          src="https://bubble-calculator.web.app/v1/embed.js"
+          strategy="afterInteractive"
+          data-tia4-auto
+          data-position="bottom-right"
+          data-theme="auto"
+          data-accent="#2b6cb0"
+          data-hotkey="alt+c"
+        />
       </body>
     </html>
   );
