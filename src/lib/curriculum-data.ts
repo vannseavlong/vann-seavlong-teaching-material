@@ -265,7 +265,7 @@ export const aiCurriculum: CurriculumData = {
         "Logarithmic & exponential applications",
       ],
       contents: [
-        { title: "Lesson", status: "coming-soon" },
+        { title: "Lesson", status: "available", href: "/ai/unit-1/lesson" },
         { title: "Practice Problems", status: "coming-soon" },
       ],
     },
