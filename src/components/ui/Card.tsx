@@ -3,11 +3,11 @@ import { ReactNode } from "react";
 type CardVariant = "aa" | "ai" | "info" | "warn" | "default";
 
 const borderColors: Record<CardVariant, string> = {
-  aa: "border-t-4 border-t-aa-primary",
-  ai: "border-t-4 border-t-ai-primary",
-  info: "border-t-4 border-t-warn-primary",
-  warn: "border-t-4 border-t-danger-primary",
-  default: "",
+  aa: "border-aa-light",
+  ai: "border-ai-light",
+  info: "border-warn-light",
+  warn: "border-danger-light",
+  default: "border-slate-200",
 };
 
 export default function Card({
@@ -21,7 +21,7 @@ export default function Card({
 }) {
   return (
     <div
-      className={`bg-white border border-slate-200 rounded-xl p-7 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${borderColors[variant]} ${className}`}
+      className={`bg-white border rounded-lg p-6 ${borderColors[variant]} ${className}`}
     >
       {children}
     </div>
@@ -30,7 +30,7 @@ export default function Card({
 
 export function CardTitle({ children }: { children: ReactNode }) {
   return (
-    <h3 className="text-lg font-semibold text-navy-900 mb-3">{children}</h3>
+    <h3 className="text-lg font-semibold text-navy-900 mb-2 text-balance">{children}</h3>
   );
 }
 

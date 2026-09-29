@@ -18,7 +18,7 @@ export default function Tag({
 }) {
   return (
     <span
-      className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold m-0.5 ${styles[variant]}`}
+      className={`inline-block px-2 py-0.5 rounded text-xs font-medium m-0.5 ${styles[variant]}`}
     >
       {children}
     </span>
