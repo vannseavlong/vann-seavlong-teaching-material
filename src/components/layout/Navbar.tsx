@@ -20,22 +20,24 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
-      <div className="max-w-300 mx-auto flex items-center justify-center px-6 py-2.5 gap-6 overflow-x-auto">
-        <Link href="/" className="font-bold text-base text-aa-primary whitespace-nowrap">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200">
+      <div className="max-w-[1000px] mx-auto flex items-center justify-between px-6 h-14 gap-6 overflow-x-auto">
+        <Link href="/" className="font-semibold text-base text-navy-900 whitespace-nowrap">
           IB Math Guide
         </Link>
-        <div className="flex gap-1">
+        <div className="flex gap-1" role="list">
           {mainNav.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive =
+              item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm px-3 py-1.5 rounded-md whitespace-nowrap transition-all ${
+                aria-current={isActive ? "page" : undefined}
+                className={`text-sm px-3 py-1.5 rounded-md whitespace-nowrap transition-colors ${
                   isActive
-                    ? "bg-aa-bg text-aa-primary font-medium"
-                    : "text-slate-500 hover:bg-aa-bg hover:text-aa-primary"
+                    ? "bg-slate-200/70 text-navy-900 font-medium"
+                    : "text-slate-500 hover:bg-slate-50 hover:text-navy-900"
                 }`}
               >
                 {item.label}

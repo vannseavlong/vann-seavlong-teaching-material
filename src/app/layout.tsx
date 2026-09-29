@@ -4,11 +4,38 @@ import "./globals.css";
 import "katex/dist/katex.min.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Inter } from "next/font/google";
+import { AUTHOR, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "IB Mathematics AA vs AI — Which Path Is Right for You?",
-  description:
-    "A clear, honest guide for Grade 11 IB students choosing between Analysis & Approaches and Applications & Interpretation.",
+  metadataBase: new URL(SITE_URL),
+  title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: AUTHOR }],
+  creator: AUTHOR,
+  keywords: [
+    "IB Mathematics",
+    "Analysis and Approaches",
+    "Applications and Interpretation",
+    "IB AA vs AI",
+    "IB math lessons",
+  ],
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: "/",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -17,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <body className="antialiased" suppressHydrationWarning>
         <Navbar />
         {children}

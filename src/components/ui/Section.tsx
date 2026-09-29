@@ -16,12 +16,12 @@ export default function Section({
   alt?: boolean;
 }) {
   return (
-    <section id={id} className={`py-16 px-6 ${alt ? "bg-white" : ""}`}>
+    <section id={id} className={`py-14 px-6 ${alt ? "bg-white border-y border-slate-200" : ""}`}>
       <div className="max-w-[1000px] mx-auto">
-        <span className="inline-block text-xs font-bold uppercase tracking-wider text-aa-primary bg-aa-bg px-3 py-1 rounded mb-3">
+        <span className="block text-sm font-medium text-slate-500 mb-2">
           {label}
         </span>
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-navy-900 mb-6">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-navy-900 mb-4 text-balance">
           {title}
         </h2>
         {intro && (

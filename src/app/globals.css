@@ -37,7 +37,7 @@
   --color-phys-bg: #fff7ed;
   --color-phys-text: #7c2d12;
 
-  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 html {
@@ -48,7 +48,20 @@ body {
   font-family: var(--font-sans);
   color: #2d3748;
   background: #f7fafc;
-  line-height: 1.7;
+  line-height: 1.65;
+  font-feature-settings: "cv11", "ss03";
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-aa-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 
 /* Remove dark mode override */
@@ -60,7 +73,7 @@ body {
 
 /* Scroll offset for fixed nav */
 section[id] {
-  scroll-margin-top: 60px;
+  scroll-margin-top: 72px;
 }
 
 @media print {
