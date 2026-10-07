@@ -10,6 +10,20 @@ export type ReviewPaper = {
   status: "available" | "coming-soon";
 };
 
+import { aiReviewPapers, paperMarks } from "./ai-review-papers";
+
+const aiSummativePapers: ReviewPaper[] = aiReviewPapers.map((p) => ({
+  id: `ai-sl-${p.slug}`,
+  topic: p.topic,
+  course: `AI SL — Summative Revision, Session ${p.session}`,
+  title: p.title,
+  subtitle: `${p.subtitle} — Exercise & Answer Sheet`,
+  marks: paperMarks(p),
+  questionCount: p.questions.length,
+  href: `/review/ai-sl/${p.slug}`,
+  status: "available",
+}));
+
 export const reviewPapers: ReviewPaper[] = [
   {
     id: "paper-1",
@@ -44,4 +58,5 @@ export const reviewPapers: ReviewPaper[] = [
     href: "/review/paper-3",
     status: "available",
   },
+  ...aiSummativePapers,
 ];
