@@ -287,11 +287,18 @@ Red `HighlightBox` (general binomial series). One `FormulaBox` (negative/fractio
 | AA Unit 4: Geometry & Vectors | ⏳ | ⏳ | ⏳ |
 | AA Unit 5: Statistics & Probability | ⏳ | ⏳ | ⏳ |
 | AA Unit 6: Calculus | ⏳ | ⏳ | ⏳ |
-| AI Unit 1: Number & Algebra | ⏳ | ⏳ | ⏳ |
+| AI Unit 1: Number & Algebra | 🟡 Topics 1–2 + summative revision (sequences, rounding, bounds, % error) | ✅ Financial (interactive) + 7 exportable review papers | ⏳ |
 | AI Unit 2: Functions & Modelling | ⏳ | ⏳ | ⏳ |
 | AI Unit 3: Geometry | ⏳ | ⏳ | ⏳ |
 | AI Unit 4: Statistics & Probability | ⏳ | ⏳ | ⏳ |
 | AI Unit 5: Calculus & Technology | ⏳ | ⏳ | ⏳ |
+
+## AI SL Summative Revision Papers
+Data-driven, exportable Q&A papers (same Export PDF → Question / Q&A flow as `/review/paper-N`).
+- Data: `src/lib/ai-review-papers.ts` (one `AiReviewPaper` per session; `\( \)` inline math, `\[ \]` block math).
+- Renderer: `src/components/review/DataPaper.tsx`; route: `src/app/review/ai-sl/[slug]/page.tsx`.
+- Papers auto-appear on `/review` via `src/lib/review-data.ts`. To add one, append to `aiReviewPapers`.
+- Lesson sections live in `src/app/ai/unit-1/lesson/page.tsx` (`RevisionPlan` + Arithmetic, Geometric, Rounding, Bounds, Percentage Error).
 
 ## Future Plans
 - Complete lesson pages for all units (follow the AA Unit 1 convention above)

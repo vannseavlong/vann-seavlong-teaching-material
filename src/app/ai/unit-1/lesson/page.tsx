@@ -7,7 +7,7 @@ import { BlockMath, InlineMath } from "@/components/ui/Math";
 export const metadata: Metadata = {
   title: "Unit 1: Number & Algebra — AI Lesson | IB Mathematics AI",
   description:
-    "Lesson notes for IB Mathematics AI Unit 1: Number & Algebra. Covers percentages and financial mathematics — compound interest, depreciation, currency conversion, and the GDC TVM Solver.",
+    "Lesson notes for IB Mathematics AI Unit 1: Number & Algebra. Covers percentages, financial mathematics (GDC TVM Solver), arithmetic and geometric sequences & series, rounding, upper and lower bounds, and percentage error — with exportable revision papers.",
 };
 
 // ─── Reusable page-level helpers ─────────────────────────────────────────────
@@ -147,9 +147,9 @@ function LessonHero() {
         </p>
 
         <div className="flex gap-6 text-sm text-ai-light flex-wrap">
-          <span>📋 Topics 1–2 of 5 (SL)</span>
+          <span>📋 Percentages · Financial · Sequences · Rounding · Bounds · % Error</span>
           <span>🧮 Includes the GDC TVM Solver</span>
-          <span>🔜 More topics in progress</span>
+          <span>📝 7 exportable Q&amp;A revision papers</span>
         </div>
       </div>
     </div>
@@ -161,6 +161,12 @@ function LessonHero() {
 const SL_TOPICS = [
   { id: "percentages", label: "Percentages" },
   { id: "financial-mathematics", label: "Financial Mathematics" },
+  { id: "summative-revision", label: "Summative Revision Plan" },
+  { id: "arithmetic", label: "Arithmetic Sequences & Series" },
+  { id: "geometric", label: "Geometric Sequences & Series" },
+  { id: "rounding", label: "Rounding" },
+  { id: "bounds", label: "Upper & Lower Bounds" },
+  { id: "percentage-error", label: "Percentage Error" },
 ];
 
 function TableOfContents() {
@@ -754,13 +760,999 @@ function FinancialMathSection() {
   );
 }
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// SUMMATIVE ASSESSMENT REVISION
+// Topics: Arithmetic · Geometric · Financial (Topic 2 above) · Rounding ·
+//         Upper & Lower Bounds · Percentage Error
+// Each session pairs a lesson section with an exportable Q&A review paper.
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const REVISION_SESSIONS = [
+  {
+    n: 1,
+    title: "Arithmetic Sequences & Series",
+    lesson: "#arithmetic",
+    paper: "/review/ai-sl/arithmetic",
+    note: "~45 min",
+  },
+  {
+    n: 2,
+    title: "Geometric Sequences & Series",
+    lesson: "#geometric",
+    paper: "/review/ai-sl/geometric",
+    note: "~50 min",
+  },
+  {
+    n: 3,
+    title: "Financial Mathematics",
+    lesson: "#financial-mathematics",
+    paper: "/review/ai-sl/financial",
+    note: "~50 min · also /practice/2",
+  },
+  {
+    n: 4,
+    title: "Rounding",
+    lesson: "#rounding",
+    paper: "/review/ai-sl/rounding",
+    note: "~35 min",
+  },
+  {
+    n: 5,
+    title: "Upper & Lower Bounds",
+    lesson: "#bounds",
+    paper: "/review/ai-sl/bounds",
+    note: "~45 min",
+  },
+  {
+    n: 6,
+    title: "Percentage Error",
+    lesson: "#percentage-error",
+    paper: "/review/ai-sl/percentage-error",
+    note: "~40 min",
+  },
+  {
+    n: 7,
+    title: "Mixed Summative Mock",
+    lesson: "#summative-revision",
+    paper: "/review/ai-sl/summative-mock",
+    note: "~50 min · all topics",
+  },
+];
+
+function RevisionPlan() {
+  return (
+    <section id="summative-revision" className="py-14 px-6 bg-white border-t-4 border-ai-primary">
+      <div className="max-w-[1000px] mx-auto">
+        <span className="inline-block text-xs font-bold uppercase tracking-wider text-white bg-ai-primary px-3 py-1 rounded mb-3">
+          Summative Assessment Revision
+        </span>
+        <h2 className="text-2xl md:text-3xl font-bold text-navy-900 mb-3">
+          Seven-session revision plan
+        </h2>
+        <p className="text-base text-slate-500 max-w-2xl mb-8">
+          Each session is one class: revise the lesson section together, then
+          students attempt the matching review paper. Every paper can be
+          exported from its page as a clean <strong>Question</strong> sheet or a
+          full <strong>Q&amp;A</strong> answer sheet (Export PDF button). Topics
+          follow the summative assessment list: arithmetic and geometric
+          sequences &amp; series, financial mathematics, rounding, upper and
+          lower bounds, and percentage error.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {REVISION_SESSIONS.map((s) => (
+            <div
+              key={s.n}
+              className="border border-slate-200 rounded-xl p-5 bg-slate-50 flex gap-4 items-start"
+            >
+              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-ai-primary text-white font-bold flex items-center justify-center">
+                {s.n}
+              </span>
+              <div className="flex-1">
+                <p className="font-semibold text-navy-900">{s.title}</p>
+                <p className="text-xs text-slate-400 mb-3">{s.note}</p>
+                <div className="flex flex-wrap gap-3 text-sm font-semibold">
+                  <a href={s.lesson} className="text-ai-primary hover:underline">
+                    Lesson ↓
+                  </a>
+                  <Link href={s.paper} className="text-ai-primary hover:underline">
+                    Review paper (Q&amp;A) →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ReviewPaperLink({ href, label }: { href: string; label: string }) {
+  return (
+    <div className="my-6 rounded-xl border-2 border-ai-primary bg-ai-bg px-6 py-5 flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <p className="text-xs font-bold uppercase tracking-wider text-ai-primary mb-1">
+          Class practice — Q&amp;A sheet
+        </p>
+        <p className="text-navy-900 font-semibold">{label}</p>
+        <p className="text-xs text-slate-500">
+          Exportable as a Question sheet or Q&amp;A answer sheet (PDF).
+        </p>
+      </div>
+      <Link
+        href={href}
+        className="text-sm font-semibold bg-ai-primary text-white px-4 py-2 rounded-lg hover:opacity-90"
+      >
+        Open review paper →
+      </Link>
+    </div>
+  );
+}
+
+// ─── 3. Arithmetic Sequences & Series ─────────────────────────────────────────
+
+function ArithmeticSection() {
+  return (
+    <LessonSection
+      id="arithmetic"
+      label="Revision 1"
+      title="Arithmetic Sequences & Series"
+      tag={<SLTag />}
+      intro="An arithmetic sequence goes up (or down) by the same amount every step. Linear growth — a fixed weekly saving, a salary rise of a fixed dollar amount, seats added row by row — is arithmetic."
+    >
+      <HighlightBox variant="green">
+        <p className="font-semibold text-navy-900 mb-1">Key Idea</p>
+        <p className="text-slate-500 text-sm">
+          Subtract any term from the next one. If you always get the{" "}
+          <strong>same number</strong> <InlineMath math="d" />, the sequence is
+          arithmetic. A <em>sequence</em> is the list of terms; a{" "}
+          <em>series</em> is what you get when you <strong>add</strong> them.
+        </p>
+      </HighlightBox>
+
+      <FormulaBox title="Arithmetic Sequence">
+        <FormulaRow label="Common difference" math="d = u_{n+1} - u_n" />
+        <FormulaRow label="nth term" math="u_n = u_1 + (n-1)d" />
+      </FormulaBox>
+
+      <FormulaBox title="Arithmetic Series (sum of n terms)">
+        <FormulaRow
+          label="Sum — using d"
+          math="S_n = \dfrac{n}{2}\left(2u_1 + (n-1)d\right)"
+        />
+        <FormulaRow
+          label="Sum — using last term"
+          math="S_n = \dfrac{n}{2}\left(u_1 + u_n\right)"
+        />
+        <FormulaRow
+          label="Sigma notation"
+          math="\sum_{k=1}^{n}u_k = u_1 + u_2 + \cdots + u_n"
+        />
+      </FormulaBox>
+
+      {/* Visual: step-flow */}
+      <div className="bg-white border border-slate-200 rounded-xl p-5 my-5 overflow-x-auto">
+        <p className="text-xs font-bold uppercase tracking-wider text-ai-primary mb-4">
+          Add the same d each step — e.g. 7, 11, 15, 19, …
+        </p>
+        <div className="flex items-center gap-2 min-w-max">
+          {["7", "11", "15", "19", "23"].map((t, i) => (
+            <div key={t} className="flex items-center gap-2">
+              <span className="w-14 h-12 rounded-lg bg-navy-900 text-white font-mono font-semibold flex items-center justify-center">
+                {t}
+              </span>
+              {i < 4 && (
+                <span className="text-xs font-bold text-ai-primary bg-ai-bg rounded-full px-2 py-1">
+                  +4 →
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+        <p className="text-xs text-slate-400 mt-3">
+          <InlineMath math="u_1 = 7,\; d = 4" /> — a straight-line pattern:
+          the terms change by a constant amount, never by a constant factor.
+        </p>
+      </div>
+
+      <HighlightBox variant="yellow">
+        <p className="font-semibold text-navy-900 mb-2">Which formula? Finding n?</p>
+        <ul className="list-disc pl-5 text-slate-500 text-sm space-y-1">
+          <li>
+            Know <InlineMath math="u_1" /> and <InlineMath math="d" /> → use{" "}
+            <InlineMath math="u_n = u_1+(n-1)d" /> for a term and the first
+            sum formula for a total.
+          </li>
+          <li>
+            Know the last term → use{" "}
+            <InlineMath math="S_n=\frac{n}{2}(u_1+u_n)" />.
+          </li>
+          <li>
+            Two terms given (e.g. <InlineMath math="u_3" /> and{" "}
+            <InlineMath math="u_8" />) → subtract them:{" "}
+            <InlineMath math="u_8-u_3 = 5d" />.
+          </li>
+          <li>
+            &ldquo;Find <InlineMath math="n" /> such that…&rdquo; → solve{" "}
+            <InlineMath math="u_n = \text{value}" /> directly, or tabulate{" "}
+            <InlineMath math="S_n" /> on the GDC for an inequality.
+          </li>
+        </ul>
+      </HighlightBox>
+
+      <WorkedExample title="nth term and finding n: 3, 8, 13, 18, …">
+        <StepBox n={1}>
+          <InlineMath math="u_1 = 3" />, <InlineMath math="d = 8-3 = 5" />. The
+          25th term:
+          <BlockMath math="u_{25} = 3 + 24(5) = \boxed{123}" />
+        </StepBox>
+        <StepBox n={2}>
+          Which term equals 188?
+          <BlockMath math="3 + 5(n-1) = 188 \;\Rightarrow\; n-1 = 37 \;\Rightarrow\; n = \boxed{38}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Sum of the first 25 terms of 3, 8, 13, …">
+        <StepBox n={1}>
+          From above, <InlineMath math="u_1 = 3" /> and{" "}
+          <InlineMath math="u_{25} = 123" />.
+        </StepBox>
+        <StepBox n={2}>
+          <BlockMath math="S_{25} = \dfrac{25}{2}(3 + 123) = 12.5 \times 126 = \boxed{1575}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Two terms given: u₅ = 22 and u₁₂ = 57">
+        <StepBox n={1}>
+          <BlockMath math="u_{12} - u_5 = 7d = 35 \;\Rightarrow\; d = 5" />
+        </StepBox>
+        <StepBox n={2}>
+          <BlockMath math="u_1 = u_5 - 4d = 22 - 20 = \boxed{2}" />
+        </StepBox>
+        <StepBox n={3}>
+          <BlockMath math="S_{12} = \dfrac{12}{2}(2 + 57) = 6 \times 59 = \boxed{354}" />
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            The sequence <InlineMath math="100,\ 94,\ 88,\ \dots" /> is
+            arithmetic. Find <InlineMath math="u_{15}" /> and{" "}
+            <InlineMath math="S_{15}" />.
+          </>
+        }
+        answer={
+          <>
+            <p>
+              <InlineMath math="d = -6" />
+            </p>
+            <BlockMath math="u_{15} = 100 + 14(-6) = \boxed{16}" />
+            <BlockMath math="S_{15} = \dfrac{15}{2}(100+16) = \boxed{870}" />
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            Vanna saves $20 in week 1 and increases her saving by $5 each
+            week. How much has she saved in total after 30 weeks?
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="S_{30} = \dfrac{30}{2}\left(2(20) + 29(5)\right) = 15 \times 185 = \boxed{\$2{,}775}" />
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            For <InlineMath math="5,\ 9,\ 13,\ \dots" /> find the first term
+            that is greater than 200.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="5 + 4(n-1) > 200 \;\Rightarrow\; n-1 > 48.75 \;\Rightarrow\; n = 50" />
+            <p>
+              <InlineMath math="u_{50} = 5 + 49(4) = \boxed{201}" /> (and{" "}
+              <InlineMath math="u_{49} = 197" /> is too small).
+            </p>
+          </>
+        }
+      />
+
+      <ReviewPaperLink
+        href="/review/ai-sl/arithmetic"
+        label="Session 1 — Arithmetic Sequences and Series (6 questions)"
+      />
+    </LessonSection>
+  );
+}
+
+// ─── 4. Geometric Sequences & Series ──────────────────────────────────────────
+
+function GeometricSection() {
+  return (
+    <LessonSection
+      id="geometric"
+      label="Revision 2"
+      title="Geometric Sequences & Series"
+      tag={<SLTag />}
+      intro="A geometric sequence multiplies by the same number every step. Percentage growth and decay — populations, bouncing balls, compound interest, depreciation — are all geometric."
+      alt
+    >
+      <HighlightBox variant="green">
+        <p className="font-semibold text-navy-900 mb-1">Key Idea</p>
+        <p className="text-slate-500 text-sm">
+          Divide any term by the one before it. If you always get the same{" "}
+          <InlineMath math="r" />, the sequence is geometric. A{" "}
+          <InlineMath math="x\%" /> increase each step gives{" "}
+          <InlineMath math="r = 1 + \frac{x}{100}" />; a{" "}
+          <InlineMath math="x\%" /> decrease gives{" "}
+          <InlineMath math="r = 1 - \frac{x}{100}" />. This is exactly the
+          multiplier from the Percentages topic.
+        </p>
+      </HighlightBox>
+
+      <FormulaBox title="Geometric Sequence">
+        <FormulaRow label="Common ratio" math="r = \dfrac{u_{n+1}}{u_n}" />
+        <FormulaRow label="nth term" math="u_n = u_1\, r^{\,n-1}" />
+      </FormulaBox>
+
+      <FormulaBox title="Geometric Series (sum of n terms)">
+        <FormulaRow
+          label="Sum (r > 1)"
+          math="S_n = \dfrac{u_1\left(r^n - 1\right)}{r - 1}"
+        />
+        <FormulaRow
+          label="Sum (r < 1)"
+          math="S_n = \dfrac{u_1\left(1 - r^n\right)}{1 - r}"
+        />
+        <FormulaRow label="Valid for" math="r \neq 1" />
+      </FormulaBox>
+
+      {/* Visual: AP vs GP */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+        <div className="bg-white border border-slate-200 rounded-xl p-5">
+          <p className="text-xs font-bold uppercase tracking-wider text-ai-primary mb-2">
+            Arithmetic — add d
+          </p>
+          <p className="font-mono text-navy-900 font-semibold">
+            3, 8, 13, 18, 23, …
+          </p>
+          <p className="text-xs text-slate-400 mt-2">Straight-line growth</p>
+        </div>
+        <div className="bg-white border border-slate-200 rounded-xl p-5">
+          <p className="text-xs font-bold uppercase tracking-wider text-ai-primary mb-2">
+            Geometric — multiply by r
+          </p>
+          <p className="font-mono text-navy-900 font-semibold">
+            3, 6, 12, 24, 48, …
+          </p>
+          <p className="text-xs text-slate-400 mt-2">
+            Exponential growth (<InlineMath math="r = 2" />)
+          </p>
+        </div>
+      </div>
+
+      <HighlightBox variant="yellow">
+        <p className="font-semibold text-navy-900 mb-2">
+          Watch the exponent: n − 1, not n
+        </p>
+        <p className="text-slate-500 text-sm">
+          The first term has had <em>no</em> multiplications yet, so{" "}
+          <InlineMath math="u_1 = u_1 r^0" />. In a bounce problem, though,
+          &ldquo;height after the 4th bounce&rdquo; starts from the drop
+          height: <InlineMath math="3 \times 0.8^4" />. Always ask: how many
+          times has the multiplier been applied? To find{" "}
+          <InlineMath math="n" /> in <InlineMath math="r^n > k" />, use the
+          GDC table/solver or logarithms:{" "}
+          <InlineMath math="n > \dfrac{\ln k}{\ln r}" />.
+        </p>
+      </HighlightBox>
+
+      <WorkedExample title="nth term: 2, 6, 18, 54, …">
+        <StepBox n={1}>
+          <InlineMath math="r = 6 \div 2 = 3" />
+        </StepBox>
+        <StepBox n={2}>
+          <BlockMath math="u_7 = 2(3)^6 = 2 \times 729 = \boxed{1458}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Sum with r < 1: 81, 54, 36, …">
+        <StepBox n={1}>
+          <InlineMath math="r = 54 \div 81 = \frac{2}{3}" />
+        </StepBox>
+        <StepBox n={2}>
+          <BlockMath math="u_5 = 81\left(\tfrac{2}{3}\right)^4 = \boxed{16}" />
+        </StepBox>
+        <StepBox n={3}>
+          <BlockMath math="S_5 = \dfrac{81\left(1 - (2/3)^5\right)}{1 - 2/3} = 243 - 32 = \boxed{211}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Decay in context: a population of 2,400 falls by 5% each year">
+        <StepBox n={1}>
+          <InlineMath math="r = 1 - 0.05 = 0.95" />. After 8 years:
+          <BlockMath math="2400(0.95)^8 = \boxed{1592}" />
+        </StepBox>
+        <StepBox n={2}>
+          First year the population is below 1,500:
+          <BlockMath math="2400(0.95)^n < 1500 \;\Rightarrow\; n > \dfrac{\ln 0.625}{\ln 0.95} = 9.16" />
+        </StepBox>
+        <StepBox n={3}>
+          <InlineMath math="n = \boxed{10}" /> (check: 1,513 after 9 years,
+          1,437 after 10).
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            Find <InlineMath math="u_6" /> for{" "}
+            <InlineMath math="3,\ 12,\ 48,\ \dots" />
+          </>
+        }
+        answer={
+          <>
+            <p>
+              <InlineMath math="r = 4" />
+            </p>
+            <BlockMath math="u_6 = 3(4)^5 = \boxed{3072}" />
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            A geometric sequence has <InlineMath math="u_1 = 6" /> and{" "}
+            <InlineMath math="r = 2" />. Find <InlineMath math="S_9" />.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="S_9 = \dfrac{6(2^9 - 1)}{2-1} = 6 \times 511 = \boxed{3066}" />
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            A town of 15,000 people grows by 2.5% per year. Find the
+            population after 10 years, to the nearest whole number.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="15000(1.025)^{10} = \boxed{19\,201}" />
+          </>
+        }
+      />
+
+      <ReviewPaperLink
+        href="/review/ai-sl/geometric"
+        label="Session 2 — Geometric Sequences and Series (6 questions)"
+      />
+    </LessonSection>
+  );
+}
+
+// ─── 5. Rounding ──────────────────────────────────────────────────────────────
+
+function RoundingSection() {
+  return (
+    <LessonSection
+      id="rounding"
+      label="Revision 4"
+      title="Rounding & Estimation"
+      tag={<SLTag />}
+      intro="Rounding shows how precise a value is. In IB exams the default is 3 significant figures unless the question says otherwise — and you must never round in the middle of a calculation."
+    >
+      <HighlightBox variant="green">
+        <p className="font-semibold text-navy-900 mb-1">Key Idea</p>
+        <p className="text-slate-500 text-sm">
+          Find the place you are rounding to, then look at the digit{" "}
+          <strong>immediately to its right</strong>. If it is{" "}
+          <strong>5 or more</strong>, round up; if it is{" "}
+          <strong>4 or less</strong>, leave the digit as it is. Place-value
+          zeros are kept (<InlineMath math="5972 \to 6000" />).
+        </p>
+      </HighlightBox>
+
+      <FormulaBox title="Rounding & Standard Form">
+        <FormulaRow
+          label="Decimal places (d.p.)"
+          math="\text{count digits after the decimal point}"
+        />
+        <FormulaRow
+          label="Significant figures (s.f.)"
+          math="\text{count from the first non-zero digit}"
+        />
+        <FormulaRow
+          label="Standard form"
+          math="a \times 10^{k},\quad 1 \le a < 10,\; k \in \mathbb{Z}"
+        />
+        <FormulaRow
+          label="Multiply"
+          math="(a\times10^m)(b\times10^n) = ab \times 10^{m+n}"
+        />
+        <FormulaRow
+          label="Divide"
+          math="\dfrac{a\times10^m}{b\times10^n} = \dfrac{a}{b} \times 10^{m-n}"
+        />
+      </FormulaBox>
+
+      {/* Visual: significant-figure table */}
+      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden my-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-ai-primary px-6 pt-5 pb-3">
+          Which digits are significant?
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left border-collapse">
+            <thead>
+              <tr className="bg-navy-900 text-white">
+                <th className="px-5 py-3 font-semibold">Number</th>
+                <th className="px-5 py-3 font-semibold">Significant digits</th>
+                <th className="px-5 py-3 font-semibold">To 2 s.f.</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { n: "0.004068", d: "4, 0, 6, 8 (leading zeros don't count)", r: "0.0041" },
+                { n: "5972", d: "5, 9, 7, 2", r: "6000" },
+                { n: "30.07", d: "3, 0, 0, 7 (zeros between count)", r: "30" },
+                { n: "2.50", d: "2, 5, 0 (trailing zero after the point counts)", r: "2.5" },
+              ].map(({ n, d, r }, i) => (
+                <tr key={n} className={i % 2 === 0 ? "bg-ai-bg" : "bg-white"}>
+                  <td className="px-5 py-3 font-mono font-semibold text-ai-primary">{n}</td>
+                  <td className="px-5 py-3 text-navy-900">{d}</td>
+                  <td className="px-5 py-3 font-mono text-slate-500">{r}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <HighlightBox variant="yellow">
+        <p className="font-semibold text-navy-900 mb-2">
+          Never round early — and round the right way for the context
+        </p>
+        <ul className="list-disc pl-5 text-slate-500 text-sm space-y-1">
+          <li>
+            Keep full GDC values (use the <em>Ans</em>/memory keys) and round
+            only the final answer. Rounding the multiplier{" "}
+            <InlineMath math="1.0375" /> to <InlineMath math="1.04" /> before
+            raising it to the 8th power changes a $2,000 investment by about
+            $52.
+          </li>
+          <li>
+            Money: 2 decimal places. Otherwise 3 s.f. unless told otherwise.
+          </li>
+          <li>
+            Things you can only buy whole (packs, buses, boxes): round{" "}
+            <strong>up</strong> — 14.96 packs means 15 packs.
+          </li>
+        </ul>
+      </HighlightBox>
+
+      <WorkedExample title="Round 3.14159 to 3 d.p. and to 3 s.f.">
+        <StepBox n={1}>
+          3 d.p.: the 4th decimal is 5 → round up:{" "}
+          <InlineMath math="\boxed{3.142}" />
+        </StepBox>
+        <StepBox n={2}>
+          3 s.f.: the digits are 3, 1, 4 and the next digit is 1 → stay:{" "}
+          <InlineMath math="\boxed{3.14}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Zeros: round 0.007049 to 2 s.f.">
+        <StepBox n={1}>
+          Significant digits start at the 7: <InlineMath math="7,\,0,\,4,\,9" />.
+        </StepBox>
+        <StepBox n={2}>
+          The 3rd s.f. is 4 → stay. Keep the zero:{" "}
+          <InlineMath math="\boxed{0.0070}" /> — the trailing zero shows 2 s.f.
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Standard form">
+        <StepBox n={1}>
+          <InlineMath math="0.000508 = \boxed{5.08 \times 10^{-4}}" />
+        </StepBox>
+        <StepBox n={2}>
+          <InlineMath math="(2.5\times10^4)(6\times10^3) = 15 \times 10^{7}" />, but{" "}
+          <InlineMath math="a" /> must be below 10:
+          <BlockMath math="15 \times 10^7 = \boxed{1.5 \times 10^{8}}" />
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            Round <InlineMath math="28\,965" /> to 2 s.f. and{" "}
+            <InlineMath math="7.996" /> to 2 d.p.
+          </>
+        }
+        answer={
+          <>
+            <p>
+              <InlineMath math="28\,965 \to \boxed{29\,000}" />
+            </p>
+            <p>
+              <InlineMath math="7.996 \to \boxed{8.00}" /> (keep both decimal
+              places).
+            </p>
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            Write <InlineMath math="0.0000372" /> and{" "}
+            <InlineMath math="83\,000\,000\,000" /> in standard form.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="0.0000372 = \boxed{3.72\times10^{-5}}" />
+            <BlockMath math="83\,000\,000\,000 = \boxed{8.3\times10^{10}}" />
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            Calculate{" "}
+            <InlineMath math="\dfrac{2.4\times10^{6}}{8\times10^{-2}}" /> in
+            standard form.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="\dfrac{2.4}{8} \times 10^{6-(-2)} = 0.3 \times 10^{8} = \boxed{3\times10^{7}}" />
+          </>
+        }
+      />
+
+      <ReviewPaperLink
+        href="/review/ai-sl/rounding"
+        label="Session 4 — Rounding (6 questions)"
+      />
+    </LessonSection>
+  );
+}
+
+// ─── 6. Upper & Lower Bounds ──────────────────────────────────────────────────
+
+function BoundsSection() {
+  return (
+    <LessonSection
+      id="bounds"
+      label="Revision 5"
+      title="Upper & Lower Bounds"
+      tag={<SLTag />}
+      intro="A rounded measurement is not one exact number — it stands for a whole interval of true values. Bounds describe that interval, and they let you decide how many figures of a calculated answer you can honestly trust."
+      alt
+    >
+      <HighlightBox variant="green">
+        <p className="font-semibold text-navy-900 mb-1">Key Idea</p>
+        <p className="text-slate-500 text-sm">
+          If a value is rounded to a given accuracy, the true value is within{" "}
+          <strong>half a unit</strong> of that accuracy either side. 8 cm to
+          the nearest cm means{" "}
+          <InlineMath math="7.5 \le x < 8.5" />. The lower bound is{" "}
+          <em>included</em>; the upper bound is the first value that would round
+          up, so it is <em>not</em> included.
+        </p>
+      </HighlightBox>
+
+      <FormulaBox title="Finding the Bounds">
+        <FormulaRow
+          label="Rule"
+          math="\text{lower} = x - \tfrac{1}{2}\text{unit}, \quad \text{upper} = x + \tfrac{1}{2}\text{unit}"
+        />
+        <FormulaRow
+          label="Inequality form"
+          math="\text{lower bound} \le x < \text{upper bound}"
+        />
+      </FormulaBox>
+
+      <FormulaBox title="Bounds of a Calculation">
+        <FormulaRow label="Sum  a + b" math="\text{upper: } a_U + b_U \qquad \text{lower: } a_L + b_L" />
+        <FormulaRow label="Difference  a − b" math="\text{upper: } a_U - b_L \qquad \text{lower: } a_L - b_U" />
+        <FormulaRow label="Product  a × b" math="\text{upper: } a_U \times b_U \qquad \text{lower: } a_L \times b_L" />
+        <FormulaRow label="Quotient  a ÷ b" math="\text{upper: } a_U \div b_L \qquad \text{lower: } a_L \div b_U" />
+      </FormulaBox>
+
+      {/* Visual: number line */}
+      <div className="bg-white border border-slate-200 rounded-xl p-5 my-5 overflow-x-auto">
+        <p className="text-xs font-bold uppercase tracking-wider text-ai-primary mb-4">
+          8 cm to the nearest cm
+        </p>
+        <div className="relative min-w-[420px] h-16">
+          <div className="absolute left-4 right-4 top-6 h-1 bg-slate-200 rounded" />
+          <div className="absolute left-[22%] right-[22%] top-5 h-3 bg-ai-light rounded" />
+          <div className="absolute left-[22%] top-3 w-3 h-3 rounded-full bg-ai-primary -translate-x-1/2" />
+          <div className="absolute right-[22%] top-3 w-3 h-3 rounded-full border-2 border-ai-primary bg-white translate-x-1/2" />
+          <span className="absolute left-[22%] top-12 -translate-x-1/2 text-xs font-mono text-navy-900">7.5 (included)</span>
+          <span className="absolute left-1/2 top-12 -translate-x-1/2 text-xs font-mono font-bold text-ai-primary">8</span>
+          <span className="absolute right-[22%] top-12 translate-x-1/2 text-xs font-mono text-navy-900">8.5 (not included)</span>
+        </div>
+      </div>
+
+      <HighlightBox variant="yellow">
+        <p className="font-semibold text-navy-900 mb-2">
+          Significant figures → find the last digit&apos;s place value
+        </p>
+        <p className="text-slate-500 text-sm">
+          <InlineMath math="350" /> to 2 s.f. is accurate to the{" "}
+          <em>nearest 10</em>, so <InlineMath math="345 \le x < 355" />.{" "}
+          <InlineMath math="0.0072" /> to 2 s.f. is accurate to the 4th decimal
+          place, so <InlineMath math="0.00715 \le x < 0.00725" />.
+          &ldquo;Nearest 5 kg&rdquo; means half of 5 = 2.5 either side.
+        </p>
+      </HighlightBox>
+
+      <HighlightBox variant="blue">
+        <p className="font-semibold text-navy-900 mb-2">
+          Justified accuracy — the final step in exam questions
+        </p>
+        <p className="text-slate-500 text-sm">
+          Round the lower and upper bound of the <em>answer</em> to the same
+          number of significant figures. The greatest accuracy at which{" "}
+          <strong>both agree</strong> is the accuracy you can give for the
+          answer. If they disagree at 3 s.f. but agree at 2 s.f., the answer is
+          quoted to 2 s.f.
+        </p>
+      </HighlightBox>
+
+      <WorkedExample title="State the bounds">
+        <StepBox n={1}>
+          A time of 6.8 s to 1 d.p.:{" "}
+          <InlineMath math="6.75 \le t < 6.85" />
+        </StepBox>
+        <StepBox n={2}>
+          A crowd of 1200 to the nearest 100:{" "}
+          <InlineMath math="1150 \le N < 1250" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Product with justified accuracy: A = 8.4, B = 3.2 (both 1 d.p.)">
+        <StepBox n={1}>
+          <InlineMath math="8.35 \le A < 8.45" /> and{" "}
+          <InlineMath math="3.15 \le B < 3.25" />
+        </StepBox>
+        <StepBox n={2}>
+          <BlockMath math="\text{lower} = 8.35 \times 3.15 = 26.3025 \qquad \text{upper} = 8.45 \times 3.25 = 27.4625" />
+        </StepBox>
+        <StepBox n={3}>
+          2 s.f.: 26 and 27 — disagree. 1 s.f.: 30 and 30 — agree. So{" "}
+          <InlineMath math="AB = \boxed{30}" /> (1 s.f.).
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Quotient: speed = 45 km (nearest km) ÷ 3.6 h (1 d.p.)">
+        <StepBox n={1}>
+          <InlineMath math="44.5 \le d < 45.5" />,{" "}
+          <InlineMath math="3.55 \le t < 3.65" />
+        </StepBox>
+        <StepBox n={2}>
+          Largest speed = largest distance ÷ smallest time; smallest speed =
+          smallest ÷ largest:
+          <BlockMath math="\text{upper} = \dfrac{45.5}{3.55} = 12.82 \qquad \text{lower} = \dfrac{44.5}{3.65} = 12.19" />
+        </StepBox>
+        <StepBox n={3}>
+          Both round to 10 at 1 s.f.; at 2 s.f. they are 13 and 12. So the
+          speed is <InlineMath math="\boxed{10\text{ km/h}}" /> (1 s.f.).
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            Write the bounds for a mass of 250 g to 2 s.f., and for a time of
+            6.8 s to 1 d.p.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="245 \le m < 255" />
+            <BlockMath math="6.75 \le t < 6.85" />
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            <InlineMath math="a = 12" /> and <InlineMath math="b = 5" />, both
+            to the nearest integer. Find the greatest and least possible value
+            of <InlineMath math="a - b" />.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="\text{greatest} = 12.5 - 4.5 = \boxed{8}" />
+            <BlockMath math="\text{least} = 11.5 - 5.5 = \boxed{6}" />
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            A square has side 9.5 cm to 1 d.p. Find the bounds of its area and
+            state the area to a justified accuracy.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="9.45^2 = 89.3025 \qquad 9.55^2 = 91.2025" />
+            <p>
+              2 s.f.: 89 vs 91 — disagree. 1 s.f.: 90 and 90 — agree.
+            </p>
+            <BlockMath math="\text{Area} = \boxed{90\ \text{cm}^2\ (1\text{ s.f.})}" />
+          </>
+        }
+      />
+
+      <ReviewPaperLink
+        href="/review/ai-sl/bounds"
+        label="Session 5 — Upper and Lower Bounds (6 questions)"
+      />
+    </LessonSection>
+  );
+}
+
+// ─── 7. Percentage Error ──────────────────────────────────────────────────────
+
+function PercentageErrorSection() {
+  return (
+    <LessonSection
+      id="percentage-error"
+      label="Revision 6"
+      title="Percentage Error"
+      tag={<SLTag />}
+      intro="Percentage error measures how far an approximate or measured value is from the true value, as a percentage of the true value. It is how we judge whether an estimate, a measurement or a rounding was good enough."
+    >
+      <HighlightBox variant="green">
+        <p className="font-semibold text-navy-900 mb-1">Key Idea</p>
+        <p className="text-slate-500 text-sm">
+          Always divide by the <strong>exact (true) value</strong>, not the
+          approximate one. The absolute value bars mean the answer is never
+          negative — percentage error says how big the mistake is, not which
+          way.
+        </p>
+      </HighlightBox>
+
+      <FormulaBox title="Percentage Error">
+        <FormulaRow
+          label="Percentage error"
+          math="\varepsilon = \left|\dfrac{v_A - v_E}{v_E}\right| \times 100\%"
+        />
+        <FormulaRow label="v_A" math="v_A = \text{approximate (measured) value}" />
+        <FormulaRow label="v_E" math="v_E = \text{exact (true) value}" />
+        <FormulaRow
+          label="Find v_E from ε"
+          math="v_E = \dfrac{v_A}{1 \pm \varepsilon/100}\quad(\text{two possible values})"
+        />
+      </FormulaBox>
+
+      <HighlightBox variant="yellow">
+        <p className="font-semibold text-navy-900 mb-2">
+          Two links to earlier topics
+        </p>
+        <ul className="list-disc pl-5 text-slate-500 text-sm space-y-1">
+          <li>
+            <strong>Rounding:</strong> percentage error tells you the effect of
+            rounding early (e.g. 1.94% when 1.0375 is rounded to 1.04 before
+            raising to the 8th power).
+          </li>
+          <li>
+            <strong>Bounds:</strong> to find the greatest possible percentage
+            error of a measurement, use the bound <em>closest to zero</em> as{" "}
+            <InlineMath math="v_E" /> — a smaller true value gives a larger
+            percentage.
+          </li>
+        </ul>
+      </HighlightBox>
+
+      <WorkedExample title="Direct percentage error">
+        <p className="text-sm text-slate-500 mb-4">
+          A table is measured as 2.4 m but its true length is 2.5 m.
+        </p>
+        <StepBox n={1}>
+          <BlockMath math="\varepsilon = \left|\dfrac{2.4 - 2.5}{2.5}\right| \times 100 = \boxed{4\%}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Greatest possible error from bounds">
+        <p className="text-sm text-slate-500 mb-4">
+          A rod is measured as 20 cm to the nearest cm. Find the greatest
+          possible percentage error in this measurement.
+        </p>
+        <StepBox n={1}>
+          True length is between 19.5 and 20.5.
+        </StepBox>
+        <StepBox n={2}>
+          <BlockMath math="\dfrac{|20 - 19.5|}{19.5} = 2.56\% \qquad \dfrac{|20 - 20.5|}{20.5} = 2.44\%" />
+        </StepBox>
+        <StepBox n={3}>
+          Greatest percentage error: <InlineMath math="\boxed{2.56\%}" />.
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Working backwards: v_A = 80, error 5%">
+        <p className="text-sm text-slate-500 mb-4">
+          A reading of 80 has a 5% error. Find the possible true values.
+        </p>
+        <StepBox n={1}>
+          <BlockMath math="\dfrac{|80 - v_E|}{v_E} = 0.05" />
+        </StepBox>
+        <StepBox n={2}>
+          Reading too high: <InlineMath math="v_E = \dfrac{80}{1.05} = 76.2" />.
+          Reading too low: <InlineMath math="v_E = \dfrac{80}{0.95} = 84.2" />.
+        </StepBox>
+      </WorkedExample>
+
+      <Practice
+        problem={
+          <>
+            An estimate is 3.2 m; the exact length is 3.0 m. Find the
+            percentage error to 3 s.f.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="\dfrac{0.2}{3.0} \times 100 = \boxed{6.67\%}" />
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            A man&apos;s mass is estimated as 70 kg; it is actually 72 kg. Find
+            the percentage error to 3 s.f.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="\dfrac{|70-72|}{72}\times100 = \boxed{2.78\%}" />
+            <p>Divide by the exact value 72, not the estimate 70.</p>
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            The exact value is 250 and the percentage error in an estimate is
+            6%. Find the two possible estimates.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="250 \times 0.06 = 15 \;\Rightarrow\; \boxed{235 \text{ or } 265}" />
+          </>
+        }
+      />
+
+      <ReviewPaperLink
+        href="/review/ai-sl/percentage-error"
+        label="Session 6 — Percentage Error (6 questions)"
+      />
+    </LessonSection>
+  );
+}
+
 // ─── More topics in progress ───────────────────────────────────────────────────
 
 function ComingSoonCard() {
   const upcoming = [
     "Exponents & Logarithms",
     "Rearranging Formulas",
-    "Sequences",
   ];
   const upcomingHL = [
     "Advanced Financial Models",
@@ -777,8 +1769,9 @@ function ComingSoonCard() {
           More topics are in progress
         </h2>
         <p className="text-sm text-slate-500 max-w-2xl mb-5">
-          This lesson currently covers Percentages and Financial
-          Mathematics. The remaining Unit 1 topics are being written next.
+          This lesson covers Percentages, Financial Mathematics, Sequences &
+          Series, Rounding, Bounds and Percentage Error. The remaining Unit 1
+          topics are being written next.
         </p>
         <div className="flex flex-wrap gap-2">
           {upcoming.map((t) => (
@@ -834,6 +1827,30 @@ function UnitSummary() {
                 "FV = PV\\left(1-\\dfrac{r}{100}\\right)^{n} \\text{ (depreciation)}",
               ],
             },
+            {
+              title: "Arithmetic Sequences & Series",
+              formulas: [
+                "u_n = u_1 + (n-1)d",
+                "S_n = \\dfrac{n}{2}\\left(2u_1 + (n-1)d\\right)",
+                "S_n = \\dfrac{n}{2}(u_1 + u_n)",
+              ],
+            },
+            {
+              title: "Geometric Sequences & Series",
+              formulas: [
+                "u_n = u_1 r^{n-1}",
+                "S_n = \\dfrac{u_1(r^n-1)}{r-1}",
+                "r = 1 \\pm \\tfrac{x}{100} \\text{ (x\\% change)}",
+              ],
+            },
+            {
+              title: "Rounding & Bounds",
+              formulas: [
+                "a \\times 10^{k},\\; 1 \\le a < 10",
+                "\\text{bounds} = x \\pm \\tfrac{1}{2}\\text{unit}",
+                "\\text{upper}(a \\div b) = a_U \\div b_L",
+              ],
+            },
           ].map(({ title, formulas }) => (
             <div
               key={title}
@@ -867,9 +1884,12 @@ function UnitSummary() {
           >
             Back to top ↑
           </Link>
-          <span className="text-sm text-slate-400 italic">
-            Practice Problems — coming soon
-          </span>
+          <Link
+            href="/review"
+            className="text-sm font-semibold text-ai-primary hover:underline"
+          >
+            Revision Papers (Q&amp;A) →
+          </Link>
         </div>
       </div>
     </section>
@@ -889,6 +1909,14 @@ export default function Page() {
       {/* SL Topics (Unit 1, part 1 of 5 — Percentages & Financial Mathematics) */}
       <PercentagesSection />
       <FinancialMathSection />
+
+      {/* Summative assessment revision: sequences, rounding, bounds, % error */}
+      <RevisionPlan />
+      <ArithmeticSection />
+      <GeometricSection />
+      <RoundingSection />
+      <BoundsSection />
+      <PercentageErrorSection />
 
       <ComingSoonCard />
       <UnitSummary />
