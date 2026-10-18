@@ -2,178 +2,220 @@ import type { AiReviewPaper } from "./types";
 
 const m = String.raw;
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// Session 2 — Geometric Sequences & Series
-// ═══════════════════════════════════════════════════════════════════════════════
+// Session 2: Geometric Sequences & Series (IB paper style, 45 marks)
 
 const paper: AiReviewPaper = {
   slug: "geometric",
   session: 2,
   topic: "Geometric Sequences & Series",
   title: "Geometric Sequences and Series",
-  subtitle: "Summative Revision — Session 2",
+  subtitle: "Summative Revision, Session 2",
   minutes: 50,
   lessonAnchor: "geometric",
   questions: [
     {
       n: 1,
-      ctx: [m`The first three terms of a geometric sequence are \(5,\ 15,\ 45,\ \dots\)`],
+      section: "A",
+      instruction: "Give all answers correct to the nearest whole number.",
+      ctx: ["A new website records the number of visitors each week. The numbers for the first three weeks follow a geometric sequence."],
+      table: {
+        head: ["Week", "1", "2", "3"],
+        rows: [["Visitors", "400", "460", "529"]],
+      },
       parts: [
         {
-          l: "a", marks: 1, q: "Write down the common ratio.", lines: 1, restate: "Common ratio",
-          steps: [m`\[r = \dfrac{15}{5} = 3\]`],
-          final: "r = 3",
+          l: "a", marks: 2, q: "Show that the common ratio of the sequence is 1.15.", lines: 2, restate: "Common ratio",
+          steps: [m`\[\dfrac{460}{400} = 1.15 \qquad \dfrac{529}{460} = 1.15\]`, "The ratios are equal, so r = 1.15."],
+          final: "r = 1.15",
+          note: "Marks: (M1) one ratio of consecutive terms, (A1) both ratios equal 1.15.",
         },
         {
-          l: "b", marks: 2, q: m`Find the 8th term, \(u_8\).`, restate: "8th term",
-          steps: [m`\[u_n = u_1 r^{\,n-1} \;\Rightarrow\; u_8 = 5(3)^7 = 5 \times 2187 = 10\,935\]`],
-          final: "u₈ = 10 935",
+          l: "b", marks: 2, q: "Find the number of visitors in week 10.", restate: "Visitors in week 10",
+          steps: [m`\[u_n = u_1 r^{\,n-1} \;\Rightarrow\; u_{10} = 400(1.15)^9 = 1407.15\ldots\]`],
+          final: "1407 visitors",
+          note: "Marks: (M1) 400(1.15)^9, (A1) 1407.",
         },
         {
-          l: "c", marks: 3, q: "Find the first term of the sequence that is greater than 1 000 000.", lines: 4, restate: "First term above 10⁶",
-          steps: [
-            m`\[5(3)^{n-1} > 1\,000\,000 \;\Rightarrow\; 3^{n-1} > 200\,000\]`,
-            "Use the GDC (table or solver) — or take logarithms:",
-            m`\[n - 1 > \dfrac{\ln 200\,000}{\ln 3} = 11.1 \;\Rightarrow\; n - 1 = 12 \;\Rightarrow\; n = 13\]`,
-            m`\[u_{13} = 5(3)^{12} = 2\,657\,205\]`,
-          ],
-          final: "u₁₃ = 2 657 205",
-          note: "Check: u₁₂ = 885 735 is below 1 000 000, so u₁₃ is the first term above it.",
+          l: "c", marks: 2, q: "Calculate the total number of visitors in the first 10 weeks.", restate: "Total, 10 weeks",
+          steps: [m`\[S_n = \dfrac{u_1(r^n - 1)}{r - 1} \;\Rightarrow\; S_{10} = \dfrac{400(1.15^{10} - 1)}{1.15 - 1} = 8121.49\ldots\]`],
+          final: "8121 visitors",
+          note: "Marks: (M1) substitution into S_n, (A1) 8121.",
         },
       ],
     },
     {
       n: 2,
-      ctx: [m`A geometric sequence has \(u_2 = 12\) and \(u_5 = 96\).`],
+      section: "A",
+      ctx: [m`A geometric sequence has third term \(u_3 = 18\) and sixth term \(u_6 = 486\).`],
       parts: [
         {
           l: "a", marks: 3, q: m`Find the common ratio \(r\) and the first term \(u_1\).`, restate: "r and u₁",
           steps: [
-            m`\[\dfrac{u_5}{u_2} = r^3 = \dfrac{96}{12} = 8 \;\Rightarrow\; r = 2\]`,
-            m`\[u_1 = \dfrac{u_2}{r} = \dfrac{12}{2} = 6\]`,
+            m`\[\dfrac{u_6}{u_3} = r^3 = \dfrac{486}{18} = 27 \;\Rightarrow\; r = 3\]`,
+            m`\[u_1 = \dfrac{u_3}{r^2} = \dfrac{18}{9} = 2\]`,
           ],
-          final: "r = 2, u₁ = 6",
+          final: "r = 3, u₁ = 2",
+          note: "Marks: (M1) r^3 = 486/18, (A1) r = 3, (A1) u₁ = 2.",
         },
         {
-          l: "b", marks: 2, q: m`Find \(S_{10}\).`, restate: "S₁₀",
-          steps: [
-            m`\[S_n = \dfrac{u_1(r^n - 1)}{r - 1} \;\Rightarrow\; S_{10} = \dfrac{6(2^{10} - 1)}{2 - 1} = 6 \times 1023 = 6138\]`,
-          ],
-          final: "S₁₀ = 6138",
+          l: "b", marks: 1, q: m`Find \(u_{12}\). Give your answer in the form \(a \times 10^k\), where \(1 \le a < 10\) and \(k \in \mathbb{Z}\).`, lines: 2, restate: "u₁₂",
+          steps: [m`\[u_{12} = 2(3)^{11} = 354\,294 = 3.54 \times 10^{5}\]`],
+          final: "3.54 × 10⁵",
+          note: "Marks: (A1) 3.54 × 10^5 (3 s.f.).",
         },
         {
-          l: "c", marks: 2, q: m`Find the least \(n\) for which \(S_n > 10\,000\).`, restate: "Least n",
+          l: "c", marks: 2, q: m`Find the smallest value of \(n\) for which \(u_n > 10^7\).`, restate: "Smallest n",
           steps: [
-            m`\[6(2^n - 1) > 10\,000 \;\Rightarrow\; 2^n > 1667.7\]`,
-            m`\[2^{10} = 1024 \;(\text{too small}), \qquad 2^{11} = 2048 \;\checkmark\]`,
+            m`\[2(3)^{n-1} > 10^7 \;\Rightarrow\; 3^{n-1} > 5\,000\,000\]`,
+            m`Table on the GDC: \(u_{15} = 9\,565\,938 < 10^7\) and \(u_{16} = 28\,697\,814 > 10^7\).`,
           ],
-          final: "n = 11",
+          final: "n = 16",
+          note: "Marks: (M1) inequality or table of values, (A1) 16.",
         },
       ],
     },
     {
       n: 3,
+      section: "A",
+      instruction: "Give all answers in mg, correct to two decimal places where necessary.",
       ctx: [
-        "A ball is dropped from a height of 3.0 m. After each bounce it rises to 80% of the height of the previous bounce.",
+        "Mr Dara takes a 250 mg tablet every 8 hours. Just before each new tablet, 30% of the previous amount of the drug is still in his body.",
+        "Let \\(A_n\\) be the amount of the drug in his body immediately after taking the \\(n\\)th tablet.",
       ],
       parts: [
         {
-          l: "a", marks: 2, q: "Find the height reached after the 4th bounce, to 3 significant figures.", restate: "Height after bounce 4",
-          steps: [
-            m`The heights after each bounce form a geometric sequence with \(r = 0.8\).`,
-            m`\[3.0 \times 0.8^4 = 1.2288 \approx 1.23\ \text{m}\]`,
-          ],
-          final: "1.23 m",
+          l: "a", marks: 1, q: m`Write down \(A_1\) and find \(A_2\).`, lines: 2, restate: "A₁ and A₂",
+          steps: [m`\[A_1 = 250 \qquad A_2 = 0.3(250) + 250 = 325\]`],
+          final: "A₁ = 250, A₂ = 325",
+          note: "Marks: (A1) 325.",
         },
         {
-          l: "b", marks: 3, q: "After which bounce does the ball first rise to a height of less than 0.5 m?", lines: 4, restate: "First bounce below 0.5 m",
-          steps: [
-            m`\[3(0.8)^n < 0.5 \;\Rightarrow\; 0.8^n < 0.1667\]`,
-            m`\[n > \dfrac{\ln(0.1667)}{\ln(0.8)} = 8.03 \;\Rightarrow\; n = 9\]`,
-          ],
-          final: "After the 9th bounce",
-          note: "Check: after bounce 8 the height is 0.503 m (still above 0.5); after bounce 9 it is 0.403 m.",
+          l: "b", marks: 2, q: m`Show that \(A_3 = 347.5\).`, lines: 2, restate: "A₃",
+          steps: [m`\[A_3 = 0.3(325) + 250 = 97.5 + 250 = 347.5\]`, m`\[\text{or } A_3 = 250(1 + 0.3 + 0.3^2) = 250(1.39) = 347.5\]`],
+          final: "A₃ = 347.5",
+          note: "Marks: (M1) 0.3 × 325 + 250, (A1) 347.5 shown.",
         },
         {
-          l: "c", marks: 3, q: "Find the sum of the heights reached after the first 6 bounces.", restate: "Sum of 6 bounce heights",
+          l: "c", marks: 2, q: m`The amounts \(A_n = 250\left(1 + 0.3 + 0.3^2 + \dots + 0.3^{n-1}\right)\) form a geometric series. Find \(A_6\).`, restate: "A₆",
+          steps: [m`\[A_6 = \dfrac{250(1 - 0.3^6)}{1 - 0.3} = \dfrac{250(0.999271)}{0.7} = 356.8825\]`],
+          final: "356.88 mg",
+          note: "Marks: (M1) S₆ with u₁ = 250, r = 0.3, (A1) 356.88.",
+        },
+        {
+          l: "d", marks: 2, q: m`Find the least number of tablets after which \(A_n\) exceeds 355 mg.`, restate: "Least n",
           steps: [
-            m`First bounce height \(u_1 = 3(0.8) = 2.4\), \(r = 0.8\), \(n = 6\):`,
-            m`\[S_6 = \dfrac{2.4\left(1 - 0.8^6\right)}{1 - 0.8} = \dfrac{2.4(0.737856)}{0.2} = 8.854\ldots\]`,
+            m`\[\dfrac{250(1 - 0.3^n)}{0.7} > 355\]`,
+            m`Table on the GDC: \(A_4 = 354.25 < 355\), \(A_5 = 356.275 > 355\).`,
           ],
-          final: "≈ 8.85 m",
+          final: "5 tablets",
+          note: "Marks: (M1) inequality or table, (A1) n = 5.",
         },
       ],
     },
     {
       n: 4,
-      ctx: ["A culture starts with 500 bacteria. The population grows by 12% every hour."],
+      section: "A",
+      instruction: "In this question, give monetary answers correct to two decimal places unless told otherwise.",
+      ctx: [
+        "Chan starts a job in year 1 on a salary of $36 000. Her salary increases by 4% each year, so her yearly salaries form a geometric sequence.",
+        "Her friend Vuthy joins another company in year 1 on $38 000. His salary increases by $1200 each year.",
+      ],
       parts: [
         {
-          l: "a", marks: 1, q: "Write down the common ratio of this geometric sequence.", lines: 1, restate: "Common ratio",
-          steps: [m`\[r = 1 + \dfrac{12}{100} = 1.12\]`],
-          final: "r = 1.12",
+          l: "a", marks: 2, q: "Calculate Chan's salary in year 6.", restate: "Chan, year 6",
+          steps: [m`\[u_6 = 36\,000(1.04)^5 = 43\,799.50\ldots\]`],
+          final: "$43 799.50",
+          note: "Marks: (M1) 36 000(1.04)^5, (A1) 43 799.50.",
         },
         {
-          l: "b", marks: 2, q: "Find the number of bacteria after 6 hours, to the nearest whole number.", restate: "After 6 hours",
-          steps: [m`\[500(1.12)^6 = 986.91\ldots\]`],
-          final: "987 bacteria",
+          l: "b", marks: 2, q: "Calculate Chan's total earnings in the first 10 years. Give your answer to the nearest dollar.", restate: "Chan, 10 years",
+          steps: [m`\[S_{10} = \dfrac{36\,000(1.04^{10} - 1)}{1.04 - 1} = 432\,219.86\ldots\]`],
+          final: "$432 220",
+          note: "Marks: (M1) substitution into S_n, (A1) 432 220.",
         },
         {
-          l: "c", marks: 3, q: "After how many whole hours does the population first exceed 2000?", lines: 4, restate: "First hour above 2000",
+          l: "c", marks: 3, q: "Find the first year in which Chan's salary is greater than Vuthy's salary.", lines: 4, restate: "First year Chan earns more",
           steps: [
-            m`\[500(1.12)^n > 2000 \;\Rightarrow\; 1.12^n > 4\]`,
-            m`\[n > \dfrac{\ln 4}{\ln 1.12} = 12.23\]`,
-            m`\[n = 13 \quad (500 \times 1.12^{13} = 2182)\]`,
+            m`Vuthy (arithmetic): \(v_n = 38\,000 + 1200(n-1)\). Chan: \(c_n = 36\,000(1.04)^{n-1}\).`,
+            m`\[36\,000(1.04)^{n-1} > 38\,000 + 1200(n-1)\]`,
+            m`Table on the GDC: year 6, \(43\,799.50 < 44\,000\). Year 7, \(45\,551.48 > 45\,200\).`,
           ],
-          final: "13 hours",
+          final: "Year 7",
+          note: "Marks: (M1) Vuthy's formula, (M1) inequality or table, (A1) year 7.",
         },
       ],
     },
     {
       n: 5,
-      ctx: [m`The sequence \(4,\ 6,\ 9,\ \dots\) is geometric.`],
-      parts: [
-        {
-          l: "a", marks: 2, q: "Show that the sequence is geometric and find its common ratio.", restate: "Common ratio",
-          steps: [m`\[\dfrac{6}{4} = 1.5 \qquad \dfrac{9}{6} = 1.5\]`, "Equal ratios, so the sequence is geometric with r = 1.5."],
-          final: "r = 1.5",
-        },
-        {
-          l: "b", marks: 2, q: m`Find \(u_6\).`, restate: "6th term",
-          steps: [m`\[u_6 = 4(1.5)^5 = 30.375\]`],
-          final: "u₆ = 30.375",
-        },
-        {
-          l: "c", marks: 2, q: m`Find \(S_8\), to 3 significant figures.`, restate: "S₈",
-          steps: [m`\[S_8 = \dfrac{4\left(1.5^8 - 1\right)}{1.5 - 1} = 8(24.6289) = 197.03\ldots\]`],
-          final: "S₈ ≈ 197",
-        },
-      ],
-    },
-    {
-      n: 6,
+      section: "B",
+      instruction: "In this question, give all monetary answers correct to two decimal places.",
       ctx: [
-        "A company offers a temporary worker two ways to be paid over 14 days.",
-        "Option A: $50 on day 1, then $5 more each day than the day before. Option B: $2 on day 1, then double the previous day's pay each day.",
+        "Rina saves for a new laptop by making one deposit into a savings box at the end of each year. Her first deposit is $1200. Each deposit is 5% larger than the one before it, so the deposits form a geometric sequence. She makes 15 deposits. The box pays no interest.",
       ],
       parts: [
         {
-          l: "a", marks: 2, q: "Find the total paid under Option A over 14 days.", restate: "Option A total",
-          steps: [m`\[S_{14} = \dfrac{14}{2}\left(2(50) + 13(5)\right) = 7(165) = 1155\]`],
-          final: "$1,155",
+          l: "a", sub: "i", marks: 1, q: "Write down the common ratio of the deposits.", lines: 1, restate: "Common ratio",
+          steps: [m`\[r = 1 + \dfrac{5}{100} = 1.05\]`],
+          final: "r = 1.05",
+          note: "Marks: (A1) 1.05.",
         },
         {
-          l: "b", marks: 2, q: "Find the total paid under Option B over 14 days.", restate: "Option B total",
-          steps: [m`\[S_{14} = \dfrac{2\left(2^{14} - 1\right)}{2 - 1} = 2(16\,383) = 32\,766\]`],
-          final: "$32,766",
+          l: "a", sub: "ii", marks: 2, q: "Find the deposit in year 10.", restate: "Deposit, year 10",
+          steps: [m`\[u_{10} = 1200(1.05)^9 = 1861.59\ldots\]`],
+          final: "$1861.59",
+          note: "Marks: (M1) 1200(1.05)^9, (A1) 1861.59.",
         },
         {
-          l: "c", marks: 2, q: "On which day does Option B's daily pay first exceed Option A's daily pay?", lines: 4, restate: "Crossover day",
+          l: "b", sub: "i", marks: 2, q: "Calculate the total amount Rina deposits in the 15 years.", restate: "Total, 15 years",
+          steps: [m`\[S_{15} = \dfrac{1200(1.05^{15} - 1)}{1.05 - 1} = 25\,894.28\ldots\]`],
+          final: "$25 894.28",
+          note: "Marks: (M1) substitution into S_n, (A1) 25 894.28.",
+        },
+        {
+          l: "b", sub: "ii", marks: 3, q: m`Rina's brother Sam deposits $1500 in year 1 and increases his deposit by a fixed amount \(d\) dollars each year. After 15 years his total equals Rina's total. Find \(d\).`, lines: 4, restate: "Value of d",
           steps: [
-            m`Day \(n\): A pays \(45 + 5n\), B pays \(2^n\).`,
-            m`\[n = 6:\; 64 < 75 \qquad n = 7:\; 128 > 80\]`,
+            m`\[S_{15} = \dfrac{15}{2}\left(2(1500) + 14d\right) = 25\,894.28\ldots\]`,
+            m`\[3000 + 14d = 6905.14\ldots \;\Rightarrow\; 14d = 452.64\ldots\]`,
+            m`\[d = 32.33\]`,
           ],
-          final: "Day 7",
+          final: "d = $32.33",
+          note: "Marks: (M1) arithmetic S_n formula, (M1) equate to Rina's total, (A1) 32.33.",
+        },
+        {
+          l: "c", marks: 3, q: "Find the first year in which Rina's deposit is greater than $2000.", lines: 4, restate: "First deposit above $2000",
+          steps: [
+            m`\[1200(1.05)^{n-1} > 2000 \;\Rightarrow\; 1.05^{n-1} > 1.6667\]`,
+            m`\[n - 1 > \dfrac{\ln 1.6667}{\ln 1.05} = 10.47 \;\Rightarrow\; n = 12\]`,
+          ],
+          final: "Year 12",
+          note: "Check: year 11 is $1954.67 and year 12 is $2052.41. Marks: (M1) inequality, (M1) logarithms or table, (A1) 12.",
+        },
+        {
+          l: "d", marks: 2, q: "Rina estimates her 15-year total as $26 000. Calculate the percentage error in her estimate. Give your answer to three significant figures.", restate: "Percentage error",
+          steps: [m`\[\varepsilon = \left|\dfrac{v_A - v_E}{v_E}\right| \times 100 = \left|\dfrac{26\,000 - 25\,894.28}{25\,894.28}\right| \times 100 = 0.408\%\]`],
+          final: "0.408%",
+          note: "Marks: (M1) percentage error formula with v_E = 25 894.28, (A1) 0.408.",
+        },
+        {
+          l: "e", sub: "i", marks: 2, q: "The laptop Rina wants costs $6000 at the start of year 1. Its price increases by 3% each year. Find its price at the end of year 6.", restate: "Price, end of year 6",
+          steps: [m`\[6000(1.03)^6 = 7164.31\ldots\]`],
+          final: "$7164.31",
+          note: "Marks: (M1) 6000(1.03)^6, (A1) 7164.31.",
+        },
+        {
+          l: "e", sub: "ii", marks: 3, q: "Find the least number of years after which Rina's total deposits are at least the price of the laptop at the end of that year.", lines: 5, restate: "Least number of years",
+          steps: [
+            m`\[\dfrac{1200(1.05^n - 1)}{0.05} \ge 6000(1.03)^n\]`,
+            m`Table on the GDC: \(n = 5\): \(6630.76 < 6955.64\). \(n = 6\): \(8162.30 > 7164.31\).`,
+          ],
+          final: "6 years",
+          note: "Marks: (M1) S_n against price, (M1) table of values, (A1) n = 6.",
+        },
+        {
+          l: "e", sub: "iii", marks: 1, q: "Calculate how much money Rina has left after buying the laptop at the end of year 6.", lines: 2, restate: "Money left",
+          steps: [m`\[S_6 - 7164.31\ldots = 8162.2954 - 7164.3138 = 997.98\]`],
+          final: "$997.98",
+          note: "Marks: (A1) 997.98 (accept 997.99 from rounded values).",
         },
       ],
     },

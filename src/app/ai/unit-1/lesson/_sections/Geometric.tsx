@@ -279,7 +279,7 @@ export default function GeometricSection() {
 
       <ReviewPaperLink
         href="/review/ai-sl/geometric"
-        label="Session 2: Geometric Sequences and Series (6 questions)"
+        label="Session 2: Geometric Sequences and Series (5 questions, 45 marks)"
       />
     </LessonSection>
   );
