@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
 import { AnswerRevealProvider } from "@/components/review/AnswerReveal";
 import {
-  PaperTop,
-  PaperHeader,
+  PartHeader,
   QuestionBanner,
   ContextText,
   PartBlock,
@@ -14,6 +13,8 @@ import {
   Note,
   SummaryTable,
   StickyPaperNav,
+  PaperHero,
+  PaperSheet,
   PaperFooterNav,
 } from "@/components/review/PaperKit";
 
@@ -29,16 +30,30 @@ export default function ReviewPaper2() {
   return (
     <AnswerRevealProvider>
       <main className="min-h-screen pt-16">
-        <PaperTop title="Sequences and Series" description="Review Paper 2: mixed practice with worked answers on request." />
+        <PaperHero
+          topic="Sequences &amp; Series"
+          course="AA — Unit 1 Algebra (Topic 5)"
+          title="Sequences and Series"
+          subtitle="Review Paper 2 — Mixed Practice"
+          stats="12 Questions · 76 Marks · Arithmetic &amp; Geometric Sequences, Series, Applications"
+          note="Attempt each part, then tap Show Answer to check your work against the worked solution."
+          meta="76 marks · 12 questions · ~90 min"
+        />
 
         {/* Sticky navigator */}
         <StickyPaperNav />
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-          <div className="a4-paper">
+        <PaperSheet
+          title="Sequences and Series — Review Paper 2"
+          course="IB Mathematics: Analysis and Approaches"
+          level="Standard Level — Review Paper 2"
+          duration="90 minutes"
+          marks={76}
+          instructions={["Answer all questions.", "Show all working; a GDC may be used.", "Give non-exact answers correct to 3 significant figures unless told otherwise."]}
+        >
           {/* ══════════════════ QUESTIONS & ANSWERS ══════════════════ */}
           <section id="exercise" className="scroll-mt-28">
-            <PaperHeader course="Mathematics: Analysis and approaches" title="Review Paper 2: Mixed Practice" duration="90 minutes" marks={76} instructions={["Answer all questions.", "Show all working; answers without working may not receive full marks.", "The maximum mark for each question is shown in brackets."]} />
+            <PartHeader variant="exercise" label="Exercise Paper" note="Attempt every part, then tap Show Answer to reveal the worked solution" />
 
             <QuestionBanner n={2} marks={5} />
             <PartBlock letter="•" marks={5}>
@@ -665,9 +680,8 @@ export default function ReviewPaper2() {
           />
 
           {/* Footer nav */}
-          </div>
           <PaperFooterNav paperLabel="Sequences and Series — Review Paper 2" />
-        </div>
+        </PaperSheet>
       </main>
     </AnswerRevealProvider>
   );

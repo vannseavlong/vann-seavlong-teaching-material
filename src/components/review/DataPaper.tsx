@@ -1,9 +1,9 @@
 import { Fragment, ReactNode } from "react";
+import Link from "next/link";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
 import { AnswerRevealProvider } from "./AnswerReveal";
 import {
-  PaperTop,
-  PaperHeader,
+  PartHeader,
   QuestionBanner,
   ContextText,
   PartBlock,
@@ -14,6 +14,8 @@ import {
   Note,
   SummaryTable,
   StickyPaperNav,
+  PaperHero,
+  PaperSheet,
   PaperFooterNav,
 } from "./PaperKit";
 import {
@@ -70,28 +72,36 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
   return (
     <AnswerRevealProvider>
       <main className="min-h-screen pt-16">
-        <PaperTop
-          title={`${paper.title}: ${paper.subtitle}`}
-          description={`AI SL summative revision, ${paper.topic}.`}
+        <PaperHero
+          topic={paper.topic}
+          course="AI SL — Unit 1 Number &amp; Algebra"
+          title={paper.title}
+          subtitle={`${paper.subtitle} — Exercise & Answer Sheet`}
+          stats={`${paper.questions.length} Questions · ${total} Marks · ~${paper.minutes} min`}
+          note="GDC allowed. Attempt each part, then tap Show Answer to check against the worked solution."
+          meta={`${total} marks · ${paper.questions.length} questions`}
+          extra={
+            <Link href={`/ai/unit-1/lesson#${paper.lessonAnchor}`} className="a4-hide print:hidden text-sm text-sky-300 hover:underline">
+              Revise the lesson →
+            </Link>
+          }
         />
 
         <StickyPaperNav />
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-          <div className="a4-paper">
+        <PaperSheet
+          title={`${paper.title} — ${paper.subtitle}`}
+          course="IB Mathematics: Applications and Interpretation"
+          level="Standard Level — Summative Revision"
+          duration={`${paper.minutes} minutes`}
+          marks={total}
+          instructions={["Answer all questions.", "Show all working; a GDC may be used.", "Give non-exact answers correct to 3 significant figures unless told otherwise."]}
+        >
           <section id="exercise" className="scroll-mt-28">
-            <PaperHeader
-              course="Mathematics: Applications and interpretation"
-              level="Standard level"
-              title={`${paper.title}: ${paper.subtitle}`}
-              duration={`${paper.minutes} minutes`}
-              marks={total}
-              instructions={[
-                "Answer all questions.",
-                "Show all working; answers without working may not receive full marks.",
-                "A GDC is allowed.",
-                "The maximum mark for each question is shown in brackets.",
-              ]}
+            <PartHeader
+              variant="exercise"
+              label="Exercise Paper"
+              note="Attempt every part, then tap Show Answer to reveal the worked solution"
             />
 
             {paper.questions.map((q) => (
@@ -135,9 +145,8 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
           </section>
 
           <SummaryTable rows={summaryRows} />
-          </div>
           <PaperFooterNav paperLabel={`${paper.title} — ${paper.subtitle}`} />
-        </div>
+        </PaperSheet>
       </main>
     </AnswerRevealProvider>
   );

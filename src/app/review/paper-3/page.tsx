@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
 import { AnswerRevealProvider } from "@/components/review/AnswerReveal";
 import {
-  PaperTop,
-  PaperHeader,
+  PartHeader,
   QuestionBanner,
   ContextText,
   PartBlock,
@@ -13,6 +12,8 @@ import {
   AnswerPart,
   SummaryTable,
   StickyPaperNav,
+  PaperHero,
+  PaperSheet,
   PaperFooterNav,
 } from "@/components/review/PaperKit";
 
@@ -28,16 +29,34 @@ export default function ReviewPaper3() {
   return (
     <AnswerRevealProvider>
       <main className="min-h-screen pt-16">
-        <PaperTop title="Sequences and Series: Full Review" description="Review Paper 3: full review with worked answers on request." />
+        <PaperHero
+          topic="Sequences &amp; Series"
+          course="AI — Unit 1 Number &amp; Algebra (Topic 5)"
+          title="Sequences and Series — Full Review"
+          subtitle="Review Paper 3 — Full Review"
+          stats="13 Questions · 67 Marks · IB Mathematics: Applications and Interpretation SL"
+          note="Show all working. A GDC may be required for some parts. Give non-exact answers correct to 3 significant figures unless told otherwise."
+          meta="67 marks · 13 questions · ~2 hours"
+        />
 
         {/* Sticky navigator */}
         <StickyPaperNav />
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-          <div className="a4-paper">
+        <PaperSheet
+          title="Sequences and Series — Review Paper 3"
+          course="IB Mathematics: Applications and Interpretation"
+          level="Standard Level — Review Paper 3"
+          duration="2 hours"
+          marks={67}
+          instructions={["Answer all questions.", "Show all working; a GDC may be used.", "Give non-exact answers correct to 3 significant figures unless told otherwise."]}
+        >
           {/* ══════════════════ QUESTIONS & ANSWERS ══════════════════ */}
           <section id="exercise" className="scroll-mt-28">
-            <PaperHeader course="Mathematics: Applications and interpretation" level="Standard level" title="Review Paper 3: Full Review" duration="2 hours" marks={67} instructions={["Answer all questions.", "Show all working. A GDC may be required for some parts.", "Give non-exact answers correct to 3 significant figures unless told otherwise.", "The maximum mark for each question is shown in brackets."]} />
+            <PartHeader
+              variant="exercise"
+              label="Exercise Paper"
+              note="Attempt every part, then tap Show Answer to reveal the worked solution"
+            />
 
             <QuestionBanner n={1} marks={6} />
             <ContextText>
@@ -569,9 +588,8 @@ export default function ReviewPaper3() {
           />
 
           {/* Footer nav */}
-          </div>
           <PaperFooterNav paperLabel="Sequences and Series — Review Paper 3" />
-        </div>
+        </PaperSheet>
       </main>
     </AnswerRevealProvider>
   );

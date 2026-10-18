@@ -12,30 +12,37 @@ export const metadata: Metadata = {
 
 // ─── Helper components ────────────────────────────────────────────────────────
 
-function SessionHeader({ n, title, time }: { n: number; title: string; time?: string }) {
+function SessionHeader({ n, title, time }: { n: number; title: string; time: string }) {
   return (
-    <h2 className="mt-12 mb-5 flex items-baseline justify-between gap-3 border-b-2 border-navy-900 pb-1 text-xl font-bold text-navy-900">
-      <span>
-        Session {n}: {title}
-      </span>
-      {time && <span className="text-sm font-normal text-slate-600">{time}</span>}
-    </h2>
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-xl px-6 py-4 mb-6 mt-10">
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <p className="text-aa-primary text-xs font-bold uppercase tracking-widest mb-1">Session {n}</p>
+          <h2 className="text-lg font-bold">{title}</h2>
+        </div>
+        <span className="text-sm bg-slate-50 border border-slate-200 text-navy-900 px-3 py-1 rounded-full font-medium">{time}</span>
+      </div>
+    </div>
   );
 }
 
 function PartHeader({ variant }: { variant: "a" | "b" }) {
-  return (
-    <h3 className={`mb-4 text-base font-bold text-navy-900 ${variant === "b" ? "mt-10" : ""}`}>
-      {variant === "a" ? "Part A: Formulas & Key Concepts" : "Part B: Practice Exercises"}
-    </h3>
+  return variant === "a" ? (
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider">
+      Part A — Formulas &amp; Key Concepts
+    </div>
+  ) : (
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-10">
+      Part B — Practice Exercises
+    </div>
   );
 }
 
 function TopicTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h4 className="text-navy-900 font-bold text-base mt-8 mb-1 border-b border-slate-300 pb-1">
+    <h3 className="text-aa-primary font-bold text-sm mt-8 mb-1 border-b border-slate-200 pb-1">
       {children}
-    </h4>
+    </h3>
   );
 }
 
@@ -68,6 +75,7 @@ function FormulaCard({
 function SectionBlock({
   code,
   title,
+  variant = "blue",
   children,
 }: {
   code: string;
@@ -75,13 +83,19 @@ function SectionBlock({
   variant?: "blue" | "green" | "orange" | "purple" | "teal";
   children: React.ReactNode;
 }) {
-  const label = code.replace(/^SECTION\s+/i, "Section ").replace(/^PART\s+/i, "Part ");
+  const headerColors = {
+    blue: "bg-slate-50 text-navy-900 border-slate-200",
+    green: "bg-slate-50 text-navy-900 border-slate-200",
+    orange: "bg-slate-50 text-navy-900 border-slate-200",
+    purple: "bg-slate-50 text-navy-900 border-slate-200",
+    teal: "bg-slate-50 text-navy-900 border-slate-200",
+  };
   return (
-    <div className="my-6 a4:break-inside-avoid-page">
-      <h4 className="mb-3 text-sm font-bold text-navy-900">
-        {label}: {title}
-      </h4>
-      <div className="space-y-3">{children}</div>
+    <div className="my-6">
+      <div className={`rounded-lg px-5 py-3 mb-4 font-bold text-sm border ${headerColors[variant]}`}>
+        {code}: {title}
+      </div>
+      <div className="space-y-3 px-1">{children}</div>
     </div>
   );
 }
@@ -89,7 +103,7 @@ function SectionBlock({
 function Q({ n, children }: { n: number; children: React.ReactNode }) {
   return (
     <div className="mb-5 a4:break-inside-avoid">
-      <p className="text-slate-700 mb-2">
+      <p className="text-slate-700 text-sm mb-2">
         <span className="font-bold text-navy-900">{n}.</span> {children}
       </p>
     </div>
@@ -130,7 +144,7 @@ function MultipleChoice({
 }) {
   return (
     <div className="mb-5">
-      <p className="text-slate-700 mb-3">
+      <p className="text-slate-700 text-sm mb-3">
         <span className="font-bold text-navy-900">{n}.</span> {question}
       </p>
       <div className="space-y-2 ml-4">
@@ -728,20 +742,36 @@ function Session4() {
 export default function MathG10AAWorksheet() {
   return (
     <main className="min-h-screen pt-16">
-      {/* Page title (web chrome) */}
-      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-8 px-6">
+      {/* Hero */}
+      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-10 px-6">
         <div className="max-w-4xl mx-auto">
-          <Link href="/worksheets" className="text-aa-primary text-sm hover:underline">
-            ← Worksheets
-          </Link>
-          <h1 className="text-3xl font-bold mt-2 mb-1">Grade 10 Math AA: Comprehensive Test</h1>
-          <p className="text-slate-500 mb-4">Indices, surds, quadratics, functions and trigonometry.</p>
-          <WorksheetActions />
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <Link href="/worksheets" className="text-aa-primary text-xs font-bold uppercase tracking-widest hover:underline">
+              ← Worksheets
+            </Link>
+            <span className="text-slate-500">|</span>
+            <span className="text-xs bg-slate-50 border border-slate-200 text-navy-900 px-2.5 py-1 rounded-full font-semibold">Mathematics</span>
+            <span className="text-xs text-slate-500">Grade 10 — AA Foundation</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Grade 10 Math AA</h1>
+          <p className="text-aa-primary text-base font-medium mb-4 italic">Comprehensive Test — Core Skills</p>
+          <div className="bg-white border border-slate-200 rounded-xl px-5 py-3 inline-block mb-6">
+            <p className="text-sm font-bold text-navy-900">
+              Covers: Indices & Surds &nbsp;|&nbsp; Quadratic Equations &nbsp;|&nbsp; Functions &nbsp;|&nbsp; Trigonometry
+            </p>
+            <p className="text-xs text-slate-500 italic mt-0.5">
+              Includes: Formulas • Multiple Choice • Graph Sketching • Word Problems
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3 items-center">
+            <WorksheetActions />
+            <span className="text-xs text-slate-500">34 questions across 4 sessions • 75 min</span>
+          </div>
         </div>
       </div>
 
       {/* Sticky session navigator */}
-      <div className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
+      <div className="a4-hide sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
         <div className="max-w-4xl mx-auto px-6 py-2 flex gap-2 overflow-x-auto">
           {[
             { id: "session-1", label: "Session 1 — Indices & Surds" },
@@ -762,29 +792,29 @@ export default function MathG10AAWorksheet() {
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-        <div className="a4-paper">
-          <PaperHeader
-            course="Mathematics: Analysis and approaches"
-            level="Grade 10"
-            title="Comprehensive Test: Core Skills"
-            duration="75 minutes"
-            questions={34}
-            instructions={[
-              "Answer all questions.",
-              "Show your working; write final answers on the lines provided.",
-              "Sketch graphs in the spaces provided.",
-              "A calculator is allowed where a question asks for a numerical value.",
-            ]}
-          />
-
+        <div className="a4-paper space-y-2">
+        <PaperHeader
+          course="Mathematics: Analysis and approaches"
+          level="Grade 10"
+          title="Grade 10 Math AA: Comprehensive Test"
+          duration="75 minutes"
+          questions={34}
+          instructions={[
+            "Answer all questions.",
+            "Show your working in the spaces provided.",
+            "Write your answers in the answer lines or spaces given.",
+          ]}
+        />
         <Session1 />
         <Session2 />
         <Session3 />
         <Session4 />
 
         {/* Formula Reference Sheet */}
-        <div className="mt-12 pt-6 border-t-2 border-navy-900 a4:break-inside-avoid-page">
-          <h2 className="mb-4 text-xl font-bold text-navy-900">Formula Reference</h2>
+        <div className="mt-16 pt-8 border-t border-slate-200">
+          <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-3 mb-5 font-bold text-sm uppercase tracking-wider">
+            Quick Formula Reference Sheet
+          </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
               <thead>
@@ -824,14 +854,15 @@ export default function MathG10AAWorksheet() {
             </table>
           </div>
         </div>
+
         </div>
 
         {/* Footer nav */}
-        <div className="mt-10 pt-6 border-t border-slate-200 flex items-center justify-between">
+        <div className="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
           <Link href="/worksheets" className="text-sm text-slate-500 hover:text-aa-primary font-medium transition-colors">
             ← All Worksheets
           </Link>
-          <p className="text-xs text-slate-400">Grade 10 Math AA: Comprehensive Test</p>
+          <p className="text-xs text-slate-400">Grade 10 Math AA — Comprehensive Test</p>
         </div>
       </div>
     </main>

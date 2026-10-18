@@ -71,3 +71,14 @@ Cut over-information: no taglines, stat pills, tag rows, multi-line hero blurbs,
 - Questions numbered `1.`, `2.` with the IB mark line `[Maximum mark: N]` right at the start of each question; parts `(a)`, `(b)`, `(c)` with marks `[2]` right-aligned; answer space for working.
 - No decorative boxes. Formulas and diagrams inline.
 - Page title on the web (above the paper) stays one line + one-line description.
+
+---
+
+# Revision 3 (owner feedback after seeing the IB restyle)
+
+The IB restyle looked flat, messy and generic in web mode. Review and worksheet pages were restored to their decolored original layout (commit `1fd804e` state). Rules now:
+- **Web mode = original layout and style** (hero, cards, question blocks), with only the over-colouring removed: keep the navy brand tone and one accent; drop purple/green/yellow/orange/red fills. Must not look generic or flat: keep hierarchy, spacing, borders and the original hero feel.
+- **No duplicate headers.** The title appears once on screen (the hero). The IB paper header block (course line, level, duration, total marks, instructions) lives inside `.a4-paper` and shows only in A4 mode and in print; there its title line is hidden on screen (`a4:hidden a4:print:block`) because the hero above already shows it.
+- **IB formatting only on the A4 sheet:** `[Maximum mark: N]`, `(a)` parts with right-aligned `[n]` marks, plain ruled working space are shown in A4/print (`hidden a4:block` / `a4:`), web mode keeps its original question look.
+- A4 mode: no Show Answer/Show All (`a4-hide`); only Print and Export buttons visible.
+- **Smaller type** on review and worksheet pages: body/question text about 14px (`text-sm`), hero title about `text-2xl`, section/part headings one step smaller than now.

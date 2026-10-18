@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
 import { AnswerRevealProvider } from "@/components/review/AnswerReveal";
 import {
-  PaperTop,
-  PaperHeader,
+  PartHeader,
   QuestionBanner,
   ContextText,
   PartBlock,
@@ -14,6 +13,8 @@ import {
   Note,
   SummaryTable,
   StickyPaperNav,
+  PaperHero,
+  PaperSheet,
   PaperFooterNav,
 } from "@/components/review/PaperKit";
 
@@ -58,16 +59,30 @@ export default function ReviewPaper1() {
   return (
     <AnswerRevealProvider>
       <main className="min-h-screen pt-16">
-        <PaperTop title="Arithmetic Sequence and Series" description="Review Paper 1: exercise paper with worked answers on request." />
+        <PaperHero
+          topic="Sequences &amp; Series"
+          course="AA — Unit 1 Algebra (Topic 5)"
+          title="Arithmetic Sequence and Series"
+          subtitle="Review Paper 1 — Exercise &amp; Answer Sheet"
+          stats="3 Questions · 25 Marks · Arithmetic &amp; Geometric Sequences, Series, Simple Interest"
+          note="Attempt each part, then tap Show Answer to check your work against the worked solution."
+          meta="25 marks · 3 questions · ~35 min"
+        />
 
         {/* Sticky navigator */}
         <StickyPaperNav />
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-          <div className="a4-paper">
+        <PaperSheet
+          title="Arithmetic Sequence and Series — Review Paper 1"
+          course="IB Mathematics: Analysis and Approaches"
+          level="Standard Level — Review Paper 1"
+          duration="35 minutes"
+          marks={25}
+          instructions={["Answer all questions.", "Show all working; a GDC may be used.", "Give non-exact answers correct to 3 significant figures unless told otherwise."]}
+        >
           {/* ══════════════════ QUESTIONS & ANSWERS ══════════════════ */}
           <section id="exercise" className="scroll-mt-28">
-            <PaperHeader course="Mathematics: Analysis and approaches" title="Review Paper 1: Arithmetic Sequence and Series" duration="35 minutes" marks={25} instructions={["Answer all questions.", "Show all working; answers without working may not receive full marks.", "The maximum mark for each question is shown in brackets."]} />
+            <PartHeader variant="exercise" label="Exercise Paper" note="Attempt every part, then tap Show Answer to reveal the worked solution" />
 
             <QuestionBanner n={1} marks={15} />
             <ContextText>
@@ -335,9 +350,8 @@ export default function ReviewPaper1() {
           />
 
           {/* Footer nav */}
-          </div>
           <PaperFooterNav paperLabel="Arithmetic Sequence and Series — Review Paper 1" />
-        </div>
+        </PaperSheet>
       </main>
     </AnswerRevealProvider>
   );

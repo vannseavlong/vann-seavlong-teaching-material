@@ -12,20 +12,24 @@ export const metadata: Metadata = {
 
 // ─── Shared helpers ───────────────────────────────────────────────────────────
 
-function SessionHeader({ n, title, time }: { n: number; title: string; time?: string }) {
+function SessionHeader({ n, title, time }: { n: number; title: string; time: string }) {
   return (
-    <h2 className="mt-12 mb-5 flex items-baseline justify-between gap-3 border-b-2 border-navy-900 pb-1 text-xl font-bold text-navy-900">
-      <span>
-        Session {n}: {title}
-      </span>
-      {time && <span className="text-sm font-normal text-slate-600">{time}</span>}
-    </h2>
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-xl px-6 py-4 mb-6 mt-10">
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <p className="text-aa-primary text-xs font-bold uppercase tracking-widest mb-1">Session {n}</p>
+          <h2 className="text-lg font-bold">{title}</h2>
+        </div>
+        <span className="text-sm bg-white border border-slate-200 text-navy-900 px-3 py-1 rounded-full font-medium">{time}</span>
+      </div>
+    </div>
   );
 }
 
 function SectionBlock({
   code,
   title,
+  variant = "green",
   children,
 }: {
   code: string;
@@ -33,13 +37,20 @@ function SectionBlock({
   variant?: "green" | "blue" | "orange" | "purple" | "teal" | "red";
   children: React.ReactNode;
 }) {
-  const label = code.replace(/^SECTION\s+/i, "Section ").replace(/^PART\s+/i, "Part ");
+  const colors = {
+    green: "bg-slate-50 text-navy-900 border-slate-200",
+    blue: "bg-slate-50 text-navy-900 border-slate-200",
+    orange: "bg-slate-50 text-navy-900 border-slate-200",
+    purple: "bg-slate-50 text-navy-900 border-slate-200",
+    teal: "bg-slate-50 text-navy-900 border-slate-200",
+    red: "bg-slate-50 text-navy-900 border-slate-200",
+  };
   return (
     <div className="my-6 a4:break-inside-avoid-page">
-      <h4 className="mb-3 text-sm font-bold text-navy-900">
-        {label}: {title}
-      </h4>
-      <div className="space-y-3">{children}</div>
+      <div className={`rounded-lg px-5 py-3 mb-4 font-bold text-sm border ${colors[variant]}`}>
+        {code}: {title}
+      </div>
+      <div className="space-y-3 px-1">{children}</div>
     </div>
   );
 }
@@ -47,7 +58,7 @@ function SectionBlock({
 function Q({ n, children }: { n: number; children: React.ReactNode }) {
   return (
     <div className="mb-5 a4:break-inside-avoid">
-      <p className="text-slate-700 mb-2">
+      <p className="text-slate-700 text-sm mb-2">
         <span className="font-bold text-navy-900">{n}.</span> {children}
       </p>
     </div>
@@ -1156,20 +1167,36 @@ function Session4() {
 export default function AreaVolumePage() {
   return (
     <main className="min-h-screen pt-16">
-      {/* Page title (web chrome) */}
-      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-8 px-6">
+      {/* Hero */}
+      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-10 px-6">
         <div className="max-w-4xl mx-auto">
-          <Link href="/worksheets" className="text-aa-primary text-sm hover:underline">
-            ← Worksheets
-          </Link>
-          <h1 className="text-3xl font-bold mt-2 mb-1">Area &amp; Volume Practice</h1>
-          <p className="text-slate-500 mb-4">Composite shapes, with a diagram for every question.</p>
-          <WorksheetActions />
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <Link href="/worksheets" className="text-aa-primary text-xs font-bold uppercase tracking-widest hover:underline">
+              ← Worksheets
+            </Link>
+            <span className="text-slate-500">|</span>
+            <span className="text-xs bg-white border border-slate-200 text-navy-900 px-2.5 py-1 rounded-full font-semibold">Mathematics</span>
+            <span className="text-xs text-slate-500">Geometry — Area & Volume</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Area & Volume Practice</h1>
+          <p className="text-aa-primary text-base font-medium mb-4 italic">Composite Shapes — Diagrams Included</p>
+          <div className="bg-white border border-slate-200 rounded-xl px-5 py-3 inline-block mb-6">
+            <p className="text-sm font-bold text-navy-900">
+              Basic Shapes &nbsp;|&nbsp; Composite (Add/Subtract) &nbsp;|&nbsp; 3D Volume &nbsp;|&nbsp; Challenge Problems
+            </p>
+            <p className="text-xs text-slate-500 italic mt-0.5">
+              Every question has a shape diagram • Progressive difficulty • Missing dimensions in hard problems
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3 items-center">
+            <WorksheetActions />
+            <span className="text-xs text-slate-500">20 questions across 4 sessions • ~100 min</span>
+          </div>
         </div>
       </div>
 
       {/* Sticky session navigator */}
-      <div className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
+      <div className="a4-hide sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
         <div className="max-w-4xl mx-auto px-6 py-2 flex gap-2 overflow-x-auto">
           {[
             { id: "session-1", label: "Session 1 — Basic Shapes" },
@@ -1190,29 +1217,29 @@ export default function AreaVolumePage() {
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-        <div className="a4-paper">
-          <PaperHeader
-            course="Mathematics: Geometry"
-            level="Grade 10"
-            title="Area &amp; Volume Practice"
-            duration="100 minutes"
-            questions={20}
-            instructions={[
-              "Answer all questions.",
-              "Show your working; write final answers on the lines provided.",
-              "Give answers exact or to 3 significant figures unless told otherwise.",
-              "A calculator is allowed.",
-            ]}
-          />
-
+        <div className="a4-paper space-y-2">
+        <PaperHeader
+          course="Mathematics"
+          level="Grade 10"
+          title="Area &amp; Volume Practice"
+          duration="approximately 100 minutes"
+          questions={20}
+          instructions={[
+            "Answer all questions.",
+            "Show your working in the spaces provided.",
+            "Write your answers in the answer lines or spaces given.",
+          ]}
+        />
         <Session1 />
         <Session2 />
         <Session3 />
         <Session4 />
 
         {/* Formula Reference */}
-        <div className="mt-12 pt-6 border-t-2 border-navy-900 a4:break-inside-avoid-page">
-          <h2 className="mb-4 text-xl font-bold text-navy-900">Formula Reference</h2>
+        <div className="mt-16 pt-8 border-t border-slate-200">
+          <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-3 mb-5 font-bold text-sm uppercase tracking-wider">
+            Quick Formula Reference Sheet
+          </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
               <thead>
@@ -1247,14 +1274,15 @@ export default function AreaVolumePage() {
             </table>
           </div>
         </div>
+
         </div>
 
         {/* Footer nav */}
-        <div className="mt-10 pt-6 border-t border-slate-200 flex items-center justify-between">
+        <div className="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
           <Link href="/worksheets" className="text-sm text-slate-500 hover:text-aa-primary font-medium transition-colors">
             ← All Worksheets
           </Link>
-          <p className="text-xs text-slate-400">Area &amp; Volume Practice</p>
+          <p className="text-xs text-slate-400">Area & Volume Practice — Geometry</p>
         </div>
       </div>
     </main>
