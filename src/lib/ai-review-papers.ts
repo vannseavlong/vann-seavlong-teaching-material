@@ -982,7 +982,7 @@ const mock: AiReviewPaper = {
   title: "Summative Assessment — Mixed Mock",
   subtitle: "Summative Revision — Session 7 (full run-through)",
   minutes: 50,
-  lessonAnchor: "summative-revision",
+  lessonAnchor: "arithmetic",
   questions: [
     {
       n: 1,
