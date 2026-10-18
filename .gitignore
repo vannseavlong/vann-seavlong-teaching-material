@@ -35,8 +35,15 @@ yarn-error.log*
 
 # vercel
 .vercel
-.claude/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Sub-repos and worktrees (each has its own git history)
+# Add every sub-repo and every new worktree folder here: vann-seavlong-teaching-material-<repo>-<task>/
+backend/
+
+.claude/*
+!.claude/skills/
+.DS_Store

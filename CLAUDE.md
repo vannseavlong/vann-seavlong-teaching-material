@@ -308,3 +308,9 @@ Data-driven, exportable Q&A papers (same Export PDF → Question / Q&A flow as `
 - All content pages follow the pattern: Lesson → Practice → Mock → Exam Prep → Answers
 
 
+
+## Agent rules
+
+Shared rules for every agent live in `AGENTS.md` and apply here too:
+
+@AGENTS.md
