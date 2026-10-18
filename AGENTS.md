@@ -14,11 +14,13 @@ Rules for any coding agent (Claude, Codex, sub-agents) working in the `vann-seav
 
 - **Git flow:** work directly on `dev`. No worktrees, no feature branches, no PRs. When the work is done: commit (specific paths, conventional message) and `git push origin dev`. The owner merges `dev` into `main` and deploys. Never push to or merge into `main`.
 - Task files are named `<Prefix>-<short-name>.md`; prefixes: `Web`. Start a task: copy `Tasks/_TEMPLATE.md`, set owner, move the file to `3-in-progress/`. Check other tasks' `Touches` for overlap first.
-- Pushed to `dev`: add an entry to the root `CHANGELOG.md` tagged `[Web]` (owner, task, commit, what changed; never a changelog inside a sub-repo) and move the task to `5-done/`.
+- After the user approves in testing: push to `dev`, add an entry to the root `CHANGELOG.md` tagged `[Web]` (owner, task, commit, what changed; never a changelog inside a sub-repo) and move the task to `5-done/`.
 
 **Parallel agents:** one agent = one task file. Claim it (`Claimed by:`) before editing, stay inside that task's `Touches`, and never use `git add -A`, `stash` or `reset --hard` in shared places. To reach another task, write a note in `Tasks/_inbox/<to-task>/` and read your own inbox at the start. Full rules: `Tasks/README.md`.
 
 ## Delivering a task (pipeline)
+
+All testing is done by the user, who gives feedback. After building, commit, move the task to `4-testing/` and tell the user what to check; do not push, write the changelog or move to `5-done/` until the user approves. Feedback goes under `## Feedback` in the task file. Details: `Tasks/PIPELINE.md`.
 
 Every task has a tier (T0 to T3). The tier decides the gates it passes; see `Tasks/PIPELINE.md`. Do not run gates the tier does not ask for, and do not skip gates it does. Skipping or adding a gate needs one line of reason in the task file. The user can override a tier; the agent does not ask for one.
 
