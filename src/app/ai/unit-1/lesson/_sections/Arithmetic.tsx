@@ -234,7 +234,7 @@ export default function ArithmeticSection() {
 
       <ReviewPaperLink
         href="/review/ai-sl/arithmetic"
-        label="Session 1: Arithmetic Sequences and Series (6 questions)"
+        label="Session 1: Arithmetic Sequences and Series (5 questions, 40 marks)"
       />
     </LessonSection>
   );
