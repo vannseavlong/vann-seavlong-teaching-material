@@ -255,7 +255,7 @@ export default function BoundsSection() {
 
       <ReviewPaperLink
         href="/review/ai-sl/bounds"
-        label="Session 5: Upper and Lower Bounds (6 questions)"
+        label="Session 5: Upper and Lower Bounds (5 questions, 41 marks)"
       />
     </LessonSection>
   );
