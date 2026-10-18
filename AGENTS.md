@@ -22,6 +22,15 @@ Rules for any coding agent (Claude, Codex, sub-agents) working in the `vann-seav
 
 Every task has a tier (T0 to T3). The tier decides the gates it passes; see `Tasks/PIPELINE.md`. Do not run gates the tier does not ask for, and do not skip gates it does. Skipping or adding a gate needs one line of reason in the task file. The user can override a tier; the agent does not ask for one.
 
+## Content writing rules (lesson, practice, worksheet, review paper)
+
+Applies to all text on lesson pages, practice pages, worksheets and review papers (headings, descriptions, instructions, questions, solutions).
+
+- **No em-dashes** (the long dash character). Use a comma, colon, full stop, brackets or the word "to". An en-dash is allowed only inside numeric ranges and math (for example `2-5` written as `2–5`, or a minus sign in KaTeX).
+- **No generic text.** No filler intros, taglines, hype or boilerplate ("Master the fundamentals", "Let's dive in", "Comprehensive guide to"). Every sentence must carry specific content: a definition, a rule, a condition, a step, an exam tip tied to the topic, or an instruction the student needs.
+- Keep headings short and exam-style (IB command terms: Find, Show that, Calculate, Determine, Hence, Justify). Prefer one clear line over a paragraph.
+- Before finishing content work, search the touched files for the em-dash character and remove any that you added.
+
 ## Docs (keep in sync)
 
 `Docs/README.md` is the index. One fact lives in one place; update it there and link, never copy.
