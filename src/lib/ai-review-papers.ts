@@ -628,7 +628,7 @@ const rounding: AiReviewPaper = {
           l: "c", marks: 3, q: "Sambo estimates the area by first rounding each dimension to 1 significant figure. Find his estimate and the percentage error in it.", lines: 4, restate: "Estimate and % error",
           steps: [
             m`Estimate: \(10 \times 8 = 80\)`,
-            m`\[\%\text{ error} = \left|\dfrac{80 - 97.34}{97.34}\right| \times 100 = 17.8\%\]`,
+            m`\[\varepsilon = \left|\dfrac{80 - 97.34}{97.34}\right| \times 100 = 17.8\%\]`,
           ],
           final: "Estimate 80 m², error ≈ 17.8%",
         },
@@ -845,7 +845,7 @@ const percentageError: AiReviewPaper = {
         {
           l: "a", marks: 2, q: "A reporter estimates a crowd at 6000. The true attendance was 5480. Find the percentage error, to 3 significant figures.", restate: "Crowd estimate",
           steps: [
-            m`\[\%\text{ error} = \left|\dfrac{v_A - v_E}{v_E}\right| \times 100 = \left|\dfrac{6000 - 5480}{5480}\right| \times 100\]`,
+            m`\[\varepsilon = \left|\dfrac{v_A - v_E}{v_E}\right| \times 100 = \left|\dfrac{6000 - 5480}{5480}\right| \times 100\]`,
             m`\[= \dfrac{520}{5480} \times 100 = 9.49\%\]`,
           ],
           final: "9.49%",

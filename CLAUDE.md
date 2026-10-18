@@ -295,6 +295,9 @@ Red `HighlightBox` (general binomial series). One `FormulaBox` (negative/fractio
 | AI Unit 4: Statistics & Probability | ⏳ | ⏳ | ⏳ |
 | AI Unit 5: Calculus & Technology | ⏳ | ⏳ | ⏳ |
 
+## Notation: follow the IB AI SL formula booklet
+Use the booklet's symbols in all AI lessons, papers and practice: `u_n = u_1 + (n-1)d`, `S_n`, `u_n = u_1 r^{n-1}`, `FV = PV(1 + r/(100k))^{kn}` (k = periods per year, n = years, r% nominal annual rate), `\varepsilon = |(v_A - v_E)/v_E| \times 100\%` (v_E exact, v_A approximate), `a^x = b \Leftrightarrow x = \log_a b`. The booklet prints no sum to infinity, so it stays labelled as an extension. GDC TVM labels (N, I%, PV, PMT, FV, P/Y, C/Y) are used only in GDC steps.
+
 ## AI SL Summative Revision Papers
 Data-driven, exportable Q&A papers (same Export PDF → Question / Q&A flow as `/review/paper-N`).
 - Data: `src/lib/ai-review-papers.ts` (one `AiReviewPaper` per session; `\( \)` inline math, `\[ \]` block math).

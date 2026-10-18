@@ -48,7 +48,7 @@ export default function PercentagesSection() {
         />
         <FormulaRow
           label="Percentage error"
-          math="\%\text{ error} = \left|\dfrac{v_A - v_E}{v_E}\right| \times 100"
+          math="\varepsilon = \left|\dfrac{v_A - v_E}{v_E}\right| \times 100"
         />
       </FormulaBox>
 
@@ -157,7 +157,7 @@ export default function PercentagesSection() {
         <StepBox n={1}>
           Here <InlineMath math="v_A = 5000" /> (approximate) and{" "}
           <InlineMath math="v_E = 4850" /> (exact):
-          <BlockMath math="\%\text{ error} = \left|\dfrac{5000 - 4850}{4850}\right| \times 100" />
+          <BlockMath math="\varepsilon = \left|\dfrac{5000 - 4850}{4850}\right| \times 100" />
         </StepBox>
         <StepBox n={2}>
           <BlockMath math="= \dfrac{150}{4850} \times 100 = \boxed{3.09\%} \; (\text{3 s.f.})" />
@@ -237,7 +237,7 @@ export default function PercentagesSection() {
             <p>
               <InlineMath math="v_A = 45,\; v_E = 50" />
             </p>
-            <BlockMath math="\%\text{ error} = \left|\dfrac{45-50}{50}\right| \times 100 = \dfrac{5}{50}\times 100 = \boxed{10\%}" />
+            <BlockMath math="\varepsilon = \left|\dfrac{45-50}{50}\right| \times 100 = \dfrac{5}{50}\times 100 = \boxed{10\%}" />
           </>
         }
       />

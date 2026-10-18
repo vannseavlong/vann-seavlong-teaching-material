@@ -48,7 +48,7 @@ export default function GeometricSection() {
       <FormulaBox title="Growth and Decay Models">
         <FormulaRow label="Growth by x% per step" math="r = 1 + \dfrac{x}{100} > 1" />
         <FormulaRow label="Decay by x% per step" math="r = 1 - \dfrac{x}{100},\; 0 < r < 1" />
-        <FormulaRow label="Value after k steps" math="A_k = A_0\, r^{\,k}" />
+        <FormulaRow label="Value after n steps" math="u_{n+1} = u_1\, r^{\,n}" />
         <FormulaRow label="Smallest n with r^n > c (r > 1)" math="n > \dfrac{\ln c}{\ln r}" />
       </FormulaBox>
 
