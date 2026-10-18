@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import PrintButton from "../../worksheets/physics-motion/PrintButton";
-import ExportPdfButton from "@/components/review/ExportPdfButton";
 import { AnswerRevealProvider } from "@/components/review/AnswerReveal";
 import {
-  PartHeader,
+  PaperTop,
+  PaperHeader,
   QuestionBanner,
   ContextText,
   PartBlock,
@@ -30,52 +28,16 @@ export default function ReviewPaper3() {
   return (
     <AnswerRevealProvider>
       <main className="min-h-screen pt-16">
-        {/* Hero */}
-        <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-14 px-6 a4:bg-white a4:py-6 a4:border-black">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <Link
-                href="/review"
-                className="text-aa-primary text-xs font-bold uppercase tracking-widest a4-hide hover:underline"
-              >
-                ← Review
-              </Link>
-              <span className="text-slate-300">|</span>
-              <span className="text-xs bg-white border border-slate-300 text-slate-600 px-2.5 py-1 rounded-full font-semibold">
-                Sequences &amp; Series
-              </span>
-              <span className="text-xs text-slate-500">AI — Unit 1 Number &amp; Algebra (Topic 5)</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-bold mb-2">Sequences and Series — Full Review</h1>
-            <p className="text-slate-600 text-xl font-medium mb-4 italic">Review Paper 3 — Full Review</p>
-            <div className="bg-white border border-slate-200 rounded-xl px-5 py-3 inline-block mb-6">
-              <p className="text-sm font-bold text-navy-900">
-                13 Questions &nbsp;|&nbsp; 67 Marks &nbsp;|&nbsp; IB Mathematics: Applications and Interpretation SL
-              </p>
-              <p className="text-xs text-slate-500 italic mt-0.5">
-                Show all working. A GDC may be required for some parts. Give non-exact answers correct to
-                3 significant figures unless told otherwise.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3 items-center w-fit print:hidden">
-              <PrintButton />
-              <ExportPdfButton />
-              <span className="text-xs text-slate-400">67 marks · 13 questions · ~2 hours</span>
-            </div>
-          </div>
-        </div>
+        <PaperTop title="Sequences and Series: Full Review" description="Review Paper 3: full review with worked answers on request." />
 
         {/* Sticky navigator */}
         <StickyPaperNav />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+          <div className="a4-paper">
           {/* ══════════════════ QUESTIONS & ANSWERS ══════════════════ */}
           <section id="exercise" className="scroll-mt-28">
-            <PartHeader
-              variant="exercise"
-              label="Exercise Paper"
-              note="Attempt every part, then tap Show Answer to reveal the worked solution"
-            />
+            <PaperHeader course="Mathematics: Applications and interpretation" level="Standard level" title="Review Paper 3: Full Review" duration="2 hours" marks={67} instructions={["Answer all questions.", "Show all working. A GDC may be required for some parts.", "Give non-exact answers correct to 3 significant figures unless told otherwise.", "The maximum mark for each question is shown in brackets."]} />
 
             <QuestionBanner n={1} marks={6} />
             <ContextText>
@@ -607,6 +569,7 @@ export default function ReviewPaper3() {
           />
 
           {/* Footer nav */}
+          </div>
           <PaperFooterNav paperLabel="Sequences and Series — Review Paper 3" />
         </div>
       </main>

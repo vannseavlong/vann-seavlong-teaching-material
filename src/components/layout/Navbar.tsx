@@ -24,7 +24,7 @@ export default function Navbar() {
   const { mode } = useDisplayMode();
 
   return (
-    <nav className="a4-hide fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200">
       <div className="max-w-[1000px] mx-auto flex items-center justify-between px-6 h-14 gap-6 overflow-x-auto">
         <Link href={withMode("/", mode)} className="font-semibold text-base text-navy-900 whitespace-nowrap">
           IB Math Guide

@@ -1,47 +1,85 @@
 import { ReactNode } from "react";
 import Link from "next/link";
+import PrintButton from "./PrintButton";
+import ExportPdfButton from "./ExportPdfButton";
 import { AnswerReveal, AnswerToggleButton, MaskedAnswer, ShowAllAnswersButton } from "./AnswerReveal";
 
 // ─── Shared building blocks for Review paper pages (exercise + answer sheet) ──
 // Used by src/app/review/[paper]/page.tsx. Keep this file dependency-free so
 // each paper page only needs to import what it uses.
 
-export function PartHeader({
-  variant,
-  label,
-  note,
-}: {
-  variant: "exercise" | "answers";
-  label: string;
-  note: string;
-}) {
-  const styles = variant === "exercise" ? "bg-slate-100 text-navy-900 border border-slate-300" : "bg-slate-100 text-navy-900 border border-slate-300";
+/** Web-only page chrome above the paper: back link, one-line title, one-line description, Print + Export. */
+export function PaperTop({ title, description }: { title: string; description: string }) {
   return (
-    <div
-      className={`${styles} a4:bg-white a4:border-black a4:rounded-none rounded-lg px-5 py-3 mb-6 mt-14 font-bold text-sm uppercase tracking-wider flex flex-wrap items-center justify-between gap-2`}
-    >
-      <span>{label}</span>
-      <span className="text-xs font-normal normal-case opacity-80">{note}</span>
+    <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-8 px-6 print:hidden">
+      <div className="max-w-4xl mx-auto">
+        <Link href="/review" className="text-aa-primary text-xs font-bold uppercase tracking-widest a4-hide hover:underline">
+          ← Review
+        </Link>
+        <h1 className="text-2xl sm:text-3xl font-bold mt-2">{title}</h1>
+        <p className="text-slate-600 mt-1">{description}</p>
+        <div className="flex flex-wrap gap-3 items-center mt-4">
+          <PrintButton />
+          <ExportPdfButton />
+        </div>
+      </div>
     </div>
   );
 }
 
+/** IB paper header block (top of `.a4-paper`): course, level, title, duration, total marks, instructions. */
+export function PaperHeader({
+  course,
+  level,
+  title,
+  duration,
+  marks,
+  instructions,
+}: {
+  course: string;
+  level?: string;
+  title: string;
+  duration: string;
+  marks: number;
+  instructions: ReactNode[];
+}) {
+  return (
+    <header className="mb-8">
+      <div className="border-b-2 border-navy-900 pb-3">
+        <p className="text-sm font-bold uppercase tracking-wide">
+          {course}
+          {level ? ` · ${level}` : ""}
+        </p>
+        <h2 className="text-2xl font-bold mt-1">{title}</h2>
+        <p className="text-sm mt-1">
+          Duration: {duration} · Total marks: {marks}
+        </p>
+      </div>
+      <p className="text-sm font-bold mt-4 mb-1">Instructions to candidates</p>
+      <ul className="list-disc pl-5 text-sm space-y-0.5">
+        {instructions.map((t, i) => (
+          <li key={i}>{t}</li>
+        ))}
+      </ul>
+    </header>
+  );
+}
+
+/** IB question opener: "1.  [Maximum mark: N]". */
 export function QuestionBanner({ n, marks }: { n: number | string; marks: number }) {
   return (
-    <div className="flex items-center justify-between border-b-2 border-navy-900 pb-2 mb-5 mt-10">
-      <h3 className="text-xl font-bold text-navy-900">Question {n}</h3>
-      <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-600 a4:bg-white a4:border a4:border-black a4:text-black">
-        Maximum mark: {marks}
-      </span>
+    <div className="flex items-baseline gap-3 font-bold mt-8 mb-3 break-after-avoid">
+      <span>{n}.</span>
+      <span>[Maximum mark: {marks}]</span>
     </div>
   );
 }
 
 export function ContextText({ children }: { children: ReactNode }) {
-  return <p className="text-slate-700 leading-relaxed mb-4">{children}</p>;
+  return <p className="text-slate-700 leading-relaxed mb-3">{children}</p>;
 }
 
-/** Exercise-side sub-part: letter badge, statement, mark pill. Use letter="•" for flat (unlettered) questions. */
+/** Exercise-side sub-part: "(a)" label, statement, right-aligned mark. Use letter="•" for flat (unlettered) questions. */
 export function PartBlock({
   letter,
   marks,
@@ -52,37 +90,23 @@ export function PartBlock({
   children: ReactNode;
 }) {
   return (
-    <div className="mb-6 flex gap-3">
-      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-slate-100 text-navy-900 border border-slate-300 a4:bg-white a4:border-black a4:text-black font-bold text-sm flex items-center justify-center mt-0.5">
-        {letter}
-      </span>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-start justify-between gap-3 mb-2">
-          <div className="text-slate-700 leading-relaxed">{children}</div>
-          <span className="flex-shrink-0 text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 a4:bg-white a4:text-black whitespace-nowrap">
-            [{marks}]
-          </span>
-        </div>
-      </div>
+    <div className="mb-2 flex gap-3 break-inside-avoid">
+      {letter !== "•" && <span className="flex-shrink-0 w-6 font-semibold">({letter})</span>}
+      <div className="flex-1 min-w-0 text-slate-700 leading-relaxed">{children}</div>
+      <span className="flex-shrink-0 font-semibold whitespace-nowrap">[{marks}]</span>
     </div>
   );
 }
 
-/** Blank ruled working space + answer line. The worked solution (`answerId`) follows directly below via `AnswerPart`. */
+/** Blank ruled working space. The worked solution (`answerId`) follows via `AnswerPart`; its Show Answer button is a4-hide. */
 export function WorkSpace({ lines = 3, answerId }: { lines?: number; answerId?: string }) {
   return (
-    <div className="ml-10 mb-2">
-      <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50/60 a4:bg-white a4:border-black px-4 py-3">
-        {Array.from({ length: lines }).map((_, i) => (
-          <div key={i} className="border-b border-slate-200 h-7 last:border-b-0" />
-        ))}
-      </div>
-      <div className="flex items-center gap-2 mt-2">
-        <span className="text-xs font-bold text-navy-900">Answer:</span>
-        <div className="flex-1 border-b-2 border-slate-300 h-6" />
-      </div>
+    <div className="ml-9 mb-4">
+      {Array.from({ length: lines }).map((_, i) => (
+        <div key={i} className="border-b border-slate-300 h-7" />
+      ))}
       {answerId && (
-        <div className="mt-3">
+        <div className="mt-2 a4-hide">
           <AnswerToggleButton id={answerId} />
         </div>
       )}
@@ -95,11 +119,7 @@ export function AnswerStep({ children }: { children: ReactNode }) {
 }
 
 export function FinalAnswer({ children }: { children: ReactNode }) {
-  return (
-    <div className="mt-3 mb-1 inline-block rounded-lg bg-white border border-slate-300 a4:border-black px-4 py-2">
-      <span className="text-sm font-bold text-navy-900">{children}</span>
-    </div>
-  );
+  return <p className="mt-3 mb-1 text-sm font-bold text-navy-900">{children}</p>;
 }
 
 /** Worked solution for a part — hidden by default, revealed by the matching `WorkSpace`'s Show Answer button (same `id`). */
@@ -118,16 +138,12 @@ export function AnswerPart({
 }) {
   return (
     <AnswerReveal id={id}>
-      <div id={id} className="mb-8 ml-10 mt-3 scroll-mt-28 rounded-xl border border-slate-200 bg-slate-50 a4:bg-white a4:border-black p-4 sm:p-5">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="flex-shrink-0 w-7 h-7 rounded-full bg-navy-900 text-white a4:bg-white a4:text-black a4:border a4:border-black font-bold text-sm flex items-center justify-center">
-            {letter}
-          </span>
-          {restate && <span className="text-sm font-semibold text-slate-500">{restate}</span>}
-          <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded-full bg-white text-slate-500 a4:text-black whitespace-nowrap">
-            [{marks}]
-          </span>
-        </div>
+      <div id={id} className="mb-6 ml-9 mt-2 scroll-mt-28 border-l-2 border-slate-300 pl-4">
+        <p className="text-sm font-semibold text-slate-600 mb-2">
+          {letter !== "•" && `(${letter}) `}
+          {restate}
+          <span className="float-right">[{marks}]</span>
+        </p>
         <div>{children}</div>
       </div>
     </AnswerReveal>
@@ -136,7 +152,7 @@ export function AnswerPart({
 
 export function Note({ children }: { children: ReactNode }) {
   return (
-    <p className="text-xs text-slate-500 italic bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 mt-2">
+    <p className="text-xs text-slate-500 italic mt-2">
       {children}
     </p>
   );
@@ -146,9 +162,9 @@ export function SummaryTable({ rows }: { rows: [string, string, string][] }) {
   return (
     <section
       id="summary"
-      className="scroll-mt-28 mt-16 pt-8 border-t border-slate-200 export-question-hide"
+      className="scroll-mt-28 mt-12 pt-6 border-t border-slate-300 export-question-hide a4-hide"
     >
-      <div className="bg-slate-100 text-navy-900 border border-slate-300 a4:bg-white a4:border-black rounded-lg px-5 py-3 mb-2 font-bold text-sm uppercase tracking-wider flex flex-wrap items-center justify-between gap-2">
+      <div className="text-navy-900 mb-2 font-bold text-sm uppercase tracking-wider flex flex-wrap items-center justify-between gap-2">
         <span>Summary of Final Answers</span>
         <ShowAllAnswersButton />
       </div>

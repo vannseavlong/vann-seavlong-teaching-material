@@ -106,64 +106,73 @@ section[id] {
   margin: 15mm;
 }
 
-/* Chrome that disappears in A4 (and the calculator widget). */
-html[data-mode="a4"] .a4-hide,
-html[data-mode="a4"] [id^="tia4"],
-html[data-mode="a4"] [class*="tia4"] {
-  display: none !important;
-}
-
-/* A4 sheet on screen: white, black text, 210mm wide, 15mm margins. */
-html[data-mode="a4"] {
+/* The paper: wrap exam/worksheet content in <div className="a4-paper">.
+   Web mode: no styling. A4 mode: a white 210mm sheet on a gray desk.
+   Navbar/Footer/page chrome are never restyled by the mode. */
+html[data-mode="a4"] main:has(.a4-paper) {
   background: #e5e7eb;
 }
-html[data-mode="a4"] body {
+html[data-mode="a4"] .a4-paper {
   background: #fff;
   color: #000;
   width: 210mm;
   max-width: 100%;
   min-height: 297mm;
-  margin: 0 auto;
+  margin: 1.5rem auto;
   padding: 15mm;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
-html[data-mode="a4"] body * {
+html[data-mode="a4"] .a4-paper * {
   background-color: transparent !important;
   background-image: none !important;
   color: #000 !important;
   box-shadow: none !important;
   text-shadow: none !important;
 }
-html[data-mode="a4"] body *:not(.visual, .visual *) {
+html[data-mode="a4"] .a4-paper *:not(.visual, .visual *) {
   border-color: #000 !important;
 }
-html[data-mode="a4"] a {
+html[data-mode="a4"] .a4-paper a {
   text-decoration: underline;
 }
-/* Pages reserve space for the fixed nav; it is hidden in A4. */
-html[data-mode="a4"] main,
-html[data-mode="a4"] body > div {
-  padding-top: 0 !important;
-}
 /* Graphs, diagrams, figures keep shape but lose colour. */
-html[data-mode="a4"] .visual {
+html[data-mode="a4"] .a4-paper .visual {
   filter: grayscale(1);
 }
-html[data-mode="a4"] .q-accent {
-  color: #000 !important;
+html[data-mode="a4"] .a4-paper .q-accent {
   font-weight: 700;
 }
+/* Answer controls never show in A4. */
+html[data-mode="a4"] .a4-hide {
+  display: none !important;
+}
 
-/* Print always uses the A4 sheet, in either mode. */
+/* Print (either mode): when a page has an .a4-paper, only the paper prints,
+   A4 portrait. Everything that neither contains nor sits inside the paper is
+   removed; the ancestors stay so the paper keeps flowing across pages. */
 @media print {
-  html[data-mode] .a4-hide {
+  .a4-hide {
     display: none !important;
   }
-  html[data-mode="a4"] {
-    background: #fff;
+  body:has(.a4-paper) *:not(:has(.a4-paper), .a4-paper, .a4-paper *) {
+    display: none !important;
   }
-  html[data-mode="a4"] body {
+  body:has(.a4-paper),
+  body:has(.a4-paper) :has(> .a4-paper),
+  body:has(.a4-paper) :has(.a4-paper) {
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  body:has(.a4-paper) .a4-paper {
     width: auto;
     min-height: 0;
+    margin: 0;
     padding: 0;
+    box-shadow: none;
   }
 }

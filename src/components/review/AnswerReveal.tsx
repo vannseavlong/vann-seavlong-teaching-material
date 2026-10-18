@@ -65,7 +65,7 @@ export function ShowAllAnswersButton() {
     <button
       type="button"
       onClick={toggleGlobal}
-      className={`print:hidden whitespace-nowrap text-xs px-3 py-1.5 rounded-full font-bold transition-colors ${
+      className={`print:hidden a4-hide whitespace-nowrap text-xs px-3 py-1.5 rounded-full font-bold transition-colors ${
         globalOpen
           ? "bg-white text-navy-900 border border-slate-300 hover:bg-slate-100"
           : "bg-aa-primary text-white hover:opacity-90 a4:bg-white a4:text-black a4:border a4:border-black"
@@ -85,7 +85,7 @@ export function AnswerToggleButton({ id }: { id: string }) {
       type="button"
       onClick={() => toggleOne(id)}
       aria-expanded={open}
-      className={`print:hidden inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${
+      className={`print:hidden a4-hide inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${
         open
           ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
           : "bg-aa-primary text-white hover:opacity-90 a4:bg-white a4:text-black a4:border a4:border-black"

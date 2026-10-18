@@ -49,10 +49,8 @@ export default function ModeProvider({ children }: { children: React.ReactNode }
   );
 }
 
-/** Floating calculator widget; not loaded in A4 mode. */
+/** Floating calculator widget (both modes). */
 export function CalculatorEmbed() {
-  const { mode } = useDisplayMode();
-  if (mode === "a4") return null;
   return (
     <Script
       src="https://bubble-calculator.web.app/v1/embed.js"

@@ -2,7 +2,8 @@ import { Fragment } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import PrintButton from "./PrintButton";
+import WorksheetActions from "../_components/WorksheetActions";
+import PaperHeader from "../_components/PaperHeader";
 
 export const metadata: Metadata = {
   title: "Physics Exam Review — Motion, Kinematics & Dynamics | Worksheets",
@@ -12,32 +13,30 @@ export const metadata: Metadata = {
 
 // ─── Helper components ────────────────────────────────────────────────────────
 
-function SessionHeader({ n, title }: { n: number; title: string }) {
+function SessionHeader({ n, title, time }: { n: number; title: string; time?: string }) {
   return (
-    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-xl px-6 py-4 mb-6 mt-12">
-      <p className="text-aa-primary text-xs font-bold uppercase tracking-widest mb-1">Session {n}</p>
-      <h2 className="text-2xl font-bold">{title}</h2>
-    </div>
+    <h2 className="mt-12 mb-5 flex items-baseline justify-between gap-3 border-b-2 border-navy-900 pb-1 text-xl font-bold text-navy-900">
+      <span>
+        Session {n}: {title}
+      </span>
+      {time && <span className="text-sm font-normal text-slate-600">{time}</span>}
+    </h2>
   );
 }
 
 function PartHeader({ variant }: { variant: "a" | "b" }) {
-  return variant === "a" ? (
-    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider">
-      Part A — Formulas &amp; Key Concepts
-    </div>
-  ) : (
-    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-10">
-      Part B — Practice Exercises
-    </div>
+  return (
+    <h3 className={`mb-4 text-base font-bold text-navy-900 ${variant === "b" ? "mt-10" : ""}`}>
+      {variant === "a" ? "Part A: Formulas & Key Concepts" : "Part B: Practice Exercises"}
+    </h3>
   );
 }
 
 function TopicTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-aa-primary font-bold text-base mt-8 mb-1 border-b border-slate-200 pb-1">
+    <h4 className="text-navy-900 font-bold text-base mt-8 mb-1 border-b border-slate-300 pb-1">
       {children}
-    </h3>
+    </h4>
   );
 }
 
@@ -128,7 +127,6 @@ function GraphShapeTable({
 function SectionBlock({
   code,
   title,
-  variant = "blue",
   children,
 }: {
   code: string;
@@ -136,19 +134,13 @@ function SectionBlock({
   variant?: "blue" | "green" | "orange" | "purple" | "teal";
   children: React.ReactNode;
 }) {
-  const headerColors = {
-    blue: "bg-[#dbeafe] text-[#1e40af] border-[#bfdbfe]",
-    green: "bg-[#dcfce7] text-[#15803d] border-[#bbf7d0]",
-    orange: "bg-[#ffedd5] text-[#c2410c] border-[#fed7aa]",
-    purple: "bg-[#f3e8ff] text-[#7e22ce] border-[#e9d5ff]",
-    teal: "bg-[#ccfbf1] text-[#0f766e] border-[#99f6e4]",
-  };
+  const label = code.replace(/^SECTION\s+/i, "Section ").replace(/^PART\s+/i, "Part ");
   return (
-    <div className="my-6">
-      <div className={`rounded-lg px-5 py-3 mb-4 font-bold text-sm border ${headerColors[variant]}`}>
-        {code}: {title}
-      </div>
-      <div className="space-y-3 px-1">{children}</div>
+    <div className="my-6 a4:break-inside-avoid-page">
+      <h4 className="mb-3 text-sm font-bold text-navy-900">
+        {label}: {title}
+      </h4>
+      <div className="space-y-3">{children}</div>
     </div>
   );
 }
@@ -1414,36 +1406,20 @@ function Session4() {
 export default function PhysicsMotionWorksheet() {
   return (
     <main className="min-h-screen pt-16">
-      {/* Hero */}
-      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-14 px-6">
+      {/* Page title (web chrome) */}
+      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-8 px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <Link href="/worksheets" className="text-aa-primary text-xs font-bold uppercase tracking-widest hover:underline">
-              ← Worksheets
-            </Link>
-            <span className="text-slate-500">|</span>
-            <span className="text-xs bg-slate-50 border border-slate-200 text-navy-900 px-2.5 py-1 rounded-full font-semibold">Physics</span>
-            <span className="text-xs text-slate-500">Grade 10 — 10SCI Unit 5</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2">Physics Exam Review</h1>
-          <p className="text-aa-primary text-xl font-medium mb-4 italic">Motion, Kinematics &amp; Dynamics</p>
-          <div className="bg-white border border-slate-200 rounded-xl px-5 py-3 inline-block mb-6">
-            <p className="text-sm font-bold text-navy-900">
-              Covers: Describing Motion &nbsp;|&nbsp; Acceleration &nbsp;|&nbsp; Newton&apos;s Laws
-            </p>
-            <p className="text-xs text-slate-500 italic mt-0.5">
-              Includes: Formulas • Practice Problems • Data Tables • Graph Exercises
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3 items-center">
-            <PrintButton />
-            <span className="text-xs text-slate-500">64 questions across 4 sessions</span>
-          </div>
+          <Link href="/worksheets" className="text-aa-primary text-sm hover:underline">
+            ← Worksheets
+          </Link>
+          <h1 className="text-3xl font-bold mt-2 mb-1">Physics Exam Review</h1>
+          <p className="text-slate-500 mb-4">Motion, kinematics and dynamics (10SCI Unit 5).</p>
+          <WorksheetActions />
         </div>
       </div>
 
       {/* Sticky session navigator */}
-      <div className="a4-hide sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
+      <div className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
         <div className="max-w-4xl mx-auto px-6 py-2 flex gap-2 overflow-x-auto">
           {[
             { id: "session-1", label: "Session 1 — Motion" },
@@ -1463,18 +1439,34 @@ export default function PhysicsMotionWorksheet() {
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-2">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        <div className="a4-paper">
+          <PaperHeader
+            course="Physics: Motion, Kinematics and Dynamics"
+            level="Grade 10, 10SCI Unit 5"
+            title="Exam Review"
+            duration="Not timed"
+            questions={64}
+            instructions={[
+              "Answer all questions.",
+              "Show your working and include units in every final answer.",
+              "Plot and sketch graphs in the spaces provided.",
+              "A calculator is allowed.",
+            ]}
+          />
+
         <Session1 />
         <Session2 />
         <Session3 />
         <Session4 />
+        </div>
 
         {/* Footer nav */}
-        <div className="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
+        <div className="mt-10 pt-6 border-t border-slate-200 flex items-center justify-between">
           <Link href="/worksheets" className="text-sm text-slate-500 hover:text-aa-primary font-medium transition-colors">
             ← All Worksheets
           </Link>
-          <p className="text-xs text-slate-400">Physics Exam Review — 10SCI Unit 5</p>
+          <p className="text-xs text-slate-400">Physics Exam Review</p>
         </div>
       </div>
     </main>

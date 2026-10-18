@@ -6,6 +6,7 @@
 3. All sub-navigation (units, lessons, practice topics) moves to a **left sidebar**, w3schools-style, on curriculum pages.
 
 ## Contract (all tasks follow this; owned by Web-display-mode)
+> **Superseded in part by Revision 2 below**: navbar/footer/calculator are NOT hidden in A4, and A4 styling is scoped to `.a4-paper`, not the whole page.
 - A4 mode exists **only on `/worksheets/**` and `/review/**`** (`supportsA4()` in `src/lib/display-mode.ts`). Everywhere else `?mode=` is ignored and the toggle is hidden.
 - `<html data-mode="web|a4">`. Default `web`. Source of truth is the `mode` search param; a tiny inline script in `<head>` sets the attribute before paint (no flash). Invalid value falls back to `web`.
 - Tailwind variant `a4:` already exists in `globals.css` (`@custom-variant a4`). Use `a4:` for A4-only overrides. Do not read the mode in JS unless unavoidable; if needed use `useDisplayMode()` from `@/components/layout/ModeProvider`.
@@ -48,3 +49,25 @@ All five touch disjoint files, so they run in parallel. Final integration check 
 
 ## Out of scope (backlog `Web-decolor-lessons-practice`)
 Colour clean-up inside AA/AI lesson and practice pages; mock tests; dark mode.
+
+---
+
+# Revision 2 (owner feedback, 2026-10-18)
+
+## Changes to the contract (replaces the A4 rules above where they conflict)
+- **Header and page stay in normal web display in A4 mode.** Navbar, Footer, hero/page chrome are NOT hidden or restyled; the Web/A4 toggle stays visible. Only the **question paper** renders as an A4 sheet.
+- **Paper container:** content that is the exam/worksheet paper is wrapped in `<div className="a4-paper">`. In `data-mode="a4"` it becomes a centred white sheet, 210mm wide, on a light-gray desk background with a soft shadow, black text, no colour fills, black borders. In `web` mode `.a4-paper` has no special styling. When printing, only the `.a4-paper` content prints (page chrome hidden), with `@page` A4 portrait 15mm margins.
+- **No answers in A4:** Show Answer / Show All / reveal controls carry `a4-hide` and are not rendered visibly in A4. A4 mode shows only **Print** and **Export** buttons.
+- Remove `a4-hide` from Navbar/Footer, remove the A4 global body/`body *` rules from `globals.css`; scope all A4 rules to `.a4-paper`.
+
+## Sidebar: topics, not units
+The sidebar lists the **topics inside each unit** (the same items as the lesson page's "Jump to topic" chips, as anchor links like `/ai/unit-1/lesson#percentages`), plus the practice topics. Unit headings are only group labels. The "Jump to topic" chip bar on lesson pages is removed (moved into the sidebar).
+
+## IB paper style for Review and Worksheets (clean headings)
+Cut over-information: no taglines, stat pills, tag rows, multi-line hero blurbs, mark-scheme chatter above the paper. Follow IB exam conventions:
+- Paper header block (top of the `a4-paper`): course line (e.g. "Mathematics: Analysis and approaches"), level (Standard level), "Paper N" / worksheet title, duration, total marks. One compact block, a rule under it.
+- Short "Instructions to candidates" list (3 to 5 bullets: answer all questions, show working, calculator allowed or not, maximum marks).
+- Section labels ("Section A", "Section B") only where the paper has them.
+- Questions numbered `1.`, `2.` with the IB mark line `[Maximum mark: N]` right at the start of each question; parts `(a)`, `(b)`, `(c)` with marks `[2]` right-aligned; answer space for working.
+- No decorative boxes. Formulas and diagrams inline.
+- Page title on the web (above the paper) stays one line + one-line description.
