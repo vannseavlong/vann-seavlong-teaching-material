@@ -1,0 +1,49 @@
+# Plan: UI consistency, A4/Web display mode, docs sidebar
+
+## Goal
+1. Calm, consistent design: colour is reserved for **visuals** (graphs, diagrams, figures) and **items inside exercise questions**. Chrome, headings, boxes, tags, tables and buttons use the neutral palette plus one accent.
+2. A **display mode** switch: `web` (today's look, minus the extra colour) and `a4` (black and white, A4 portrait, print-ready). Driven by the search param `?mode=a4|web` so the owner can send a student a link in the right mode.
+3. All sub-navigation (units, lessons, practice topics) moves to a **left sidebar**, w3schools-style, on curriculum pages.
+
+## Contract (all tasks follow this; owned by Web-display-mode)
+- `<html data-mode="web|a4">`. Default `web`. Source of truth is the `mode` search param; a tiny inline script in `<head>` sets the attribute before paint (no flash). Invalid value falls back to `web`.
+- Tailwind variant `a4:` already exists in `globals.css` (`@custom-variant a4`). Use `a4:` for A4-only overrides. Do not read the mode in JS unless unavoidable; if needed use `useDisplayMode()` from `@/components/layout/ModeProvider`.
+- Chrome that must disappear in A4 carries the class `a4-hide` (display none under `[data-mode=a4]`). Navbar, Footer, sidebar and the calculator widget are hidden in A4.
+- A4 page: white sheet 210mm wide, portrait, margins 15mm, `@page { size: A4 portrait; margin: 15mm }`, black text on white, no backgrounds, no shadows, borders in black/gray. Colour in graphs/visuals stays only as grayscale in A4 (via `filter: grayscale(1)` on `.visual`).
+- Marking visuals: wrap any graph/diagram/figure in an element with class `visual` (keeps colour in web mode, gray in A4). Exercise-item colour (e.g. a coloured highlight on a term inside a question) uses class `q-accent`.
+- Internal links in Navbar and Sidebar keep the current `mode` param.
+
+## Neutral palette (web mode)
+Text `navy-900`/`slate-500`, surfaces white/`slate-50`, borders `slate-200`, one accent `aa-primary` (blue) for links, active states and primary buttons. Remove green/yellow/red/orange boxes, tags and section tints from chrome. SL/HL, AA/AI distinctions use a text label or an outline, not fill colour. Semantic red is allowed only for a genuine warning.
+
+## Flow
+| Step | State |
+|---|---|
+| Student opens link `…?mode=a4` | new |
+| Page renders in chosen mode, toggle in Navbar shows current mode | new |
+| Toggle click updates `?mode=` (replace, keep other params) | new |
+| Export PDF / Print on review and worksheets | exists, must work with A4 mode |
+| Curriculum page → lesson/practice navigation | change: sidebar |
+
+## Gaps and decisions
+- Existing print CSS (`@media print`) and `ExportPdfButton` (`data-print-mode` question/answers) stay; A4 mode must compose with them, not replace them. Decision: print always uses the A4 sheet layout regardless of mode.
+- Lesson and practice pages are 1.7k to 2.7k lines each with heavy colour. Decision: this wave gets sidebar + mode support for them but not the colour clean-up inside the pages (wave 2, backlog). Worksheets and Review get the full clean-up, as asked.
+- Sidebar scope: pages under `/aa/**` and `/ai/**` (unit tree: Lesson, Practice 1..n, per unit). Worksheets and Review keep the top nav (flat lists).
+
+## Open questions (recommendation)
+1. Should `mode` persist when the student navigates by in-page links? Recommend yes for Navbar and Sidebar only (done in this wave).
+2. Should A4 mode apply to Home and curriculum overview pages? Recommend yes, it only hides chrome and goes B/W.
+
+## Task breakdown
+| Task | Depends on | Parallel group | Tier | Size |
+|---|---|---|---|---|
+| Web-display-mode | none | A | T2 | M |
+| Web-docs-sidebar | contract only | A | T2 | M |
+| Web-decolor-worksheets | contract only | A | T1 | M |
+| Web-decolor-review | contract only | A | T1 | M |
+| Web-neutral-shared-ui | contract only | A | T1 | S |
+
+All five touch disjoint files, so they run in parallel. Final integration check (build, both modes, print) is done by the project manager after all five finish.
+
+## Out of scope (backlog `Web-decolor-lessons-practice`)
+Colour clean-up inside AA/AI lesson and practice pages; mock tests; dark mode.

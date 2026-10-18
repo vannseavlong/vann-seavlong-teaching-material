@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Display mode contract: <html data-mode="web|a4">. Use `a4:` utilities for A4-only styles. */
+@custom-variant a4 (&:where([data-mode="a4"], [data-mode="a4"] *));
+
 @theme inline {
   --color-navy-900: #1a365d;
   --color-navy-800: #2d3748;
