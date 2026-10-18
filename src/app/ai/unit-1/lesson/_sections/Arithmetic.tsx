@@ -11,42 +11,40 @@ export default function ArithmeticSection() {
       label="Revision 1"
       title="Arithmetic Sequences & Series"
       tag={<SLTag />}
-      intro="An arithmetic sequence goes up (or down) by the same amount every step. Linear growth — a fixed weekly saving, a salary rise of a fixed dollar amount, seats added row by row — is arithmetic."
+      intro="Arithmetic sequences model linear growth: a fixed weekly saving, a fixed yearly pay rise, a fixed number of extra seats per row."
     >
-      <HighlightBox variant="green">
+      <HighlightBox variant="blue">
         <p className="font-semibold text-navy-900 mb-1">Key Idea</p>
         <p className="text-slate-500 text-sm">
-          Subtract any term from the next one. If you always get the{" "}
-          <strong>same number</strong> <InlineMath math="d" />, the sequence is
-          arithmetic. A <em>sequence</em> is the list of terms; a{" "}
-          <em>series</em> is what you get when you <strong>add</strong> them.
+          A sequence is arithmetic if every term differs from the previous one by the
+          same number <InlineMath math="d" />. A <em>sequence</em> is the list of
+          terms; a <em>series</em> is their <strong>sum</strong>. The formulas for{" "}
+          <InlineMath math="u_n" /> and <InlineMath math="S_n" /> are in the IB
+          formula booklet.
         </p>
       </HighlightBox>
 
-      <FormulaBox title="Arithmetic Sequence">
+      <FormulaBox title="Group 1: Sequence (nth term)">
         <FormulaRow label="Common difference" math="d = u_{n+1} - u_n" />
         <FormulaRow label="nth term" math="u_n = u_1 + (n-1)d" />
+        <FormulaRow label="Two terms given" math="u_q - u_p = (q-p)d" />
       </FormulaBox>
 
-      <FormulaBox title="Arithmetic Series (sum of n terms)">
-        <FormulaRow
-          label="Sum — using d"
-          math="S_n = \dfrac{n}{2}\left(2u_1 + (n-1)d\right)"
-        />
-        <FormulaRow
-          label="Sum — using last term"
-          math="S_n = \dfrac{n}{2}\left(u_1 + u_n\right)"
-        />
-        <FormulaRow
-          label="Sigma notation"
-          math="\sum_{k=1}^{n}u_k = u_1 + u_2 + \cdots + u_n"
-        />
+      <FormulaBox title="Group 2: Series (sum of n terms)">
+        <FormulaRow label="Sum, using d" math="S_n = \dfrac{n}{2}\left(2u_1 + (n-1)d\right)" />
+        <FormulaRow label="Sum, using last term" math="S_n = \dfrac{n}{2}\left(u_1 + u_n\right)" />
+      </FormulaBox>
+
+      <FormulaBox title="Group 3: Sigma notation">
+        <FormulaRow label="Meaning" math="\sum_{k=1}^{n}u_k = u_1 + u_2 + \cdots + u_n" />
+        <FormulaRow label="Number of terms" math="\sum_{k=a}^{b}\ \text{has}\ b-a+1\ \text{terms}" />
+        <FormulaRow label="Linear rule" math="u_k = pk + q \Rightarrow d = p,\ u_1 = p+q" />
       </FormulaBox>
 
       {/* Visual: step-flow */}
       <div className="bg-white border border-slate-200 rounded-xl p-5 my-5 overflow-x-auto">
         <p className="text-xs font-bold uppercase tracking-wider text-ai-primary mb-4">
-          Add the same d each step — e.g. 7, 11, 15, 19, …
+          Add the same d each step: 7, 11, 15, 19, 23
         </p>
         <div className="flex items-center gap-2 min-w-max">
           {["7", "11", "15", "19", "23"].map((t, i) => (
@@ -63,67 +61,88 @@ export default function ArithmeticSection() {
           ))}
         </div>
         <p className="text-xs text-slate-400 mt-3">
-          <InlineMath math="u_1 = 7,\; d = 4" /> — a straight-line pattern:
-          the terms change by a constant amount, never by a constant factor.
+          <InlineMath math="u_1 = 7,\; d = 4" />. The terms change by a constant
+          amount, never by a constant factor (that is geometric).
         </p>
       </div>
 
       <HighlightBox variant="yellow">
-        <p className="font-semibold text-navy-900 mb-2">Which formula? Finding n?</p>
+        <p className="font-semibold text-navy-900 mb-2">Choose the method</p>
         <ul className="list-disc pl-5 text-slate-500 text-sm space-y-1">
           <li>
-            Know <InlineMath math="u_1" /> and <InlineMath math="d" /> → use{" "}
-            <InlineMath math="u_n = u_1+(n-1)d" /> for a term and the first
-            sum formula for a total.
+            Know <InlineMath math="u_1" /> and <InlineMath math="d" />: use{" "}
+            <InlineMath math="u_n" /> for a term, <InlineMath math="S_n" /> with{" "}
+            <InlineMath math="d" /> for a total.
           </li>
           <li>
-            Know the last term → use{" "}
+            Know <InlineMath math="u_1" /> and the last term: use{" "}
             <InlineMath math="S_n=\frac{n}{2}(u_1+u_n)" />.
           </li>
           <li>
-            Two terms given (e.g. <InlineMath math="u_3" /> and{" "}
-            <InlineMath math="u_8" />) → subtract them:{" "}
-            <InlineMath math="u_8-u_3 = 5d" />.
+            Two terms given: subtract them to get <InlineMath math="d" /> first.
           </li>
           <li>
-            &ldquo;Find <InlineMath math="n" /> such that…&rdquo; → solve{" "}
-            <InlineMath math="u_n = \text{value}" /> directly, or tabulate{" "}
-            <InlineMath math="S_n" /> on the GDC for an inequality.
+            &ldquo;Find <InlineMath math="n" />&rdquo; for a target term: solve{" "}
+            <InlineMath math="u_n=\text{value}" />. For a target sum or an
+            inequality on <InlineMath math="S_n" />, use the GDC table.
+          </li>
+          <li>
+            GDC: enter <InlineMath math="u_n" /> or <InlineMath math="S_n" /> as a
+            function of <InlineMath math="n" /> in the table or equation solver, or
+            use the sequence and sum commands for sigma.
           </li>
         </ul>
       </HighlightBox>
 
-      <WorkedExample title="nth term and finding n: 3, 8, 13, 18, …">
+      <WorkedExample title="Find the 25th term and the position of 188 in 3, 8, 13, 18, …">
         <StepBox n={1}>
-          <InlineMath math="u_1 = 3" />, <InlineMath math="d = 8-3 = 5" />. The
-          25th term:
+          <InlineMath math="u_1 = 3" />, <InlineMath math="d = 8-3 = 5" />.
           <BlockMath math="u_{25} = 3 + 24(5) = \boxed{123}" />
         </StepBox>
         <StepBox n={2}>
-          Which term equals 188?
+          Set <InlineMath math="u_n = 188" />.
           <BlockMath math="3 + 5(n-1) = 188 \;\Rightarrow\; n-1 = 37 \;\Rightarrow\; n = \boxed{38}" />
         </StepBox>
       </WorkedExample>
 
-      <WorkedExample title="Sum of the first 25 terms of 3, 8, 13, …">
+      <WorkedExample title="Given u₅ = 22 and u₁₂ = 57, find u₁, d and S₁₂">
         <StepBox n={1}>
-          From above, <InlineMath math="u_1 = 3" /> and{" "}
-          <InlineMath math="u_{25} = 123" />.
-        </StepBox>
-        <StepBox n={2}>
-          <BlockMath math="S_{25} = \dfrac{25}{2}(3 + 123) = 12.5 \times 126 = \boxed{1575}" />
-        </StepBox>
-      </WorkedExample>
-
-      <WorkedExample title="Two terms given: u₅ = 22 and u₁₂ = 57">
-        <StepBox n={1}>
-          <BlockMath math="u_{12} - u_5 = 7d = 35 \;\Rightarrow\; d = 5" />
+          <BlockMath math="u_{12} - u_5 = 7d = 35 \;\Rightarrow\; d = \boxed{5}" />
         </StepBox>
         <StepBox n={2}>
           <BlockMath math="u_1 = u_5 - 4d = 22 - 20 = \boxed{2}" />
         </StepBox>
         <StepBox n={3}>
           <BlockMath math="S_{12} = \dfrac{12}{2}(2 + 57) = 6 \times 59 = \boxed{354}" />
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Evaluate the sum of 3k + 2 for k = 1 to 20">
+        <StepBox n={1}>
+          The rule is linear, so the terms are arithmetic: <InlineMath math="u_1 = 5" />,{" "}
+          <InlineMath math="d = 3" />, 20 terms.
+        </StepBox>
+        <StepBox n={2}>
+          <InlineMath math="u_{20} = 3(20)+2 = 62" />.
+          <BlockMath math="S_{20} = \dfrac{20}{2}(5 + 62) = 10 \times 67 = \boxed{670}" />
+        </StepBox>
+        <StepBox n={3}>
+          GDC check: sum of the sequence <InlineMath math="3X+2" /> for{" "}
+          <InlineMath math="X" /> from 1 to 20 gives 670.
+        </StepBox>
+      </WorkedExample>
+
+      <WorkedExample title="Application: a hall has 18 seats in row 1 and 3 more in each next row. Find the least number of rows for at least 1000 seats">
+        <StepBox n={1}>
+          <InlineMath math="u_1 = 18" />, <InlineMath math="d = 3" />.
+          <BlockMath math="S_n = \dfrac{n}{2}\left(36 + 3(n-1)\right) = \dfrac{n}{2}(3n+33)" />
+        </StepBox>
+        <StepBox n={2}>
+          Solve <InlineMath math="S_n \geq 1000" /> with the GDC table:
+          <BlockMath math="S_{20} = 930 < 1000, \qquad S_{21} = 1008 \geq 1000" />
+        </StepBox>
+        <StepBox n={3}>
+          The least number of rows is <InlineMath math="n = \boxed{21}" />.
         </StepBox>
       </WorkedExample>
 
@@ -148,13 +167,16 @@ export default function ArithmeticSection() {
       <Practice
         problem={
           <>
-            Vanna saves $20 in week 1 and increases her saving by $5 each
-            week. How much has she saved in total after 30 weeks?
+            An arithmetic sequence has <InlineMath math="u_4 = 17" /> and{" "}
+            <InlineMath math="u_9 = -3" />. Find <InlineMath math="d" />,{" "}
+            <InlineMath math="u_1" /> and <InlineMath math="S_{20}" />.
           </>
         }
         answer={
           <>
-            <BlockMath math="S_{30} = \dfrac{30}{2}\left(2(20) + 29(5)\right) = 15 \times 185 = \boxed{\$2{,}775}" />
+            <BlockMath math="5d = -3 - 17 = -20 \;\Rightarrow\; d = \boxed{-4}" />
+            <BlockMath math="u_1 = 17 + 3(4) = \boxed{29}" />
+            <BlockMath math="u_{20} = 29 - 19(4) = -47, \quad S_{20} = 10(29 - 47) = \boxed{-180}" />
           </>
         }
       />
@@ -162,15 +184,49 @@ export default function ArithmeticSection() {
         problem={
           <>
             For <InlineMath math="5,\ 9,\ 13,\ \dots" /> find the first term
-            that is greater than 200.
+            greater than 200.
           </>
         }
         answer={
           <>
             <BlockMath math="5 + 4(n-1) > 200 \;\Rightarrow\; n-1 > 48.75 \;\Rightarrow\; n = 50" />
             <p>
-              <InlineMath math="u_{50} = 5 + 49(4) = \boxed{201}" /> (and{" "}
-              <InlineMath math="u_{49} = 197" /> is too small).
+              <InlineMath math="u_{50} = 5 + 49(4) = \boxed{201}" />, and{" "}
+              <InlineMath math="u_{49} = 197" /> is too small.
+            </p>
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            Evaluate <InlineMath math="\sum_{k=1}^{15}(4k-1)" />.
+          </>
+        }
+        answer={
+          <>
+            <p>
+              <InlineMath math="u_1 = 3" />, <InlineMath math="u_{15} = 59" />, 15 terms.
+            </p>
+            <BlockMath math="S_{15} = \dfrac{15}{2}(3 + 59) = 7.5 \times 62 = \boxed{465}" />
+          </>
+        }
+      />
+      <Practice
+        problem={
+          <>
+            Vanna saves $20 in week 1 and increases her saving by $5 each week.
+            (a) Find her total savings after 30 weeks. (b) Find the first week
+            in which her total savings exceed $1000.
+          </>
+        }
+        answer={
+          <>
+            <BlockMath math="\text{(a)}\quad S_{30} = \dfrac{30}{2}\left(2(20) + 29(5)\right) = 15 \times 185 = \boxed{\$2775}" />
+            <BlockMath math="\text{(b)}\quad S_n = \dfrac{n}{2}(5n+35)" />
+            <BlockMath math="S_{16} = 920 < 1000, \qquad S_{17} = 1020 > 1000" />
+            <p>
+              Week <InlineMath math="\boxed{17}" />.
             </p>
           </>
         }
@@ -178,9 +234,8 @@ export default function ArithmeticSection() {
 
       <ReviewPaperLink
         href="/review/ai-sl/arithmetic"
-        label="Session 1 — Arithmetic Sequences and Series (6 questions)"
+        label="Session 1: Arithmetic Sequences and Series (6 questions)"
       />
     </LessonSection>
   );
 }
-
