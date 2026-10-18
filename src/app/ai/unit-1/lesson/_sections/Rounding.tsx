@@ -291,7 +291,7 @@ export default function RoundingSection() {
 
       <ReviewPaperLink
         href="/review/ai-sl/rounding"
-        label="Session 4: Rounding (6 questions)"
+        label="Session 4: Rounding (4 questions, 31 marks)"
       />
     </LessonSection>
   );
