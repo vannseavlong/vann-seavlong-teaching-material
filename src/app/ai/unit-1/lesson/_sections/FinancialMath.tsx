@@ -441,7 +441,7 @@ export default function FinancialMathSection() {
 
       <ReviewPaperLink
         href="/review/ai-sl/financial"
-        label="Session 3: Financial Mathematics (7 questions)"
+        label="Session 3: Financial Mathematics (6 questions, 45 marks)"
       />
     </LessonSection>
   );
