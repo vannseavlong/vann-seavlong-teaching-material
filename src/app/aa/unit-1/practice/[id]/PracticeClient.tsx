@@ -3,6 +3,8 @@
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { InlineMath, BlockMath } from "@/components/ui/Math";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Idea01Icon } from "@hugeicons/core-free-icons";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -1994,8 +1996,8 @@ function ProblemCard({
         {problem.hint && (
           <details className="mb-4 group">
             <summary className="list-none cursor-pointer text-xs font-semibold text-aa-primary hover:underline w-fit select-none">
-              <span className="group-open:hidden">💡 Show hint</span>
-              <span className="hidden group-open:inline">💡 Hide hint</span>
+              <span className="group-open:hidden"><HugeiconsIcon icon={Idea01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" />Show hint</span>
+              <span className="hidden group-open:inline"><HugeiconsIcon icon={Idea01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" />Hide hint</span>
             </summary>
             <div className="mt-2 bg-warn-bg border border-warn-primary rounded-lg px-4 py-3 text-sm text-navy-900">
               {problem.hint}

@@ -9,6 +9,8 @@ import GeometricSection from "./_sections/Geometric";
 import RoundingSection from "./_sections/Rounding";
 import BoundsSection from "./_sections/Bounds";
 import PercentageErrorSection from "./_sections/PercentageError";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Task01Icon, Calculator01Icon, File01Icon } from "@hugeicons/core-free-icons";
 
 export const metadata: Metadata = {
   title: "Unit 1: Number & Algebra — AI Lesson | IB Mathematics AI",
@@ -50,9 +52,9 @@ function LessonHero() {
         </p>
 
         <div className="flex gap-6 text-sm text-ai-light flex-wrap">
-          <span>📋 Percentages · Financial · Sequences · Rounding · Bounds · % Error</span>
-          <span>🧮 Includes the GDC TVM Solver</span>
-          <span>📝 7 exportable Q&amp;A revision papers</span>
+          <span><HugeiconsIcon icon={Task01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" /> Percentages · Financial · Sequences · Rounding · Bounds · % Error</span>
+          <span><HugeiconsIcon icon={Calculator01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" /> Includes the GDC TVM Solver</span>
+          <span><HugeiconsIcon icon={File01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" /> 7 exportable Q&amp;A revision papers</span>
         </div>
       </div>
     </div>
