@@ -256,7 +256,7 @@ export default function PercentageErrorSection() {
 
       <ReviewPaperLink
         href="/review/ai-sl/percentage-error"
-        label="Session 6: Percentage Error (6 questions)"
+        label="Session 6: Percentage Error (5 questions, 36 marks)"
       />
     </LessonSection>
   );
