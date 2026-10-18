@@ -1,24 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Suspense, useState } from "react";
 import type { SidebarTree } from "@/lib/sidebar-data";
 
-function withMode(href: string, mode: string | null) {
-  return mode === "a4" || mode === "web" ? `${href}?mode=${mode}` : href;
-}
-
 function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void }) {
   const pathname = usePathname();
-  const mode = useSearchParams().get("mode");
   // Units whose pages contain the current path start open; others toggle manually.
   const [openMap, setOpenMap] = useState<Record<number, boolean>>({});
 
   return (
     <nav aria-label={`${tree.shortName} units`} className="text-sm">
       <Link
-        href={withMode(tree.overviewHref, mode)}
+        href={tree.overviewHref}
         onClick={onNavigate}
         aria-current={pathname === tree.overviewHref ? "page" : undefined}
         className={`block px-3 py-2 mb-2 rounded-md font-semibold ${
@@ -69,7 +64,7 @@ function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void
                     return (
                       <li key={item.label}>
                         <Link
-                          href={withMode(item.href, mode)}
+                          href={item.href}
                           onClick={onNavigate}
                           aria-current={active ? "page" : undefined}
                           className={`${base} ${

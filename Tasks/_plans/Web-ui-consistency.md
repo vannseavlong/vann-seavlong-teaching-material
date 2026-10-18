@@ -6,12 +6,13 @@
 3. All sub-navigation (units, lessons, practice topics) moves to a **left sidebar**, w3schools-style, on curriculum pages.
 
 ## Contract (all tasks follow this; owned by Web-display-mode)
+- A4 mode exists **only on `/worksheets/**` and `/review/**`** (`supportsA4()` in `src/lib/display-mode.ts`). Everywhere else `?mode=` is ignored and the toggle is hidden.
 - `<html data-mode="web|a4">`. Default `web`. Source of truth is the `mode` search param; a tiny inline script in `<head>` sets the attribute before paint (no flash). Invalid value falls back to `web`.
 - Tailwind variant `a4:` already exists in `globals.css` (`@custom-variant a4`). Use `a4:` for A4-only overrides. Do not read the mode in JS unless unavoidable; if needed use `useDisplayMode()` from `@/components/layout/ModeProvider`.
 - Chrome that must disappear in A4 carries the class `a4-hide` (display none under `[data-mode=a4]`). Navbar, Footer, sidebar and the calculator widget are hidden in A4.
 - A4 page: white sheet 210mm wide, portrait, margins 15mm, `@page { size: A4 portrait; margin: 15mm }`, black text on white, no backgrounds, no shadows, borders in black/gray. Colour in graphs/visuals stays only as grayscale in A4 (via `filter: grayscale(1)` on `.visual`).
 - Marking visuals: wrap any graph/diagram/figure in an element with class `visual` (keeps colour in web mode, gray in A4). Exercise-item colour (e.g. a coloured highlight on a term inside a question) uses class `q-accent`.
-- Internal links in Navbar and Sidebar keep the current `mode` param.
+- Navbar links keep the `mode` param only when they point to a worksheets/review page; the sidebar does not carry it.
 
 ## Neutral palette (web mode)
 Text `navy-900`/`slate-500`, surfaces white/`slate-50`, borders `slate-200`, one accent `aa-primary` (blue) for links, active states and primary buttons. Remove green/yellow/red/orange boxes, tags and section tints from chrome. SL/HL, AA/AI distinctions use a text label or an outline, not fill colour. Semantic red is allowed only for a genuine warning.
@@ -32,7 +33,7 @@ Text `navy-900`/`slate-500`, surfaces white/`slate-50`, borders `slate-200`, one
 
 ## Open questions (recommendation)
 1. Should `mode` persist when the student navigates by in-page links? Recommend yes for Navbar and Sidebar only (done in this wave).
-2. Should A4 mode apply to Home and curriculum overview pages? Recommend yes, it only hides chrome and goes B/W.
+2. Decided by owner: A4 mode applies only to worksheets and review.
 
 ## Task breakdown
 | Task | Depends on | Parallel group | Tier | Size |

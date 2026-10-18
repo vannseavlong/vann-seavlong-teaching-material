@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDisplayMode } from "./ModeProvider";
 import ModeToggle from "./ModeToggle";
-import { withMode } from "@/lib/display-mode";
+import { supportsA4, withMode } from "@/lib/display-mode";
 
 type NavItem = {
   label: string;
@@ -49,7 +49,7 @@ export default function Navbar() {
             );
           })}
         </div>
-        <ModeToggle />
+        {supportsA4(pathname) && <ModeToggle />}
       </div>
     </nav>
   );

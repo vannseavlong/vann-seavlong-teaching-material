@@ -14,7 +14,7 @@ Implement the display-mode contract from the plan: `?mode=a4|web` sets `<html da
 `src/app/layout.tsx`, `src/app/globals.css`, `src/components/layout/ModeProvider.tsx` (new), `src/components/layout/ModeToggle.tsx` (new), `src/components/layout/Navbar.tsx`, `src/components/layout/Footer.tsx`, `src/lib/display-mode.ts` (new)
 
 ## Done when
-- [ ] `?mode=a4` renders black/white A4 sheet with no nav/footer; `?mode=web` and no param render web mode
+- [ ] `?mode=a4` (only on /worksheets and /review; ignored elsewhere) renders black/white A4 sheet with no nav/footer; `?mode=web` and no param render web mode
 - [ ] Invalid value falls back to web; no flash on load
 - [ ] Toggle works and updates the URL; Navbar links preserve mode
 - [ ] Print from A4 mode gives A4 portrait

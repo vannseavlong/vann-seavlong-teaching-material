@@ -3,7 +3,7 @@
 import { createContext, Suspense, useContext, useEffect, useMemo } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
-import { MODE_PARAM, parseMode, type DisplayMode } from "@/lib/display-mode";
+import { MODE_PARAM, parseMode, supportsA4, type DisplayMode } from "@/lib/display-mode";
 
 type ModeContextValue = { mode: DisplayMode; setMode: (mode: DisplayMode) => void };
 
@@ -18,7 +18,7 @@ function ModeState({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const mode = parseMode(searchParams.get(MODE_PARAM));
+  const mode = supportsA4(pathname) ? parseMode(searchParams.get(MODE_PARAM)) : "web";
 
   useEffect(() => {
     document.documentElement.setAttribute("data-mode", mode);
