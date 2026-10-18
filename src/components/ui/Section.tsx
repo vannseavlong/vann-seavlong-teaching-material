@@ -16,7 +16,7 @@ export default function Section({
   alt?: boolean;
 }) {
   return (
-    <section id={id} className={`py-14 px-6 ${alt ? "bg-white border-y border-slate-200" : ""}`}>
+    <section id={id} className={`py-14 px-6 ${alt ? "bg-white border-y border-slate-200 a4:border-black" : ""}`}>
       <div className="max-w-[1000px] mx-auto">
         <span className="block text-sm font-medium text-slate-500 mb-2">
           {label}

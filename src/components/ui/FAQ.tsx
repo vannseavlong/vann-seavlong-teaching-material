@@ -11,13 +11,13 @@ export default function FAQ({ items }: { items: FAQItem[] }) {
       {items.map((item, i) => (
         <details
           key={i}
-          className="bg-white border border-slate-200 rounded-xl overflow-hidden group"
+          className="bg-white border border-slate-200 a4:border-black rounded-xl overflow-hidden group"
         >
           <summary className="px-6 py-4 cursor-pointer font-semibold text-navy-900 list-none flex items-center gap-3 [&::-webkit-details-marker]:hidden">
-            <span className="text-xl text-aa-primary font-bold shrink-0 w-6 text-center group-open:hidden">
+            <span className="text-xl text-aa-primary a4:text-black font-bold shrink-0 w-6 text-center group-open:hidden">
               +
             </span>
-            <span className="text-xl text-aa-primary font-bold shrink-0 w-6 text-center hidden group-open:inline">
+            <span className="text-xl text-aa-primary a4:text-black font-bold shrink-0 w-6 text-center hidden group-open:inline">
               &minus;
             </span>
             {item.question}

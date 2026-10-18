@@ -31,36 +31,36 @@ export default function ReviewPaper3() {
     <AnswerRevealProvider>
       <main className="min-h-screen pt-16">
         {/* Hero */}
-        <div className="bg-[#1e3a5f] text-white py-14 px-6">
+        <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-14 px-6 a4:bg-white a4:py-6 a4:border-black">
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <Link
                 href="/review"
-                className="text-purple-300 text-xs font-bold uppercase tracking-widest hover:underline"
+                className="text-aa-primary text-xs font-bold uppercase tracking-widest a4-hide hover:underline"
               >
                 ← Review
               </Link>
-              <span className="text-white/30">|</span>
-              <span className="text-xs bg-purple-700/80 text-white px-2.5 py-1 rounded-full font-semibold">
+              <span className="text-slate-300">|</span>
+              <span className="text-xs bg-white border border-slate-300 text-slate-600 px-2.5 py-1 rounded-full font-semibold">
                 Sequences &amp; Series
               </span>
-              <span className="text-xs text-white/50">AI — Unit 1 Number &amp; Algebra (Topic 5)</span>
+              <span className="text-xs text-slate-500">AI — Unit 1 Number &amp; Algebra (Topic 5)</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold mb-2">Sequences and Series — Full Review</h1>
-            <p className="text-purple-300 text-xl font-medium mb-4 italic">Review Paper 3 — Full Review</p>
-            <div className="bg-white/10 rounded-xl px-5 py-3 inline-block mb-6">
-              <p className="text-sm font-bold text-white">
+            <p className="text-slate-600 text-xl font-medium mb-4 italic">Review Paper 3 — Full Review</p>
+            <div className="bg-white border border-slate-200 rounded-xl px-5 py-3 inline-block mb-6">
+              <p className="text-sm font-bold text-navy-900">
                 13 Questions &nbsp;|&nbsp; 67 Marks &nbsp;|&nbsp; IB Mathematics: Applications and Interpretation SL
               </p>
-              <p className="text-xs text-white/70 italic mt-0.5">
+              <p className="text-xs text-slate-500 italic mt-0.5">
                 Show all working. A GDC may be required for some parts. Give non-exact answers correct to
                 3 significant figures unless told otherwise.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3 items-center">
+            <div className="flex flex-wrap gap-3 items-center w-fit print:hidden">
               <PrintButton />
               <ExportPdfButton />
-              <span className="text-xs text-white/40">67 marks · 13 questions · ~2 hours</span>
+              <span className="text-xs text-slate-400">67 marks · 13 questions · ~2 hours</span>
             </div>
           </div>
         </div>
@@ -252,7 +252,7 @@ export default function ReviewPaper3() {
                 <thead>
                   <tr>
                     {["Year, n", "1", "2", "3", "4"].map((h) => (
-                      <th key={h} className="bg-[#1e3a5f] text-white px-3 py-2 text-left font-semibold text-xs">
+                      <th key={h} className="bg-slate-100 text-navy-900 border border-slate-200 px-3 py-2 text-left font-semibold text-xs">
                         {h}
                       </th>
                     ))}
@@ -414,7 +414,7 @@ export default function ReviewPaper3() {
                   <thead>
                     <tr>
                       {["n", "Rₙ", "Lₙ"].map((h) => (
-                        <th key={h} className="bg-[#1e3a5f] text-white px-3 py-2 text-left font-semibold text-xs">
+                        <th key={h} className="bg-slate-100 text-navy-900 border border-slate-200 px-3 py-2 text-left font-semibold text-xs">
                           {h}
                         </th>
                       ))}

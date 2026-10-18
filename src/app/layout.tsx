@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Script from "next/script";
+import ModeProvider, { CalculatorEmbed } from "@/components/layout/ModeProvider";
+import { MODE_INIT_SCRIPT } from "@/lib/display-mode";
 import "./globals.css";
 import "katex/dist/katex.min.css";
 import Navbar from "@/components/layout/Navbar";
@@ -44,21 +45,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} data-mode="web" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: MODE_INIT_SCRIPT }} />
+      </head>
       <body className="antialiased" suppressHydrationWarning>
-        <Navbar />
-        {children}
-        <Footer />
-        {/* Floating calculator widget (https://bubble-calculator.web.app) */}
-        <Script
-          src="https://bubble-calculator.web.app/v1/embed.js"
-          strategy="afterInteractive"
-          data-tia4-auto
-          data-position="bottom-right"
-          data-theme="auto"
-          data-accent="#2b6cb0"
-          data-hotkey="alt+c"
-        />
+        <ModeProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          {/* Floating calculator widget (https://bubble-calculator.web.app), web mode only */}
+          <CalculatorEmbed />
+        </ModeProvider>
       </body>
     </html>
   );

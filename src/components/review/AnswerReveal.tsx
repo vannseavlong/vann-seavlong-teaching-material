@@ -67,8 +67,8 @@ export function ShowAllAnswersButton() {
       onClick={toggleGlobal}
       className={`print:hidden whitespace-nowrap text-xs px-3 py-1.5 rounded-full font-bold transition-colors ${
         globalOpen
-          ? "bg-[#1e3a5f] text-white hover:bg-[#16304d]"
-          : "bg-purple-700 text-white hover:bg-purple-800"
+          ? "bg-white text-navy-900 border border-slate-300 hover:bg-slate-100"
+          : "bg-aa-primary text-white hover:opacity-90 a4:bg-white a4:text-black a4:border a4:border-black"
       }`}
     >
       {globalOpen ? "Hide All Answers" : "Show All Answers"}
@@ -88,7 +88,7 @@ export function AnswerToggleButton({ id }: { id: string }) {
       className={`print:hidden inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${
         open
           ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
-          : "bg-purple-700 text-white hover:bg-purple-800"
+          : "bg-aa-primary text-white hover:opacity-90 a4:bg-white a4:text-black a4:border a4:border-black"
       }`}
     >
       {open ? "Hide Answer ▲" : "Show Answer ▼"}

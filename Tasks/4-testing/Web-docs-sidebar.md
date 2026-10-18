@@ -17,9 +17,9 @@ All sub navigation (units, Lesson, Practice 1..n) moves to a left sidebar on `/a
 - [ ] Sidebar shows on every `/aa/**` and `/ai/**` page, correct item highlighted
 - [ ] Mobile collapse works
 - [ ] Hidden in `?mode=a4`, content fills the sheet
-- [ ] Neutral styling only (accent blue for active item), no SL/HL or AA/AI fill colours
-- [ ] No broken links (check each href against `src/app`)
-- [ ] `npm run build` and `npm run lint` pass
+- [x] Neutral styling only (accent blue for active item), no SL/HL or AA/AI fill colours
+- [x] No broken links (check each href against `src/app`)
+- [x] `npm run build` passes; `npm run lint` clean for my files (repo-wide lint has 7 pre-existing errors in other files, e.g. practice clients)
 - [ ] Nothing outside `Touches` was edited (other agents work in parallel on the same checkout; do not commit, the project manager commits)
 
 ## Gates (T2)

@@ -99,3 +99,71 @@ section[id] {
     display: none !important;
   }
 }
+
+/* ---------- Display mode (see Tasks/_plans/Web-ui-consistency.md) ---------- */
+@page {
+  size: A4 portrait;
+  margin: 15mm;
+}
+
+/* Chrome that disappears in A4 (and the calculator widget). */
+html[data-mode="a4"] .a4-hide,
+html[data-mode="a4"] [id^="tia4"],
+html[data-mode="a4"] [class*="tia4"] {
+  display: none !important;
+}
+
+/* A4 sheet on screen: white, black text, 210mm wide, 15mm margins. */
+html[data-mode="a4"] {
+  background: #e5e7eb;
+}
+html[data-mode="a4"] body {
+  background: #fff;
+  color: #000;
+  width: 210mm;
+  max-width: 100%;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 15mm;
+}
+html[data-mode="a4"] body * {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #000 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+html[data-mode="a4"] body *:not(.visual, .visual *) {
+  border-color: #000 !important;
+}
+html[data-mode="a4"] a {
+  text-decoration: underline;
+}
+/* Pages reserve space for the fixed nav; it is hidden in A4. */
+html[data-mode="a4"] main,
+html[data-mode="a4"] body > div {
+  padding-top: 0 !important;
+}
+/* Graphs, diagrams, figures keep shape but lose colour. */
+html[data-mode="a4"] .visual {
+  filter: grayscale(1);
+}
+html[data-mode="a4"] .q-accent {
+  color: #000 !important;
+  font-weight: 700;
+}
+
+/* Print always uses the A4 sheet, in either mode. */
+@media print {
+  html[data-mode] .a4-hide {
+    display: none !important;
+  }
+  html[data-mode="a4"] {
+    background: #fff;
+  }
+  html[data-mode="a4"] body {
+    width: auto;
+    min-height: 0;
+    padding: 0;
+  }
+}

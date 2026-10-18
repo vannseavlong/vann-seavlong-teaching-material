@@ -14,13 +14,13 @@ export default function ComparisonTable({
 }) {
   return (
     <div className="overflow-x-auto my-6">
-      <table className="w-full border-separate border-spacing-0 rounded-xl overflow-hidden shadow-sm">
+      <table className="w-full border-separate border-spacing-0 rounded-xl overflow-hidden border border-slate-200 a4:border-black a4:shadow-none">
         <thead>
           <tr>
             {columns.map((col, i) => (
               <th
                 key={i}
-                className={`px-5 py-4 text-left text-sm font-semibold text-white ${col.className || "bg-navy-900"}`}
+                className={`px-5 py-4 text-left text-sm font-semibold text-navy-900 bg-slate-50 border-b border-slate-200 a4:bg-white a4:text-black a4:border-black`}
               >
                 {col.header}
               </th>
@@ -29,11 +29,11 @@ export default function ComparisonTable({
         </thead>
         <tbody>
           {rows.map((row, ri) => (
-            <tr key={ri} className="hover:bg-aa-bg transition-colors">
+            <tr key={ri} className="hover:bg-slate-50 transition-colors">
               {row.map((cell, ci) => (
                 <td
                   key={ci}
-                  className={`px-5 py-3.5 text-sm border-b border-slate-200 ${ri % 2 === 1 ? "bg-slate-50" : "bg-white"} ${ci === 0 ? "font-semibold text-navy-900" : "text-slate-500"}`}
+                  className={`px-5 py-3.5 text-sm border-b border-slate-200 ${ri % 2 === 1 ? "bg-slate-50" : "bg-white"} a4:bg-white a4:border-black ${ci === 0 ? "font-semibold text-navy-900" : "text-slate-500"}`}
                   dangerouslySetInnerHTML={{ __html: cell }}
                 />
               ))}

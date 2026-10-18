@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useDisplayMode } from "./ModeProvider";
+import ModeToggle from "./ModeToggle";
+import { withMode } from "@/lib/display-mode";
 
 type NavItem = {
   label: string;
@@ -18,11 +21,12 @@ const mainNav: NavItem[] = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { mode } = useDisplayMode();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200">
+    <nav className="a4-hide fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200">
       <div className="max-w-[1000px] mx-auto flex items-center justify-between px-6 h-14 gap-6 overflow-x-auto">
-        <Link href="/" className="font-semibold text-base text-navy-900 whitespace-nowrap">
+        <Link href={withMode("/", mode)} className="font-semibold text-base text-navy-900 whitespace-nowrap">
           IB Math Guide
         </Link>
         <div className="flex gap-1" role="list">
@@ -32,7 +36,7 @@ export default function Navbar() {
             return (
               <Link
                 key={item.href}
-                href={item.href}
+                href={withMode(item.href, mode)}
                 aria-current={isActive ? "page" : undefined}
                 className={`text-sm px-3 py-1.5 rounded-md whitespace-nowrap transition-colors ${
                   isActive
@@ -45,6 +49,7 @@ export default function Navbar() {
             );
           })}
         </div>
+        <ModeToggle />
       </div>
     </nav>
   );

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 function PendulumDiagram() {
   return (
     <div className="my-4 flex justify-center">
-      <svg viewBox="0 0 400 190" className="w-full max-w-md border border-slate-200 rounded-xl bg-white shadow-sm" aria-label="Pendulum swing diagram">
+      <svg viewBox="0 0 400 190" className="visual w-full max-w-md border border-slate-200 rounded-xl bg-white" aria-label="Pendulum swing diagram">
         {/* Pivot */}
         <circle cx="200" cy="18" r="4" fill="#1a365d" />
         <line x1="180" y1="18" x2="220" y2="18" stroke="#1a365d" strokeWidth={2} />
@@ -61,32 +61,32 @@ export default function ReviewPaper1() {
     <AnswerRevealProvider>
       <main className="min-h-screen pt-16">
         {/* Hero */}
-        <div className="bg-[#1e3a5f] text-white py-14 px-6">
+        <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-14 px-6 a4:bg-white a4:py-6 a4:border-black">
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              <Link href="/review" className="text-purple-300 text-xs font-bold uppercase tracking-widest hover:underline">
+              <Link href="/review" className="text-aa-primary text-xs font-bold uppercase tracking-widest a4-hide hover:underline">
                 ← Review
               </Link>
-              <span className="text-white/30">|</span>
-              <span className="text-xs bg-purple-700/80 text-white px-2.5 py-1 rounded-full font-semibold">
+              <span className="text-slate-300">|</span>
+              <span className="text-xs bg-white border border-slate-300 text-slate-600 px-2.5 py-1 rounded-full font-semibold">
                 Sequences &amp; Series
               </span>
-              <span className="text-xs text-white/50">AA — Unit 1 Algebra (Topic 5)</span>
+              <span className="text-xs text-slate-500">AA — Unit 1 Algebra (Topic 5)</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold mb-2">Arithmetic Sequence and Series</h1>
-            <p className="text-purple-300 text-xl font-medium mb-4 italic">Review Paper 1 — Exercise &amp; Answer Sheet</p>
-            <div className="bg-white/10 rounded-xl px-5 py-3 inline-block mb-6">
-              <p className="text-sm font-bold text-white">
+            <p className="text-slate-600 text-xl font-medium mb-4 italic">Review Paper 1 — Exercise &amp; Answer Sheet</p>
+            <div className="bg-white border border-slate-200 rounded-xl px-5 py-3 inline-block mb-6">
+              <p className="text-sm font-bold text-navy-900">
                 3 Questions &nbsp;|&nbsp; 25 Marks &nbsp;|&nbsp; Arithmetic &amp; Geometric Sequences, Series, Simple Interest
               </p>
-              <p className="text-xs text-white/70 italic mt-0.5">
+              <p className="text-xs text-slate-500 italic mt-0.5">
                 Attempt each part, then tap Show Answer to check your work against the worked solution.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3 items-center">
+            <div className="flex flex-wrap gap-3 items-center w-fit print:hidden">
               <PrintButton />
               <ExportPdfButton />
-              <span className="text-xs text-white/40">25 marks · 3 questions · ~35 min</span>
+              <span className="text-xs text-slate-400">25 marks · 3 questions · ~35 min</span>
             </div>
           </div>
         </div>

@@ -20,7 +20,7 @@ function UnitCard({
   const variant = pathway === "aa" ? "aa" : "ai";
   const tagVariant = pathway === "aa" ? "blue" : "green";
   const bulletColor =
-    pathway === "aa" ? "text-aa-primary" : "text-ai-primary";
+    "text-slate-500";
 
   return (
     <Card variant={variant}>
@@ -64,7 +64,7 @@ function UnitCard({
                   key={i}
                   className="flex items-start gap-1.5 text-xs text-slate-600"
                 >
-                  <span className="mt-0.5 text-orange-400 shrink-0">+</span>
+                  <span className="mt-0.5 text-slate-500 shrink-0">+</span>
                   {topic}
                 </li>
               ))}

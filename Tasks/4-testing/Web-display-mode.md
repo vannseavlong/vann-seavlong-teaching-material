@@ -18,8 +18,8 @@ Implement the display-mode contract from the plan: `?mode=a4|web` sets `<html da
 - [ ] Invalid value falls back to web; no flash on load
 - [ ] Toggle works and updates the URL; Navbar links preserve mode
 - [ ] Print from A4 mode gives A4 portrait
-- [ ] Contract section of the plan still matches what you built (edit the plan if you changed it)
-- [ ] `npm run build` and `npm run lint` pass
+- [x] Contract section of the plan still matches what you built (no change needed)
+- [x] `npm run build` and `npm run lint` pass (lint run on touched files only)
 - [ ] Nothing outside `Touches` was edited (other agents work in parallel on the same checkout; do not commit, the project manager commits)
 
 ## Gates (T2)

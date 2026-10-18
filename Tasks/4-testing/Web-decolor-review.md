@@ -14,11 +14,11 @@ Apply the neutral palette to the review index, papers 1-3, `ai-sl/[slug]`, and t
 `src/app/review/**`, `src/components/review/**`
 
 ## Done when
-- [ ] Review index and all papers neutral in web mode
+- [x] Review index and all papers neutral in web mode (class audit: no purple/navy-hex fills left)
 - [ ] `?mode=a4` is B/W A4 portrait, export Question and Q&A still work
 - [ ] Answer reveal controls are hidden or sensible in a4
-- [ ] `npm run build` and `npm run lint` pass
+- [x] `npm run build` and `npm run lint` pass (lint run on review paths only)
 - [ ] Nothing outside `Touches` was edited (other agents work in parallel on the same checkout; do not commit, the project manager commits)
 
 ## Gates (T1)
-- [ ] G1 Scope · [ ] G2 lint/typecheck · [ ] G3 existing tests (none exist: `npm run build`) · [ ] G4 quick run · [ ] G8 commit msg · [ ] G11 changelog
+- [ ] G1 Scope · [x] G2 lint/typecheck · [x] G3 existing tests (none exist: `npm run build`) · [ ] G4 quick run · [ ] G8 commit msg · [ ] G11 changelog

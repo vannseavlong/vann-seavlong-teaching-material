@@ -15,10 +15,10 @@ export function PartHeader({
   label: string;
   note: string;
 }) {
-  const styles = variant === "exercise" ? "bg-purple-700" : "bg-[#1e3a5f]";
+  const styles = variant === "exercise" ? "bg-slate-100 text-navy-900 border border-slate-300" : "bg-slate-100 text-navy-900 border border-slate-300";
   return (
     <div
-      className={`${styles} text-white rounded-lg px-5 py-3 mb-6 mt-14 font-bold text-sm uppercase tracking-wider flex flex-wrap items-center justify-between gap-2`}
+      className={`${styles} a4:bg-white a4:border-black a4:rounded-none rounded-lg px-5 py-3 mb-6 mt-14 font-bold text-sm uppercase tracking-wider flex flex-wrap items-center justify-between gap-2`}
     >
       <span>{label}</span>
       <span className="text-xs font-normal normal-case opacity-80">{note}</span>
@@ -30,7 +30,7 @@ export function QuestionBanner({ n, marks }: { n: number | string; marks: number
   return (
     <div className="flex items-center justify-between border-b-2 border-navy-900 pb-2 mb-5 mt-10">
       <h3 className="text-xl font-bold text-navy-900">Question {n}</h3>
-      <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-600">
+      <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-600 a4:bg-white a4:border a4:border-black a4:text-black">
         Maximum mark: {marks}
       </span>
     </div>
@@ -53,13 +53,13 @@ export function PartBlock({
 }) {
   return (
     <div className="mb-6 flex gap-3">
-      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-purple-100 text-purple-700 font-bold text-sm flex items-center justify-center mt-0.5">
+      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-slate-100 text-navy-900 border border-slate-300 a4:bg-white a4:border-black a4:text-black font-bold text-sm flex items-center justify-center mt-0.5">
         {letter}
       </span>
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="text-slate-700 leading-relaxed">{children}</div>
-          <span className="flex-shrink-0 text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 whitespace-nowrap">
+          <span className="flex-shrink-0 text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 a4:bg-white a4:text-black whitespace-nowrap">
             [{marks}]
           </span>
         </div>
@@ -72,7 +72,7 @@ export function PartBlock({
 export function WorkSpace({ lines = 3, answerId }: { lines?: number; answerId?: string }) {
   return (
     <div className="ml-10 mb-2">
-      <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50/60 px-4 py-3">
+      <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50/60 a4:bg-white a4:border-black px-4 py-3">
         {Array.from({ length: lines }).map((_, i) => (
           <div key={i} className="border-b border-slate-200 h-7 last:border-b-0" />
         ))}
@@ -96,8 +96,8 @@ export function AnswerStep({ children }: { children: ReactNode }) {
 
 export function FinalAnswer({ children }: { children: ReactNode }) {
   return (
-    <div className="mt-3 mb-1 inline-block rounded-lg bg-purple-50 border border-purple-200 px-4 py-2">
-      <span className="text-sm font-bold text-purple-700">{children}</span>
+    <div className="mt-3 mb-1 inline-block rounded-lg bg-white border border-slate-300 a4:border-black px-4 py-2">
+      <span className="text-sm font-bold text-navy-900">{children}</span>
     </div>
   );
 }
@@ -118,13 +118,13 @@ export function AnswerPart({
 }) {
   return (
     <AnswerReveal id={id}>
-      <div id={id} className="mb-8 ml-10 mt-3 scroll-mt-28 rounded-xl border border-purple-100 bg-purple-50/50 p-4 sm:p-5">
+      <div id={id} className="mb-8 ml-10 mt-3 scroll-mt-28 rounded-xl border border-slate-200 bg-slate-50 a4:bg-white a4:border-black p-4 sm:p-5">
         <div className="flex items-center gap-3 mb-3">
-          <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#1e3a5f] text-white font-bold text-sm flex items-center justify-center">
+          <span className="flex-shrink-0 w-7 h-7 rounded-full bg-navy-900 text-white a4:bg-white a4:text-black a4:border a4:border-black font-bold text-sm flex items-center justify-center">
             {letter}
           </span>
           {restate && <span className="text-sm font-semibold text-slate-500">{restate}</span>}
-          <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded-full bg-white text-slate-500 whitespace-nowrap">
+          <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded-full bg-white text-slate-500 a4:text-black whitespace-nowrap">
             [{marks}]
           </span>
         </div>
@@ -148,7 +148,7 @@ export function SummaryTable({ rows }: { rows: [string, string, string][] }) {
       id="summary"
       className="scroll-mt-28 mt-16 pt-8 border-t border-slate-200 export-question-hide"
     >
-      <div className="bg-[#1e3a5f] text-white rounded-lg px-5 py-3 mb-2 font-bold text-sm uppercase tracking-wider flex flex-wrap items-center justify-between gap-2">
+      <div className="bg-slate-100 text-navy-900 border border-slate-300 a4:bg-white a4:border-black rounded-lg px-5 py-3 mb-2 font-bold text-sm uppercase tracking-wider flex flex-wrap items-center justify-between gap-2">
         <span>Summary of Final Answers</span>
         <ShowAllAnswersButton />
       </div>
@@ -156,11 +156,11 @@ export function SummaryTable({ rows }: { rows: [string, string, string][] }) {
         Answers are masked until you tap Show All Answers.
       </p>
       <div className="overflow-x-auto">
-        <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+        <table className="w-full text-sm border-collapse rounded-xl overflow-hidden">
           <thead>
             <tr>
               {["Question", "Part", "Answer"].map((h) => (
-                <th key={h} className="bg-[#1e3a5f] text-white px-4 py-2.5 text-left font-semibold text-xs uppercase">
+                <th key={h} className="bg-slate-100 text-navy-900 border border-slate-200 a4:bg-white a4:border-black px-4 py-2.5 text-left font-semibold text-xs uppercase">
                   {h}
                 </th>
               ))}
@@ -171,7 +171,7 @@ export function SummaryTable({ rows }: { rows: [string, string, string][] }) {
               <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
                 <td className="px-4 py-2.5 border border-slate-200 font-semibold text-navy-900">{row[0]}</td>
                 <td className="px-4 py-2.5 border border-slate-200 text-slate-600">{row[1]}</td>
-                <td className="px-4 py-2.5 border border-slate-200 font-mono text-purple-700 text-sm">
+                <td className="px-4 py-2.5 border border-slate-200 font-mono text-navy-900 text-sm">
                   <MaskedAnswer>{row[2]}</MaskedAnswer>
                 </td>
               </tr>
@@ -185,7 +185,7 @@ export function SummaryTable({ rows }: { rows: [string, string, string][] }) {
 
 export function StickyPaperNav() {
   return (
-    <div className="print:hidden sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+    <div className="print:hidden a4-hide sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
       <div className="max-w-4xl mx-auto px-6 py-2 flex flex-wrap items-center gap-2">
         <div className="flex gap-2 overflow-x-auto">
           {[
@@ -195,7 +195,7 @@ export function StickyPaperNav() {
             <a
               key={id}
               href={`#${id}`}
-              className="whitespace-nowrap text-xs px-3 py-1.5 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-500 hover:text-purple-700 font-medium transition-colors"
+              className="whitespace-nowrap text-xs px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-navy-900 font-medium transition-colors"
             >
               {label}
             </a>
@@ -214,7 +214,7 @@ export function PaperFooterNav({ paperLabel }: { paperLabel: string }) {
     <div className="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
       <Link
         href="/review"
-        className="print:hidden text-sm text-slate-500 hover:text-purple-700 font-medium transition-colors"
+        className="print:hidden text-sm text-slate-500 hover:text-aa-primary font-medium transition-colors"
       >
         ← All Review Papers
       </Link>
