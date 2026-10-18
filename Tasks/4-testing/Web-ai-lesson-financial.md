@@ -2,7 +2,6 @@
 
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-18 / 2026-10-18
-- **Claimed by:** agent ai-lesson-financial, 2026-10-18
 - **Tier:** T1 · content-only edit in one section file, no shared code, no new route
 - **Depends on:** none (section split committed)
 - **Touches:** src/app/ai/unit-1/lesson/_sections/FinancialMath.tsx only
