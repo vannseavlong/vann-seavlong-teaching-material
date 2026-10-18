@@ -69,7 +69,7 @@ function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void
               </p>
               {(
                 <ul className="ml-3 mt-1 border-l border-slate-200 space-y-0.5">
-                  {u.items.map((item) => {
+                  {u.items.map((item, idx) => {
                     const active = item.anchor
                       ? activeId === item.anchor && item.href?.split("#")[0] === pathname
                       : !!item.href && pathname === item.href;
@@ -79,7 +79,7 @@ function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void
                     ) : null;
                     if (!item.href) {
                       return (
-                        <li key={item.label}>
+                        <li key={item.href ?? `${item.label}-${idx}`}>
                           {groupHead}
                           <span
                             aria-disabled="true"
@@ -92,7 +92,7 @@ function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void
                       );
                     }
                     return (
-                      <li key={item.label}>
+                      <li key={item.href ?? `${item.label}-${idx}`}>
                         {groupHead}
                         <Link
                           href={item.href}
