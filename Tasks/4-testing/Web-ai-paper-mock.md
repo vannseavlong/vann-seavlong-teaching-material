@@ -2,7 +2,6 @@
 
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-19 / 2026-10-19
-- **Claimed by:** agent ai-paper-mock, 2026-10-19
 - **Tier:** T1 · content-only edit in one data file
 - **Touches:** src/lib/ai-review-papers/mock.ts only
 - **Plan:** Tasks/_plans/Web-ai-ib-papers.md
