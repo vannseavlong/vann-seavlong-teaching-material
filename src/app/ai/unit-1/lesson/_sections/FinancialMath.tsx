@@ -30,12 +30,47 @@ const tvmCases = [
   { t: "Lump sum grows", pv: "−", pmt: "0", fv: "+ (solve)" },
   { t: "Loan repaid in full", pv: "+ (amount borrowed)", pmt: "− (solve)", fv: "0" },
   { t: "Regular savings", pv: "0", pmt: "−", fv: "+ (solve)" },
+  { t: "Amount still owed on a loan", pv: "+ (amount borrowed)", pmt: "− (given)", fv: "− (solve, amount owed)" },
+  { t: "Amount needed now for a goal", pv: "− (solve, amount to pay in)", pmt: "0", fv: "+ (goal)" },
+];
+
+// Every TVM case. Blank-free: each cell is what to type, "solve" is the unknown.
+// k = periods per year (P/Y = C/Y = k). Depreciation uses a negative I%.
+const tvmCheatRows = [
+  { g: "Growth: lump sum", rows: [
+    { c: "Value after n years", n: "kn", i: "r", pv: "−start", pmt: "0", fv: "solve" },
+    { c: "Amount to invest now for a goal", n: "kn", i: "r", pv: "solve", pmt: "0", fv: "+goal" },
+    { c: "How long to reach a target (round up)", n: "solve", i: "r", pv: "−start", pmt: "0", fv: "+target" },
+    { c: "Find the interest rate", n: "kn", i: "solve", pv: "−start", pmt: "0", fv: "+end value" },
+  ]},
+  { g: "Depreciation (value falls)", rows: [
+    { c: "Value after n years", n: "n", i: "−r", pv: "−start", pmt: "0", fv: "solve" },
+    { c: "How long to fall to a value (round up)", n: "solve", i: "−r", pv: "−start", pmt: "0", fv: "+value" },
+    { c: "Find the depreciation rate", n: "n", i: "solve (negative)", pv: "−start", pmt: "0", fv: "+end value" },
+  ]},
+  { g: "Inflation", rows: [
+    { c: "Price after n years", n: "n", i: "inflation %", pv: "−price now", pmt: "0", fv: "solve" },
+    { c: "Value in today's prices of a future amount", n: "n", i: "inflation %", pv: "solve", pmt: "0", fv: "+future amount" },
+  ]},
+  { g: "Regular savings (deposits at the end of each period)", rows: [
+    { c: "Value after n years", n: "kn", i: "r", pv: "0", pmt: "−deposit", fv: "solve" },
+    { c: "Deposit needed to reach a goal", n: "kn", i: "r", pv: "0", pmt: "solve", fv: "+goal" },
+    { c: "How long to reach a goal (round up)", n: "solve", i: "r", pv: "0", pmt: "−deposit", fv: "+goal" },
+    { c: "Starting lump sum and regular deposits", n: "kn", i: "r", pv: "−lump sum", pmt: "−deposit", fv: "solve" },
+  ]},
+  { g: "Loans (payments at the end of each period)", rows: [
+    { c: "Monthly payment", n: "kn", i: "r", pv: "+loan", pmt: "solve", fv: "0" },
+    { c: "Balance owed after m payments", n: "m", i: "r", pv: "+loan", pmt: "−payment", fv: "solve (negative = owed)" },
+    { c: "Number of payments to clear the loan", n: "solve", i: "r", pv: "+loan", pmt: "−payment", fv: "0" },
+    { c: "Loan you can afford for a given payment", n: "kn", i: "r", pv: "solve", pmt: "−payment", fv: "0" },
+    { c: "Find the loan interest rate", n: "kn", i: "solve", pv: "+loan", pmt: "−payment", fv: "0" },
+  ]},
 ];
 
 const methodRows = [
   { clue: "simple interest, same interest every year", method: "I = PRT/100", calc: "Type the formula" },
   { clue: "compounded annually, half-yearly, quarterly, monthly; one deposit, no payments", method: "FV formula with PMT = 0", calc: "TVM Solver, solve FV" },
-  { clue: "depreciates, loses r% each year, value falls", method: "PV × (1 − r/100)^n", calc: "Type the multiplier" },
+  { clue: "depreciates, loses r% each year, value falls", method: "PV × (1 − r/100)^n", calc: "Type the multiplier, or TVM Solver with I% = −r" },
   { clue: "loan repaid by equal payments, mortgage, instalments", method: "TVM with FV = 0, PV positive", calc: "TVM Solver, solve PMT" },
   { clue: "saves a fixed amount each month, regular deposits", method: "TVM with PMT negative", calc: "TVM Solver, solve FV" },
   { clue: "how long, how many years, when will it reach", method: "Solve N, then round up", calc: "TVM Solver, solve N" },
@@ -269,6 +304,39 @@ export default function FinancialMathSection() {
         </div>
       </div>
 
+      <HighlightBox variant="blue">
+        <p className="font-semibold text-navy-900 mb-2">
+          How to decide the sign of each entry
+        </p>
+        <ol className="list-decimal pl-5 space-y-1 text-slate-500 text-sm">
+          <li>
+            Take the customer&apos;s point of view. Ask for each amount: does
+            the money leave me or come to me?
+          </li>
+          <li>
+            Money that leaves you (invest, deposit, repay) is negative. Money
+            that comes to you (loan received, final balance collected) is
+            positive.
+          </li>
+          <li>
+            Enter 0 for any amount that does not occur. Never leave an old
+            value from the last question.
+          </li>
+          <li>
+            Solve for the unknown and do not change its sign. The sign tells
+            you the direction: <InlineMath math="PV = -37\,162.57" /> means
+            you pay in $37,162.57; <InlineMath math="PMT = -417.80" /> means
+            you pay $417.80 each period; a negative <InlineMath math="FV" />{" "}
+            on a loan means the amount you still owe.
+          </li>
+          <li>
+            Check: <InlineMath math="PV" /> and <InlineMath math="FV" /> with
+            the same sign (both nonzero, no payments) give an error or a
+            negative <InlineMath math="N" />. Change one sign and solve again.
+          </li>
+        </ol>
+      </HighlightBox>
+
       <HighlightBox variant="red">
         <p className="font-semibold text-navy-900 mb-2">
           Sign convention and C/Y
@@ -282,6 +350,89 @@ export default function FinancialMathSection() {
           <InlineMath math="k \times n" />, not <InlineMath math="n" />. Give
           money answers to 2 d.p. unless the question says otherwise.
         </p>
+      </HighlightBox>
+
+      {/* ── Visual: every TVM case ── */}
+      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden my-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-ai-primary px-6 pt-5 pb-1">
+          TVM Solver: what to type in every case
+        </p>
+        <p className="text-sm text-slate-500 px-6 pb-3">
+          <InlineMath math="k" /> = periods per year, so{" "}
+          <InlineMath math="P/Y = C/Y = k" /> on every row (use 1 for yearly).
+          Keep <strong>PMT: END</strong>. &ldquo;solve&rdquo; marks the line to
+          solve; a minus sign means you pay it, a plus sign means you receive
+          it. Type 0 in any line shown as 0.
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left border-collapse">
+            <thead>
+              <tr className="bg-navy-900 text-white">
+                {["Case", "N", "I%", "PV", "PMT", "FV"].map((h) => (
+                  <th key={h} className="px-4 py-3 font-semibold">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            {tvmCheatRows.map(({ g, rows }) => (
+              <tbody key={g}>
+                <tr className="bg-slate-100">
+                  <td colSpan={6} className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-navy-900">
+                    {g}
+                  </td>
+                </tr>
+                {rows.map(({ c, n, i, pv, pmt, fv }, idx) => (
+                  <tr key={c} className={idx % 2 === 0 ? "bg-ai-bg" : "bg-white"}>
+                    <td className="px-4 py-2.5 text-navy-900 font-semibold">{c}</td>
+                    {[n, i, pv, pmt, fv].map((cell, j) => (
+                      <td
+                        key={j}
+                        className={`px-4 py-2.5 font-mono text-xs ${
+                          cell.startsWith("solve")
+                            ? "font-bold text-navy-900 bg-slate-100"
+                            : "text-slate-500"
+                        }`}
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            ))}
+          </table>
+        </div>
+      </div>
+
+      <HighlightBox variant="blue">
+        <p className="font-semibold text-navy-900 mb-2">
+          Check before you press SOLVE
+        </p>
+        <ul className="list-disc pl-5 space-y-1 text-slate-500 text-sm">
+          <li>
+            Depreciation: type the rate as negative, <InlineMath math="I\% = -12" />{" "}
+            for 12% depreciation. When you solve for the rate, the answer is
+            negative: report its size as the depreciation rate.
+          </li>
+          <li>
+            Time questions: round <InlineMath math="N" /> up to the next whole
+            period, then divide by <InlineMath math="k" /> if the answer is
+            needed in years.
+          </li>
+          <li>
+            Total interest on a loan or savings plan is not a TVM line:{" "}
+            <InlineMath math="\text{total paid} - \text{amount borrowed}" /> for a
+            loan, <InlineMath math="FV - \text{total deposited}" /> for savings.
+          </li>
+          <li>
+            Simple interest and currency exchange do not use the TVM Solver.
+            Type the formula or the rate calculation.
+          </li>
+          <li>
+            If the answer looks wrong, check <InlineMath math="P/Y = C/Y" />,{" "}
+            <InlineMath math="N = k \times n" />, and the signs of PV, PMT and
+            FV.
+          </li>
+        </ul>
       </HighlightBox>
 
       {/* ── All worked examples come AFTER all formula groups ── */}
@@ -469,14 +620,24 @@ export default function FinancialMathSection() {
         <CalcSteps
           steps={[
             <>
-              The TVM Solver is set up for growth, so type the multiplier
-              directly: <Keys s="28000 × 0.88 ^ 5 enter" />.
+              Type the multiplier directly: <Keys s="28000 × 0.88 ^ 5 enter" />.
             </>,
             <>
               Or let the calculator build the multiplier:{" "}
               <Keys s="28000 × ( 1 − 12 ÷ 100 ) ^ 5 enter" />.
             </>,
+            <>
+              Or use the TVM Solver with a negative rate, as in the screen:{" "}
+              <InlineMath math="I\% = -12" />, <InlineMath math="PV = -28000" />,
+              solve <InlineMath math="FV" />. All three give the same answer.
+            </>,
           ]}
+          screen={
+            <TvmEntry
+              values={{ N: "5", "I%": "-12", PV: "-28000", PMT: "0", "P/Y": "1", "C/Y": "1" }}
+              solve="FV"
+            />
+          }
         />
       </WorkedExample>
 
