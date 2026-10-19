@@ -173,3 +173,82 @@ export function ReviewPaperLink({ href, label }: { href: string; label: string }
   );
 }
 
+
+// ─── TI-84 Plus CE calculator helpers ────────────────────────────────────────
+
+/** Key sequence: space-separated tokens, each drawn as one key, e.g. "5000 × ( 1 + 6 ÷ 100 ) ^ 4 enter". */
+export function Keys({ s }: { s: string }) {
+  return (
+    <span className="inline-flex flex-wrap items-center gap-1 align-middle">
+      {s.split(" ").map((k, i) => (
+        <kbd
+          key={i}
+          className="px-1.5 py-0.5 rounded border border-slate-300 border-b-2 bg-white text-navy-900 font-mono text-xs font-semibold"
+        >
+          {k}
+        </kbd>
+      ))}
+    </span>
+  );
+}
+
+type TvmField = "N" | "I%" | "PV" | "PMT" | "FV" | "P/Y" | "C/Y";
+
+/** TVM Solver screen. Give every value as text; `solve` marks the line to solve with alpha enter. */
+export function TvmEntry({
+  values,
+  solve,
+}: {
+  values: Partial<Record<TvmField, string>>;
+  solve: TvmField;
+}) {
+  const order: TvmField[] = ["N", "I%", "PV", "PMT", "FV", "P/Y", "C/Y"];
+  return (
+    <div className="visual max-w-xs rounded-lg bg-[#d7e0c8] border-4 border-slate-500 p-3 font-mono text-sm text-navy-900 shadow-inner">
+      <p className="text-center font-bold text-xs mb-2 tracking-widest">
+        TVM Solver
+      </p>
+      {order.map((f) => (
+        <div
+          key={f}
+          className={`flex justify-between px-2 py-0.5 ${
+            f === solve ? "bg-navy-900 text-white font-bold" : ""
+          }`}
+        >
+          <span>{f} =</span>
+          <span className="tabular-nums">
+            {f === solve ? "solve" : (values[f] ?? "0")}
+          </span>
+        </div>
+      ))}
+      <p className="px-2 pt-1 text-xs">PMT: END</p>
+    </div>
+  );
+}
+
+/** Numbered TI-84 Plus CE key steps, optionally with the TVM screen to the right. */
+export function CalcSteps({
+  steps,
+  screen,
+}: {
+  steps: ReactNode[];
+  screen?: ReactNode;
+}) {
+  return (
+    <div className="my-3 rounded-lg border border-slate-200 bg-white p-4">
+      <p className="text-xs font-bold uppercase tracking-wider text-navy-900 mb-3">
+        TI-84 Plus CE steps
+      </p>
+      <div className="flex flex-col md:flex-row gap-4 md:items-start">
+        <ol className="flex-1 space-y-2 text-sm text-slate-500 list-decimal pl-5">
+          {steps.map((s, i) => (
+            <li key={i} className="leading-relaxed">
+              {s}
+            </li>
+          ))}
+        </ol>
+        {screen && <div className="flex-shrink-0">{screen}</div>}
+      </div>
+    </div>
+  );
+}
