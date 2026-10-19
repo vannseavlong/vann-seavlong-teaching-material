@@ -158,40 +158,6 @@ function LessonHero() {
 
 // ─── Table of Contents ────────────────────────────────────────────────────────
 
-const SL_TOPICS = [
-  { id: "percentages", label: "Percentages" },
-  { id: "financial-mathematics", label: "Financial Mathematics" },
-  { id: "summative-revision", label: "Summative Revision Plan" },
-  { id: "arithmetic", label: "Arithmetic Sequences & Series" },
-  { id: "geometric", label: "Geometric Sequences & Series" },
-  { id: "rounding", label: "Rounding" },
-  { id: "bounds", label: "Upper & Lower Bounds" },
-  { id: "percentage-error", label: "Percentage Error" },
-];
-
-function TableOfContents() {
-  return (
-    <div className="bg-white border-b border-slate-200 px-6 py-8 sticky top-[60px] z-10 shadow-sm">
-      <div className="max-w-[1000px] mx-auto">
-        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
-          Jump to topic
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {SL_TOPICS.map((t) => (
-            <a
-              key={t.id}
-              href={`#${t.id}`}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-ai-bg text-ai-text hover:bg-ai-light transition-colors"
-            >
-              {t.label}
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ─── Section wrapper (used in this file so we can control alt colours) ────────
 
 function LessonSection({
@@ -1904,7 +1870,6 @@ export default function Page() {
   return (
     <main>
       <LessonHero />
-      <TableOfContents />
 
       {/* SL Topics (Unit 1, part 1 of 5 — Percentages & Financial Mathematics) */}
       <PercentagesSection />

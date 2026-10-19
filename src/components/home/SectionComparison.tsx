@@ -2,9 +2,9 @@ import Section from "@/components/ui/Section";
 import ComparisonTable from "@/components/ui/ComparisonTable";
 
 const columns = [
-  { header: "Feature", className: "bg-navy-800" },
-  { header: "AA (Analysis & Approaches)", className: "bg-aa-primary" },
-  { header: "AI (Applications & Interpretation)", className: "bg-ai-dark" },
+  { header: "Feature" },
+  { header: "AA (Analysis & Approaches)" },
+  { header: "AI (Applications & Interpretation)" },
 ];
 
 const rows = [

@@ -2,7 +2,8 @@ import { Fragment } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import PrintButton from "./PrintButton";
+import WorksheetActions from "../_components/WorksheetActions";
+import PaperHeader from "../_components/PaperHeader";
 
 export const metadata: Metadata = {
   title: "Physics Exam Review — Motion, Kinematics & Dynamics | Worksheets",
@@ -14,20 +15,20 @@ export const metadata: Metadata = {
 
 function SessionHeader({ n, title }: { n: number; title: string }) {
   return (
-    <div className="bg-[#1e3a5f] text-white rounded-xl px-6 py-4 mb-6 mt-12">
-      <p className="text-phys-light text-xs font-bold uppercase tracking-widest mb-1">Session {n}</p>
-      <h2 className="text-2xl font-bold">{title}</h2>
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-xl px-6 py-4 mb-6 mt-12">
+      <p className="text-aa-primary text-xs font-bold uppercase tracking-widest mb-1">Session {n}</p>
+      <h2 className="text-lg font-bold">{title}</h2>
     </div>
   );
 }
 
 function PartHeader({ variant }: { variant: "a" | "b" }) {
   return variant === "a" ? (
-    <div className="bg-[#2b4a8f] text-white rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider">
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider">
       Part A — Formulas &amp; Key Concepts
     </div>
   ) : (
-    <div className="bg-phys-primary text-white rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-10">
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-10">
       Part B — Practice Exercises
     </div>
   );
@@ -35,7 +36,7 @@ function PartHeader({ variant }: { variant: "a" | "b" }) {
 
 function TopicTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-aa-primary font-bold text-base mt-8 mb-1 border-b border-aa-light pb-1">
+    <h3 className="text-aa-primary font-bold text-sm mt-8 mb-1 border-b border-slate-200 pb-1">
       {children}
     </h3>
   );
@@ -53,13 +54,13 @@ function FormulaCard({
   note?: string;
 }) {
   return (
-    <div className="rounded-xl overflow-hidden border border-slate-200 shadow-sm my-4">
-      <div className="bg-[#1e3a5f] text-white py-4 px-6 text-center overflow-x-auto">
+    <div className="rounded-xl overflow-hidden border border-slate-200  my-4">
+      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-4 px-6 text-center overflow-x-auto">
         <BlockMath math={formula} />
       </div>
-      <div className="grid grid-cols-2 bg-[#dbeafe] px-6 py-4 gap-x-8 gap-y-0.5">
-        <p className="text-[#1e40af] font-bold text-sm mb-1">Variables</p>
-        <p className="text-[#1e40af] font-bold text-sm mb-1">SI Units</p>
+      <div className="grid grid-cols-2 bg-slate-50 px-6 py-4 gap-x-8 gap-y-0.5">
+        <p className="text-navy-900 font-bold text-sm mb-1">Variables</p>
+        <p className="text-navy-900 font-bold text-sm mb-1">SI Units</p>
         {vars.map((v, i) => (
           <Fragment key={i}>
             <p className="text-sm text-slate-700 font-mono leading-relaxed">{v.sym}</p>
@@ -71,7 +72,7 @@ function FormulaCard({
         <div className="px-6 py-4 bg-white border-t border-slate-100 space-y-1.5">
           {relationship && (
             <p className="text-sm">
-              <span className="font-bold text-orange-600">Relationship: </span>
+              <span className="font-bold text-navy-900">Relationship: </span>
               <span className="text-slate-600">{relationship}</span>
             </p>
           )}
@@ -96,13 +97,13 @@ function GraphShapeTable({
 }) {
   return (
     <div className="overflow-x-auto my-4">
-      <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+      <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
         <thead>
           <tr>
             {headers.map((h, i) => (
               <th
                 key={i}
-                className="bg-[#1e3a5f] text-white px-4 py-2.5 text-left font-semibold text-xs uppercase tracking-wide border border-[#2a4a7f]"
+                className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-2.5 text-left font-semibold text-xs uppercase tracking-wide"
               >
                 {h}
               </th>
@@ -137,11 +138,11 @@ function SectionBlock({
   children: React.ReactNode;
 }) {
   const headerColors = {
-    blue: "bg-[#dbeafe] text-[#1e40af] border-[#bfdbfe]",
-    green: "bg-[#dcfce7] text-[#15803d] border-[#bbf7d0]",
-    orange: "bg-[#ffedd5] text-[#c2410c] border-[#fed7aa]",
-    purple: "bg-[#f3e8ff] text-[#7e22ce] border-[#e9d5ff]",
-    teal: "bg-[#ccfbf1] text-[#0f766e] border-[#99f6e4]",
+    blue: "bg-slate-50 text-navy-900 border-slate-200",
+    green: "bg-slate-50 text-navy-900 border-slate-200",
+    orange: "bg-slate-50 text-navy-900 border-slate-200",
+    purple: "bg-slate-50 text-navy-900 border-slate-200",
+    teal: "bg-slate-50 text-navy-900 border-slate-200",
   };
   return (
     <div className="my-6">
@@ -155,8 +156,8 @@ function SectionBlock({
 
 function Q({ n, children }: { n: number; children: React.ReactNode }) {
   return (
-    <div className="mb-5">
-      <p className="text-slate-700 mb-2">
+    <div className="mb-5 a4:break-inside-avoid">
+      <p className="text-slate-700 text-sm mb-2">
         <span className="font-bold text-navy-900">{n}.</span> {children}
       </p>
     </div>
@@ -170,7 +171,7 @@ function AnsLine({ label, wide = false }: { label: string; wide?: boolean }) {
       <input
         type="text"
         aria-label={label}
-        className={`border-b-2 border-slate-300 bg-transparent outline-none focus:border-phys-primary transition-colors text-slate-700 text-sm ${wide ? "flex-1 min-w-0" : "w-52"}`}
+        className={`border-b-2 border-slate-300 bg-transparent outline-none focus:border-slate-200 transition-colors text-slate-700 text-sm ${wide ? "flex-1 min-w-0" : "w-52"}`}
       />
     </div>
   );
@@ -235,7 +236,7 @@ function GraphArea({
       )}
       <svg
         viewBox={`0 0 ${W} ${H}`}
-        className="w-full border border-slate-200 rounded-xl bg-white shadow-sm"
+        className="visual w-full border border-slate-200 rounded-xl bg-white"
         aria-label={title ?? `${yLabel} vs ${xLabel} graph`}
       >
         {/* Grid lines */}
@@ -387,16 +388,16 @@ function Session1() {
       <TopicTitle>4. Displacement vs. Distance</TopicTitle>
       <p className="text-sm text-slate-600 mb-1">Distance (d): Total path length traveled — scalar, always positive.</p>
       <p className="text-sm text-slate-600 mb-3">Displacement (Δx): Straight-line change in position from start to end — vector, can be negative.</p>
-      <div className="grid grid-cols-2 gap-px rounded-xl overflow-hidden border border-slate-200 my-4 shadow-sm">
-        <div className="bg-[#2b6cb0] text-white p-3 text-center font-bold text-sm">Distance</div>
-        <div className="bg-[#c05621] text-white p-3 text-center font-bold text-sm">Displacement</div>
-        <div className="bg-aa-bg p-4 space-y-1.5">
+      <div className="grid grid-cols-2 gap-px rounded-xl overflow-hidden border border-slate-200 my-4 ">
+        <div className="bg-slate-50 border border-slate-200 text-navy-900 p-3 text-center font-bold text-sm">Distance</div>
+        <div className="bg-slate-50 border border-slate-200 text-navy-900 p-3 text-center font-bold text-sm">Displacement</div>
+        <div className="bg-slate-50 p-4 space-y-1.5">
           <p className="text-sm">• Scalar (no direction)</p>
           <p className="text-sm">• Total path length</p>
           <p className="text-sm">• Always positive or zero</p>
           <p className="text-sm">• Measured in metres</p>
         </div>
-        <div className="bg-phys-bg p-4 space-y-1.5">
+        <div className="bg-slate-50 p-4 space-y-1.5">
           <p className="text-sm">• Vector (has direction)</p>
           <p className="text-sm">• Shortest path start→end</p>
           <p className="text-sm">• Can be negative or zero</p>
@@ -428,7 +429,7 @@ function Session1() {
         relationship="A steeper slope = faster speed. A horizontal line = object is NOT moving. A curved line = changing speed."
       />
 
-      <p className="text-sm font-semibold text-[#2b6cb0] mt-6 mb-2">Graph Shapes — Distance vs. Time</p>
+      <p className="text-sm font-semibold text-navy-900 mt-6 mb-2">Graph Shapes — Distance vs. Time</p>
       <GraphShapeTable
         headers={["Graph Shape", "What It Means", "Speed"]}
         rows={[
@@ -464,13 +465,13 @@ function Session1() {
           <div className="flex items-center gap-2 mt-1 text-sm text-slate-600">
             <InlineMath math="a^2 + b^2 = c^2" />
             <span>→</span>
-            <input type="text" className="border-b-2 border-slate-300 w-10 bg-transparent outline-none focus:border-phys-primary" aria-label="a value" />
+            <input type="text" className="border-b-2 border-slate-300 w-10 bg-transparent outline-none focus:border-slate-200" aria-label="a value" />
             <sup>2</sup>
             <span>+</span>
-            <input type="text" className="border-b-2 border-slate-300 w-10 bg-transparent outline-none focus:border-phys-primary" aria-label="b value" />
+            <input type="text" className="border-b-2 border-slate-300 w-10 bg-transparent outline-none focus:border-slate-200" aria-label="b value" />
             <sup>2</sup>
             <span>=</span>
-            <input type="text" className="border-b-2 border-slate-300 w-10 bg-transparent outline-none focus:border-phys-primary" aria-label="c value" />
+            <input type="text" className="border-b-2 border-slate-300 w-10 bg-transparent outline-none focus:border-slate-200" aria-label="c value" />
             <sup>2</sup>
           </div>
         </div>
@@ -504,12 +505,12 @@ function Session1() {
         <div className="grid grid-cols-2 gap-6 mb-4">
           {["A", "B"].map((label) => (
             <div key={label}>
-              <p className="text-sm font-bold text-[#2b6cb0] mb-2">Data Table {label}</p>
-              <table className="w-full text-sm border-collapse rounded-lg overflow-hidden shadow-sm">
+              <p className="text-sm font-bold text-navy-900 mb-2">Data Table {label}</p>
+              <table className="w-full text-sm border-collapse rounded-lg overflow-hidden ">
                 <thead>
                   <tr>
-                    <th className="bg-[#2b6cb0] text-white px-3 py-2 text-center font-semibold">Time (s)</th>
-                    <th className="bg-[#2b6cb0] text-white px-3 py-2 text-center font-semibold">Distance (m)</th>
+                    <th className="bg-slate-50 border border-slate-200 text-navy-900 px-3 py-2 text-center font-semibold">Time (s)</th>
+                    <th className="bg-slate-50 border border-slate-200 text-navy-900 px-3 py-2 text-center font-semibold">Distance (m)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -519,7 +520,7 @@ function Session1() {
                       <td className="px-3 py-2 text-center border border-slate-200">
                         <input
                           type="text"
-                          className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-phys-primary text-sm"
+                          className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-slate-200 text-sm"
                           aria-label={`Table ${label} t=${t} distance`}
                         />
                       </td>
@@ -543,11 +544,11 @@ function Session1() {
         <Q n={10}>Calculate the speed in Graph B using the slope formula.</Q>
         <div className="text-sm text-slate-600 flex flex-wrap items-center gap-1 my-2">
           <span>slope = rise/run = Δdistance/Δtime =</span>
-          <input type="text" className="border-b-2 border-slate-300 w-14 bg-transparent outline-none focus:border-phys-primary text-center" aria-label="rise" />
+          <input type="text" className="border-b-2 border-slate-300 w-14 bg-transparent outline-none focus:border-slate-200 text-center" aria-label="rise" />
           <span>/</span>
-          <input type="text" className="border-b-2 border-slate-300 w-14 bg-transparent outline-none focus:border-phys-primary text-center" aria-label="run" />
+          <input type="text" className="border-b-2 border-slate-300 w-14 bg-transparent outline-none focus:border-slate-200 text-center" aria-label="run" />
           <span>=</span>
-          <input type="text" className="border-b-2 border-slate-300 w-20 bg-transparent outline-none focus:border-phys-primary text-center" aria-label="speed result" />
+          <input type="text" className="border-b-2 border-slate-300 w-20 bg-transparent outline-none focus:border-slate-200 text-center" aria-label="speed result" />
           <span>m/s</span>
         </div>
 
@@ -647,7 +648,7 @@ function Session2() {
         relationship="Positive slope = positive acceleration (speeding up). Negative slope = negative acceleration (slowing down). Horizontal line = zero acceleration (constant velocity)."
       />
 
-      <p className="text-sm font-semibold text-[#2b6cb0] mt-6 mb-2">Graph Shapes — Velocity vs. Time</p>
+      <p className="text-sm font-semibold text-navy-900 mt-6 mb-2">Graph Shapes — Velocity vs. Time</p>
       <GraphShapeTable
         headers={["Graph Shape", "What It Means", "Acceleration"]}
         rows={[
@@ -708,11 +709,11 @@ function Session2() {
 
         {/* Data table with actual values */}
         <div className="overflow-x-auto mb-4">
-          <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+          <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
             <thead>
               <tr>
-                <th className="bg-[#2b6cb0] text-white px-6 py-2.5 text-center font-semibold">Time (s)</th>
-                <th className="bg-[#2b6cb0] text-white px-6 py-2.5 text-center font-semibold">Velocity (m/s)</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-6 py-2.5 text-center font-semibold">Time (s)</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-6 py-2.5 text-center font-semibold">Velocity (m/s)</th>
               </tr>
             </thead>
             <tbody>
@@ -758,12 +759,12 @@ function Session2() {
       <SectionBlock code="SECTION 2-4" title="Match the Graph" variant="purple">
         <p className="text-sm text-slate-600 mb-4">Match each description (A–D) to the correct velocity-time graph shape. Then write the acceleration type.</p>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+          <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
             <thead>
               <tr>
-                <th className="bg-[#7e22ce] text-white px-4 py-3 text-left font-semibold">Description</th>
-                <th className="bg-[#7e22ce] text-white px-4 py-3 text-center font-semibold">Graph Type</th>
-                <th className="bg-[#7e22ce] text-white px-4 py-3 text-center font-semibold">Acceleration Type</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-3 text-left font-semibold">Description</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-3 text-center font-semibold">Graph Type</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-3 text-center font-semibold">Acceleration Type</th>
               </tr>
             </thead>
             <tbody>
@@ -776,10 +777,10 @@ function Session2() {
                 <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
                   <td className="px-4 py-3 border border-slate-200 text-center">{desc}</td>
                   <td className="px-4 py-3 border border-slate-200 text-center">
-                    <input type="text" className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-phys-primary" aria-label={`Graph type for ${desc}`} />
+                    <input type="text" className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-slate-200" aria-label={`Graph type for ${desc}`} />
                   </td>
                   <td className="px-4 py-3 border border-slate-200 text-center">
-                    <input type="text" className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-phys-primary" aria-label={`Acceleration type for ${desc}`} />
+                    <input type="text" className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-slate-200" aria-label={`Acceleration type for ${desc}`} />
                   </td>
                 </tr>
               ))}
@@ -830,19 +831,19 @@ function Session2() {
       </SectionBlock>
 
       <SectionBlock code="SECTION 2-6" title="Displacement from V-T Graph Area" variant="orange">
-        <div className="bg-orange-50 border border-orange-200 rounded-xl px-5 py-4 mb-4">
-          <p className="font-bold text-orange-800 text-sm mb-2">Key Concept — Area Under a Velocity-Time Graph = Displacement</p>
+        <div className="bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 mb-4">
+          <p className="font-bold text-navy-900 text-sm mb-2">Key Concept — Area Under a Velocity-Time Graph = Displacement</p>
           <div className="grid grid-cols-2 gap-6 text-sm">
             <div className="text-center">
-              <p className="font-semibold text-orange-700 mb-1">Constant Velocity → Rectangle</p>
+              <p className="font-semibold text-navy-900 mb-1">Constant Velocity → Rectangle</p>
               <BlockMath math="\text{displacement} = v \times \Delta t" />
             </div>
             <div className="text-center">
-              <p className="font-semibold text-orange-700 mb-1">Uniform Accel/Decel → Triangle</p>
+              <p className="font-semibold text-navy-900 mb-1">Uniform Accel/Decel → Triangle</p>
               <BlockMath math="\text{displacement} = \tfrac{1}{2} \times \text{base} \times \text{height}" />
             </div>
           </div>
-          <p className="text-xs text-orange-700 mt-2 text-center italic">Trapezoid (speeding up/down between two non-zero velocities): use ½ × (v₁ + v₂) × Δt</p>
+          <p className="text-xs text-navy-900 mt-2 text-center italic">Trapezoid (speeding up/down between two non-zero velocities): use ½ × (v₁ + v₂) × Δt</p>
         </div>
 
         <Q n={53}>A cyclist&apos;s journey has three phases: Phase 1 — accelerates from 0 to 12 m/s in 8 s; Phase 2 — maintains 12 m/s for 10 s; Phase 3 — decelerates uniformly to rest in 6 s.</Q>
@@ -895,7 +896,7 @@ function Session3() {
       <PartHeader variant="a" />
 
       <TopicTitle>Newton&apos;s 1st Law — Law of Inertia</TopicTitle>
-      <div className="border-l-4 border-aa-primary bg-aa-bg rounded-r-xl px-5 py-4 my-3 italic text-slate-700">
+      <div className="border-l-4 border-slate-200 bg-slate-50 rounded-r-xl px-5 py-4 my-3 italic text-slate-700">
         &quot;An object will move at a constant velocity until a net force acts on it.&quot;
       </div>
       <ul className="text-sm text-slate-700 space-y-1 my-3 ml-4">
@@ -931,7 +932,7 @@ function Session3() {
       />
 
       <TopicTitle>Newton&apos;s 3rd Law — Action-Reaction</TopicTitle>
-      <div className="border-l-4 border-phys-primary bg-phys-bg rounded-r-xl px-5 py-4 my-3 italic text-slate-700">
+      <div className="border-l-4 border-slate-200 bg-slate-50 rounded-r-xl px-5 py-4 my-3 italic text-slate-700">
         &quot;Every action has an equal and opposite reaction.&quot;
       </div>
       <ul className="text-sm text-slate-700 space-y-1 my-3 ml-4">
@@ -953,11 +954,11 @@ function Session3() {
       />
 
       <TopicTitle>Law of Conservation of Momentum</TopicTitle>
-      <div className="rounded-xl overflow-hidden border border-purple-200 my-4 shadow-sm">
-        <div className="bg-[#1e3a5f] text-white py-4 px-6 text-center overflow-x-auto">
+      <div className="rounded-xl overflow-hidden border border-slate-200 my-4 ">
+        <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-4 px-6 text-center overflow-x-auto">
           <BlockMath math="p_{\text{before}} = p_{\text{after}}" />
         </div>
-        <div className="bg-purple-50 px-6 py-3 italic text-purple-700 text-sm text-center">
+        <div className="bg-slate-50 px-6 py-3 italic text-navy-900 text-sm text-center">
           In a collision, total momentum is conserved (never created or destroyed — only transferred).
         </div>
       </div>
@@ -996,9 +997,9 @@ function Session3() {
         <Q n={26}>A driver is texting while driving and collides with a parked car, transferring all the car&apos;s moving force. Which law explains this?</Q>
         <div className="flex flex-wrap items-center gap-2 my-2">
           <span className="font-bold text-sm text-navy-900">Newton&apos;s</span>
-          <input type="text" className="border-b-2 border-slate-300 w-12 bg-transparent outline-none focus:border-phys-primary text-center" aria-label="law number" />
+          <input type="text" className="border-b-2 border-slate-300 w-12 bg-transparent outline-none focus:border-slate-200 text-center" aria-label="law number" />
           <span className="font-bold text-sm text-navy-900">Law because:</span>
-          <input type="text" className="border-b-2 border-slate-300 flex-1 bg-transparent outline-none focus:border-phys-primary min-w-32" aria-label="reason" />
+          <input type="text" className="border-b-2 border-slate-300 flex-1 bg-transparent outline-none focus:border-slate-200 min-w-32" aria-label="reason" />
         </div>
 
         <Q n={27}>When you slam on your brakes, your body still flies forward. Explain this using Newton&apos;s 1st Law.</Q>
@@ -1025,18 +1026,18 @@ function Session3() {
 
         <Q n={32}>Find the net force on the stack of books below:</Q>
         {/* Force diagram */}
-        <div className="flex items-center justify-center gap-6 my-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+        <div className="flex items-center justify-center gap-6 my-4 p-4 bg-slate-50 rounded-xl border border-slate-200 visual">
           <div className="flex items-center gap-2">
             <span className="text-aa-primary text-xl font-bold">←</span>
             <span className="font-semibold text-aa-primary text-sm">F = 3 N</span>
           </div>
-          <div className="flex items-center gap-2 px-6 py-3 bg-white border-2 border-slate-400 rounded-lg shadow-sm">
+          <div className="flex items-center gap-2 px-6 py-3 bg-white border-2 border-slate-400 rounded-lg ">
             <span className="text-base">📚</span>
             <span className="font-medium text-slate-700">Books</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-phys-primary text-sm">F = 1 N</span>
-            <span className="text-phys-primary text-xl font-bold">→</span>
+            <span className="font-semibold text-aa-primary text-sm">F = 1 N</span>
+            <span className="text-aa-primary text-xl font-bold">→</span>
           </div>
         </div>
         <div className="text-sm text-slate-500 italic mb-2">50 N → + 50 N → + ← 50 N</div>
@@ -1062,12 +1063,12 @@ function Session3() {
 
         <Q n={36}>Name the Newton&apos;s Law at work in each scenario:</Q>
         <div className="overflow-x-auto mt-3">
-          <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+          <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
             <thead>
               <tr>
-                <th className="bg-[#0f766e] text-white px-4 py-3 text-center font-semibold">Scenario</th>
-                <th className="bg-[#0f766e] text-white px-4 py-3 text-center font-semibold">Newton&apos;s Law #</th>
-                <th className="bg-[#0f766e] text-white px-4 py-3 text-center font-semibold">Reason (brief)</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-3 text-center font-semibold">Scenario</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-3 text-center font-semibold">Newton&apos;s Law #</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-3 text-center font-semibold">Reason (brief)</th>
               </tr>
             </thead>
             <tbody>
@@ -1082,10 +1083,10 @@ function Session3() {
                 <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
                   <td className="px-4 py-3 border border-slate-200 text-center">{scenario}</td>
                   <td className="px-4 py-3 border border-slate-200 text-center">
-                    <input type="text" className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-phys-primary" aria-label={`Law for: ${scenario}`} />
+                    <input type="text" className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-slate-200" aria-label={`Law for: ${scenario}`} />
                   </td>
                   <td className="px-4 py-3 border border-slate-200">
-                    <input type="text" className="w-full bg-transparent outline-none border-b border-slate-300 focus:border-phys-primary" aria-label={`Reason for: ${scenario}`} />
+                    <input type="text" className="w-full bg-transparent outline-none border-b border-slate-300 focus:border-slate-200" aria-label={`Reason for: ${scenario}`} />
                   </td>
                 </tr>
               ))}
@@ -1156,12 +1157,12 @@ function Session3() {
       </SectionBlock>
 
       <SectionBlock code="SECTION 3-6" title="Impulse, Momentum &amp; Collisions" variant="orange">
-        <div className="bg-orange-50 border border-orange-200 rounded-xl px-5 py-4 mb-4">
-          <p className="font-bold text-orange-800 text-sm mb-2">New Formula — Impulse-Momentum Theorem</p>
+        <div className="bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 mb-4">
+          <p className="font-bold text-navy-900 text-sm mb-2">New Formula — Impulse-Momentum Theorem</p>
           <div className="text-center overflow-x-auto">
             <BlockMath math="J = F \cdot \Delta t = \Delta p = m(v_f - v_i)" />
           </div>
-          <p className="text-xs text-orange-700 mt-1 text-center italic">Impulse J (units: N·s or kg·m/s) = the force applied × the time it acts. It equals the change in momentum.</p>
+          <p className="text-xs text-navy-900 mt-1 text-center italic">Impulse J (units: N·s or kg·m/s) = the force applied × the time it acts. It equals the change in momentum.</p>
         </div>
 
         <Q n={58}>A 0.5 kg soccer ball is kicked from rest and leaves the player&apos;s foot at 28 m/s. The contact time between foot and ball is 0.07 s.</Q>
@@ -1205,16 +1206,16 @@ function Session4() {
     <section id="session-4" className="scroll-mt-28">
       <SessionHeader n={4} title="Comprehensive Mixed Review" />
 
-      <div className="bg-[#2b4a8f] text-white rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider">
+      <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider">
         Full Formula Reference Sheet
       </div>
 
       <div className="overflow-x-auto my-4">
-        <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+        <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
           <thead>
             <tr>
               {["Concept", "Formula", "Variables", "Units"].map((h) => (
-                <th key={h} className="bg-[#1e3a5f] text-white px-4 py-2.5 text-left font-semibold text-xs uppercase tracking-wide border border-[#2a4a7f]">
+                <th key={h} className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-2.5 text-left font-semibold text-xs uppercase tracking-wide">
                   {h}
                 </th>
               ))}
@@ -1239,7 +1240,7 @@ function Session4() {
             ].map(([concept, formula, vars, units], i) => (
               <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
                 <td className="px-4 py-2.5 border border-slate-200 font-semibold text-navy-900">{concept}</td>
-                <td className="px-4 py-2.5 border border-slate-200 font-mono text-phys-primary font-medium">{formula}</td>
+                <td className="px-4 py-2.5 border border-slate-200 font-mono text-aa-primary font-medium">{formula}</td>
                 <td className="px-4 py-2.5 border border-slate-200 text-slate-600">{vars}</td>
                 <td className="px-4 py-2.5 border border-slate-200 text-slate-500">{units}</td>
               </tr>
@@ -1248,7 +1249,7 @@ function Session4() {
         </table>
       </div>
 
-      <div className="bg-phys-primary text-white rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-8">
+      <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-8">
         Mixed Practice Problems
       </div>
 
@@ -1285,14 +1286,14 @@ function Session4() {
         <p className="text-sm text-slate-600 mb-4">Use the data tables below to plot TWO graphs (Distance vs. Time and Velocity vs. Time), then answer the analysis questions.</p>
 
         {/* Mixed data table */}
-        <p className="text-sm font-bold text-[#2b6cb0] mb-2">Mixed Data Table (Runner)</p>
+        <p className="text-sm font-bold text-navy-900 mb-2">Mixed Data Table (Runner)</p>
         <div className="overflow-x-auto mb-6">
-          <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+          <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
             <thead>
               <tr>
-                <th className="bg-[#2b6cb0] text-white px-6 py-2.5 text-center font-semibold">Time (s)</th>
-                <th className="bg-[#2b6cb0] text-white px-6 py-2.5 text-center font-semibold">Distance (m)</th>
-                <th className="bg-[#2b6cb0] text-white px-6 py-2.5 text-center font-semibold">Velocity (m/s)</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-6 py-2.5 text-center font-semibold">Time (s)</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-6 py-2.5 text-center font-semibold">Distance (m)</th>
+                <th className="bg-slate-50 border border-slate-200 text-navy-900 px-6 py-2.5 text-center font-semibold">Velocity (m/s)</th>
               </tr>
             </thead>
             <tbody>
@@ -1300,10 +1301,10 @@ function Session4() {
                 <tr key={t} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
                   <td className="px-6 py-2 text-center border border-slate-200">{t}</td>
                   <td className="px-6 py-2 text-center border border-slate-200">
-                    <input type="text" className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-phys-primary text-sm" aria-label={`Runner distance at t=${t}`} />
+                    <input type="text" className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-slate-200 text-sm" aria-label={`Runner distance at t=${t}`} />
                   </td>
                   <td className="px-6 py-2 text-center border border-slate-200">
-                    <input type="text" className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-phys-primary text-sm" aria-label={`Runner velocity at t=${t}`} />
+                    <input type="text" className="w-full text-center bg-transparent outline-none border-b border-slate-300 focus:border-slate-200 text-sm" aria-label={`Runner velocity at t=${t}`} />
                   </td>
                 </tr>
               ))}
@@ -1332,7 +1333,7 @@ function Session4() {
         <AnsLine label="Displacement:" wide />
       </SectionBlock>
 
-      <div className="bg-phys-primary text-white rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-8">
+      <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-8">
         Exam-Level Challenge Problems
       </div>
 
@@ -1415,35 +1416,35 @@ export default function PhysicsMotionWorksheet() {
   return (
     <main className="min-h-screen pt-16">
       {/* Hero */}
-      <div className="bg-[#1e3a5f] text-white py-14 px-6">
+      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-10 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-wrap items-center gap-3 mb-4">
-            <Link href="/worksheets" className="text-phys-light text-xs font-bold uppercase tracking-widest hover:underline">
+            <Link href="/worksheets" className="text-aa-primary text-xs font-bold uppercase tracking-widest hover:underline">
               ← Worksheets
             </Link>
-            <span className="text-white/30">|</span>
-            <span className="text-xs bg-phys-primary/80 text-white px-2.5 py-1 rounded-full font-semibold">Physics</span>
-            <span className="text-xs text-white/50">Grade 10 — 10SCI Unit 5</span>
+            <span className="text-slate-500">|</span>
+            <span className="text-xs bg-slate-50 border border-slate-200 text-navy-900 px-2.5 py-1 rounded-full font-semibold">Physics</span>
+            <span className="text-xs text-slate-500">Grade 10 — 10SCI Unit 5</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2">Physics Exam Review</h1>
-          <p className="text-phys-light text-xl font-medium mb-4 italic">Motion, Kinematics &amp; Dynamics</p>
-          <div className="bg-white/10 rounded-xl px-5 py-3 inline-block mb-6">
-            <p className="text-sm font-bold text-white">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Physics Exam Review</h1>
+          <p className="text-aa-primary text-base font-medium mb-4 italic">Motion, Kinematics &amp; Dynamics</p>
+          <div className="bg-white border border-slate-200 rounded-xl px-5 py-3 inline-block mb-6">
+            <p className="text-sm font-bold text-navy-900">
               Covers: Describing Motion &nbsp;|&nbsp; Acceleration &nbsp;|&nbsp; Newton&apos;s Laws
             </p>
-            <p className="text-xs text-white/70 italic mt-0.5">
+            <p className="text-xs text-slate-500 italic mt-0.5">
               Includes: Formulas • Practice Problems • Data Tables • Graph Exercises
             </p>
           </div>
           <div className="flex flex-wrap gap-3 items-center">
-            <PrintButton />
-            <span className="text-xs text-white/40">64 questions across 4 sessions</span>
+            <WorksheetActions />
+            <span className="text-xs text-slate-500">64 questions across 4 sessions</span>
           </div>
         </div>
       </div>
 
       {/* Sticky session navigator */}
-      <div className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+      <div className="a4-hide sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
         <div className="max-w-4xl mx-auto px-6 py-2 flex gap-2 overflow-x-auto">
           {[
             { id: "session-1", label: "Session 1 — Motion" },
@@ -1454,7 +1455,7 @@ export default function PhysicsMotionWorksheet() {
             <a
               key={id}
               href={`#${id}`}
-              className="whitespace-nowrap text-xs px-3 py-1.5 rounded-full bg-slate-100 hover:bg-phys-bg text-slate-500 hover:text-phys-primary font-medium transition-colors"
+              className="whitespace-nowrap text-xs px-3 py-1.5 rounded-full bg-slate-100 text-slate-500 hover:text-aa-primary hover:bg-slate-200 font-medium transition-colors"
             >
               {label}
             </a>
@@ -1463,15 +1464,30 @@ export default function PhysicsMotionWorksheet() {
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-2">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        <div className="a4-paper space-y-2">
+        <PaperHeader
+          course="Physics"
+          level="Grade 10, 10SCI Unit 5"
+          title="Physics Exam Review: Motion, Kinematics &amp; Dynamics"
+          
+          questions={64}
+          instructions={[
+            "Answer all questions.",
+            "Show your working in the spaces provided.",
+            "Write your answers in the answer lines or spaces given.",
+          ]}
+        />
         <Session1 />
         <Session2 />
         <Session3 />
         <Session4 />
 
+        </div>
+
         {/* Footer nav */}
         <div className="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
-          <Link href="/worksheets" className="text-sm text-slate-500 hover:text-phys-primary font-medium transition-colors">
+          <Link href="/worksheets" className="text-sm text-slate-500 hover:text-aa-primary font-medium transition-colors">
             ← All Worksheets
           </Link>
           <p className="text-xs text-slate-400">Physics Exam Review — 10SCI Unit 5</p>

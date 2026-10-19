@@ -78,6 +78,8 @@ teaching-material-ib/
 - **HighlightBox:** `variant="blue" | "green" | "yellow" | "red"`
 - **Tag:** `variant="blue" | "green" | "yellow" | "red"`
 
+**Neutral rule:** colour is reserved for visuals (class `visual`) and items inside exercise questions (`q-accent`). Variant props are kept for compatibility but render neutral: surfaces white/`slate-50`, borders `slate-200`, one accent `aa-primary`. `aa`/`blue` = accent left border or outline; `ai`/`green`/`yellow`/`info`/`warn` = grey left border or outline; `red` keeps a red left border for genuine warnings only. Shared primitives carry `a4:` overrides (white, black borders, no shadow). See `Tasks/_plans/Web-ui-consistency.md`.
+
 ## Pages
 
 ### Homepage (`/`)
@@ -308,3 +310,9 @@ Data-driven, exportable Q&A papers (same Export PDF → Question / Q&A flow as `
 - All content pages follow the pattern: Lesson → Practice → Mock → Exam Prep → Answers
 
 
+
+## Agent rules
+
+Shared rules for every agent live in `AGENTS.md` and apply here too:
+
+@AGENTS.md

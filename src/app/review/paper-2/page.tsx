@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import PrintButton from "../../worksheets/physics-motion/PrintButton";
-import ExportPdfButton from "@/components/review/ExportPdfButton";
 import { AnswerRevealProvider } from "@/components/review/AnswerReveal";
 import {
   PartHeader,
@@ -16,6 +13,8 @@ import {
   Note,
   SummaryTable,
   StickyPaperNav,
+  PaperHero,
+  PaperSheet,
   PaperFooterNav,
 } from "@/components/review/PaperKit";
 
@@ -31,41 +30,27 @@ export default function ReviewPaper2() {
   return (
     <AnswerRevealProvider>
       <main className="min-h-screen pt-16">
-        {/* Hero */}
-        <div className="bg-[#1e3a5f] text-white py-14 px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <Link href="/review" className="text-purple-300 text-xs font-bold uppercase tracking-widest hover:underline">
-                ← Review
-              </Link>
-              <span className="text-white/30">|</span>
-              <span className="text-xs bg-purple-700/80 text-white px-2.5 py-1 rounded-full font-semibold">
-                Sequences &amp; Series
-              </span>
-              <span className="text-xs text-white/50">AA — Unit 1 Algebra (Topic 5)</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-bold mb-2">Sequences and Series</h1>
-            <p className="text-purple-300 text-xl font-medium mb-4 italic">Review Paper 2 — Mixed Practice</p>
-            <div className="bg-white/10 rounded-xl px-5 py-3 inline-block mb-6">
-              <p className="text-sm font-bold text-white">
-                12 Questions &nbsp;|&nbsp; 76 Marks &nbsp;|&nbsp; Arithmetic &amp; Geometric Sequences, Series, Applications
-              </p>
-              <p className="text-xs text-white/70 italic mt-0.5">
-                Attempt each part, then tap Show Answer to check your work against the worked solution.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3 items-center">
-              <PrintButton />
-              <ExportPdfButton />
-              <span className="text-xs text-white/40">76 marks · 12 questions · ~90 min</span>
-            </div>
-          </div>
-        </div>
+        <PaperHero
+          topic="Sequences &amp; Series"
+          course="AA — Unit 1 Algebra (Topic 5)"
+          title="Sequences and Series"
+          subtitle="Review Paper 2 — Mixed Practice"
+          stats="12 Questions · 76 Marks · Arithmetic &amp; Geometric Sequences, Series, Applications"
+          note="Attempt each part, then tap Show Answer to check your work against the worked solution."
+          meta="76 marks · 12 questions · ~90 min"
+        />
 
         {/* Sticky navigator */}
         <StickyPaperNav />
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        <PaperSheet
+          title="Sequences and Series — Review Paper 2"
+          course="IB Mathematics: Analysis and Approaches"
+          level="Standard Level — Review Paper 2"
+          duration="90 minutes"
+          marks={76}
+          instructions={["Answer all questions.", "Show all working; a GDC may be used.", "Give non-exact answers correct to 3 significant figures unless told otherwise."]}
+        >
           {/* ══════════════════ QUESTIONS & ANSWERS ══════════════════ */}
           <section id="exercise" className="scroll-mt-28">
             <PartHeader variant="exercise" label="Exercise Paper" note="Attempt every part, then tap Show Answer to reveal the worked solution" />
@@ -454,7 +439,7 @@ export default function ReviewPaper2() {
                   <thead>
                     <tr>
                       {["n", "Antonio (€)", "Barbara (€)", "Antonio ≥ Barbara?"].map((h) => (
-                        <th key={h} className="bg-[#1e3a5f] text-white px-3 py-2 text-left font-semibold text-xs">
+                        <th key={h} className="bg-slate-100 text-navy-900 border border-slate-200 px-3 py-2 text-left font-semibold text-xs">
                           {h}
                         </th>
                       ))}
@@ -475,7 +460,7 @@ export default function ReviewPaper2() {
                           <td
                             key={j}
                             className={`px-3 py-1.5 border border-slate-200 ${
-                              j === 3 && cell === "No" ? "font-bold text-danger-primary" : "text-slate-600"
+                              j === 3 && cell === "No" ? "font-bold text-navy-900 underline" : "text-slate-600"
                             }`}
                           >
                             {cell}
@@ -696,7 +681,7 @@ export default function ReviewPaper2() {
 
           {/* Footer nav */}
           <PaperFooterNav paperLabel="Sequences and Series — Review Paper 2" />
-        </div>
+        </PaperSheet>
       </main>
     </AnswerRevealProvider>
   );

@@ -3,8 +3,8 @@ import Card, { CardTitle, CardGrid } from "@/components/ui/Card";
 
 function FlowQuestion({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-aa-bg border-2 border-[#90cdf4] rounded-xl px-8 py-5 max-w-[500px] w-full text-center">
-      <p className="font-semibold text-aa-primary">{children}</p>
+    <div className="bg-slate-50 border-2 border-slate-200 a4:bg-white a4:border-black rounded-xl px-8 py-5 max-w-[500px] w-full text-center">
+      <p className="font-semibold text-navy-900">{children}</p>
     </div>
   );
 }
@@ -22,10 +22,10 @@ function FlowBranch({
 }) {
   return (
     <div className="flex gap-6 w-full max-w-[520px] justify-center flex-col sm:flex-row">
-      <div className={`flex-1 p-4 rounded-xl text-center font-semibold text-sm border-2 ${leftClass}`}>
+      <div className={`flex-1 p-4 rounded-xl text-center font-semibold text-sm border-2 a4:border-black a4:text-black ${leftClass}`}>
         {left}
       </div>
-      <div className={`flex-1 p-4 rounded-xl text-center font-semibold text-sm border-2 ${rightClass}`}>
+      <div className={`flex-1 p-4 rounded-xl text-center font-semibold text-sm border-2 a4:border-black a4:text-black ${rightClass}`}>
         {right}
       </div>
     </div>
@@ -48,8 +48,8 @@ export default function SectionDecisionGuide() {
         <FlowBranch
           left={<>Yes &rarr; Lean toward <strong>AA</strong></>}
           right={<>Not really &rarr; Continue below</>}
-          leftClass="bg-ai-light text-ai-text border-[#68d391]"
-          rightClass="bg-warn-light text-warn-text border-[#ecc94b]"
+          leftClass="bg-white text-navy-900 border-slate-500"
+          rightClass="bg-white text-slate-500 border-slate-200"
         />
 
         <span className="text-2xl text-gray-400">&#9660;</span>
@@ -60,8 +60,8 @@ export default function SectionDecisionGuide() {
         <FlowBranch
           left={<>Yes &rarr; Lean toward <strong>AI</strong></>}
           right={<>Not sure &rarr; Continue below</>}
-          leftClass="bg-ai-light text-ai-text border-[#68d391]"
-          rightClass="bg-warn-light text-warn-text border-[#ecc94b]"
+          leftClass="bg-white text-navy-900 border-slate-500"
+          rightClass="bg-white text-slate-500 border-slate-200"
         />
 
         <span className="text-2xl text-gray-400">&#9660;</span>
@@ -72,8 +72,8 @@ export default function SectionDecisionGuide() {
         <FlowBranch
           left={<>Yes &rarr; Choose <strong>AA</strong></>}
           right={<>No &rarr; Choose <strong>AI</strong></>}
-          leftClass="bg-aa-light text-aa-text border-[#63b3ed]"
-          rightClass="bg-ai-light text-ai-text border-[#68d391]"
+          leftClass="bg-white text-navy-900 border-aa-primary"
+          rightClass="bg-white text-navy-900 border-slate-500"
         />
       </div>
 

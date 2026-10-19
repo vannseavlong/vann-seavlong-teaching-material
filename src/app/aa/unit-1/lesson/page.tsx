@@ -172,55 +172,6 @@ function LessonHero() {
 
 // ─── Table of Contents ────────────────────────────────────────────────────────
 
-const SL_TOPICS = [
-  { id: "indices", label: "Laws of Indices" },
-  { id: "surds", label: "Surds" },
-  { id: "quadratics", label: "Quadratic Equations" },
-  { id: "completing-square", label: "Completing the Square" },
-  { id: "sequences", label: "Sequences & Series" },
-  { id: "logarithms", label: "Logarithms" },
-  { id: "binomial", label: "Binomial Expansion" },
-];
-
-const HL_TOPICS = [
-  { id: "induction", label: "Proof by Induction" },
-  { id: "complex", label: "Complex Numbers" },
-  { id: "advanced-sequences", label: "Advanced Sequences & Series" },
-  { id: "harder-binomial", label: "Harder Binomial Expansion" },
-];
-
-function TableOfContents() {
-  return (
-    <div className="bg-white border-b border-slate-200 px-6 py-8 sticky top-[60px] z-10 shadow-sm">
-      <div className="max-w-[1000px] mx-auto">
-        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
-          Jump to topic
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {SL_TOPICS.map((t) => (
-            <a
-              key={t.id}
-              href={`#${t.id}`}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-aa-bg text-aa-text hover:bg-aa-light transition-colors"
-            >
-              {t.label}
-            </a>
-          ))}
-          {HL_TOPICS.map((t) => (
-            <a
-              key={t.id}
-              href={`#${t.id}`}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-danger-bg text-danger-text hover:bg-danger-light transition-colors"
-            >
-              HL: {t.label}
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ─── Section wrapper (used in this file so we can control alt colours) ────────
 
 function LessonSection({
@@ -2694,7 +2645,6 @@ export default function Page() {
   return (
     <main>
       <LessonHero />
-      <TableOfContents />
 
       {/* SL Topics */}
       <IndicesSection />

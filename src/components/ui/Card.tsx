@@ -3,10 +3,10 @@ import { ReactNode } from "react";
 type CardVariant = "aa" | "ai" | "info" | "warn" | "default";
 
 const borderColors: Record<CardVariant, string> = {
-  aa: "border-aa-light",
-  ai: "border-ai-light",
-  info: "border-warn-light",
-  warn: "border-danger-light",
+  aa: "border-slate-200 border-l-4 border-l-aa-primary",
+  ai: "border-slate-200 border-l-4 border-l-slate-500",
+  info: "border-slate-200",
+  warn: "border-slate-200 border-l-4 border-l-slate-400",
   default: "border-slate-200",
 };
 
@@ -21,7 +21,7 @@ export default function Card({
 }) {
   return (
     <div
-      className={`bg-white border rounded-lg p-6 ${borderColors[variant]} ${className}`}
+      className={`bg-white border rounded-lg p-6 a4:border-black a4:border-l-black a4:shadow-none a4:bg-white ${borderColors[variant]} ${className}`}
     >
       {children}
     </div>

@@ -1,8 +1,6 @@
 import { Fragment, ReactNode } from "react";
 import Link from "next/link";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import PrintButton from "@/app/worksheets/physics-motion/PrintButton";
-import ExportPdfButton from "./ExportPdfButton";
 import { AnswerRevealProvider } from "./AnswerReveal";
 import {
   PartHeader,
@@ -16,6 +14,8 @@ import {
   Note,
   SummaryTable,
   StickyPaperNav,
+  PaperHero,
+  PaperSheet,
   PaperFooterNav,
 } from "./PaperKit";
 import {
@@ -72,47 +72,31 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
   return (
     <AnswerRevealProvider>
       <main className="min-h-screen pt-16">
-        {/* Hero */}
-        <div className="bg-[#1e3a5f] text-white py-14 px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <Link href="/review" className="text-purple-300 text-xs font-bold uppercase tracking-widest hover:underline">
-                ← Review
-              </Link>
-              <span className="text-white/30">|</span>
-              <span className="text-xs bg-purple-700/80 text-white px-2.5 py-1 rounded-full font-semibold">
-                {paper.topic}
-              </span>
-              <span className="text-xs text-white/50">AI SL — Unit 1 Number &amp; Algebra</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-bold mb-2">{paper.title}</h1>
-            <p className="text-purple-300 text-xl font-medium mb-4 italic">
-              {paper.subtitle} — Exercise &amp; Answer Sheet
-            </p>
-            <div className="bg-white/10 rounded-xl px-5 py-3 inline-block mb-6">
-              <p className="text-sm font-bold text-white">
-                {paper.questions.length} Questions &nbsp;|&nbsp; {total} Marks &nbsp;|&nbsp; ~{paper.minutes} min
-              </p>
-              <p className="text-xs text-white/70 italic mt-0.5">
-                GDC allowed. Attempt each part, then tap Show Answer to check against the worked solution.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3 items-center">
-              <PrintButton />
-              <ExportPdfButton />
-              <Link
-                href={`/ai/unit-1/lesson#${paper.lessonAnchor}`}
-                className="print:hidden text-sm text-purple-300 hover:underline"
-              >
-                Revise the lesson →
-              </Link>
-            </div>
-          </div>
-        </div>
+        <PaperHero
+          topic={paper.topic}
+          course="AI SL — Unit 1 Number &amp; Algebra"
+          title={paper.title}
+          subtitle={`${paper.subtitle} — Exercise & Answer Sheet`}
+          stats={`${paper.questions.length} Questions · ${total} Marks · ~${paper.minutes} min`}
+          note="GDC allowed. Attempt each part, then tap Show Answer to check against the worked solution."
+          meta={`${total} marks · ${paper.questions.length} questions`}
+          extra={
+            <Link href={`/ai/unit-1/lesson#${paper.lessonAnchor}`} className="a4-hide print:hidden text-sm text-sky-300 hover:underline">
+              Revise the lesson →
+            </Link>
+          }
+        />
 
         <StickyPaperNav />
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        <PaperSheet
+          title={`${paper.title} — ${paper.subtitle}`}
+          course="IB Mathematics: Applications and Interpretation"
+          level="Standard Level — Summative Revision"
+          duration={`${paper.minutes} minutes`}
+          marks={total}
+          instructions={["Answer all questions.", "Show all working; a GDC may be used.", "Give non-exact answers correct to 3 significant figures unless told otherwise."]}
+        >
           <section id="exercise" className="scroll-mt-28">
             <PartHeader
               variant="exercise"
@@ -162,7 +146,7 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
 
           <SummaryTable rows={summaryRows} />
           <PaperFooterNav paperLabel={`${paper.title} — ${paper.subtitle}`} />
-        </div>
+        </PaperSheet>
       </main>
     </AnswerRevealProvider>
   );

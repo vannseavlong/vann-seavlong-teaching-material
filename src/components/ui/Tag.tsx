@@ -3,10 +3,10 @@ import { ReactNode } from "react";
 type TagVariant = "blue" | "green" | "yellow" | "red";
 
 const styles: Record<TagVariant, string> = {
-  blue: "bg-aa-light text-aa-text",
-  green: "bg-ai-light text-ai-text",
-  yellow: "bg-warn-light text-warn-text",
-  red: "bg-danger-light text-danger-text",
+  blue: "border-aa-primary text-aa-primary",
+  green: "border-slate-300 text-slate-500",
+  yellow: "border-slate-300 text-slate-500",
+  red: "border-slate-500 text-navy-900",
 };
 
 export default function Tag({
@@ -18,7 +18,7 @@ export default function Tag({
 }) {
   return (
     <span
-      className={`inline-block px-2 py-0.5 rounded text-xs font-medium m-0.5 ${styles[variant]}`}
+      className={`inline-block px-2 py-0.5 rounded text-xs font-medium m-0.5 border bg-white a4:bg-white a4:border-black a4:text-black ${styles[variant]}`}
     >
       {children}
     </span>

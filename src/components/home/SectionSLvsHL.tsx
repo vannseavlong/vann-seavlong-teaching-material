@@ -4,9 +4,9 @@ import ComparisonTable from "@/components/ui/ComparisonTable";
 import HighlightBox from "@/components/ui/HighlightBox";
 
 const columns = [
-  { header: "Combination", className: "bg-navy-800" },
-  { header: "Difficulty", className: "bg-navy-900" },
-  { header: "Best For", className: "bg-navy-900" },
+  { header: "Combination" },
+  { header: "Difficulty" },
+  { header: "Best For" },
 ];
 
 const rows = [

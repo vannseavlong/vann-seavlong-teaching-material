@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import PrintButton from "../physics-motion/PrintButton";
+import WorksheetActions from "../_components/WorksheetActions";
+import PaperHeader from "../_components/PaperHeader";
 
 export const metadata: Metadata = {
   title: "Area & Volume Practice Worksheet | Worksheets",
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
 
 function SessionHeader({ n, title, time }: { n: number; title: string; time: string }) {
   return (
-    <div className="bg-[#14532d] text-white rounded-xl px-6 py-4 mb-6 mt-10">
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-xl px-6 py-4 mb-6 mt-10">
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div>
-          <p className="text-[#86efac] text-xs font-bold uppercase tracking-widest mb-1">Session {n}</p>
-          <h2 className="text-xl font-bold">{title}</h2>
+          <p className="text-aa-primary text-xs font-bold uppercase tracking-widest mb-1">Session {n}</p>
+          <h2 className="text-lg font-bold">{title}</h2>
         </div>
-        <span className="text-sm bg-[#166534]/80 text-white px-3 py-1 rounded-full font-medium">{time}</span>
+        <span className="text-sm bg-white border border-slate-200 text-navy-900 px-3 py-1 rounded-full font-medium">{time}</span>
       </div>
     </div>
   );
@@ -37,15 +38,15 @@ function SectionBlock({
   children: React.ReactNode;
 }) {
   const colors = {
-    green: "bg-[#dcfce7] text-[#14532d] border-[#86efac]",
-    blue: "bg-[#dbeafe] text-[#1e40af] border-[#bfdbfe]",
-    orange: "bg-[#ffedd5] text-[#c2410c] border-[#fed7aa]",
-    purple: "bg-[#f3e8ff] text-[#7e22ce] border-[#e9d5ff]",
-    teal: "bg-[#ccfbf1] text-[#0f766e] border-[#99f6e4]",
-    red: "bg-[#fee2e2] text-[#991b1b] border-[#fca5a5]",
+    green: "bg-slate-50 text-navy-900 border-slate-200",
+    blue: "bg-slate-50 text-navy-900 border-slate-200",
+    orange: "bg-slate-50 text-navy-900 border-slate-200",
+    purple: "bg-slate-50 text-navy-900 border-slate-200",
+    teal: "bg-slate-50 text-navy-900 border-slate-200",
+    red: "bg-slate-50 text-navy-900 border-slate-200",
   };
   return (
-    <div className="my-6">
+    <div className="my-6 a4:break-inside-avoid-page">
       <div className={`rounded-lg px-5 py-3 mb-4 font-bold text-sm border ${colors[variant]}`}>
         {code}: {title}
       </div>
@@ -56,9 +57,9 @@ function SectionBlock({
 
 function Q({ n, children }: { n: number; children: React.ReactNode }) {
   return (
-    <div className="mb-5">
-      <p className="text-slate-700 mb-2">
-        <span className="font-bold text-[#14532d]">{n}.</span> {children}
+    <div className="mb-5 a4:break-inside-avoid">
+      <p className="text-slate-700 text-sm mb-2">
+        <span className="font-bold text-navy-900">{n}.</span> {children}
       </p>
     </div>
   );
@@ -71,7 +72,7 @@ function AnsLine({ label, wide = false }: { label: string; wide?: boolean }) {
       <input
         type="text"
         aria-label={label}
-        className={`border-b-2 border-slate-300 bg-transparent outline-none focus:border-[#16a34a] transition-colors text-slate-700 text-sm ${wide ? "flex-1 min-w-0" : "w-52"}`}
+        className={`border-b-2 border-slate-300 bg-transparent outline-none focus:border-slate-200 transition-colors text-slate-700 text-sm ${wide ? "flex-1 min-w-0" : "w-52"}`}
       />
     </div>
   );
@@ -90,7 +91,7 @@ function AnsTextarea({ label }: { label: string }) {
 function DiagramBox({ children, caption }: { children: React.ReactNode; caption?: string }) {
   return (
     <div className="my-4 flex flex-col items-center">
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-2 w-full max-w-md">
+      <div className="visual bg-white rounded-xl border border-slate-200 p-2 w-full max-w-md a4:break-inside-avoid">
         {children}
       </div>
       {caption && <p className="text-xs text-slate-400 italic mt-1">{caption}</p>}
@@ -100,7 +101,7 @@ function DiagramBox({ children, caption }: { children: React.ReactNode; caption?
 
 function FormulaChip({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-block bg-[#14532d] text-white rounded-lg px-4 py-2 text-sm my-2">
+    <div className="inline-block bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-4 py-2 text-sm my-2">
       {children}
     </div>
   );
@@ -784,8 +785,8 @@ function Session1() {
     <section id="session-1" className="scroll-mt-28">
       <SessionHeader n={1} title="Area of Basic Shapes" time="20 min" />
 
-      <div className="bg-[#dcfce7] border border-[#86efac] rounded-xl px-5 py-4 mb-6">
-        <p className="font-bold text-[#14532d] text-sm mb-2">Key Formulas — Basic Areas</p>
+      <div className="bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 mb-6">
+        <p className="font-bold text-navy-900 text-sm mb-2">Key Formulas — Basic Areas</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
           {[
             { name: "Rectangle", f: "A = l \\times w" },
@@ -795,8 +796,8 @@ function Session1() {
             { name: "Trapezium", f: "A = \\tfrac{1}{2}(a+b)h" },
             { name: "Sector", f: "A = \\tfrac{\\theta}{360}\\pi r^2" },
           ].map((item) => (
-            <div key={item.name} className="bg-white rounded-lg px-3 py-2 border border-[#bbf7d0] text-center">
-              <p className="font-semibold text-[#14532d] text-xs mb-1">{item.name}</p>
+            <div key={item.name} className="bg-white rounded-lg px-3 py-2 border border-slate-200 text-center">
+              <p className="font-semibold text-navy-900 text-xs mb-1">{item.name}</p>
               <BlockMath math={item.f} />
             </div>
           ))}
@@ -859,9 +860,9 @@ function Session2() {
     <section id="session-2" className="scroll-mt-28">
       <SessionHeader n={2} title="Composite Area — Split, Add & Subtract" time="25 min" />
 
-      <div className="bg-[#fef9c3] border border-[#fde047] rounded-xl px-5 py-4 mb-6">
-        <p className="font-bold text-[#713f12] text-sm mb-1">Strategy for Composite Shapes</p>
-        <ol className="text-sm text-[#713f12] space-y-0.5 list-decimal ml-4">
+      <div className="bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 mb-6">
+        <p className="font-bold text-navy-900 text-sm mb-1">Strategy for Composite Shapes</p>
+        <ol className="text-sm text-navy-900 space-y-0.5 list-decimal ml-4">
           <li>Identify whether you <strong>add</strong> (joining parts) or <strong>subtract</strong> (removing a cutout)</li>
           <li>Find any <em>unlabeled</em> side lengths from the given dimensions</li>
           <li>Calculate each part separately, then combine</li>
@@ -877,7 +878,7 @@ function Session2() {
           <LShapeDiagram />
         </DiagramBox>
         <div className="bg-slate-50 rounded-lg p-4 text-sm space-y-2 mb-3">
-          <p className="font-bold text-[#1e40af]">Method 1 — Split into two rectangles (Part A + Part B)</p>
+          <p className="font-bold text-navy-900">Method 1 — Split into two rectangles (Part A + Part B)</p>
           <AnsLine label="Part A dimensions:" wide />
           <AnsLine label="Part A area:" wide />
           <AnsLine label="Part B dimensions:" wide />
@@ -885,7 +886,7 @@ function Session2() {
           <AnsLine label="Total area (A + B):" wide />
         </div>
         <div className="bg-slate-50 rounded-lg p-4 text-sm space-y-2">
-          <p className="font-bold text-[#15803d]">Method 2 — Big rectangle minus cutout</p>
+          <p className="font-bold text-navy-900">Method 2 — Big rectangle minus cutout</p>
           <AnsLine label="Big rectangle (12 × 9):" wide />
           <AnsLine label="Cutout area (7 × 4):" wide />
           <AnsLine label="Total area (big − cutout):" wide />
@@ -957,7 +958,7 @@ function Session2() {
         <AnsLine label="Missing horizontal arm length (each side):" wide />
         <AnsLine label="Missing vertical arm length (each side):" wide />
         <div className="bg-slate-50 rounded-lg p-4 text-sm space-y-1 my-3">
-          <p className="font-semibold text-[#991b1b]">Method — large square minus four corner squares</p>
+          <p className="font-semibold text-navy-900">Method — large square minus four corner squares</p>
           <AnsLine label="Big 12×12 square area:" wide />
           <AnsLine label="One corner square size:" wide />
           <AnsLine label="Four corner squares area:" wide />
@@ -975,8 +976,8 @@ function Session3() {
     <section id="session-3" className="scroll-mt-28">
       <SessionHeader n={3} title="Volume of 3D Shapes" time="25 min" />
 
-      <div className="bg-[#dcfce7] border border-[#86efac] rounded-xl px-5 py-4 mb-6">
-        <p className="font-bold text-[#14532d] text-sm mb-2">Key Formulas — Volume</p>
+      <div className="bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 mb-6">
+        <p className="font-bold text-navy-900 text-sm mb-2">Key Formulas — Volume</p>
         <div className="grid grid-cols-2 gap-3 text-sm">
           {[
             { name: "Rectangular Prism", f: "V = l \\times w \\times h" },
@@ -986,8 +987,8 @@ function Session3() {
             { name: "Sphere", f: "V = \\tfrac{4}{3}\\pi r^3" },
             { name: "Any prism", f: "V = A_{\\text{cross}} \\times L" },
           ].map((item) => (
-            <div key={item.name} className="bg-white rounded-lg px-3 py-2 border border-[#bbf7d0] text-center">
-              <p className="font-semibold text-[#14532d] text-xs mb-1">{item.name}</p>
+            <div key={item.name} className="bg-white rounded-lg px-3 py-2 border border-slate-200 text-center">
+              <p className="font-semibold text-navy-900 text-xs mb-1">{item.name}</p>
               <BlockMath math={item.f} />
             </div>
           ))}
@@ -1047,9 +1048,9 @@ function Session4() {
     <section id="session-4" className="scroll-mt-28">
       <SessionHeader n={4} title="Challenge — Complex Composite Shapes" time="30 min" />
 
-      <div className="bg-[#fee2e2] border border-[#fca5a5] rounded-xl px-5 py-4 mb-6">
-        <p className="font-bold text-[#991b1b] text-sm mb-1">Challenge Level — What to expect</p>
-        <ul className="text-sm text-[#991b1b] space-y-0.5 list-disc ml-4">
+      <div className="bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 mb-6">
+        <p className="font-bold text-navy-900 text-sm mb-1">Challenge Level — What to expect</p>
+        <ul className="text-sm text-navy-900 space-y-0.5 list-disc ml-4">
           <li>Some side lengths are <strong>not labeled</strong> — derive them from other given dimensions</li>
           <li>Shapes may require <strong>3 or more parts</strong> to split or subtract</li>
           <li>3D problems may involve composite solids — calculate each piece separately</li>
@@ -1067,12 +1068,12 @@ function Session4() {
           <ComplexLShapeDiagram />
         </DiagramBox>
         <div className="bg-slate-50 rounded-lg p-4 text-sm space-y-2 mb-3">
-          <p className="font-semibold text-[#991b1b]">Step 1 — Find missing lengths</p>
+          <p className="font-semibold text-navy-900">Step 1 — Find missing lengths</p>
           <AnsLine label="Missing horizontal length (right portion width):" wide />
           <AnsLine label="Missing vertical length (right portion height):" wide />
         </div>
         <div className="bg-slate-50 rounded-lg p-4 text-sm space-y-2 mb-3">
-          <p className="font-semibold text-[#991b1b]">Step 2 — Calculate each part</p>
+          <p className="font-semibold text-navy-900">Step 2 — Calculate each part</p>
           <AnsLine label="Part A dimensions and area:" wide />
           <AnsLine label="Part B dimensions and area:" wide />
         </div>
@@ -1167,35 +1168,35 @@ export default function AreaVolumePage() {
   return (
     <main className="min-h-screen pt-16">
       {/* Hero */}
-      <div className="bg-[#14532d] text-white py-14 px-6">
+      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-10 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-wrap items-center gap-3 mb-4">
-            <Link href="/worksheets" className="text-[#86efac] text-xs font-bold uppercase tracking-widest hover:underline">
+            <Link href="/worksheets" className="text-aa-primary text-xs font-bold uppercase tracking-widest hover:underline">
               ← Worksheets
             </Link>
-            <span className="text-white/30">|</span>
-            <span className="text-xs bg-[#166534]/80 text-white px-2.5 py-1 rounded-full font-semibold">Mathematics</span>
-            <span className="text-xs text-white/50">Geometry — Area & Volume</span>
+            <span className="text-slate-500">|</span>
+            <span className="text-xs bg-white border border-slate-200 text-navy-900 px-2.5 py-1 rounded-full font-semibold">Mathematics</span>
+            <span className="text-xs text-slate-500">Geometry — Area & Volume</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2">Area & Volume Practice</h1>
-          <p className="text-[#86efac] text-xl font-medium mb-4 italic">Composite Shapes — Diagrams Included</p>
-          <div className="bg-white/10 rounded-xl px-5 py-3 inline-block mb-6">
-            <p className="text-sm font-bold text-white">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Area & Volume Practice</h1>
+          <p className="text-aa-primary text-base font-medium mb-4 italic">Composite Shapes — Diagrams Included</p>
+          <div className="bg-white border border-slate-200 rounded-xl px-5 py-3 inline-block mb-6">
+            <p className="text-sm font-bold text-navy-900">
               Basic Shapes &nbsp;|&nbsp; Composite (Add/Subtract) &nbsp;|&nbsp; 3D Volume &nbsp;|&nbsp; Challenge Problems
             </p>
-            <p className="text-xs text-white/70 italic mt-0.5">
+            <p className="text-xs text-slate-500 italic mt-0.5">
               Every question has a shape diagram • Progressive difficulty • Missing dimensions in hard problems
             </p>
           </div>
           <div className="flex flex-wrap gap-3 items-center">
-            <PrintButton />
-            <span className="text-xs text-white/40">20 questions across 4 sessions • ~100 min</span>
+            <WorksheetActions />
+            <span className="text-xs text-slate-500">20 questions across 4 sessions • ~100 min</span>
           </div>
         </div>
       </div>
 
       {/* Sticky session navigator */}
-      <div className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+      <div className="a4-hide sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
         <div className="max-w-4xl mx-auto px-6 py-2 flex gap-2 overflow-x-auto">
           {[
             { id: "session-1", label: "Session 1 — Basic Shapes" },
@@ -1206,7 +1207,7 @@ export default function AreaVolumePage() {
             <a
               key={id}
               href={`#${id}`}
-              className="whitespace-nowrap text-xs px-3 py-1.5 rounded-full bg-slate-100 hover:bg-[#dcfce7] text-slate-500 hover:text-[#14532d] font-medium transition-colors"
+              className="whitespace-nowrap text-xs px-3 py-1.5 rounded-full bg-slate-100 text-slate-500 hover:text-aa-primary hover:bg-slate-200 font-medium transition-colors"
             >
               {label}
             </a>
@@ -1215,7 +1216,20 @@ export default function AreaVolumePage() {
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-2">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        <div className="a4-paper space-y-2">
+        <PaperHeader
+          course="Mathematics"
+          level="Grade 10"
+          title="Area &amp; Volume Practice"
+          duration="approximately 100 minutes"
+          questions={20}
+          instructions={[
+            "Answer all questions.",
+            "Show your working in the spaces provided.",
+            "Write your answers in the answer lines or spaces given.",
+          ]}
+        />
         <Session1 />
         <Session2 />
         <Session3 />
@@ -1223,15 +1237,15 @@ export default function AreaVolumePage() {
 
         {/* Formula Reference */}
         <div className="mt-16 pt-8 border-t border-slate-200">
-          <div className="bg-[#14532d] text-white rounded-lg px-5 py-3 mb-5 font-bold text-sm uppercase tracking-wider">
+          <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-3 mb-5 font-bold text-sm uppercase tracking-wider">
             Quick Formula Reference Sheet
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+            <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
               <thead>
                 <tr>
                   {["Shape", "Area Formula", "Volume Formula"].map((h) => (
-                    <th key={h} className="bg-[#14532d] text-white px-4 py-2.5 text-left font-semibold text-xs uppercase">
+                    <th key={h} className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-2.5 text-left font-semibold text-xs uppercase">
                       {h}
                     </th>
                   ))}
@@ -1251,7 +1265,7 @@ export default function AreaVolumePage() {
                   ["Sphere", "—", "V = (4/3)πr³"],
                 ].map((row, i) => (
                   <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
-                    <td className="px-4 py-2.5 border border-slate-200 font-semibold text-[#14532d]">{row[0]}</td>
+                    <td className="px-4 py-2.5 border border-slate-200 font-semibold text-navy-900">{row[0]}</td>
                     <td className="px-4 py-2.5 border border-slate-200 font-mono text-sm text-slate-700">{row[1]}</td>
                     <td className="px-4 py-2.5 border border-slate-200 font-mono text-sm text-slate-700">{row[2]}</td>
                   </tr>
@@ -1261,9 +1275,11 @@ export default function AreaVolumePage() {
           </div>
         </div>
 
+        </div>
+
         {/* Footer nav */}
         <div className="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
-          <Link href="/worksheets" className="text-sm text-slate-500 hover:text-[#14532d] font-medium transition-colors">
+          <Link href="/worksheets" className="text-sm text-slate-500 hover:text-aa-primary font-medium transition-colors">
             ← All Worksheets
           </Link>
           <p className="text-xs text-slate-400">Area & Volume Practice — Geometry</p>

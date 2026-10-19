@@ -167,51 +167,6 @@ function LessonHero() {
 
 // ─── Table of Contents ────────────────────────────────────────────────────────
 
-const SL_TOPICS = [
-  { id: "trig-ratios", label: "Trig Ratios & Unit Circle" },
-  { id: "sine-cosine-rules", label: "Sine & Cosine Rules" },
-  { id: "trig-graphs", label: "Trig Graphs" },
-  { id: "trig-equations", label: "Trig Equations" },
-];
-
-const HL_TOPICS = [
-  { id: "trig-identities", label: "Trig Identities" },
-  { id: "complex-equations", label: "Complex Trig Equations" },
-  { id: "modelling", label: "Modelling with Trigonometry" },
-];
-
-function TableOfContents() {
-  return (
-    <div className="bg-white border-b border-slate-200 px-6 py-8 sticky top-[60px] z-10 shadow-sm">
-      <div className="max-w-[1000px] mx-auto">
-        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
-          Jump to topic
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {SL_TOPICS.map((t) => (
-            <a
-              key={t.id}
-              href={`#${t.id}`}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-aa-bg text-aa-text hover:bg-aa-light transition-colors"
-            >
-              {t.label}
-            </a>
-          ))}
-          {HL_TOPICS.map((t) => (
-            <a
-              key={t.id}
-              href={`#${t.id}`}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-danger-bg text-danger-text hover:bg-danger-light transition-colors"
-            >
-              HL: {t.label}
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ─── Section wrapper ──────────────────────────────────────────────────────────
 
 function LessonSection({
@@ -1695,7 +1650,6 @@ export default function Page() {
   return (
     <main>
       <LessonHero />
-      <TableOfContents />
 
       {/* SL Topics */}
       <TrigRatiosSection />

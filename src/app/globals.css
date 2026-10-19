@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Display mode contract: <html data-mode="web|a4">. Use `a4:` utilities for A4-only styles. */
+@custom-variant a4 (&:where([data-mode="a4"], [data-mode="a4"] *));
+
 @theme inline {
   --color-navy-900: #1a365d;
   --color-navy-800: #2d3748;
@@ -94,5 +97,82 @@ section[id] {
      on paper serve no purpose once there's no button left to reveal them. */
   html[data-print-mode="question"] .export-question-hide {
     display: none !important;
+  }
+}
+
+/* ---------- Display mode (see Tasks/_plans/Web-ui-consistency.md) ---------- */
+@page {
+  size: A4 portrait;
+  margin: 15mm;
+}
+
+/* The paper: wrap exam/worksheet content in <div className="a4-paper">.
+   Web mode: no styling. A4 mode: a white 210mm sheet on a gray desk.
+   Navbar/Footer/page chrome are never restyled by the mode. */
+html[data-mode="a4"] main:has(.a4-paper) {
+  background: #e5e7eb;
+}
+html[data-mode="a4"] .a4-paper {
+  background: #fff;
+  color: #000;
+  width: 210mm;
+  max-width: 100%;
+  min-height: 297mm;
+  margin: 1.5rem auto;
+  padding: 15mm;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+html[data-mode="a4"] .a4-paper * {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #000 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+html[data-mode="a4"] .a4-paper *:not(.visual, .visual *) {
+  border-color: #000 !important;
+}
+html[data-mode="a4"] .a4-paper a {
+  text-decoration: underline;
+}
+/* Graphs, diagrams, figures keep shape but lose colour. */
+html[data-mode="a4"] .a4-paper .visual {
+  filter: grayscale(1);
+}
+html[data-mode="a4"] .a4-paper .q-accent {
+  font-weight: 700;
+}
+/* Answer controls never show in A4. */
+html[data-mode="a4"] .a4-hide {
+  display: none !important;
+}
+
+/* Print (either mode): when a page has an .a4-paper, only the paper prints,
+   A4 portrait. Everything that neither contains nor sits inside the paper is
+   removed; the ancestors stay so the paper keeps flowing across pages. */
+@media print {
+  .a4-hide {
+    display: none !important;
+  }
+  body:has(.a4-paper) *:not(:has(.a4-paper), .a4-paper, .a4-paper *) {
+    display: none !important;
+  }
+  body:has(.a4-paper),
+  body:has(.a4-paper) :has(> .a4-paper),
+  body:has(.a4-paper) :has(.a4-paper) {
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  body:has(.a4-paper) .a4-paper {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
   }
 }

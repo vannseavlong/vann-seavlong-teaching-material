@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import PrintButton from "../physics-motion/PrintButton";
+import WorksheetActions from "../_components/WorksheetActions";
+import PaperHeader from "../_components/PaperHeader";
 
 export const metadata: Metadata = {
   title: "Grade 10 Math AA — Comprehensive Test | Worksheets",
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
 
 function SessionHeader({ n, title, time }: { n: number; title: string; time: string }) {
   return (
-    <div className="bg-[#1e3a5f] text-white rounded-xl px-6 py-4 mb-6 mt-10">
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-xl px-6 py-4 mb-6 mt-10">
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div>
-          <p className="text-aa-light text-xs font-bold uppercase tracking-widest mb-1">Session {n}</p>
-          <h2 className="text-xl font-bold">{title}</h2>
+          <p className="text-aa-primary text-xs font-bold uppercase tracking-widest mb-1">Session {n}</p>
+          <h2 className="text-lg font-bold">{title}</h2>
         </div>
-        <span className="text-sm bg-aa-primary/80 text-white px-3 py-1 rounded-full font-medium">{time}</span>
+        <span className="text-sm bg-slate-50 border border-slate-200 text-navy-900 px-3 py-1 rounded-full font-medium">{time}</span>
       </div>
     </div>
   );
@@ -27,11 +28,11 @@ function SessionHeader({ n, title, time }: { n: number; title: string; time: str
 
 function PartHeader({ variant }: { variant: "a" | "b" }) {
   return variant === "a" ? (
-    <div className="bg-[#2b4a8f] text-white rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider">
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider">
       Part A — Formulas &amp; Key Concepts
     </div>
   ) : (
-    <div className="bg-aa-primary text-white rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-10">
+    <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-2.5 mb-5 font-bold text-sm uppercase tracking-wider mt-10">
       Part B — Practice Exercises
     </div>
   );
@@ -39,7 +40,7 @@ function PartHeader({ variant }: { variant: "a" | "b" }) {
 
 function TopicTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-aa-primary font-bold text-base mt-8 mb-1 border-b border-aa-light pb-1">
+    <h3 className="text-aa-primary font-bold text-sm mt-8 mb-1 border-b border-slate-200 pb-1">
       {children}
     </h3>
   );
@@ -53,11 +54,11 @@ function FormulaCard({
   vars: { sym: string; unit: string }[];
 }) {
   return (
-    <div className="rounded-xl overflow-hidden border border-slate-200 shadow-sm my-4">
-      <div className="bg-[#1e3a5f] text-white py-4 px-6 text-center overflow-x-auto">
+    <div className="rounded-xl overflow-hidden border border-slate-200  my-4">
+      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-4 px-6 text-center overflow-x-auto">
         <BlockMath math={formula} />
       </div>
-      <div className="grid grid-cols-2 bg-aa-bg px-6 py-4 gap-x-8 gap-y-0.5">
+      <div className="grid grid-cols-2 bg-slate-50 px-6 py-4 gap-x-8 gap-y-0.5">
         <p className="text-aa-primary font-bold text-sm mb-1">Variables</p>
         <p className="text-aa-primary font-bold text-sm mb-1">Units</p>
         {vars.map((v, i) => (
@@ -83,11 +84,11 @@ function SectionBlock({
   children: React.ReactNode;
 }) {
   const headerColors = {
-    blue: "bg-[#dbeafe] text-[#1e40af] border-[#bfdbfe]",
-    green: "bg-[#dcfce7] text-[#15803d] border-[#bbf7d0]",
-    orange: "bg-[#ffedd5] text-[#c2410c] border-[#fed7aa]",
-    purple: "bg-[#f3e8ff] text-[#7e22ce] border-[#e9d5ff]",
-    teal: "bg-[#ccfbf1] text-[#0f766e] border-[#99f6e4]",
+    blue: "bg-slate-50 text-navy-900 border-slate-200",
+    green: "bg-slate-50 text-navy-900 border-slate-200",
+    orange: "bg-slate-50 text-navy-900 border-slate-200",
+    purple: "bg-slate-50 text-navy-900 border-slate-200",
+    teal: "bg-slate-50 text-navy-900 border-slate-200",
   };
   return (
     <div className="my-6">
@@ -101,8 +102,8 @@ function SectionBlock({
 
 function Q({ n, children }: { n: number; children: React.ReactNode }) {
   return (
-    <div className="mb-5">
-      <p className="text-slate-700 mb-2">
+    <div className="mb-5 a4:break-inside-avoid">
+      <p className="text-slate-700 text-sm mb-2">
         <span className="font-bold text-navy-900">{n}.</span> {children}
       </p>
     </div>
@@ -116,7 +117,7 @@ function AnsLine({ label, wide = false }: { label: string; wide?: boolean }) {
       <input
         type="text"
         aria-label={label}
-        className={`border-b-2 border-slate-300 bg-transparent outline-none focus:border-aa-primary transition-colors text-slate-700 text-sm ${wide ? "flex-1 min-w-0" : "w-52"}`}
+        className={`border-b-2 border-slate-300 bg-transparent outline-none focus:border-slate-200 transition-colors text-slate-700 text-sm ${wide ? "flex-1 min-w-0" : "w-52"}`}
       />
     </div>
   );
@@ -143,7 +144,7 @@ function MultipleChoice({
 }) {
   return (
     <div className="mb-5">
-      <p className="text-slate-700 mb-3">
+      <p className="text-slate-700 text-sm mb-3">
         <span className="font-bold text-navy-900">{n}.</span> {question}
       </p>
       <div className="space-y-2 ml-4">
@@ -209,7 +210,7 @@ function GraphArea({
       )}
       <svg
         viewBox={`0 0 ${W} ${H}`}
-        className="w-full border border-slate-200 rounded-xl bg-white shadow-sm"
+        className="visual w-full border border-slate-200 rounded-xl bg-white"
         aria-label={title ?? `${yLabel} vs ${xLabel} graph`}
       >
         {/* Grid lines */}
@@ -523,12 +524,12 @@ function Session3() {
 
       <TopicTitle>3. Graph Transformations</TopicTitle>
       <div className="overflow-x-auto my-4">
-        <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+        <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
           <thead>
             <tr>
-              <th className="bg-[#1e3a5f] text-white px-4 py-2.5 text-left font-semibold text-xs">Transformation</th>
-              <th className="bg-[#1e3a5f] text-white px-4 py-2.5 text-left font-semibold text-xs">Effect on y = f(x)</th>
-              <th className="bg-[#1e3a5f] text-white px-4 py-2.5 text-left font-semibold text-xs">Example</th>
+              <th className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-2.5 text-left font-semibold text-xs">Transformation</th>
+              <th className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-2.5 text-left font-semibold text-xs">Effect on y = f(x)</th>
+              <th className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-2.5 text-left font-semibold text-xs">Example</th>
             </tr>
           </thead>
           <tbody>
@@ -742,35 +743,35 @@ export default function MathG10AAWorksheet() {
   return (
     <main className="min-h-screen pt-16">
       {/* Hero */}
-      <div className="bg-[#1e3a5f] text-white py-14 px-6">
+      <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-10 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-wrap items-center gap-3 mb-4">
-            <Link href="/worksheets" className="text-aa-light text-xs font-bold uppercase tracking-widest hover:underline">
+            <Link href="/worksheets" className="text-aa-primary text-xs font-bold uppercase tracking-widest hover:underline">
               ← Worksheets
             </Link>
-            <span className="text-white/30">|</span>
-            <span className="text-xs bg-aa-primary/80 text-white px-2.5 py-1 rounded-full font-semibold">Mathematics</span>
-            <span className="text-xs text-white/50">Grade 10 — AA Foundation</span>
+            <span className="text-slate-500">|</span>
+            <span className="text-xs bg-slate-50 border border-slate-200 text-navy-900 px-2.5 py-1 rounded-full font-semibold">Mathematics</span>
+            <span className="text-xs text-slate-500">Grade 10 — AA Foundation</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2">Grade 10 Math AA</h1>
-          <p className="text-aa-light text-xl font-medium mb-4 italic">Comprehensive Test — Core Skills</p>
-          <div className="bg-white/10 rounded-xl px-5 py-3 inline-block mb-6">
-            <p className="text-sm font-bold text-white">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Grade 10 Math AA</h1>
+          <p className="text-aa-primary text-base font-medium mb-4 italic">Comprehensive Test — Core Skills</p>
+          <div className="bg-white border border-slate-200 rounded-xl px-5 py-3 inline-block mb-6">
+            <p className="text-sm font-bold text-navy-900">
               Covers: Indices & Surds &nbsp;|&nbsp; Quadratic Equations &nbsp;|&nbsp; Functions &nbsp;|&nbsp; Trigonometry
             </p>
-            <p className="text-xs text-white/70 italic mt-0.5">
+            <p className="text-xs text-slate-500 italic mt-0.5">
               Includes: Formulas • Multiple Choice • Graph Sketching • Word Problems
             </p>
           </div>
           <div className="flex flex-wrap gap-3 items-center">
-            <PrintButton />
-            <span className="text-xs text-white/40">34 questions across 4 sessions • 75 min</span>
+            <WorksheetActions />
+            <span className="text-xs text-slate-500">34 questions across 4 sessions • 75 min</span>
           </div>
         </div>
       </div>
 
       {/* Sticky session navigator */}
-      <div className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+      <div className="a4-hide sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
         <div className="max-w-4xl mx-auto px-6 py-2 flex gap-2 overflow-x-auto">
           {[
             { id: "session-1", label: "Session 1 — Indices & Surds" },
@@ -781,7 +782,7 @@ export default function MathG10AAWorksheet() {
             <a
               key={id}
               href={`#${id}`}
-              className="whitespace-nowrap text-xs px-3 py-1.5 rounded-full bg-slate-100 hover:bg-aa-bg text-slate-500 hover:text-aa-primary font-medium transition-colors"
+              className="whitespace-nowrap text-xs px-3 py-1.5 rounded-full bg-slate-100 text-slate-500 hover:text-aa-primary hover:bg-slate-200 font-medium transition-colors"
             >
               {label}
             </a>
@@ -790,7 +791,20 @@ export default function MathG10AAWorksheet() {
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-2">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        <div className="a4-paper space-y-2">
+        <PaperHeader
+          course="Mathematics: Analysis and approaches"
+          level="Grade 10"
+          title="Grade 10 Math AA: Comprehensive Test"
+          duration="75 minutes"
+          questions={34}
+          instructions={[
+            "Answer all questions.",
+            "Show your working in the spaces provided.",
+            "Write your answers in the answer lines or spaces given.",
+          ]}
+        />
         <Session1 />
         <Session2 />
         <Session3 />
@@ -798,15 +812,15 @@ export default function MathG10AAWorksheet() {
 
         {/* Formula Reference Sheet */}
         <div className="mt-16 pt-8 border-t border-slate-200">
-          <div className="bg-[#1e3a5f] text-white rounded-lg px-5 py-3 mb-5 font-bold text-sm uppercase tracking-wider">
+          <div className="bg-slate-50 border border-slate-200 text-navy-900 rounded-lg px-5 py-3 mb-5 font-bold text-sm uppercase tracking-wider">
             Quick Formula Reference Sheet
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+            <table className="w-full text-sm border-collapse rounded-xl overflow-hidden ">
               <thead>
                 <tr>
                   {["Topic", "Formula", "Variables"].map((h) => (
-                    <th key={h} className="bg-[#1e3a5f] text-white px-4 py-2.5 text-left font-semibold text-xs uppercase">
+                    <th key={h} className="bg-slate-50 border border-slate-200 text-navy-900 px-4 py-2.5 text-left font-semibold text-xs uppercase">
                       {h}
                     </th>
                   ))}
@@ -839,6 +853,8 @@ export default function MathG10AAWorksheet() {
               </tbody>
             </table>
           </div>
+        </div>
+
         </div>
 
         {/* Footer nav */}
