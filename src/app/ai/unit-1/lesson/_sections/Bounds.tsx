@@ -1,6 +1,6 @@
 import HighlightBox from "@/components/ui/HighlightBox";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, ReviewPaperLink } from "./helpers";
+import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, ReviewPaperLink, Keys, CalcSteps } from "./helpers";
 
 // ─── 6. Upper & Lower Bounds ──────────────────────────────────────────────────
 
@@ -95,6 +95,16 @@ export default function BoundsSection() {
         </p>
       </div>
 
+      <CalcSteps
+        steps={[
+          <>Write the bounds by hand with the half-unit rule. Then type each extreme combination as its own line.</>,
+          <>Store both results: <Keys s="8.35 × 3.15 sto→ alpha A enter" /> and <Keys s="8.45 × 3.25 sto→ alpha B enter" />. Recall them with <Keys s="alpha A" /> and <Keys s="alpha B" />.</>,
+          <>Change one number and rerun: press <Keys s="2nd enter" /> (ENTRY) to bring back the last line, edit the bound, press <Keys s="enter" />.</>,
+          <>Round both bounds to the same number of s.f. to test the accuracy. To see s.f. directly, press <Keys s="mode" />, choose SCI, and set the second row to the s.f. minus 1 (for example 1 shows 2 s.f.). Set the first row back to NORMAL and the second row back to FLOAT when done.</>,
+          <>Never round a bound before multiplying or dividing. Use <Keys s="2nd (−)" /> (Ans) for the previous result.</>,
+        ]}
+      />
+
       <HighlightBox variant="yellow">
         <p className="font-semibold text-navy-900 mb-2">
           Exam tip: read the accuracy from the last digit
@@ -157,6 +167,11 @@ export default function BoundsSection() {
           GDC: enter each bound product directly and store the results to
           compare. Do not round before multiplying.
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Type <Keys s="8.35 × 3.15 enter" /> for 26.3025 and <Keys s="8.45 × 3.25 enter" /> for 27.4625. Press <Keys s="2nd enter" /> to recall and edit the second line.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Quotient: speed = 45 km (nearest km) ÷ 3.6 h (1 d.p.)">
@@ -173,6 +188,11 @@ export default function BoundsSection() {
           Both round to 10 at 1 s.f. At 2 s.f. they are 13 and 12. So the
           speed is <InlineMath math="\boxed{10\text{ km/h}}" /> (1 s.f.).
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Upper: <Keys s="45.5 ÷ 3.55 enter" /> gives 12.8169... Lower: <Keys s="44.5 ÷ 3.65 enter" /> gives 12.1918... Largest over smallest for the upper bound.</>,
+          ]}
+        />
       </WorkedExample>
 
       <Practice
@@ -216,6 +236,11 @@ export default function BoundsSection() {
         answer={
           <>
             <BlockMath math="\text{lower} = 15.15 + 6.35 = 21.50 \qquad \text{upper} = 15.25 + 6.45 = 21.70" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="15.15 + 6.35 enter" /> and <Keys s="15.25 + 6.45 enter" />.</>,
+              ]}
+            />
             <p>3 s.f.: 21.5 and 21.7 (disagree). 2 s.f.: 22 and 22 (agree).</p>
             <BlockMath math="p+q = \boxed{22}\ (2\text{ s.f.})" />
           </>
@@ -231,6 +256,11 @@ export default function BoundsSection() {
         answer={
           <>
             <BlockMath math="9.45^2 = 89.3025 \qquad 9.55^2 = 91.2025" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="9.45 x² enter" /> and <Keys s="9.55 x² enter" />.</>,
+              ]}
+            />
             <p>2 s.f.: 89 and 91 (disagree). 1 s.f.: 90 and 90 (agree).</p>
             <BlockMath math="\text{Area} = \boxed{90\ \text{cm}^2\ (1\text{ s.f.})}" />
           </>
@@ -247,6 +277,11 @@ export default function BoundsSection() {
         answer={
           <>
             <BlockMath math="\text{upper} = \dfrac{52.45}{6.45} = 8.13 \qquad \text{lower} = \dfrac{52.35}{6.55} = 7.99" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="52.45 ÷ 6.45 enter" /> and <Keys s="52.35 ÷ 6.55 enter" />. Largest mass over smallest volume gives the upper bound.</>,
+              ]}
+            />
             <p>2 s.f.: 8.1 and 8.0 (disagree). 1 s.f.: 8 and 8 (agree).</p>
             <BlockMath math="\text{Density} = \boxed{8\ \text{g/cm}^3\ (1\text{ s.f.})}" />
           </>

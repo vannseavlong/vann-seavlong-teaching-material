@@ -1,6 +1,6 @@
 import HighlightBox from "@/components/ui/HighlightBox";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, ReviewPaperLink } from "./helpers";
+import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, ReviewPaperLink, Keys, CalcSteps } from "./helpers";
 
 // ─── 4. Geometric Sequences & Series ──────────────────────────────────────────
 
@@ -113,6 +113,17 @@ export default function GeometricSection() {
         </table>
       </div>
 
+      <CalcSteps
+        steps={[
+          <>One term: <Keys s="3 × 2 ^ 9 enter" />. The power is n − 1, so the 10th term uses 9.</>,
+          <>Ratio as a fraction: <Keys s="54 ÷ 81 enter" />, then press <Keys s="math" /> and choose 1:►Frac to see 2/3.</>,
+          <>Find r from r^3 = 8: <Keys s="8 ^ ( 1 ÷ 3 ) enter" />. The bracket around 1 ÷ 3 is essential. <Keys s="math" /> 4:³√( also works.</>,
+          <>Sum of a rule: sum(seq(81 (2 ÷ 3) ^ (X − 1), X, 1, 5)), using <Keys s="2nd stat" /> MATH 5:sum( and <Keys s="2nd stat" /> OPS 5:seq(. Or type the formula with brackets around the numerator and the denominator.</>,
+          <>Find n in r^n greater than k: <Keys s="ln ( 250 ) ÷ ln ( 1.5 ) enter" />. Then round n up, and check with the table: <Keys s="y=" />, Y1 = the rule with <Keys s="X,T,θ,n" />, <Keys s="2nd graph" /> (TABLE).</>,
+          <>Sum to infinity: <Keys s="24 ÷ ( 1 − 1 ÷ 2 ) enter" />. Always put brackets round 1 − r.</>,
+        ]}
+      />
+
       <HighlightBox variant="yellow">
         <p className="font-semibold text-navy-900 mb-2">
           Exam tip: count the multiplications
@@ -142,6 +153,11 @@ export default function GeometricSection() {
         <StepBox n={3}>
           <BlockMath math="u_{10} = 3(2)^9 = 3 \times 512 = \boxed{1536}" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>r: <Keys s="( 96 ÷ 12 ) ^ ( 1 ÷ 3 ) enter" /> gives 2. Then <Keys s="3 × 2 ^ 9 enter" /> gives 1536.</>,
+          ]}
+        />
       </WorkedExample>
 
       <Practice
@@ -156,6 +172,11 @@ export default function GeometricSection() {
         answer={
           <>
             <BlockMath math="r = 4,\quad u_6 = 3(4)^5 = \boxed{3072}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="3 × 4 ^ 5 enter" />.</>,
+              ]}
+            />
             <BlockMath math="r^3 = \dfrac{162}{6} = 27 \Rightarrow r = 3,\quad u_1 = 2,\quad u_8 = 2(3)^7 = \boxed{4374}" />
           </>
         }
@@ -172,6 +193,11 @@ export default function GeometricSection() {
           <BlockMath math="S_5 = \dfrac{81\left(1 - (2/3)^5\right)}{1 - 2/3} = 243 - 32 = \boxed{211}" />
           Check: 81 + 54 + 36 + 24 + 16 = 211.
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Formula: <Keys s="81 ( 1 − ( 2 ÷ 3 ) ^ 5 ) ÷ ( 1 − 2 ÷ 3 ) enter" /> gives 211. Check with sum(seq(81 (2 ÷ 3) ^ (X − 1), X, 1, 5)).</>,
+          ]}
+        />
       </WorkedExample>
 
       <Practice
@@ -189,6 +215,11 @@ export default function GeometricSection() {
           <>
             <BlockMath math="S_9 = \dfrac{6(2^9 - 1)}{2-1} = 6 \times 511 = \boxed{3066}" />
             <BlockMath math="r = 0.75,\quad S_6 = \dfrac{64\left(1-0.75^6\right)}{1-0.75} = 256 \times 0.82202 = \boxed{210}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="64 ( 1 − 0.75 ^ 6 ) ÷ ( 1 − 0.75 ) enter" />. Both brackets are needed.</>,
+              ]}
+            />
           </>
         }
       />
@@ -207,6 +238,11 @@ export default function GeometricSection() {
           <InlineMath math="x=14" /> (below 500) and 583.9 at{" "}
           <InlineMath math="x=15" />.
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Logs: <Keys s="ln ( 250 ) ÷ ln ( 1.5 ) enter" /> gives 13.6. Table: <Keys s="y=" /> Y1 = <Keys s="2 × 1.5 ^ ( X − 1 )" />, then <Keys s="2nd graph" /> and scroll to X = 14 and X = 15.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Decay in context: a population of 2,400 falls by 5% each year">
@@ -222,6 +258,11 @@ export default function GeometricSection() {
           <InlineMath math="n = \boxed{10}" /> (check: 1,513 after 9 years,
           1,437 after 10).
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>After 8 years: <Keys s="2400 × 0.95 ^ 8 enter" />. Below 1500: <Keys s="ln ( 1500 ÷ 2400 ) ÷ ln ( 0.95 ) enter" /> gives 9.16, so n = 10. Both logs are negative, so the quotient is positive.</>,
+          ]}
+        />
       </WorkedExample>
 
       <Practice
@@ -235,6 +276,11 @@ export default function GeometricSection() {
         answer={
           <>
             <BlockMath math="15000(1.025)^{10} = \boxed{19\,201}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="15000 × 1.025 ^ 10 enter" />. For (b): <Keys s="ln ( 20000 ÷ 15000 ) ÷ ln ( 1.025 ) enter" /> gives 11.65, so round up to 12.</>,
+              ]}
+            />
             <BlockMath math="1.025^n > \dfrac{4}{3} \Rightarrow n > \dfrac{\ln(4/3)}{\ln 1.025} = 11.65 \Rightarrow n = \boxed{12}" />
             (check: 19,681 after 11 years, 20,173 after 12).
           </>
@@ -272,6 +318,11 @@ export default function GeometricSection() {
         answer={
           <>
             <BlockMath math="r = \tfrac23,\quad S_\infty = \dfrac{18}{1/3} = \boxed{54}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="18 ÷ ( 1 − 12 ÷ 18 ) enter" />. For the second part: <Keys s="50 × ( 1 − 0.9 ) enter" />.</>,
+              ]}
+            />
             <BlockMath math="50 = \dfrac{u_1}{1-0.9} \Rightarrow u_1 = 50(0.1) = \boxed{5}" />
           </>
         }

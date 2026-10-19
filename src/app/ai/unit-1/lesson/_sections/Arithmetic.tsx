@@ -1,6 +1,6 @@
 import HighlightBox from "@/components/ui/HighlightBox";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, ReviewPaperLink } from "./helpers";
+import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, ReviewPaperLink, Keys, CalcSteps } from "./helpers";
 
 // ─── 3. Arithmetic Sequences & Series ─────────────────────────────────────────
 
@@ -66,6 +66,16 @@ export default function ArithmeticSection() {
         </p>
       </div>
 
+      <CalcSteps
+        steps={[
+          <>One term: type the formula with brackets, <Keys s="3 + ( 25 − 1 ) × 5 enter" />.</>,
+          <>Table of terms: press <Keys s="y=" /> and type Y1 as the rule, using <Keys s="X,T,θ,n" /> for n, for example <Keys s="3 + 5 ( X − 1 )" />. Press <Keys s="2nd window" /> (TBLSET), set TblStart = 1 and ΔTbl = 1, then press <Keys s="2nd graph" /> (TABLE) and scroll to read terms.</>,
+          <>Sum of a rule: sum( is under <Keys s="2nd stat" />, MATH, 5:sum(. seq( is under <Keys s="2nd stat" />, OPS, 5:seq(. Type sum(seq(3X + 2, X, 1, 20)) and press <Keys s="enter" />. The four seq( inputs are rule, variable, start, end.</>,
+          <>Find n for a target value: press <Keys s="math" />, choose 0:Solver... Type the equation as 0 = rule minus target, for example <Keys s="3 + 5 ( X − 1 ) − 188" /> after the 0 =, press <Keys s="enter" />, type a guess for X, put the cursor on X and press <Keys s="alpha enter" />.</>,
+          <>To find the first n where a sum passes a target, put S_n in Y1 and scroll the table until it crosses the target. Read the n just before and just after.</>,
+        ]}
+      />
+
       <HighlightBox variant="yellow">
         <p className="font-semibold text-navy-900 mb-2">Choose the method</p>
         <ul className="list-disc pl-5 text-slate-500 text-sm space-y-1">
@@ -103,6 +113,12 @@ export default function ArithmeticSection() {
           Set <InlineMath math="u_n = 188" />.
           <BlockMath math="3 + 5(n-1) = 188 \;\Rightarrow\; n-1 = 37 \;\Rightarrow\; n = \boxed{38}" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>u_25: <Keys s="3 + 24 × 5 enter" /> gives 123.</>,
+            <>Position of 188: open <Keys s="math" />, 0:Solver..., enter 0 = <Keys s="3 + 5 ( X − 1 ) − 188" />, guess X = 10, cursor on X, <Keys s="alpha enter" />. X = 38.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Given u₅ = 22 and u₁₂ = 57, find u₁, d and S₁₂">
@@ -115,6 +131,11 @@ export default function ArithmeticSection() {
         <StepBox n={3}>
           <BlockMath math="S_{12} = \dfrac{12}{2}(2 + 57) = 6 \times 59 = \boxed{354}" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Type <Keys s="12 ÷ 2 × ( 2 + 57 ) enter" /> to get 354.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Evaluate the sum of 3k + 2 for k = 1 to 20">
@@ -130,6 +151,11 @@ export default function ArithmeticSection() {
           GDC check: sum of the sequence <InlineMath math="3X+2" /> for{" "}
           <InlineMath math="X" /> from 1 to 20 gives 670.
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Press <Keys s="2nd stat" />, MATH, 5:sum(, then <Keys s="2nd stat" />, OPS, 5:seq(. Complete it as sum(seq(3X + 2, X, 1, 20)) with <Keys s="X,T,θ,n" /> for X, then press <Keys s="enter" />. The answer is 670.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Application: a hall has 18 seats in row 1 and 3 more in each next row. Find the least number of rows for at least 1000 seats">
@@ -141,6 +167,11 @@ export default function ArithmeticSection() {
           Solve <InlineMath math="S_n \geq 1000" /> with the GDC table:
           <BlockMath math="S_{20} = 930 < 1000, \qquad S_{21} = 1008 \geq 1000" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Press <Keys s="y=" /> and type Y1 = <Keys s="X ÷ 2 × ( 36 + 3 ( X − 1 ) )" />. Press <Keys s="2nd graph" /> (TABLE) and scroll: X = 20 gives 930, X = 21 gives 1008. The first value of at least 1000 is at X = 21.</>,
+          ]}
+        />
         <StepBox n={3}>
           The least number of rows is <InlineMath math="n = \boxed{21}" />.
         </StepBox>
@@ -161,6 +192,11 @@ export default function ArithmeticSection() {
             </p>
             <BlockMath math="u_{15} = 100 + 14(-6) = \boxed{16}" />
             <BlockMath math="S_{15} = \dfrac{15}{2}(100+16) = \boxed{870}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="100 + 14 × (−) 6 enter" /> for u_15, then <Keys s="15 ÷ 2 × ( 100 + 16 ) enter" />. Use <Keys s="(−)" /> for the negative d.</>,
+              ]}
+            />
           </>
         }
       />
@@ -209,6 +245,11 @@ export default function ArithmeticSection() {
               <InlineMath math="u_1 = 3" />, <InlineMath math="u_{15} = 59" />, 15 terms.
             </p>
             <BlockMath math="S_{15} = \dfrac{15}{2}(3 + 59) = 7.5 \times 62 = \boxed{465}" />
+            <CalcSteps
+              steps={[
+                <>Type sum(seq(4X − 1, X, 1, 15)) using <Keys s="2nd stat" /> menus as in the toolkit, then <Keys s="enter" />. The answer is 465.</>,
+              ]}
+            />
           </>
         }
       />
@@ -228,6 +269,11 @@ export default function ArithmeticSection() {
             <p>
               Week <InlineMath math="\boxed{17}" />.
             </p>
+            <CalcSteps
+              steps={[
+                <>Put Y1 = <Keys s="X ÷ 2 × ( 5 X + 35 )" /> in <Keys s="y=" /> and open the table: X = 16 gives 920, X = 17 gives 1020.</>,
+              ]}
+            />
           </>
         }
       />

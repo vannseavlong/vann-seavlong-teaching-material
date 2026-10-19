@@ -1,6 +1,6 @@
 import HighlightBox from "@/components/ui/HighlightBox";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, ReviewPaperLink } from "./helpers";
+import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, ReviewPaperLink, Keys, CalcSteps } from "./helpers";
 
 // ─── 5. Rounding ──────────────────────────────────────────────────────────────
 
@@ -140,6 +140,17 @@ export default function RoundingSection() {
         </ul>
       </HighlightBox>
 
+      <CalcSteps
+        steps={[
+          <>Keep MODE on NORMAL and FLOAT so every digit is shown. Do not set a fixed number of decimals while you calculate.</>,
+          <>Round to d.p.: press <Keys s="math" />, move right to NUM, choose 2:round(, then type <Keys s="3.14159 , 3 ) enter" /> to get 3.142. The number after the comma is the decimal places.</>,
+          <>Standard form entry: <Keys s="2.4 2nd , 6 enter" /> enters 2.4 × 10^6. The <Keys s="2nd ," /> key is EE.</>,
+          <>Show answers in standard form: press <Keys s="mode" />, move to the first row, choose SCI, press <Keys s="enter" />, then <Keys s="2nd mode" /> to leave. Set it back to NORMAL afterwards, or all later answers stay in standard form.</>,
+          <>To check significant figures, in SCI mode set the second row to 2 instead of FLOAT. Answers then show 3 s.f. Set it back to FLOAT when done.</>,
+          <>Square, root and pi: <Keys s="x²" />, <Keys s="2nd x²" /> (√( opens a bracket, close it), <Keys s="2nd ^" /> (π).</>,
+        ]}
+      />
+
       <WorkedExample title="Round 3.14159 to 3 d.p. and to 3 s.f.">
         <StepBox n={1}>
           3 d.p.: the 4th decimal is 5, so round up:{" "}
@@ -171,6 +182,11 @@ export default function RoundingSection() {
           Round the final answer only:{" "}
           <InlineMath math="d = \boxed{8.15\text{ cm}}" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Type <Keys s="2nd x² ( 7.46 x² + 3.28 x² ) enter" />. The display shows 8.1492..., so 8.15. Do not round 7.46 or 3.28 first.</>,
+          ]}
+        />
         <StepBox n={3}>
           Check the early-rounding error: rounding the squares to 2 s.f. gives{" "}
           <InlineMath math="\sqrt{56+11} = \sqrt{67} \approx 8.19" />, which is
@@ -191,6 +207,11 @@ export default function RoundingSection() {
           <InlineMath math="3.2\times10^{5} + 4.5\times10^{4} = 32\times10^{4} + 4.5\times10^{4} = 36.5\times10^{4}" />
           <BlockMath math="= \boxed{3.65\times10^{5}}" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Product: <Keys s="( 2.5 2nd , 4 ) × ( 6 2nd , 3 ) enter" />. In SCI mode this shows 1.5E8. Sum: <Keys s="3.2 2nd , 5 + 4.5 2nd , 4 enter" /> shows 3.65E5.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Round up for whole items">
@@ -204,6 +225,11 @@ export default function RoundingSection() {
           <InlineMath math="814.30 \div 250 = 3.257\ldots" />. You cannot buy
           part of a cup, so <InlineMath math="\boxed{4}" /> cups.
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Volume: <Keys s="2nd ^ × 4.5 x² × 12.8 enter" /> gives 814.30... Then <Keys s="Ans ÷ 250 enter" /> where Ans is <Keys s="2nd (−)" />. The result 3.257 is rounded up to 4.</>,
+          ]}
+        />
       </WorkedExample>
 
       <Practice
@@ -236,6 +262,11 @@ export default function RoundingSection() {
         answer={
           <>
             <BlockMath math="1250 \div 84 = 14.88\ldots" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="1250 ÷ 84 enter" />. 14.88 is not a whole number of packs, so round up to 15.</>,
+              ]}
+            />
             <p>
               Whole packs only, so round up: <InlineMath math="\boxed{15}" /> packs.
             </p>
@@ -253,6 +284,11 @@ export default function RoundingSection() {
           <>
             <BlockMath math="0.0000372 = \boxed{3.72\times10^{-5}}" />
             <BlockMath math="83\,000\,000\,000 = \boxed{8.3\times10^{10}}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="0.0000372 enter" /> and <Keys s="83000000000 enter" /> with the calculator in SCI mode. The display shows 3.72E-5 and 8.3E10.</>,
+              ]}
+            />
           </>
         }
       />
@@ -269,6 +305,11 @@ export default function RoundingSection() {
           <>
             <BlockMath math="\dfrac{2.4}{8} \times 10^{6-(-2)} = 0.3 \times 10^{8} = \boxed{3\times10^{7}}" />
             <BlockMath math="78\times10^{5} - 2.5\times10^{5} = 75.5\times10^{5} = \boxed{7.55\times10^{6}}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="2.4 2nd , 6 ÷ ( 8 2nd , (−) 2 ) enter" /> and <Keys s="7.8 2nd , 6 − 2.5 2nd , 5 enter" />. Bracket the whole divisor.</>,
+              ]}
+            />
           </>
         }
       />

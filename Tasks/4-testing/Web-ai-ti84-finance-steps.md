@@ -14,6 +14,9 @@ The student (AI SL, TI-84 Plus CE) is weak at choosing the right method in finan
 - [x] Numbers re-checked; no em-dash added in touched files
 - [x] npx tsc --noEmit and eslint on touched files pass
 
+## Follow-up (2026-10-19)
+Extended to the other Unit 1 lesson sections: Percentages, Arithmetic, Geometric, Rounding, Bounds, Percentage Error (TI-84 toolkit block + steps in key examples and practice answers). Touches also: those six files in src/app/ai/unit-1/lesson/_sections/.
+
 ## Notes
 - G2: tsc passes; eslint passes on lesson files. PracticeClient.tsx has one existing react-hooks/set-state-in-effect error (line ~443, not part of this change).
 - Pages /ai/unit-1/lesson and /ai/unit-1/practice/2 return 200 on the dev server; not checked visually and no calculator keystrokes were run on a real TI-84.

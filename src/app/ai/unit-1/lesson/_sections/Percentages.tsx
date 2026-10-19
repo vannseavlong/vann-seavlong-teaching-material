@@ -1,6 +1,6 @@
 import HighlightBox from "@/components/ui/HighlightBox";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection } from "./helpers";
+import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, Keys, CalcSteps } from "./helpers";
 
 // ─── 1. Percentages ───────────────────────────────────────────────────────────
 
@@ -74,6 +74,18 @@ export default function PercentagesSection() {
         ))}
       </div>
 
+      <CalcSteps
+        steps={[
+          <>There is no % key. Type a percentage as a fraction of 100: 18% of 520 is <Keys s="18 ÷ 100 × 520 enter" />.</>,
+          <>Increase or decrease in one line: <Keys s="520 × ( 1 − 18 ÷ 100 ) enter" />. The bracket builds the multiplier, so you never find the 18% separately.</>,
+          <>Reverse percentage: divide by the multiplier, <Keys s="2160 ÷ 1.2 enter" />.</>,
+          <>To change one number and run the line again, press <Keys s="2nd enter" /> (ENTRY) to bring back the last line, edit it, then <Keys s="enter" />.</>,
+          <>Percentage change: <Keys s="( 96 − 100 ) ÷ 100 × 100 enter" />. A negative result is a decrease.</>,
+          <>Percentage error needs the absolute value: press <Keys s="math" />, move right to NUM, choose 1:abs(, then type <Keys s="5000 − 4850 ) ÷ 4850 × 100 enter" />.</>,
+          <>Keep a long result: <Keys s="sto→ alpha A enter" /> stores it in A, and <Keys s="2nd (−)" /> is Ans (the last answer). Use these instead of retyping a rounded value.</>,
+        ]}
+      />
+
       <HighlightBox variant="yellow">
         <p className="font-semibold text-navy-900 mb-2">
           Why don&apos;t a +20% and a −20% change cancel out?
@@ -106,6 +118,11 @@ export default function PercentagesSection() {
           multiplier is <InlineMath math="1 - \frac{12}{100} = 0.88" />:
           <BlockMath math="650 \times 0.88 = \boxed{\$572.00}" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Type <Keys s="40 × ( 1 + 15 ÷ 100 ) enter" /> to get 46, then <Keys s="650 × ( 1 − 12 ÷ 100 ) enter" /> to get 572.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Reverse percentage — find the original amount">
@@ -126,6 +143,11 @@ export default function PercentagesSection() {
         <StepBox n={3}>
           Check: <InlineMath math="1800 \times 1.20 = 2160" /> ✓
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Type <Keys s="2160 ÷ 1.2 enter" /> to get 1800. Do not type <Keys s="2160 × 0.8 enter" />: that gives 1728, which is wrong.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Successive percentage changes">
@@ -146,6 +168,11 @@ export default function PercentagesSection() {
           net <strong>4% decrease</strong>, not 0%, exactly as predicted by{" "}
           <InlineMath math="1 - 0.2^2 = 0.96" />.
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Type <Keys s="100 × 1.2 × 0.8 enter" /> to get 96. Percentage change: <Keys s="( 96 − 100 ) ÷ 100 × 100 enter" /> gives −4.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Percentage error">
@@ -162,6 +189,11 @@ export default function PercentagesSection() {
         <StepBox n={2}>
           <BlockMath math="= \dfrac{150}{4850} \times 100 = \boxed{3.09\%} \; (\text{3 s.f.})" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Press <Keys s="math" />, NUM, 1:abs(, then type <Keys s="5000 − 4850 ) ÷ 4850 × 100 enter" />. The result is 3.0927..., so 3.09 (3 s.f.).</>,
+          ]}
+        />
       </WorkedExample>
 
       <Practice
@@ -178,6 +210,11 @@ export default function PercentagesSection() {
               <InlineMath math="1 - 0.18 = 0.82" />
             </p>
             <BlockMath math="520 \times 0.82 = \boxed{\$426.40}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="520 × 0.82 enter" />. Or build the multiplier: <Keys s="520 × ( 1 − 18 ÷ 100 ) enter" />.</>,
+              ]}
+            />
           </>
         }
       />
@@ -195,6 +232,11 @@ export default function PercentagesSection() {
               Multiplier: <InlineMath math="1 - 0.12 = 0.88" />
             </p>
             <BlockMath math="\text{Original} = \dfrac{4884}{0.88} = \boxed{\$5{,}550}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="4884 ÷ 0.88 enter" />. Divide, because 4884 is the result after the decrease.</>,
+              ]}
+            />
             <p>
               Check: <InlineMath math="5550 \times 0.88 = 4884" /> ✓
             </p>
@@ -220,6 +262,11 @@ export default function PercentagesSection() {
               <InlineMath math="1 - 0.3^2 = 1 - 0.09 = 0.91" />.
             </p>
             <BlockMath math="\text{Overall change} = \boxed{-9\% \; (\text{a 9\% decrease})}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="1.3 × 0.7 enter" /> to get 0.91, then <Keys s="( Ans − 1 ) × 100 enter" /> to get −9.</>,
+              ]}
+            />
           </>
         }
       />
@@ -238,6 +285,11 @@ export default function PercentagesSection() {
               <InlineMath math="v_A = 45,\; v_E = 50" />
             </p>
             <BlockMath math="\varepsilon = \left|\dfrac{45-50}{50}\right| \times 100 = \dfrac{5}{50}\times 100 = \boxed{10\%}" />
+            <CalcSteps
+              steps={[
+                <>Press <Keys s="math" />, NUM, 1:abs(, then type <Keys s="45 − 50 ) ÷ 50 × 100 enter" />.</>,
+              ]}
+            />
           </>
         }
       />

@@ -1,6 +1,6 @@
 import HighlightBox from "@/components/ui/HighlightBox";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
-import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, ReviewPaperLink } from "./helpers";
+import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, ReviewPaperLink, Keys, CalcSteps } from "./helpers";
 
 // ─── 7. Percentage Error ──────────────────────────────────────────────────────
 
@@ -95,6 +95,17 @@ export default function PercentageErrorSection() {
         </table>
       </div>
 
+      <CalcSteps
+        steps={[
+          <>The absolute value is under <Keys s="math" />, NUM, 1:abs(. Type the whole formula in one line: abs( then <Keys s="2.4 − 2.5 ) ÷ 2.5 × 100 enter" />.</>,
+          <>Divide by the exact value. Check that the number after ÷ is v_E, not the estimate.</>,
+          <>Store long values: <Keys s="22 ÷ 7 sto→ alpha A enter" /> and <Keys s="2nd ^ sto→ alpha B enter" /> (π). Then abs( <Keys s="alpha A − alpha B ) ÷ alpha B × 100 enter" />.</>,
+          <>Working backwards, two lines give the two answers: <Keys s="80 ÷ 1.05 enter" /> and <Keys s="80 ÷ 0.95 enter" />.</>,
+          <>Greatest error from a measurement: type the formula once for each bound. Press <Keys s="2nd enter" /> to recall the line and edit the bound.</>,
+          <>Give ε to 3 s.f. unless the question says otherwise.</>,
+        ]}
+      />
+
       <HighlightBox variant="yellow">
         <p className="font-semibold text-navy-900 mb-1">Exam tip</p>
         <p className="text-slate-500 text-sm">
@@ -114,6 +125,11 @@ export default function PercentageErrorSection() {
         <StepBox n={2}>
           <BlockMath math="\varepsilon = \left|\dfrac{2.4 - 2.5}{2.5}\right| \times 100 = \boxed{4\%}" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Press <Keys s="math" />, NUM, 1:abs(, then <Keys s="2.4 − 2.5 ) ÷ 2.5 × 100 enter" /> gives 4.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Find the possible exact values">
@@ -132,6 +148,11 @@ export default function PercentageErrorSection() {
         <StepBox n={3}>
           <InlineMath math="\boxed{v_E = 76.2 \text{ or } 84.2}" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Type <Keys s="80 ÷ 1.05 enter" /> for 76.19... and <Keys s="80 ÷ 0.95 enter" /> for 84.21...</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Find the greatest possible percentage error">
@@ -149,6 +170,11 @@ export default function PercentageErrorSection() {
           The bound closest to 0 gives the larger error:{" "}
           <InlineMath math="\boxed{2.56\%}" />.
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Type <Keys s="0.5 ÷ 19.5 × 100 enter" /> for 2.564... and <Keys s="0.5 ÷ 20.5 × 100 enter" /> for 2.439... Keep the larger.</>,
+          ]}
+        />
       </WorkedExample>
 
       <WorkedExample title="Find the error caused by rounding">
@@ -164,6 +190,11 @@ export default function PercentageErrorSection() {
         <StepBox n={2}>
           <BlockMath math="\varepsilon = \left|\dfrac{\frac{22}{7} - \pi}{\pi}\right| \times 100 = \boxed{0.0402\%}" />
         </StepBox>
+        <CalcSteps
+          steps={[
+            <>Store <Keys s="22 ÷ 7 sto→ alpha A enter" /> and <Keys s="2nd ^ sto→ alpha B enter" />. Then abs( from <Keys s="math" /> NUM, and <Keys s="alpha A − alpha B ) ÷ alpha B × 100 enter" /> gives 0.04024...</>,
+          ]}
+        />
       </WorkedExample>
 
       <Practice
@@ -176,6 +207,11 @@ export default function PercentageErrorSection() {
         answer={
           <>
             <BlockMath math="\dfrac{|3.2-3.0|}{3.0} \times 100 = \boxed{6.67\%}" />
+            <CalcSteps
+              steps={[
+                <>abs( <Keys s="3.2 − 3 ) ÷ 3 × 100 enter" />.</>,
+              ]}
+            />
           </>
         }
       />
@@ -203,6 +239,11 @@ export default function PercentageErrorSection() {
         answer={
           <>
             <BlockMath math="250 \times 0.06 = 15 \;\Rightarrow\; \boxed{235 \text{ or } 265}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="250 × 0.94 enter" /> and <Keys s="250 × 1.06 enter" />.</>,
+              ]}
+            />
           </>
         }
       />
@@ -236,6 +277,11 @@ export default function PercentageErrorSection() {
               Bounds: <InlineMath math="4.55 \le x < 4.65" />.
             </p>
             <BlockMath math="\dfrac{0.05}{4.55} \times 100 = \boxed{1.10\%}" />
+            <CalcSteps
+              steps={[
+                <>Type <Keys s="0.05 ÷ 4.55 × 100 enter" /> and <Keys s="0.05 ÷ 4.65 × 100 enter" />. Keep the larger.</>,
+              ]}
+            />
             <p>The other bound gives 1.08%, which is smaller.</p>
           </>
         }
@@ -250,6 +296,11 @@ export default function PercentageErrorSection() {
         answer={
           <>
             <BlockMath math="\dfrac{|1.4 - \sqrt{2}|}{\sqrt{2}} \times 100 = \dfrac{0.01421\ldots}{1.41421\ldots} \times 100 = \boxed{1.01\%}" />
+            <CalcSteps
+              steps={[
+                <>abs( <Keys s="1.4 − 2nd x² 2 ) ) ÷ 2nd x² 2 ) × 100 enter" />. The first ) closes the root, the second closes abs(.</>,
+              ]}
+            />
           </>
         }
       />
