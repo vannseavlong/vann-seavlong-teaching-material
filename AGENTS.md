@@ -4,7 +4,7 @@ Rules for any coding agent (Claude, Codex, sub-agents) working in the `vann-seav
 
 ## Before you start
 1. Read your task in `Tasks/` (its folder is its status) and `Tasks/_inbox/<your-task>/`.
-2. Claim the task and work directly on the `dev` branch (no worktrees, no feature branches), follow "Working in parallel" in `Tasks/README.md`.
+2. Claim the task and work directly on the `main` branch (single developer; no worktrees, no feature branches), follow "Working in parallel" in `Tasks/README.md`.
 3. Pick the task's **tier yourself** with the auto picker in `Tasks/PIPELINE.md` and write it into the task file. Never ask the developer to choose. The tier decides which checks run before the task moves forward.
 4. New feature, new screen or unclear scope? Plan first with the `task-planner` skill: it turns design and requirements into scoped task files in `Tasks/2-todo/`.
 
@@ -12,9 +12,9 @@ Rules for any coding agent (Claude, Codex, sub-agents) working in the `vann-seav
 
 `Tasks/` holds one file per task; its folder is the status: `1-backlog` → `2-todo` → `3-in-progress` → `4-testing` → `5-done` → `6-deploy`.
 
-- **Git flow:** work directly on `dev`. No worktrees, no feature branches, no PRs. When the work is done: commit (specific paths, conventional message) and `git push origin dev`. The owner merges `dev` into `main` and deploys. Never push to or merge into `main`.
+- **Git flow:** work directly on `main`. No worktrees, no feature branches, no PRs. When the work is done: commit (specific paths, conventional message) and `git push origin main`. The owner deploys from `main`.
 - Task files are named `<Prefix>-<short-name>.md`; prefixes: `Web`. Start a task: copy `Tasks/_TEMPLATE.md`, set owner, move the file to `3-in-progress/`. Check other tasks' `Touches` for overlap first.
-- After the user approves in testing: push to `dev`, add an entry to the root `CHANGELOG.md` tagged `[Web]` (owner, task, commit, what changed; never a changelog inside a sub-repo) and move the task to `5-done/`.
+- After the user approves in testing: push to `main`, add an entry to the root `CHANGELOG.md` tagged `[Web]` (owner, task, commit, what changed; never a changelog inside a sub-repo) and move the task to `5-done/`.
 
 **Parallel agents:** one agent = one task file. Claim it (`Claimed by:`) before editing, stay inside that task's `Touches`, and never use `git add -A`, `stash` or `reset --hard` in shared places. To reach another task, write a note in `Tasks/_inbox/<to-task>/` and read your own inbox at the start. Full rules: `Tasks/README.md`.
 
