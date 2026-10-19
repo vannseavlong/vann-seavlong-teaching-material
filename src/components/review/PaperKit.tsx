@@ -160,7 +160,7 @@ export function SummaryTable({ rows }: { rows: [string, string, string][] }) {
   return (
     <section
       id="summary"
-      className="scroll-mt-28 mt-16 pt-8 border-t border-slate-200 export-question-hide"
+      className="scroll-mt-28 mt-16 pt-8 border-t border-slate-200 export-question-hide a4-hide"
     >
       <div className="bg-[#1e3a5f] text-white rounded-lg px-5 py-2.5 mb-2 font-bold text-xs uppercase tracking-wider flex flex-wrap items-center justify-between gap-2">
         <span>Summary of Final Answers</span>
