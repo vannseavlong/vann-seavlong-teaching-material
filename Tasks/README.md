@@ -6,9 +6,9 @@ One file per task, moved between folders as it progresses. The folder is the sta
 |---|---|---|
 | `1-backlog/` | Idea or later; not scheduled | Captured, no decision yet |
 | `2-todo/` | Decided, ready to start | Scope and owner agreed |
-| `3-in-progress/` | Being built on `dev` | Work started and claimed |
-| `4-testing/` | Built and committed; waiting for the user to test and give feedback | Agent checks done, code committed on `dev` |
-| `5-done/` | Pushed to `dev`, changelog written | The user approved after testing (owner merges to `main`) |
+| `3-in-progress/` | Being built on `main` | Work started and claimed |
+| `4-testing/` | Built and committed; waiting for the user to test and give feedback | Agent checks done, code committed on `main` |
+| `5-done/` | Pushed to `main`, changelog written | The user approved after testing |
 | `6-deploy/` | Released | Live in production |
 
 ## Planning
@@ -18,19 +18,19 @@ One file per task, moved between folders as it progresses. The folder is the sta
 `<Prefix>-<short-name>.md`, prefixes: `Web`. Copy `_TEMPLATE.md`.
 
 ## Git rules
-- Work directly on `dev`. No worktrees, no feature branches, no PRs.
-- When the task is done: commit with specific paths, `git push origin dev`, move the task file to `5-done/`. The owner merges `dev` into `main` and deploys; never push or merge to `main`.
+- Work directly on `main`. No worktrees, no feature branches, no PRs.
+- When the task is done: commit with specific paths, `git push origin main`, move the task file to `5-done/`. The owner deploys from `main`.
 - The repo tracks `Tasks/`, `Docs/`, `CLAUDE.md`, `AGENTS.md`, `CHANGELOG.md` along with the code. Commit when a task is done.
 - Two tasks must not touch the same files; note overlaps in the task file.
 
 ## Changelog (one file at the root: `CHANGELOG.md`)
-Tasks live at the root, so the changelog does too. **Do not add a `CHANGELOG.md` inside any sub-repo.** On each push to `dev`, add one entry at the top, tagged with the project:
+Tasks live at the root, so the changelog does too. **Do not add a `CHANGELOG.md` inside any sub-repo.** On each push to `main`, add one entry at the top, tagged with the project:
 
 ```
 ## 2026-01-20 · [Web] feat(export): acquisition Excel report
 - Owner: <name>
 - Task: Tasks/5-done/Web-acquisition-export.md
-- Commit: abc1234 (dev)
+- Commit: abc1234 (main)
 - What changed: <1-3 bullets, user-visible>
 - Needs: <backend / config / migration, or "none">
 ```

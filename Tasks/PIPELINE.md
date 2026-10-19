@@ -38,7 +38,7 @@ Before planning is finished the signals come from the plan's scope; before testi
 | G6 | **Security review** | Security-review skill | – | – | if auth/data/input | ✔ |
 | G7 | **Docs sync**: contract / architecture / requests updated | Agent | if docs changed | if contract touched | ✔ | ✔ |
 | G8 | **Commit message** passes the format below | Agent | ✔ | ✔ | ✔ | ✔ |
-| G9 | **Human review** of the diff before merging `dev` to `main` | User | – | – | optional | ✔ |
+| G9 | **Human review** of the diff before pushing to `main` | User | – | – | optional | ✔ |
 | G10 | **Release plan**: rollback, flags, dependencies, who monitors | Agent drafts, user approves | – | – | – | ✔ |
 | G11 | **Changelog** entry at root | Agent | – | ✔ | ✔ | ✔ |
 
@@ -50,7 +50,7 @@ The user tests everything by hand and gives feedback. The agent never moves a ta
 - Agent finishes the build, runs only the checks it can (G1, G2, plus G3 where tests exist), commits, then moves the task to `4-testing/` and says what to look at (URL, what changed, what was not verified).
 - G4 "Run it" and G9 "Human review" are the user's test. The agent does not claim a page was checked unless it really rendered it.
 - Feedback arrives in chat. The agent writes it under `## Feedback` in the task file, fixes it, commits, and returns the task to `4-testing/`.
-- Only when the user says it is good: add the changelog entry (G11), push `dev` as `AGENTS.md` says, move to `5-done/`.
+- Only when the user says it is good: add the changelog entry (G11), push `main` as `AGENTS.md` says, move to `5-done/`.
 
 ## Gates by stage
 
@@ -58,7 +58,7 @@ The user tests everything by hand and gives feedback. The agent never moves a ta
 |---|---|
 | `3-in-progress/` | G1 while building |
 | `4-testing/` | Agent: G2 to G7 as the tier requires. User: hands-on test and feedback (G4, G9) |
-| `5-done/` | User approved after testing; G8, G11 passed, pushed to `dev` |
+| `5-done/` | User approved after testing; G8, G11 passed, pushed to `main` |
 | `6-deploy/` | G10 executed, live and checked |
 
 ## Commit message (G8)
