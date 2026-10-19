@@ -375,8 +375,8 @@ export default function FinancialMathSection() {
             </thead>
             {tvmCheatRows.map(({ g, rows }) => (
               <tbody key={g}>
-                <tr className="bg-slate-100">
-                  <td colSpan={6} className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-navy-900">
+                <tr className="bg-slate-200">
+                  <td colSpan={6} className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-navy-900 border-l-4 border-navy-900">
                     {g}
                   </td>
                 </tr>
@@ -388,7 +388,7 @@ export default function FinancialMathSection() {
                         key={j}
                         className={`px-4 py-2.5 font-mono text-xs ${
                           cell.startsWith("solve")
-                            ? "font-bold text-navy-900 bg-slate-100"
+                            ? "font-bold text-navy-900 underline decoration-2 underline-offset-4"
                             : "text-slate-500"
                         }`}
                       >
