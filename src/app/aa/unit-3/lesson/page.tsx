@@ -3,6 +3,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import HighlightBox from "@/components/ui/HighlightBox";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Task01Icon } from "@hugeicons/core-free-icons";
 
 export const metadata: Metadata = {
   title: "Unit 3: Trigonometry — AA Lesson | IB Mathematics AA",
@@ -158,7 +160,7 @@ function LessonHero() {
         <div className="flex gap-6 text-sm text-aa-light flex-wrap">
           <span>⏱ SL: 13 hours</span>
           <span>⏱ HL: 26 hours</span>
-          <span>📋 7 topics</span>
+          <span><HugeiconsIcon icon={Task01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" /> 7 topics</span>
         </div>
       </div>
     </div>

@@ -79,7 +79,6 @@ const LESSON_TOPICS: Record<string, { sl: [string, string][]; hl?: [string, stri
     sl: [
       ["percentages", "Percentages"],
       ["financial-mathematics", "Financial Mathematics"],
-      ["summative-revision", "Summative Revision Plan"],
       ["arithmetic", "Arithmetic Sequences & Series"],
       ["geometric", "Geometric Sequences & Series"],
       ["rounding", "Rounding"],

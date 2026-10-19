@@ -4,6 +4,8 @@ import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { BlockMath } from "@/components/ui/Math";
 import { ProblemVisual, type Visual } from "./FinanceVisuals";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Idea01Icon } from "@hugeicons/core-free-icons";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -30,6 +32,8 @@ type Problem = {
   answer: string;
   /** KaTeX worked solution — displayed only after key unlock */
   answerMath?: string;
+  /** TI-84 Plus CE steps, shown with the working after key unlock. Keys are written in [brackets]. */
+  calc?: string[];
   difficulty: "basic" | "standard" | "challenge";
   type: ProblemType;
 };
@@ -128,6 +132,9 @@ const PRACTICE_DATA: Record<string, PracticeSet> = {
         answer: "$982.60",
         answerMath: "FV = 1600(1 - 0.15)^3 = 1600(0.85)^3 = \\$982.60",
         hint: "Each year the value is multiplied by 0.85.",
+        calc: [
+          "Type [1600] [×] [0.85] [^] [3] [enter]. Year 3 is the third multiplication, so the power is 3.",
+        ],
       },
       {
         id: 4,
@@ -157,6 +164,12 @@ const PRACTICE_DATA: Record<string, PracticeSet> = {
         answerMath:
           "\\begin{aligned} FV &= 8000\\left(1+\\tfrac{4.8}{1200}\\right)^{36} = \\$9\\,236.42 \\\\ \\text{Interest} &= 9236.42 - 8000 = \\$1\\,236.42 \\end{aligned}",
         hint: "Monthly compounding: k = 12, so N = 12 × 3 = 36.",
+        calc: [
+          "Press [apps], choose 1:Finance..., then 1:TVM Solver... and press [enter].",
+          "Enter N = 36, I% = 4.8, PV = -8000 (use [(−)]), PMT = 0, FV = 0, P/Y = 12, C/Y = 12. Leave PMT: END.",
+          "Put the cursor on the FV line and press [alpha] [enter] (SOLVE): FV = 9236.42.",
+          "Interest: [9236.42] [−] [8000] [enter].",
+        ],
       },
       {
         id: 5,
@@ -211,6 +224,11 @@ const PRACTICE_DATA: Record<string, PracticeSet> = {
         answerMath:
           "15000\\left(1+\\tfrac{r}{400}\\right)^{24} = 19620 \\;\\Rightarrow\\; \\left(1+\\tfrac{r}{400}\\right)^{24}=1.308 \\;\\Rightarrow\\; r \\approx 4.5",
         hint: "Solve for I% on the GDC. Remember PV is negative (money paid out) and FV is positive.",
+        calc: [
+          "Press [apps], choose 1:Finance..., then 1:TVM Solver... and press [enter].",
+          "Enter N = 24 (4 × 6), PV = -15000, PMT = 0, FV = 19620, P/Y = 4, C/Y = 4. The I% line can hold any value.",
+          "Put the cursor on the I% line and press [alpha] [enter]: I% = 4.50. The answer is already a percentage.",
+        ],
       },
       {
         id: 7,
@@ -233,6 +251,9 @@ const PRACTICE_DATA: Record<string, PracticeSet> = {
         answerMath:
           "800 \\times 36.4 = 29\\,120 \\;\\Rightarrow\\; 29\\,120 \\times 0.97 = 28\\,246.40 \\text{ THB}",
         hint: "Convert first, then take 3% off — or multiply by 0.97.",
+        calc: [
+          "Type [800] [×] [36.4] [×] [0.97] [enter]. Multiplying by 0.97 takes off the 3% commission.",
+        ],
       },
       {
         id: 8,
@@ -270,6 +291,11 @@ const PRACTICE_DATA: Record<string, PracticeSet> = {
         answerMath:
           "\\begin{aligned} V_4 &= 5000(1.03)^4 = 5627.54 \\\\ V_6 &= 5627.54\\left(1+\\tfrac{4.2}{1200}\\right)^{24} = \\$6\\,119.78 \\end{aligned}",
         hint: "The answer to stage 1 becomes the starting amount for stage 2.",
+        calc: [
+          "Stage 1: [5000] [×] [1.03] [^] [4] [enter] gives 5627.54.",
+          "Stage 2 uses the stored answer: [Ans] [×] [(] [1] [+] [4.2] [÷] [1200] [)] [^] [24] [enter].",
+          "Do not retype the rounded 5627.54. [Ans] keeps every digit.",
+        ],
       },
       {
         id: 10,
@@ -306,6 +332,11 @@ const PRACTICE_DATA: Record<string, PracticeSet> = {
         answerMath:
           "3000(1.05)^5 = 3828.84 < 4000 \\qquad 3000(1.05)^6 = 4020.29 \\ge 4000",
         hint: "Test n = 5 and n = 6, or use the GDC to solve for N and round up.",
+        calc: [
+          "Press [apps], choose 1:Finance..., then 1:TVM Solver... and press [enter].",
+          "Enter I% = 5, PV = -3000, PMT = 0, FV = 4000, P/Y = 1, C/Y = 1. Put the cursor on N and press [alpha] [enter]: N = 5.896.",
+          "N is the number of whole years, so round up to 6. Check: [3000] [×] [1.05] [^] [6] [enter] = 4020.29.",
+        ],
       },
       {
         id: 12,
@@ -319,6 +350,11 @@ const PRACTICE_DATA: Record<string, PracticeSet> = {
         answerMath:
           "\\begin{aligned} \\text{Invest} &= 22000\\left(1+\\tfrac{5}{400}\\right)^{24} = 29\\,641.72 \\\\ \\text{Car} &= 22000(0.86)^6 = 8\\,900.48 \\\\ \\text{Difference} &= \\$20\\,741.24 \\end{aligned}",
         hint: "Two separate calculations: compound growth (k = 4) and depreciation, then subtract.",
+        calc: [
+          "Investment: [22000] [×] [(] [1] [+] [5] [÷] [400] [)] [^] [24] [enter]. Store with [sto→] [alpha] [A].",
+          "Car: [22000] [×] [0.86] [^] [6] [enter].",
+          "Difference: [alpha] [A] [−] [Ans] [enter]. Keep full digits until the final line.",
+        ],
       },
     ],
   },
@@ -726,8 +762,8 @@ function ProblemCard({
         {problem.hint && (
           <details className="mb-4 group">
             <summary className="list-none cursor-pointer text-xs font-semibold text-ai-primary hover:underline w-fit select-none">
-              <span className="group-open:hidden">💡 Show hint</span>
-              <span className="hidden group-open:inline">💡 Hide hint</span>
+              <span className="group-open:hidden"><HugeiconsIcon icon={Idea01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" />Show hint</span>
+              <span className="hidden group-open:inline"><HugeiconsIcon icon={Idea01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" />Hide hint</span>
             </summary>
             <div className="mt-2 bg-warn-bg border border-warn-primary rounded-lg px-4 py-3 text-sm text-navy-900">
               {problem.hint}
@@ -831,6 +867,19 @@ function AnswerCompareCard({
             Working
           </p>
           <BlockMath math={problem.answerMath} />
+        </div>
+      )}
+
+      {problem.calc && (
+        <div className="px-6 py-4 border-t border-slate-100">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+            TI-84 Plus CE steps
+          </p>
+          <ol className="list-decimal pl-5 space-y-1 text-sm text-slate-500">
+            {problem.calc.map((step, i) => (
+              <li key={i}>{step}</li>
+            ))}
+          </ol>
         </div>
       )}
     </div>

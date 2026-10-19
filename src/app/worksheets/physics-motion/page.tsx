@@ -4,6 +4,8 @@ import Link from "next/link";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
 import WorksheetActions from "../_components/WorksheetActions";
 import PaperHeader from "../_components/PaperHeader";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { BookOpen01Icon } from "@hugeicons/core-free-icons";
 
 export const metadata: Metadata = {
   title: "Physics Exam Review — Motion, Kinematics & Dynamics | Worksheets",
@@ -1032,7 +1034,7 @@ function Session3() {
             <span className="font-semibold text-aa-primary text-sm">F = 3 N</span>
           </div>
           <div className="flex items-center gap-2 px-6 py-3 bg-white border-2 border-slate-400 rounded-lg ">
-            <span className="text-base">📚</span>
+            <HugeiconsIcon icon={BookOpen01Icon} size={20} strokeWidth={1.8} />
             <span className="font-medium text-slate-700">Books</span>
           </div>
           <div className="flex items-center gap-2">

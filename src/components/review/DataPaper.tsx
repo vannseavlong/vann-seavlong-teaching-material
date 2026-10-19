@@ -64,7 +64,7 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
   const summaryRows: [string, string, string][] = paper.questions.flatMap((q) =>
     q.parts.map((p): [string, string, string] => [
       String(q.n),
-      p.l === "•" ? "—" : `(${p.l})`,
+      p.l === "•" ? "—" : `(${p.l})${p.sub ? `(${p.sub})` : ""}`,
       p.final,
     ]),
   );
@@ -104,17 +104,59 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
               note="Attempt every part, then tap Show Answer to reveal the worked solution"
             />
 
-            {paper.questions.map((q) => (
+            {paper.questions.map((q, qi) => (
               <Fragment key={q.n}>
+                {q.section && q.section !== paper.questions[qi - 1]?.section && (
+                  <div className="mt-10 mb-2 border-b border-slate-300 pb-2">
+                    <h2 className="text-xl font-bold text-navy-900">Section {q.section}</h2>
+                    <p className="text-sm text-slate-600">
+                      {q.section === "A"
+                        ? "Answer all questions. Answers must be written within the answer boxes provided."
+                        : "Answer all questions in the answer booklet provided. Please start each question on a new page."}
+                    </p>
+                  </div>
+                )}
                 <QuestionBanner n={q.n} marks={questionMarks(q)} />
+                {q.instruction && (
+                  <p className="text-sm font-bold text-navy-900 mb-3">
+                    <RichText text={q.instruction} />
+                  </p>
+                )}
                 {q.ctx?.map((c, i) => (
                   <ContextText key={i}>
                     <RichText text={c} />
                   </ContextText>
                 ))}
 
+                {q.table && (
+                  <div className="overflow-x-auto mb-4">
+                    <table className="text-sm border-collapse border border-slate-400">
+                      <thead>
+                        <tr>
+                          {q.table.head.map((h, i) => (
+                            <th key={i} className="border border-slate-400 px-4 py-2 text-left font-bold">
+                              <RichText text={h} />
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {q.table.rows.map((row, ri) => (
+                          <tr key={ri}>
+                            {row.map((c, ci) => (
+                              <td key={ci} className="border border-slate-400 px-4 py-2">
+                                <RichText text={c} />
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
                 {q.parts.map((p) => {
-                  const id = `ans-q${q.n}${p.l === "•" ? "" : p.l}`;
+                  const id = `ans-q${q.n}${p.l === "•" ? "" : p.l}${p.sub ?? ""}`;
                   return (
                     <Fragment key={id}>
                       {p.ctx && (
@@ -122,11 +164,11 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
                           <RichText text={p.ctx} />
                         </ContextText>
                       )}
-                      <PartBlock letter={p.l} marks={p.marks}>
+                      <PartBlock letter={p.l} sub={p.sub} marks={p.marks}>
                         <RichText text={p.q} />
                       </PartBlock>
                       <WorkSpace lines={p.lines ?? 3} answerId={id} />
-                      <AnswerPart id={id} letter={p.l} marks={p.marks} restate={p.restate}>
+                      <AnswerPart id={id} letter={p.l} sub={p.sub} marks={p.marks} restate={p.restate}>
                         {p.steps.map((s, i) => (
                           <Step key={i} text={s} />
                         ))}

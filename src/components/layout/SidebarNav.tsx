@@ -3,11 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { ArrowDown01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import type { SidebarTree } from "@/lib/sidebar-data";
 
 function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void }) {
   const pathname = usePathname();
   const [activeId, setActiveId] = useState<string | null>(null);
+  // Units the user toggled by hand; the unit holding the current page is open unless closed by hand.
+  const [manual, setManual] = useState<Record<number, boolean>>({});
 
   // Highlight the lesson topic in view (IntersectionObserver) or from the hash.
   useEffect(() => {
@@ -62,13 +66,22 @@ function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void
       <ul className="space-y-1">
         {tree.units.map((u) => {
           const inUnit = pathname.startsWith(`/${tree.pathway}/unit-${u.unit}/`);
+          const open = manual[u.unit] ?? inUnit;
+          const panelId = `unit-${tree.pathway}-${u.unit}`;
           return (
             <li key={u.unit} className="mt-3">
-              <p className={`px-3 py-1 text-xs uppercase tracking-wide ${inUnit ? "font-semibold text-navy-900" : "font-medium text-slate-500"}`}>
-                Unit {u.unit}: {u.title}
-              </p>
-              {(
-                <ul className="ml-3 mt-1 border-l border-slate-200 space-y-0.5">
+              <button
+                type="button"
+                onClick={() => setManual((m) => ({ ...m, [u.unit]: !open }))}
+                aria-expanded={open}
+                aria-controls={panelId}
+                className={`w-full flex items-center gap-1.5 px-3 py-1.5 rounded-md text-left text-xs uppercase tracking-wide hover:bg-slate-50 ${inUnit ? "font-semibold text-navy-900" : "font-medium text-slate-500"}`}
+              >
+                <HugeiconsIcon icon={open ? ArrowDown01Icon : ArrowRight01Icon} size={14} strokeWidth={2} className="shrink-0" />
+                <span>Unit {u.unit}: {u.title}</span>
+              </button>
+              {open && (
+                <ul id={panelId} className="ml-3 mt-1 border-l border-slate-200 space-y-0.5">
                   {u.items.map((item, idx) => {
                     const active = item.anchor
                       ? activeId === item.anchor && item.href?.split("#")[0] === pathname

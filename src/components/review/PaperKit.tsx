@@ -47,20 +47,25 @@ export function ContextText({ children }: { children: ReactNode }) {
 /** Exercise-side sub-part: letter badge, statement, mark pill. Use letter="•" for flat (unlettered) questions. */
 export function PartBlock({
   letter,
+  sub,
   marks,
   children,
 }: {
   letter: string;
+  sub?: string;
   marks: number;
   children: ReactNode;
 }) {
   return (
     <div className="mb-5 flex gap-3">
-      <span className="a4:hidden print:hidden flex-shrink-0 w-6 h-6 rounded-full bg-[#1e3a5f]/10 text-[#1e3a5f] font-bold text-xs flex items-center justify-center mt-0.5">
+      <span className="a4:hidden print:hidden flex-shrink-0 min-w-6 h-6 px-1.5 rounded-full bg-[#1e3a5f]/10 text-[#1e3a5f] font-bold text-xs flex items-center justify-center mt-0.5">
         {letter}
+        {sub && `(${sub})`}
       </span>
       {letter !== "•" && (
-        <span className="hidden a4:inline print:inline flex-shrink-0 text-sm font-semibold">({letter})</span>
+        <span className="hidden a4:inline print:inline flex-shrink-0 text-sm font-semibold">
+          ({letter}){sub && `(${sub})`}
+        </span>
       )}
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-3 mb-2">
@@ -112,12 +117,14 @@ export function FinalAnswer({ children }: { children: ReactNode }) {
 export function AnswerPart({
   id,
   letter,
+  sub,
   marks,
   restate,
   children,
 }: {
   id: string;
   letter: string;
+  sub?: string;
   marks: number;
   restate?: string;
   children: ReactNode;
@@ -126,8 +133,9 @@ export function AnswerPart({
     <AnswerReveal id={id}>
       <div id={id} className="mb-8 ml-10 mt-3 scroll-mt-28 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
         <div className="flex items-center gap-3 mb-3">
-          <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#1e3a5f] text-white font-bold text-sm flex items-center justify-center">
+          <span className="flex-shrink-0 min-w-7 h-7 px-2 rounded-full bg-[#1e3a5f] text-white font-bold text-sm flex items-center justify-center">
             {letter}
+            {sub && `(${sub})`}
           </span>
           {restate && <span className="text-sm font-semibold text-slate-500">{restate}</span>}
           <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded-full bg-white text-slate-500 whitespace-nowrap">

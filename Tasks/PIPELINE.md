@@ -44,13 +44,21 @@ Before planning is finished the signals come from the plan's scope; before testi
 
 The validator for G5 and G6 is never the same agent run that wrote the code: use a fresh agent or the review skill so it reads the diff cold.
 
+## Testing is done by the user
+
+The user tests everything by hand and gives feedback. The agent never moves a task to `5-done/` on its own.
+- Agent finishes the build, runs only the checks it can (G1, G2, plus G3 where tests exist), commits, then moves the task to `4-testing/` and says what to look at (URL, what changed, what was not verified).
+- G4 "Run it" and G9 "Human review" are the user's test. The agent does not claim a page was checked unless it really rendered it.
+- Feedback arrives in chat. The agent writes it under `## Feedback` in the task file, fixes it, commits, and returns the task to `4-testing/`.
+- Only when the user says it is good: add the changelog entry (G11), push `dev` as `AGENTS.md` says, move to `5-done/`.
+
 ## Gates by stage
 
 | Stage folder | Gates run |
 |---|---|
 | `3-in-progress/` | G1 while building |
-| `4-testing/` | G2 to G7 (as the tier requires) |
-| `5-done/` | G8, G9, G11 passed, pushed to `dev` |
+| `4-testing/` | Agent: G2 to G7 as the tier requires. User: hands-on test and feedback (G4, G9) |
+| `5-done/` | User approved after testing; G8, G11 passed, pushed to `dev` |
 | `6-deploy/` | G10 executed, live and checked |
 
 ## Commit message (G8)

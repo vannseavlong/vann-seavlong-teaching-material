@@ -7,8 +7,8 @@ One file per task, moved between folders as it progresses. The folder is the sta
 | `1-backlog/` | Idea or later; not scheduled | Captured, no decision yet |
 | `2-todo/` | Decided, ready to start | Scope and owner agreed |
 | `3-in-progress/` | Being built on `dev` | Work started and claimed |
-| `4-testing/` | Built; checks and QA running | Code committed on `dev` |
-| `5-done/` | Pushed to `dev`, changelog written | Tested and pushed (owner merges to `main`) |
+| `4-testing/` | Built and committed; waiting for the user to test and give feedback | Agent checks done, code committed on `dev` |
+| `5-done/` | Pushed to `dev`, changelog written | The user approved after testing (owner merges to `main`) |
 | `6-deploy/` | Released | Live in production |
 
 ## Planning
