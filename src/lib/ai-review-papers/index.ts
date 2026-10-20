@@ -9,6 +9,8 @@ import bounds from "./bounds";
 import percentageError from "./percentageError";
 import mock from "./mock";
 import sequencesMixed from "./sequencesMixed";
+import bounds2 from "./bounds2";
+import bounds3 from "./bounds3";
 
 export const aiReviewPapers: AiReviewPaper[] = [
   arithmetic,
@@ -20,6 +22,8 @@ export const aiReviewPapers: AiReviewPaper[] = [
   percentageError,
   mock,
   sequencesMixed,
+  bounds2,
+  bounds3,
 ];
 
 export const getAiReviewPaper = (slug: string) =>
