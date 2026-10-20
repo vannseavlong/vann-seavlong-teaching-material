@@ -104,6 +104,8 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
               note="Attempt every part, then tap Show Answer to reveal the worked solution"
             />
 
+            {paper.source && <p className="text-xs italic text-slate-600 mb-4">Source: {paper.source}</p>}
+
             {paper.questions.map((q, qi) => (
               <Fragment key={q.n}>
                 {q.section && q.section !== paper.questions[qi - 1]?.section && (

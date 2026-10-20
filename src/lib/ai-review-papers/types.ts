@@ -52,6 +52,8 @@ export type AiReviewPaper = {
   minutes: number;
   /** Lesson anchor on /ai/unit-1/lesson */
   lessonAnchor: string;
+  /** Credit line for questions adapted from another author; shown above the exercise and in the PDF export */
+  source?: string;
   questions: ReviewQuestion[];
 };
 

@@ -13,6 +13,7 @@ const paper: AiReviewPaper = {
   subtitle: "Summative Revision, Session 10",
   minutes: 40,
   lessonAnchor: "bounds",
+  source: `Questions adapted from "Limits of Accuracy: Exam Style Questions" by Corbettmaths (corbettmaths.com), © Corbettmaths. Wording, units and worked answers rewritten for this course.`,
   questions: [
     {
       n: 1,
