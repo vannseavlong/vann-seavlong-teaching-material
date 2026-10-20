@@ -205,7 +205,7 @@ const paper: AiReviewPaper = {
           l: "d", marks: 3, q: "Find the first month in which the donation from Fund 2 is greater than the donation from Fund 1.", lines: 5, restate: "First month v > u",
           steps: [
             m`GDC: table of \(300(1.08)^{x-1}\) and \(300 + 40(x-1)\).`,
-            m`Month 14: \(v_{14} = 815.69\), \(u_{14} = 820\). Month 15: \(v_{15} = 881.16\), \(u_{15} = 860\).`,
+            m`Month 14: \(v_{14} = 815.89\), \(u_{14} = 820\). Month 15: \(v_{15} = 881.16\), \(u_{15} = 860\).`,
           ],
           final: "Month 15",
           note: "Marks: (M1) inequality or table, (A1) values either side of the change, (A1) month 15.",
