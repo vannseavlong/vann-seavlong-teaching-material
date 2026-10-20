@@ -8,6 +8,7 @@ import rounding from "./rounding";
 import bounds from "./bounds";
 import percentageError from "./percentageError";
 import mock from "./mock";
+import sequencesMixed from "./sequencesMixed";
 
 export const aiReviewPapers: AiReviewPaper[] = [
   arithmetic,
@@ -18,6 +19,7 @@ export const aiReviewPapers: AiReviewPaper[] = [
   bounds,
   percentageError,
   mock,
+  sequencesMixed,
 ];
 
 export const getAiReviewPaper = (slug: string) =>
