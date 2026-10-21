@@ -130,6 +130,19 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
                   </ContextText>
                 ))}
 
+                {q.figure && (
+                  <figure className="mb-4">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={q.figure.src}
+                      alt={q.figure.alt}
+                      width={q.figure.width}
+                      height={q.figure.height}
+                      className="max-w-full h-auto border border-slate-300 bg-white"
+                    />
+                  </figure>
+                )}
+
                 {q.table && (
                   <div className="overflow-x-auto mb-4">
                     <table className="text-sm border-collapse border border-slate-400">

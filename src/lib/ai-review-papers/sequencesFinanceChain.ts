@@ -58,7 +58,9 @@ const paper: AiReviewPaper = {
       section: "A",
       ctx: [
         "A ball is dropped from a height of 2.4 metres and bounces on the ground. The maximum height reached by the ball after each bounce is 80% of the previous maximum height.",
+        m`The diagram shows the first three bounces. The maximum heights after bounces 1, 2 and 3 are \(h_1\), \(h_2\) and \(h_3\).`,
       ],
+      figure: { src: "/review/set1-q2-bouncing-ball.svg", alt: "A ball dropped from 2.4 m, then three bounce arcs of heights h1, h2 and h3, each 80% of the one before", width: 580, height: 300 },
       parts: [
         {
           l: "a", marks: 2, q: "Show that the maximum height reached by the ball after it has bounced for the fifth time is 79 cm, to the nearest cm.", lines: 3, restate: "Height after bounce 5",
@@ -96,14 +98,15 @@ const paper: AiReviewPaper = {
       n: 3,
       section: "B",
       ctx: [
-        "Mehta builds a path across her rectangular lawn using pairs of paving slabs. Each slab is 15 cm wide and 30 cm long.",
-        m`When \(n\) pairs of slabs are laid, the path has a width of \(w_n\) centimetres and a length of \(l_n\) centimetres. The table shows \(w_n\) and \(l_n\) for the first three values of \(n\). Both \(w_n\) and \(l_n\) increase by a constant amount each time a pair is added.`,
+        "Mehta builds a path across her rectangular lawn using pairs of paving slabs. Each slab is 15 cm wide and 30 cm long. A pair is two slabs side by side. Each new pair is placed one slab-width to the right of, and directly above, the previous pair.",
+        m`When \(n\) pairs of slabs are laid, the path has a width of \(w_n\) centimetres and a length of \(l_n\) centimetres. The diagram shows the path for \(n = 1\) and \(n = 3\), and the table shows \(w_n\) and \(l_n\) for the first three values of \(n\). Both \(w_n\) and \(l_n\) increase by a constant amount each time a pair is added.`,
       ],
+      figure: { src: "/review/set1-q3-paving-path.svg", alt: "Two lawns showing a staircase path of slab pairs for n equals 1 and n equals 3, with width w and length l marked", width: 580, height: 346 },
       table: {
         head: [m`\(n\)`, "1", "2", "3"],
         rows: [
           [m`\(w_n\)`, "30", m`\(a\)`, "60"],
-          [m`\(l_n\)`, "55", "80", m`\(b\)`],
+          [m`\(l_n\)`, "30", "60", m`\(b\)`],
         ],
       },
       parts: [
@@ -115,9 +118,9 @@ const paper: AiReviewPaper = {
         },
         {
           l: "a", sub: "ii", marks: 1, q: m`Find the value of \(b\).`, lines: 2, restate: "b",
-          steps: [m`\[l_2 - l_1 = 80 - 55 = 25 \;\Rightarrow\; b = 80 + 25 = 105\]`],
-          final: "b = 105",
-          note: "Marks: (A1) 105.",
+          steps: [m`\[l_2 - l_1 = 60 - 30 = 30 \;\Rightarrow\; b = 60 + 30 = 90\]`],
+          final: "b = 90",
+          note: "Marks: (A1) 90. Each new pair adds one slab length, 30 cm.",
         },
         {
           l: "b", sub: "i", marks: 2, q: m`Write down an expression in terms of \(n\) for \(w_n\).`, lines: 3, restate: "w_n",
@@ -130,18 +133,18 @@ const paper: AiReviewPaper = {
         },
         {
           l: "b", sub: "ii", marks: 1, q: m`Write down an expression in terms of \(n\) for \(l_n\).`, lines: 2, restate: "l_n",
-          steps: [m`\[l_n = 55 + 25(n-1) = 25n + 30\]`],
-          final: "l_n = 25n + 30",
-          note: "Marks: (A1) 25n + 30. Check: l₂ = 80 and l₃ = 105 match the table.",
+          steps: [m`\[l_n = 30 + 30(n-1) = 30n\]`],
+          final: "l_n = 30n",
+          note: "Marks: (A1) 30n. Check: l₂ = 60 and l₃ = 90 match the table and the diagram.",
         },
         {
-          l: "c", sub: "i", marks: 2, q: "Mehta's lawn has a length of 1330 cm. The path reaches the other side of the lawn. Show that Mehta needs 104 slabs.", lines: 3, restate: "Slabs needed",
+          l: "c", sub: "i", marks: 2, q: "Mehta's lawn has a length of 1560 cm. The path reaches the other side of the lawn. Show that Mehta needs 104 slabs.", lines: 3, restate: "Slabs needed",
           steps: [
-            m`Use \(l_n\) from (b)(ii): \(25n + 30 = 1330 \Rightarrow n = 52\) pairs.`,
+            m`Use \(l_n\) from (b)(ii): \(30n = 1560 \Rightarrow n = 52\) pairs.`,
             m`\[52 \times 2 = 104\ \text{slabs}\]`,
           ],
           final: "n = 52 pairs, 104 slabs",
-          note: "Marks: (M1) setting l_n = 1330, (A1) n = 52 and 2 × 52 = 104 shown. A pair is two slabs.",
+          note: "Marks: (M1) setting l_n = 1560, (A1) n = 52 and 2 × 52 = 104 shown. A pair is two slabs.",
         },
         {
           l: "c", sub: "ii", marks: 1, q: m`Find the value of \(w_n\) for this path.`, lines: 2, restate: "w for n = 52",

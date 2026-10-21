@@ -12,6 +12,7 @@ import sequencesMixed from "./sequencesMixed";
 import bounds2 from "./bounds2";
 import bounds3 from "./bounds3";
 import sequencesFinanceChain from "./sequencesFinanceChain";
+import sequencesFinanceChain2 from "./sequencesFinanceChain2";
 
 export const aiReviewPapers: AiReviewPaper[] = [
   arithmetic,
@@ -26,6 +27,7 @@ export const aiReviewPapers: AiReviewPaper[] = [
   bounds2,
   bounds3,
   sequencesFinanceChain,
+  sequencesFinanceChain2,
 ];
 
 export const getAiReviewPaper = (slug: string) =>
