@@ -1,5 +1,6 @@
 # Display mode: Web / A4 toggle driven by ?mode
 
+- **ID:** T-0024
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-18 / 2026-10-18
 - **Due:** none

@@ -1,5 +1,6 @@
 # A4 mode: sheet only, header stays web
 
+- **ID:** T-0002
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-18 / 2026-10-18
 - **Depends on:** none (follows "Revision 2" in `Tasks/_plans/Web-ui-consistency.md`)

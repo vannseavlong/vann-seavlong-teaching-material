@@ -1,5 +1,6 @@
 # Sidebar lists topics inside each unit
 
+- **ID:** T-0030
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-18 / 2026-10-18
 - **Depends on:** none (follows "Revision 2" in `Tasks/_plans/Web-ui-consistency.md`)

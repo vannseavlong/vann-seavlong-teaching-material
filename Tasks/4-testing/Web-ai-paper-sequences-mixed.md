@@ -1,5 +1,6 @@
 # AI revision paper: Arithmetic and Geometric mixed
 
+- **ID:** T-0019
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-20 / 2026-10-20
 - **Tier:** T1 · new content in the review-paper data, one index line

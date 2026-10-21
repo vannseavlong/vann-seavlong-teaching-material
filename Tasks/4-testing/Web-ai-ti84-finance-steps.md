@@ -1,5 +1,6 @@
 # TI-84 Plus CE steps in AI Unit 1 Financial Mathematics
 
+- **ID:** T-0020
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-19 / 2026-10-19
 - **Tier:** T1 · content edit in the finance lesson section, one new helper added to the lesson-local helpers file, one optional field on the finance practice data; no new route

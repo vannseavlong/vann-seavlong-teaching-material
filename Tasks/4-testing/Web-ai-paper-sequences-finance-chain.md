@@ -1,5 +1,6 @@
 # AI revision paper: Sequences, Series and Financial Mathematics, chained
 
+- **ID:** T-0018
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-21 / 2026-10-21
 - **Tier:** T1 · new content in the review-paper data, one index line

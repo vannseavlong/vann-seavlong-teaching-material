@@ -1,5 +1,6 @@
 # Rewrite AI revision paper to IB standard: Arithmetic Sequences and Series
 
+- **ID:** T-0010
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-19 / 2026-10-19
 - **Tier:** T1 · content-only edit in one data file

@@ -1,5 +1,6 @@
 # Match AI Unit 1 notation to the SL formula booklet
 
+- **ID:** T-0003
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-19 / 2026-10-19
 - **Tier:** T1 · symbol changes in content files only

@@ -1,5 +1,6 @@
 # Collapsible sidebar units and Hugeicons instead of emoji
 
+- **ID:** T-0029
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-18 / 2026-10-18
 - **Tier:** T2 · edits shared layout component, adds a dependency (package.json), touches 6 files

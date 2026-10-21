@@ -1,5 +1,6 @@
 # Design AI Unit 1 lesson: Arithmetic Sequences and Series
 
+- **ID:** T-0004
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-18 / 2026-10-18
 - **Tier:** T1 · content-only edit in one section file, no shared code, no new route

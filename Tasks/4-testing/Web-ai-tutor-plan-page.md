@@ -1,5 +1,6 @@
 # Move AI Unit 1 revision plan to a tutor-only page
 
+- **ID:** T-0021
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-19 / 2026-10-19
 - **Tier:** T1 · moves one component to a new route, no shared code

@@ -1,5 +1,6 @@
 # IB paper style for Review papers
 
+- **ID:** T-0026
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-18 / 2026-10-18
 - **Depends on:** none (follows "Revision 2" in `Tasks/_plans/Web-ui-consistency.md`)
