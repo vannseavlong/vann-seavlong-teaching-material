@@ -119,6 +119,7 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
                   </div>
                 )}
                 <QuestionBanner n={q.n} marks={questionMarks(q)} />
+                {q.ref && <p className="text-xs italic text-slate-600 mb-2">IB past paper: {q.ref}</p>}
                 {q.instruction && (
                   <p className="text-sm font-bold text-navy-900 mb-3">
                     <RichText text={q.instruction} />

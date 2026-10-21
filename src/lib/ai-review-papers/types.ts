@@ -42,6 +42,8 @@ export type ReviewQuestion = {
   n: number;
   /** IB paper section; a section heading is shown when it changes between questions */
   section?: "A" | "B";
+  /** Past-paper code of the original question, e.g. "25N.1.SL.TZ1.2"; shown under the question banner */
+  ref?: string;
   /** Bold lead-in line, e.g. "In this question, give all answers to two decimal places." */
   instruction?: string;
   /** Diagram shown after the context and before the table */
