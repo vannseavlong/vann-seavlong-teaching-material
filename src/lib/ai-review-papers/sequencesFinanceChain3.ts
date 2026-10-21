@@ -5,7 +5,7 @@ const m = String.raw;
 // Session 14: Summative revision, chained, Set 3 (71 marks).
 // Covers all six summative topics: arithmetic sequences and series, geometric sequences and series,
 // financial mathematics, rounding, upper and lower bounds, percentage error.
-// New contexts and new diagrams (shrinking arches, L-shaped tile mosaics); each part feeds the next part.
+// New contexts and new diagrams (pizza slices, L-shaped tile mosaics); each part feeds the next part.
 
 const paper: AiReviewPaper = {
   slug: "sequences-finance-chain-3",
@@ -74,52 +74,52 @@ const paper: AiReviewPaper = {
       n: 2,
       section: "A",
       ctx: [
-        "A shop front is trimmed with a row of semicircular arches that get smaller from left to right. The first arch has a curved length of 80 cm. Each arch after that has a curved length that is 90% of the curved length of the arch before it.",
-        m`The diagram shows the first three arches. Their curved lengths are \(s_1\), \(s_2\) and \(s_3\).`,
+        "A pizza is cut into slices from the centre. The angle at the centre of the first slice is 50°. Each slice after that has an angle that is 90% of the angle of the slice before it.",
+        m`The diagram shows the pizza. The angles of the first three slices are \(\theta_1\), \(\theta_2\) and \(\theta_3\).`,
       ],
-      figure: { src: "/review/set3-q2-arches.svg", alt: "A row of semicircular arches on a line, getting smaller from left to right, with the first three labelled s1, s2 and s3", width: 580, height: 230 },
+      figure: { src: "/review/set3-q2-pizza.svg", alt: "A pizza cut from the centre into slices that get narrower going clockwise, with the first three labelled theta 1, theta 2 and theta 3", width: 580, height: 290 },
       parts: [
         {
-          l: "a", marks: 2, q: "Show that the curved length of the 7th arch is 42.5 cm, correct to 3 significant figures.", lines: 3, restate: "Curved length of arch 7",
+          l: "a", marks: 2, q: "Show that the angle of the 7th slice is 26.6°, correct to 3 significant figures.", lines: 3, restate: "Angle of slice 7",
           steps: [
-            m`The curved lengths form a geometric sequence: \(u_1 = 80\), \(r = 0.9\).`,
-            m`\[u_7 = 80(0.9)^6 = 42.515\ldots \approx 42.5\ \text{cm}\]`,
+            m`The angles form a geometric sequence: \(u_1 = 50\), \(r = 0.9\).`,
+            m`\[u_7 = 50(0.9)^6 = 26.572\ldots \approx 26.6^\circ\]`,
           ],
-          final: "80(0.9)⁶ = 42.515 ≈ 42.5 cm",
-          note: "Marks: (M1) 80(0.9)^6, (A1) 42.515 shown and rounded to 42.5. The power is 6, not 7: arch 1 is the first term.",
+          final: "50(0.9)⁶ = 26.572 ≈ 26.6°",
+          note: "Marks: (M1) 50(0.9)^6, (A1) 26.572 shown and rounded to 26.6. The power is 6, not 7: slice 1 is the first term.",
         },
         {
-          l: "b", marks: 2, q: "Using the same model, find the number of arches with a curved length greater than 20 cm.", lines: 4, restate: "Arches above 20 cm",
+          l: "b", marks: 2, q: "Using the same model, find the number of slices with an angle greater than 20°.", lines: 4, restate: "Slices above 20°",
           steps: [
-            m`\[80(0.9)^{n-1} > 20\]`,
-            m`GDC: \(n = 14\) gives 20.33 cm (above 20), \(n = 15\) gives 18.30 cm (below 20).`,
+            m`\[50(0.9)^{n-1} > 20\]`,
+            m`GDC: \(n = 9\) gives 21.52° (above 20), \(n = 10\) gives 19.37° (below 20).`,
           ],
-          final: "14 arches",
-          note: "Marks: (M1) inequality or table using the model from (a), (A1) 14.",
+          final: "9 slices",
+          note: "Marks: (M1) inequality or table using the model from (a), (A1) 9.",
         },
         {
-          l: "c", marks: 3, q: "Find the total length of trim needed to cover the first 8 arches. Give your answer correct to 3 significant figures.", lines: 5, restate: "Trim for 8 arches",
+          l: "c", marks: 3, q: "Find the total angle at the centre taken up by the first 8 slices. Give your answer correct to 3 significant figures.", lines: 5, restate: "Total angle, 8 slices",
           steps: [
-            m`\[S_8 = \dfrac{80\left(1 - 0.9^{8}\right)}{1 - 0.9}\]`,
-            m`\[= 455.63\ldots \approx 456\ \text{cm}\]`,
+            m`\[S_8 = \dfrac{50\left(1 - 0.9^{8}\right)}{1 - 0.9}\]`,
+            m`\[= 284.77\ldots \approx 285^\circ\]`,
           ],
-          final: "456 cm",
-          note: "Marks: (M1) geometric sum formula, (A1) correct substitution with r = 0.9 and n = 8, (A1) 456.",
+          final: "285°",
+          note: "Marks: (M1) geometric sum formula, (A1) correct substitution with r = 0.9 and n = 8, (A1) 285. The total is below 360°, so the 8 slices fit in the pizza.",
         },
         {
-          l: "d", sub: "i", marks: 1, q: "The curved length of the first arch, 80 cm, was measured correct to the nearest centimetre. Write down the lower bound and the upper bound of this length.", lines: 2, restate: "Bounds of 80 cm",
-          steps: [m`\[79.5 \leq u_1 < 80.5\]`],
-          final: "Lower 79.5 cm, upper 80.5 cm",
-          note: "Marks: (A1) both bounds. Half of the 1 cm unit is 0.5 cm.",
+          l: "d", sub: "i", marks: 1, q: "The angle of the first slice, 50°, was measured correct to the nearest degree. Write down the lower bound and the upper bound of this angle.", lines: 2, restate: "Bounds of 50°",
+          steps: [m`\[49.5 \leq u_1 < 50.5\]`],
+          final: "Lower 49.5°, upper 50.5°",
+          note: "Marks: (A1) both bounds. Half of the 1° unit is 0.5°.",
         },
         {
-          l: "d", sub: "ii", marks: 2, q: "Hence find the lower bound and the upper bound of the total length of trim in part (c).", lines: 4, restate: "Bounds of total trim",
+          l: "d", sub: "ii", marks: 2, q: "Hence find the lower bound and the upper bound of the total angle in part (c).", lines: 4, restate: "Bounds of total angle",
           steps: [
             m`The ratio 0.9 is exact, so \(S_8\) is proportional to \(u_1\): \(S_8 = u_1 \times 5.6953\ldots\)`,
-            m`\[\text{lower: } 79.5 \times 5.6953\ldots = 452.78\ldots,\qquad \text{upper: } 80.5 \times 5.6953\ldots = 458.47\ldots\]`,
+            m`\[\text{lower: } 49.5 \times 5.6953\ldots = 281.92\ldots,\qquad \text{upper: } 50.5 \times 5.6953\ldots = 287.61\ldots\]`,
           ],
-          final: "Lower 452.78 cm, upper 458.47 cm",
-          note: "Marks: (A1) lower bound 452.78, (A1) upper bound 458.47. Both bounds come from the bounds of u₁ in (d)(i). The value from (c), 455.63, lies between them.",
+          final: "Lower 281.92°, upper 287.61°",
+          note: "Marks: (A1) lower bound 281.92, (A1) upper bound 287.61. Both bounds come from the bounds of u₁ in (d)(i). The value from (c), 284.77, lies between them.",
         },
       ],
     },
