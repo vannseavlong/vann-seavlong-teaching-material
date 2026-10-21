@@ -5,7 +5,7 @@ const m = String.raw;
 // Session 14: Summative revision, chained, Set 3 (71 marks).
 // Covers all six summative topics: arithmetic sequences and series, geometric sequences and series,
 // financial mathematics, rounding, upper and lower bounds, percentage error.
-// New contexts and new diagrams (pendulum, L-shaped tile mosaics); each part feeds the next part.
+// New contexts and new diagrams (shrinking arches, L-shaped tile mosaics); each part feeds the next part.
 
 const paper: AiReviewPaper = {
   slug: "sequences-finance-chain-3",
@@ -74,31 +74,31 @@ const paper: AiReviewPaper = {
       n: 2,
       section: "A",
       ctx: [
-        "A pendulum bob swings back and forth. The first swing, from the left end to the right end, travels an arc of length 80 cm. Each swing after that travels 90% of the arc length of the previous swing.",
-        m`The diagram shows the first three swings. Their arc lengths are \(s_1\), \(s_2\) and \(s_3\).`,
+        "A shop front is trimmed with a row of semicircular arches that get smaller from left to right. The first arch has a curved length of 80 cm. Each arch after that has a curved length that is 90% of the curved length of the arch before it.",
+        m`The diagram shows the first three arches. Their curved lengths are \(s_1\), \(s_2\) and \(s_3\).`,
       ],
-      figure: { src: "/review/set3-q2-pendulum.svg", alt: "A pendulum bob starting at the left, with three nested swing arcs of lengths s1, s2 and s3, each 90% of the one before", width: 580, height: 330 },
+      figure: { src: "/review/set3-q2-arches.svg", alt: "A row of semicircular arches on a line, getting smaller from left to right, with the first three labelled s1, s2 and s3", width: 580, height: 230 },
       parts: [
         {
-          l: "a", marks: 2, q: "Show that the arc length of the 7th swing is 42.5 cm, correct to 3 significant figures.", lines: 3, restate: "Arc length of swing 7",
+          l: "a", marks: 2, q: "Show that the curved length of the 7th arch is 42.5 cm, correct to 3 significant figures.", lines: 3, restate: "Curved length of arch 7",
           steps: [
-            m`The arc lengths form a geometric sequence: \(u_1 = 80\), \(r = 0.9\).`,
+            m`The curved lengths form a geometric sequence: \(u_1 = 80\), \(r = 0.9\).`,
             m`\[u_7 = 80(0.9)^6 = 42.515\ldots \approx 42.5\ \text{cm}\]`,
           ],
           final: "80(0.9)⁶ = 42.515 ≈ 42.5 cm",
-          note: "Marks: (M1) 80(0.9)^6, (A1) 42.515 shown and rounded to 42.5. The power is 6, not 7: swing 1 is the first term.",
+          note: "Marks: (M1) 80(0.9)^6, (A1) 42.515 shown and rounded to 42.5. The power is 6, not 7: arch 1 is the first term.",
         },
         {
-          l: "b", marks: 2, q: "Using the same model, find the number of swings with an arc length greater than 20 cm.", lines: 4, restate: "Swings above 20 cm",
+          l: "b", marks: 2, q: "Using the same model, find the number of arches with a curved length greater than 20 cm.", lines: 4, restate: "Arches above 20 cm",
           steps: [
             m`\[80(0.9)^{n-1} > 20\]`,
             m`GDC: \(n = 14\) gives 20.33 cm (above 20), \(n = 15\) gives 18.30 cm (below 20).`,
           ],
-          final: "14 swings",
+          final: "14 arches",
           note: "Marks: (M1) inequality or table using the model from (a), (A1) 14.",
         },
         {
-          l: "c", marks: 3, q: "Find the total distance travelled by the bob in the first 8 swings. Give your answer correct to 3 significant figures.", lines: 5, restate: "Distance, 8 swings",
+          l: "c", marks: 3, q: "Find the total length of trim needed to cover the first 8 arches. Give your answer correct to 3 significant figures.", lines: 5, restate: "Trim for 8 arches",
           steps: [
             m`\[S_8 = \dfrac{80\left(1 - 0.9^{8}\right)}{1 - 0.9}\]`,
             m`\[= 455.63\ldots \approx 456\ \text{cm}\]`,
@@ -107,13 +107,13 @@ const paper: AiReviewPaper = {
           note: "Marks: (M1) geometric sum formula, (A1) correct substitution with r = 0.9 and n = 8, (A1) 456.",
         },
         {
-          l: "d", sub: "i", marks: 1, q: "The arc length of the first swing, 80 cm, was measured correct to the nearest centimetre. Write down the lower bound and the upper bound of the first arc length.", lines: 2, restate: "Bounds of 80 cm",
+          l: "d", sub: "i", marks: 1, q: "The curved length of the first arch, 80 cm, was measured correct to the nearest centimetre. Write down the lower bound and the upper bound of this length.", lines: 2, restate: "Bounds of 80 cm",
           steps: [m`\[79.5 \leq u_1 < 80.5\]`],
           final: "Lower 79.5 cm, upper 80.5 cm",
           note: "Marks: (A1) both bounds. Half of the 1 cm unit is 0.5 cm.",
         },
         {
-          l: "d", sub: "ii", marks: 2, q: "Hence find the lower bound and the upper bound of the total distance in part (c).", lines: 4, restate: "Bounds of total distance",
+          l: "d", sub: "ii", marks: 2, q: "Hence find the lower bound and the upper bound of the total length of trim in part (c).", lines: 4, restate: "Bounds of total trim",
           steps: [
             m`The ratio 0.9 is exact, so \(S_8\) is proportional to \(u_1\): \(S_8 = u_1 \times 5.6953\ldots\)`,
             m`\[\text{lower: } 79.5 \times 5.6953\ldots = 452.78\ldots,\qquad \text{upper: } 80.5 \times 5.6953\ldots = 458.47\ldots\]`,

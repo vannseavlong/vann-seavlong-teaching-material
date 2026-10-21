@@ -6,7 +6,7 @@
 - **Touches:** src/lib/ai-review-papers/sequencesFinanceChain3.ts, index.ts, public/review/set3-*.svg
 
 ## Goal
-Set 3 of the chained paper (71 marks, 80 min). Different contexts and different Figma diagrams from Sets 1 and 2 (pendulum arcs, L-shaped tile mosaics). Covers all six Summative Assessment Revision topics:
+Set 3 of the chained paper (71 marks, 80 min). Different contexts and different Figma diagrams from Sets 1 and 2 (shrinking arches, L-shaped tile mosaics). Covers all six Summative Assessment Revision topics:
 
 | Topic | Where |
 |---|---|
