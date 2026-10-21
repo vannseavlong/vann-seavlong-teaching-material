@@ -11,6 +11,7 @@ import mock from "./mock";
 import sequencesMixed from "./sequencesMixed";
 import bounds2 from "./bounds2";
 import bounds3 from "./bounds3";
+import sequencesFinanceChain from "./sequencesFinanceChain";
 
 export const aiReviewPapers: AiReviewPaper[] = [
   arithmetic,
@@ -24,6 +25,7 @@ export const aiReviewPapers: AiReviewPaper[] = [
   sequencesMixed,
   bounds2,
   bounds3,
+  sequencesFinanceChain,
 ];
 
 export const getAiReviewPaper = (slug: string) =>
