@@ -16,15 +16,16 @@ One lesson page at `/ai/unit-3/lesson` for IB Mathematics AI SL, topic "Geometry
 5. Section files (new): one per topic below, stubs created by the scaffold task so later tasks only edit their own file.
 
 ## Lesson content (SL, section order)
-Pedagogical order: algebra of lines first (needed for Voronoi), then solids, then trig, then trig in context, then Voronoi.
+Pedagogical order: algebra of lines first (needed for Voronoi), then solids, then trig, then arcs and sectors, then trig in context, then Voronoi.
 
 | # | Section id / file | Content | GDC |
 |---|---|---|---|
 | 1 | `lines` / Lines.tsx | Gradient from two points, y = mx + c, ax + by + d = 0, parallel (m1 = m2), perpendicular (m1 m2 = -1), midpoint, distance in 2D | Graph and intersect |
 | 2 | `solids-3d` / Solids3D.tsx | Distance and midpoint in 3D, volume and surface area of right pyramid, cone, sphere, hemisphere, composite solids, angle between a line and a plane (right-angled trig inside the solid) | none |
 | 3 | `trigonometry` / Trigonometry.tsx | SOH CAH TOA, sine rule (incl. ambiguous case), cosine rule, area = 1/2 ab sin C, choosing the rule | angle mode DEGREE |
-| 4 | `trig-context` / TrigContext.tsx | Angles of elevation and depression, bearings (3 figures, clockwise from north), multi-triangle problems, 3D trig | angle mode |
-| 5 | `voronoi` / Voronoi.tsx | Sites, cells, edges, vertices, perpendicular bisector construction, adding a site, nearest-neighbour interpolation, toxic-waste-dump (largest empty circle) | none |
+| 4 | `arc-sector` / ArcSector.tsx | Length of an arc l = θ/360 × 2πr, area of a sector A = θ/360 × πr² (degrees, as in the booklet), perimeter of a sector, segment area = sector minus triangle, finding r or θ from a given l or A | angle mode |
+| 5 | `trig-context` / TrigContext.tsx | Angles of elevation and depression, bearings (3 figures, clockwise from north), multi-triangle problems, 3D trig | angle mode |
+| 6 | `voronoi` / Voronoi.tsx | Sites, cells, edges, vertices, perpendicular bisector construction, adding a site, nearest-neighbour interpolation, toxic-waste-dump (largest empty circle) | none |
 
 Formulas that are in the AI SL booklet are printed as the booklet prints them (see CLAUDE.md "Notation"): distance, midpoint, volumes and areas of solids, sine rule, cosine rule, area of a triangle, gradient, parallel and perpendicular conditions. Mark each Practice with a context question, not a bare drill (style from `Tasks/_plans/Web-ai-ib-papers.md`).
 
@@ -53,12 +54,13 @@ None. Only edit to shared data: AI unit 3 `contents` entry in `src/lib/curriculu
 | Web-ai-u3-lines | scaffold | T1 | S |
 | Web-ai-u3-solids | scaffold | T1 | M |
 | Web-ai-u3-trigonometry | scaffold | T1 | M |
+| Web-ai-u3-arc-sector | scaffold | T1 | S |
 | Web-ai-u3-trig-context | scaffold | T1 | M |
 | Web-ai-u3-voronoi | scaffold | T1 | M |
 | Web-ai-u3-wrapup | all above | T1 | S |
 | Web-ai-u3-practice-papers (backlog) | wrapup | T2 | L |
 
-Parallel group after scaffold: lines, solids, trigonometry, trig-context, voronoi (each touches only its own section file; diagrams are added to `diagrams.tsx` by the scaffold, and a section task that needs a new diagram defines it inside its own section file to avoid conflict).
+Parallel group after scaffold: lines, solids, trigonometry, arc-sector, trig-context, voronoi (each touches only its own section file; diagrams are added to `diagrams.tsx` by the scaffold, and a section task that needs a new diagram defines it inside its own section file to avoid conflict).
 
 ## Out of scope
 HL content (3D geometry and spatial reasoning, graph theory), practice pages, review papers, mock tests.

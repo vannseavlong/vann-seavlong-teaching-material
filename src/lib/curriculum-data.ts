@@ -316,7 +316,7 @@ export const aiCurriculum: CurriculumData = {
         "Graph theory",
       ],
       contents: [
-        { title: "Lesson", status: "coming-soon" },
+        { title: "Lesson", status: "available", href: "/ai/unit-3/lesson" },
         { title: "Practice Problems", status: "coming-soon" },
       ],
     },
