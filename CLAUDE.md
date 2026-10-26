@@ -291,7 +291,7 @@ Red `HighlightBox` (general binomial series). One `FormulaBox` (negative/fractio
 | AA Unit 6: Calculus | ⏳ | ⏳ | ⏳ |
 | AI Unit 1: Number & Algebra | 🟡 Topics 1–2 + summative revision (sequences, rounding, bounds, % error) | ✅ Financial (interactive) + 7 exportable review papers | ⏳ |
 | AI Unit 2: Functions & Modelling | ⏳ | ⏳ | ⏳ |
-| AI Unit 3: Geometry | ⏳ | ⏳ | ⏳ |
+| AI Unit 3: Geometry & Trigonometry | 🟡 Lines, 3D & solids, trigonometry, arc & sector, trig in context, Voronoi (SL, awaiting review) | ⏳ | ⏳ |
 | AI Unit 4: Statistics & Probability | ⏳ | ⏳ | ⏳ |
 | AI Unit 5: Calculus & Technology | ⏳ | ⏳ | ⏳ |
 

@@ -106,6 +106,41 @@ function ComingSoonCard() {
   );
 }
 
+const SUMMARY = [
+  {
+    title: "Lines in 2D",
+    formulas: [
+      "m = \\dfrac{y_2-y_1}{x_2-x_1},\\; y - y_1 = m(x - x_1)",
+      "m_1 = m_2 \\text{ (parallel)},\\; m_1 m_2 = -1 \\text{ (perpendicular)}",
+      "d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}",
+    ],
+  },
+  {
+    title: "3D and solids",
+    formulas: [
+      "d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}",
+      "V_{\\text{pyramid}} = \\tfrac13 Ah,\\; V_{\\text{cone}} = \\tfrac13 \\pi r^2 h",
+      "V_{\\text{sphere}} = \\tfrac43 \\pi r^3,\\; A_{\\text{sphere}} = 4\\pi r^2",
+    ],
+  },
+  {
+    title: "Trigonometry",
+    formulas: [
+      "\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B} = \\dfrac{c}{\\sin C}",
+      "c^2 = a^2 + b^2 - 2ab\\cos C",
+      "A = \\tfrac12 ab\\sin C",
+    ],
+  },
+  {
+    title: "Arc, sector, context",
+    formulas: [
+      "l = \\dfrac{\\theta}{360} \\times 2\\pi r,\\; A = \\dfrac{\\theta}{360} \\times \\pi r^2",
+      "\\text{back bearing} = \\text{bearing} \\pm 180°",
+      "\\text{Voronoi edge: } m = -\\dfrac{1}{m_{PQ}} \\text{ through the midpoint}",
+    ],
+  },
+];
+
 function UnitSummary() {
   return (
     <section id="summary" className="py-16 px-6 bg-white border-t border-slate-200">
@@ -113,10 +148,21 @@ function UnitSummary() {
         <h2 className="text-2xl md:text-3xl font-bold text-navy-900 mb-6">
           Key Formulas at a Glance
         </h2>
-        <div className="bg-navy-900 text-white rounded-xl px-6 py-5 mb-10">
-          <p className="text-sm">
-            <InlineMath math="m = \dfrac{y_2 - y_1}{x_2 - x_1}" />
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
+          {SUMMARY.map(({ title, formulas }) => (
+            <div key={title} className="bg-navy-900 text-white rounded-xl px-6 py-5">
+              <p className="text-xs font-bold uppercase tracking-wider text-ai-light mb-3">
+                {title}
+              </p>
+              <ul className="space-y-2">
+                {formulas.map((f, i) => (
+                  <li key={i} className="text-sm">
+                    <InlineMath math={f} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
         <div className="flex flex-col sm:flex-row justify-between gap-4 pt-8 border-t border-slate-200">
           <Link href="/ai" className="text-sm font-semibold text-ai-primary hover:underline">

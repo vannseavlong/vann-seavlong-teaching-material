@@ -306,13 +306,15 @@ export const aiCurriculum: CurriculumData = {
       slHours: 18,
       hlHours: 46,
       slTopics: [
-        "Measurement",
+        "Lines in 2D",
+        "3D distance & solids",
+        "Trigonometry",
+        "Arc length & sector area",
         "Trigonometry in context",
-        "Scale & units",
+        "Voronoi diagrams",
       ],
       hlTopics: [
         "3D geometry & spatial reasoning",
-        "Voronoi diagrams",
         "Graph theory",
       ],
       contents: [
