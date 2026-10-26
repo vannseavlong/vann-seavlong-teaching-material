@@ -15,15 +15,6 @@ export const metadata: Metadata = {
     "Lesson notes for IB Mathematics AI SL Unit 3: lines in 2D, 3D distance and solids, trigonometry, arc length and sector area, trigonometry in context, and Voronoi diagrams.",
 };
 
-const TOPICS = [
-  { id: "lines", label: "Lines in 2D" },
-  { id: "solids-3d", label: "3D & Solids" },
-  { id: "trigonometry", label: "Trigonometry" },
-  { id: "arc-sector", label: "Arc & Sector" },
-  { id: "trig-context", label: "Trig in Context" },
-  { id: "voronoi", label: "Voronoi" },
-];
-
 function LessonHero() {
   return (
     <div className="bg-gradient-to-br from-navy-900 to-navy-700 text-white pt-28 pb-16 px-6">
@@ -60,25 +51,6 @@ function LessonHero() {
         </div>
       </div>
     </div>
-  );
-}
-
-function TableOfContents() {
-  return (
-    <nav className="sticky top-16 z-30 bg-white border-b border-slate-200 px-6 py-3 overflow-x-auto">
-      <ul className="max-w-[1000px] mx-auto flex gap-2 whitespace-nowrap">
-        {TOPICS.map((t) => (
-          <li key={t.id}>
-            <a
-              href={`#${t.id}`}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-ai-bg text-ai-text hover:bg-ai-light"
-            >
-              {t.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
   );
 }
 
@@ -181,7 +153,6 @@ export default function Page() {
   return (
     <main>
       <LessonHero />
-      <TableOfContents />
       <LinesSection />
       <Solids3DSection />
       <TrigonometrySection />

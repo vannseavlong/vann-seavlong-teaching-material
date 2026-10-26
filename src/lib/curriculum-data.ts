@@ -300,9 +300,9 @@ export const aiCurriculum: CurriculumData = {
     },
     {
       unit: 3,
-      title: "Geometry",
+      title: "Geometry & Trigonometry",
       description:
-        "Measurement, trigonometry applied in real-world contexts, and working with scale and units.",
+        "Lines, 3D solids, trigonometry, arcs and sectors, bearings and Voronoi diagrams.",
       slHours: 18,
       hlHours: 46,
       slTopics: [

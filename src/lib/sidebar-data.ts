@@ -86,6 +86,16 @@ const LESSON_TOPICS: Record<string, { sl: [string, string][]; hl?: [string, stri
       ["percentage-error", "Percentage Error"],
     ],
   },
+  "ai/3": {
+    sl: [
+      ["lines", "Lines in 2D"],
+      ["solids-3d", "3D Distance & Solids"],
+      ["trigonometry", "Trigonometry"],
+      ["arc-sector", "Arc Length & Sector Area"],
+      ["trig-context", "Trigonometry in Context"],
+      ["voronoi", "Voronoi Diagrams"],
+    ],
+  },
 };
 
 function build(data: CurriculumData): SidebarTree {
