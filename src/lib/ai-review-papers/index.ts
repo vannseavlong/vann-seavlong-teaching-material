@@ -17,6 +17,7 @@ import sequencesFinanceChain3 from "./sequencesFinanceChain3";
 import pastPaperPractice2 from "./pastPaperPractice2";
 import trigonometry from "./trigonometry";
 import arcSector from "./arcSector";
+import trig3d from "./trig3d";
 
 export const aiReviewPapers: AiReviewPaper[] = [
   arithmetic,
@@ -36,6 +37,7 @@ export const aiReviewPapers: AiReviewPaper[] = [
   pastPaperPractice2,
   trigonometry,
   arcSector,
+  trig3d,
 ];
 
 export const getAiReviewPaper = (slug: string) =>
