@@ -28,6 +28,8 @@ import probabilityPaper from "./probabilityPaper";
 import distributionsPaper from "./distributionsPaper";
 import derivativeTangent from "./derivativeTangent";
 import integrationArea from "./integrationArea";
+import trigContext from "./trigContext";
+import unit3Mixed from "./unit3Mixed";
 
 export const aiReviewPapers: AiReviewPaper[] = [
   arithmetic,
@@ -58,6 +60,8 @@ export const aiReviewPapers: AiReviewPaper[] = [
   distributionsPaper,
   derivativeTangent,
   integrationArea,
+  trigContext,
+  unit3Mixed,
 ];
 
 export const getAiReviewPaper = (slug: string) =>

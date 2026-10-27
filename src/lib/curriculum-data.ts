@@ -319,7 +319,11 @@ export const aiCurriculum: CurriculumData = {
       ],
       contents: [
         { title: "Lesson", status: "available", href: "/ai/unit-3/lesson" },
-        { title: "Practice Problems", status: "coming-soon" },
+        {
+          title: "Summative Revision Papers (Q&A)",
+          status: "available",
+          href: "/review/ai-sl/trigonometry",
+        },
       ],
     },
     {
