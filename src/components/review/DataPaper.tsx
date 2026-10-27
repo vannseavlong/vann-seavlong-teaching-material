@@ -81,7 +81,7 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
           note="GDC allowed. Attempt each part, then tap Show Answer to check against the worked solution."
           meta={`${total} marks · ${paper.questions.length} questions`}
           extra={
-            <Link href={`/ai/unit-1/lesson#${paper.lessonAnchor}`} className="a4-hide print:hidden text-sm text-sky-300 hover:underline">
+            <Link href={`${paper.lessonHref ?? "/ai/unit-1/lesson"}#${paper.lessonAnchor}`} className="a4-hide print:hidden text-sm text-sky-300 hover:underline">
               Revise the lesson →
             </Link>
           }

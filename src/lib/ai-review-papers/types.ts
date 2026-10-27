@@ -63,8 +63,10 @@ export type AiReviewPaper = {
   title: string;
   subtitle: string;
   minutes: number;
-  /** Lesson anchor on /ai/unit-1/lesson */
+  /** Lesson anchor on the lesson page */
   lessonAnchor: string;
+  /** Lesson page path; defaults to /ai/unit-1/lesson */
+  lessonHref?: string;
   /** Credit line for questions adapted from another author; shown above the exercise and in the PDF export */
   source?: string;
   questions: ReviewQuestion[];
