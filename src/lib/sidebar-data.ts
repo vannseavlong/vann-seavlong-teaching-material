@@ -86,6 +86,32 @@ const LESSON_TOPICS: Record<string, { sl: [string, string][]; hl?: [string, stri
       ["percentage-error", "Percentage Error"],
     ],
   },
+  "ai/2": {
+    sl: [
+      ["functions", "Functions, notation, domain and range"],
+      ["linear-model", "Linear model"],
+      ["quadratic", "Quadratic model"],
+      ["exponential", "Exponential and logarithmic models"],
+      ["other-models", "Other models and graph features"],
+    ],
+  },
+  "ai/4": {
+    sl: [
+      ["data", "Sampling and data"],
+      ["measures", "Measures of centre and spread"],
+      ["regression", "Correlation and regression"],
+      ["probability", "Probability"],
+      ["distributions", "Random variables and distributions"],
+      ["tests", "Spearman, chi-squared and t-test"],
+    ],
+  },
+  "ai/5": {
+    sl: [
+      ["derivative", "Derivative of x^n"],
+      ["integration", "Integration and area"],
+      ["applications", "Stationary points and optimisation"],
+    ],
+  },
   "ai/3": {
     sl: [
       ["lines", "Lines in 2D"],

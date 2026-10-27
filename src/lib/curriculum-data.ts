@@ -282,11 +282,11 @@ export const aiCurriculum: CurriculumData = {
       slHours: 31,
       hlHours: 42,
       slTopics: [
-        "Linear models",
-        "Quadratic models",
-        "Exponential models",
-        "Interpreting graphs",
-        "Using models for prediction",
+        "Functions, notation, domain and range",
+        "Linear model",
+        "Quadratic model",
+        "Exponential and logarithmic models",
+        "Other models and graph features",
       ],
       hlTopics: [
         "Complex real-world scenarios",
@@ -294,7 +294,7 @@ export const aiCurriculum: CurriculumData = {
         "Advanced modelling techniques",
       ],
       contents: [
-        { title: "Lesson", status: "coming-soon" },
+        { title: "Lesson", status: "available", href: "/ai/unit-2/lesson" },
         { title: "Practice Problems", status: "coming-soon" },
       ],
     },
@@ -330,19 +330,18 @@ export const aiCurriculum: CurriculumData = {
       slHours: 36,
       hlHours: 52,
       slTopics: [
-        "Data collection",
-        "Mean, variance & standard deviation",
-        "Correlation & regression",
-        "Probability rules",
+        "Sampling and data",
+        "Measures of centre and spread",
+        "Correlation and regression",
+        "Probability",
+        "Random variables and distributions",
+        "Spearman, chi-squared and t-test",
       ],
       hlTopics: [
-        "Probability distributions",
-        "Normal distribution",
-        "Hypothesis testing",
         "Statistical inference",
       ],
       contents: [
-        { title: "Lesson", status: "coming-soon" },
+        { title: "Lesson", status: "available", href: "/ai/unit-4/lesson" },
         { title: "Practice Problems", status: "coming-soon" },
       ],
     },
@@ -354,8 +353,9 @@ export const aiCurriculum: CurriculumData = {
       slHours: 19,
       hlHours: 41,
       slTopics: [
-        "Calculator-based modelling",
-        "Data analysis with technology",
+        "Derivative of x^n",
+        "Integration and area",
+        "Stationary points and optimisation",
       ],
       hlTopics: [
         "Rate of change",
@@ -363,7 +363,7 @@ export const aiCurriculum: CurriculumData = {
         "Light calculus applications",
       ],
       contents: [
-        { title: "Lesson", status: "coming-soon" },
+        { title: "Lesson", status: "available", href: "/ai/unit-5/lesson" },
         { title: "Practice Problems", status: "coming-soon" },
       ],
     },
