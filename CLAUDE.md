@@ -290,10 +290,10 @@ Red `HighlightBox` (general binomial series). One `FormulaBox` (negative/fractio
 | AA Unit 5: Statistics & Probability | ⏳ | ⏳ | ⏳ |
 | AA Unit 6: Calculus | ⏳ | ⏳ | ⏳ |
 | AI Unit 1: Number & Algebra | 🟡 Topics 1–2 + summative revision (sequences, rounding, bounds, % error) | ✅ Financial (interactive) + 7 exportable review papers | ⏳ |
-| AI Unit 2: Functions & Modelling | ⏳ | ⏳ | ⏳ |
+| AI Unit 2: Functions & Modelling | 🟡 Functions, linear, quadratic (2.5), exponential and log form (1.5), other models (SL, awaiting review) | ⏳ | ⏳ |
 | AI Unit 3: Geometry & Trigonometry | 🟡 Lines, 3D & solids, trigonometry, arc & sector, trig in context, Voronoi (SL, awaiting review) | ⏳ | ⏳ |
-| AI Unit 4: Statistics & Probability | ⏳ | ⏳ | ⏳ |
-| AI Unit 5: Calculus & Technology | ⏳ | ⏳ | ⏳ |
+| AI Unit 4: Statistics & Probability | 🟡 Data, measures (4.2, 4.3), regression, probability (4.5, 4.6), distributions (4.7, 4.8), tests (SL, awaiting review) | ⏳ | ⏳ |
+| AI Unit 5: Calculus & Technology | 🟡 Derivative (5.3), integration and area (5.5), trapezoidal rule (5.8), optimisation (SL, awaiting review) | ⏳ | ⏳ |
 
 ## Notation: follow the IB AI SL formula booklet
 Use the booklet's symbols in all AI lessons, papers and practice: `u_n = u_1 + (n-1)d`, `S_n`, `u_n = u_1 r^{n-1}`, `FV = PV(1 + r/(100k))^{kn}` (k = periods per year, n = years, r% nominal annual rate), `\varepsilon = |(v_A - v_E)/v_E| \times 100\%` (v_E exact, v_A approximate), `a^x = b \Leftrightarrow x = \log_a b`. The booklet prints no sum to infinity, so it stays labelled as an extension. GDC TVM labels (N, I%, PV, PMT, FV, P/Y, C/Y) are used only in GDC steps.

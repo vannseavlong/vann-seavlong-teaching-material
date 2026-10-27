@@ -51,7 +51,34 @@ function LessonHero() {
   );
 }
 
-const SUMMARY: { title: string; formulas: string[] }[] = [];
+const SUMMARY: { title: string; formulas: string[] }[] = [
+  {
+    title: "Lines and models",
+    formulas: [
+      "y = mx + c,\\; ax + by + d = 0,\\; y - y_1 = m(x - x_1)",
+      "m = \\dfrac{y_2 - y_1}{x_2 - x_1}",
+    ],
+  },
+  {
+    title: "Quadratic",
+    formulas: [
+      "f(x) = ax^2 + bx + c \\Rightarrow x = -\\dfrac{b}{2a}",
+    ],
+  },
+  {
+    title: "Exponential",
+    formulas: [
+      "f(x) = a \\times b^{x},\\; b = 1 + \\dfrac{r}{100}",
+      "a^x = b \\Leftrightarrow x = \\log_a b",
+    ],
+  },
+  {
+    title: "Sinusoidal",
+    formulas: [
+      "f(x) = a\\sin(b(x - c)) + d,\\; \\text{period} = \\dfrac{360}{b}",
+    ],
+  },
+];
 
 function UnitSummary() {
   return (

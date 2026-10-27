@@ -349,7 +349,7 @@ export const aiCurriculum: CurriculumData = {
       unit: 5,
       title: "Calculus & Technology",
       description:
-        "Calculator-based modelling and data analysis at SL. HL introduces rate of change and simple optimization using calculus.",
+        "Derivatives, integration and area, the trapezoidal rule, stationary points and optimisation. Booklet Topic 5.",
       slHours: 19,
       hlHours: 41,
       slTopics: [

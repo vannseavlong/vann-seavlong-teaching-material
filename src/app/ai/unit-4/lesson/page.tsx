@@ -52,7 +52,36 @@ function LessonHero() {
   );
 }
 
-const SUMMARY: { title: string; formulas: string[] }[] = [];
+const SUMMARY: { title: string; formulas: string[] }[] = [
+  {
+    title: "Measures",
+    formulas: [
+      "\\bar{x} = \\dfrac{\\sum f_i x_i}{n},\\; n = \\sum f_i",
+      "\\text{IQR} = Q_3 - Q_1",
+    ],
+  },
+  {
+    title: "Probability",
+    formulas: [
+      "P(A) = \\dfrac{n(A)}{n(U)},\\; P(A) + P(A') = 1",
+      "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)",
+    ],
+  },
+  {
+    title: "Conditional and independent",
+    formulas: [
+      "P(A \\mid B) = \\dfrac{P(A \\cap B)}{P(B)}",
+      "P(A \\cap B) = P(A)\\,P(B)",
+    ],
+  },
+  {
+    title: "Distributions",
+    formulas: [
+      "E(X) = \\sum x_i\\,P(X = x_i)",
+      "X \\sim B(n, p):\\; E(X) = np,\\; \\mathrm{Var}(X) = np(1 - p)",
+    ],
+  },
+];
 
 function UnitSummary() {
   return (

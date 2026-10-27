@@ -49,7 +49,35 @@ function LessonHero() {
   );
 }
 
-const SUMMARY: { title: string; formulas: string[] }[] = [];
+const SUMMARY: { title: string; formulas: string[] }[] = [
+  {
+    title: "Derivative",
+    formulas: [
+      "f(x) = x^n \\Rightarrow f'(x) = nx^{n-1}",
+      "y - f(a) = f'(a)(x - a)",
+    ],
+  },
+  {
+    title: "Integral and area",
+    formulas: [
+      "\\int x^n\\,dx = \\dfrac{x^{n+1}}{n+1} + C,\\; n \\ne -1",
+      "A = \\int_a^b y\\,dx",
+    ],
+  },
+  {
+    title: "Trapezoidal rule",
+    formulas: [
+      "\\int_a^b y\\,dx \\approx \\tfrac12 h\\bigl((y_0 + y_n) + 2(y_1 + \\dots + y_{n-1})\\bigr)",
+      "h = \\dfrac{b - a}{n}",
+    ],
+  },
+  {
+    title: "Stationary points",
+    formulas: [
+      "f'(x) = 0",
+    ],
+  },
+];
 
 function UnitSummary() {
   return (
