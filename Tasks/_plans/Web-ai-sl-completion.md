@@ -69,3 +69,37 @@ For every booklet row: a `FormulaRow` (or equivalent) in a lesson section in boo
 
 ## Out of scope
 HL content, interactive reveal-key practice for Units 2 to 5, mock exam for AA, redesign of lesson components.
+
+## Coverage matrix (2026-10-28, keyword audit of lessons and papers)
+Each row is matched by its formula text in a lesson file and a paper file, so it shows the formula is present, not that it is taught well. Read the pages before approving.
+
+| Booklet row | Lesson | Paper |
+|---|---|---|
+| 1.2 AP u_n, S_n | yes | yes |
+| 1.3 GP u_n, S_n | yes | yes |
+| 1.4 FV compound interest | yes | yes |
+| 1.5 a^x=b <=> log | yes | yes |
+| 1.6 epsilon | yes | yes |
+| 2.1 lines (3 forms, gradient) | yes | yes |
+| 2.5 axis x=-b/2a | yes | yes |
+| PL parallelogram | yes | yes |
+| PL triangle | yes | yes |
+| PL trapezoid | yes | yes |
+| PL circle/circumference | yes | yes |
+| PL cuboid, cylinder, prism | yes | yes |
+| PL 2D distance, midpoint | yes | yes |
+| 3.1 3D distance, midpoint | yes | yes |
+| 3.2 pyramid, cone, sphere | yes | yes |
+| 3.2 sine, cosine rule, area | yes | yes |
+| 3.4 arc, sector | yes | yes |
+| 4.2 IQR | yes | yes |
+| 4.3 mean from table | yes | yes |
+| 4.5 P(A)=n(A)/n(U), complement | yes | yes |
+| 4.6 union, exclusive | yes | yes |
+| 4.6 conditional | yes | yes |
+| 4.6 independent | yes | yes |
+| 4.7 E(X) | yes | yes |
+| 4.8 binomial, np, np(1-p) | yes | yes |
+| 5.3 derivative x^n | yes | yes |
+| 5.5 integral x^n, area | yes | yes |
+| 5.8 trapezoidal rule | yes | yes |

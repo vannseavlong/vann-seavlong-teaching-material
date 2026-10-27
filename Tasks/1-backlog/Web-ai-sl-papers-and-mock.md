@@ -24,3 +24,7 @@ Exportable Q&A papers in the style of `Tasks/_plans/Web-ai-ib-papers.md`, one ta
 
 ## Rules
 No copying of IB or Corbettmaths questions; verify every answer numerically; no em-dashes; booklet symbols.
+
+## Status (2026-10-28)
+Done and in testing: geometric-log, linear-quadratic, exponential-models, lines-voronoi, solids-3d, data-measures, probability, distributions, derivative-tangent, integration-area (sessions 18 to 27, 3 questions each, about 30 marks).
+Still to do: a Unit 3 mixed Section B paper, longer Section B questions (each paper has one extended question of 9 to 14 marks, not the 15 to 19 of the IB style), Mock set 1 (Paper 1 and Paper 2), and a read-through by the owner of every answer.

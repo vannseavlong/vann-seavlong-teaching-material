@@ -53,6 +53,15 @@ export default function Solids3DSection() {
         </p>
       </HighlightBox>
 
+      <FormulaBox title="Prior learning: areas and prisms (booklet Topic 3)">
+        <FormulaRow label="Parallelogram" math="A = bh" />
+        <FormulaRow label="Triangle" math="A = \tfrac12 bh" />
+        <FormulaRow label="Trapezoid" math="A = \tfrac12 (a + b)h \quad (a, b \text{ parallel sides})" />
+        <FormulaRow label="Circle area, circumference" math="A = \pi r^2,\quad C = 2\pi r" />
+        <FormulaRow label="Cuboid" math="V = lwh" />
+        <FormulaRow label="Prism" math="V = Ah \quad (A = \text{area of cross-section})" />
+      </FormulaBox>
+
       <FormulaBox title="Distance and midpoint in 3D">
         <FormulaRow label="Distance AB" math="d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}" />
         <FormulaRow label="Midpoint of AB" math="\left(\dfrac{x_1+x_2}{2},\ \dfrac{y_1+y_2}{2},\ \dfrac{z_1+z_2}{2}\right)" />

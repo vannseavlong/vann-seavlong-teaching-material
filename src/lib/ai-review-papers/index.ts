@@ -18,6 +18,16 @@ import pastPaperPractice2 from "./pastPaperPractice2";
 import trigonometry from "./trigonometry";
 import arcSector from "./arcSector";
 import trig3d from "./trig3d";
+import geometricLog from "./geometricLog";
+import linearQuadratic from "./linearQuadratic";
+import exponentialModels from "./exponentialModels";
+import linesVoronoi from "./linesVoronoi";
+import solidsMeasure from "./solidsMeasure";
+import dataMeasures from "./dataMeasures";
+import probabilityPaper from "./probabilityPaper";
+import distributionsPaper from "./distributionsPaper";
+import derivativeTangent from "./derivativeTangent";
+import integrationArea from "./integrationArea";
 
 export const aiReviewPapers: AiReviewPaper[] = [
   arithmetic,
@@ -38,6 +48,16 @@ export const aiReviewPapers: AiReviewPaper[] = [
   trigonometry,
   arcSector,
   trig3d,
+  geometricLog,
+  linearQuadratic,
+  exponentialModels,
+  linesVoronoi,
+  solidsMeasure,
+  dataMeasures,
+  probabilityPaper,
+  distributionsPaper,
+  derivativeTangent,
+  integrationArea,
 ];
 
 export const getAiReviewPaper = (slug: string) =>
