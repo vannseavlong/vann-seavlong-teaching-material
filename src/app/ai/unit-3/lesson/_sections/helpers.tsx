@@ -20,6 +20,14 @@ export function SLTag() {
   );
 }
 
+export function HLTag() {
+  return (
+    <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-danger-bg text-danger-text">
+      HL
+    </span>
+  );
+}
+
 /** Frame for an inline SVG visual. Colour is allowed inside visuals only. */
 export function Diagram({
   caption,

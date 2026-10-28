@@ -38,6 +38,14 @@ const PRACTICE_TOPICS: Record<string, { id: string; title: string }[]> = {
     { id: "5", title: "Sequences & Patterns" },
   ],
   "ai/1": [{ id: "2", title: "Financial Mathematics" }],
+  "ai/3": [
+    { id: "1", title: "Lines in 2D" },
+    { id: "2", title: "3D Distance & Solids" },
+    { id: "3", title: "Trigonometry" },
+    { id: "4", title: "Arc Length & Sector Area" },
+    { id: "5", title: "Trigonometry in Context" },
+    { id: "6", title: "Voronoi Diagrams" },
+  ],
 };
 
 /**
@@ -120,6 +128,10 @@ const LESSON_TOPICS: Record<string, { sl: [string, string][]; hl?: [string, stri
       ["arc-sector", "Arc Length & Sector Area"],
       ["trig-context", "Trigonometry in Context"],
       ["voronoi", "Voronoi Diagrams"],
+    ],
+    hl: [
+      ["graph-theory", "Graph Theory"],
+      ["vectors", "Vectors in 3D"],
     ],
   },
 };

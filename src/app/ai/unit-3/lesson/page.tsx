@@ -1,18 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { InlineMath } from "@/components/ui/Math";
-import { SLTag } from "./_sections/helpers";
+import { SLTag, HLTag } from "./_sections/helpers";
 import LinesSection from "./_sections/Lines";
 import Solids3DSection from "./_sections/Solids3D";
 import TrigonometrySection from "./_sections/Trigonometry";
 import ArcSectorSection from "./_sections/ArcSector";
 import TrigContextSection from "./_sections/TrigContext";
 import VoronoiSection from "./_sections/Voronoi";
+import GraphTheorySection from "./_sections/GraphTheory";
+import VectorsSection from "./_sections/Vectors";
 
 export const metadata: Metadata = {
   title: "Unit 3: Geometry & Trigonometry | AI Lesson | IB Mathematics AI",
   description:
-    "Lesson notes for IB Mathematics AI SL Unit 3: lines in 2D, 3D distance and solids, trigonometry, arc length and sector area, trigonometry in context, and Voronoi diagrams.",
+    "Lesson notes for IB Mathematics AI SL Unit 3: lines in 2D, 3D distance and solids, trigonometry, arc length and sector area, trigonometry in context and Voronoi diagrams, plus HL graph theory and vectors.",
 };
 
 function LessonHero() {
@@ -46,7 +48,7 @@ function LessonHero() {
         </p>
 
         <div className="flex gap-6 text-sm text-ai-light flex-wrap">
-          <span>6 topics</span>
+          <span>6 SL topics, 2 HL topics</span>
           <span>Set the GDC to DEGREE mode before any trig question</span>
         </div>
       </div>
@@ -54,27 +56,17 @@ function LessonHero() {
   );
 }
 
-function ComingSoonCard() {
-  const upcomingHL = ["3D geometry & spatial reasoning", "Graph theory"];
+function HLDivider() {
   return (
-    <section className="py-14 px-6 bg-slate-50 border-t border-slate-200">
-      <div className="max-w-[1000px] mx-auto">
-        <span className="inline-block text-xs font-bold uppercase tracking-wider text-slate-500 bg-white border border-slate-200 px-3 py-1 rounded mb-3">
-          Rest of Unit 3
-        </span>
-        <h2 className="text-xl font-bold text-navy-900 mb-3">HL topics are not written yet</h2>
-        <div className="flex flex-wrap gap-2">
-          {upcomingHL.map((t) => (
-            <span
-              key={t}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-white border border-danger-light text-danger-text/60 italic"
-            >
-              HL: {t} (coming soon)
-            </span>
-          ))}
-        </div>
+    <div className="bg-danger-bg border-y border-danger-light py-6 px-6">
+      <div className="max-w-[1000px] mx-auto flex items-center gap-3 flex-wrap">
+        <HLTag />
+        <p className="font-bold text-danger-text">Higher Level topics</p>
+        <p className="text-sm text-slate-500">
+          Not in the SL course. Radian measure and matrices are not written yet.
+        </p>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -109,6 +101,20 @@ const SUMMARY = [
       "l = \\dfrac{\\theta}{360} \\times 2\\pi r,\\; A = \\dfrac{\\theta}{360} \\times \\pi r^2",
       "\\text{back bearing} = \\text{bearing} \\pm 180°",
       "\\text{Voronoi edge: } m = -\\dfrac{1}{m_{PQ}} \\text{ through the midpoint}",
+    ],
+  },
+  {
+    title: "HL: graph theory",
+    formulas: [
+      "\\sum \\deg(v) = 2 \\times \\text{edges}",
+      "(\\mathbf{A}^n)_{ij} = \\text{walks of length } n \\text{ from } i \\text{ to } j",
+    ],
+  },
+  {
+    title: "HL: vectors",
+    formulas: [
+      "\\cos\\theta = \\dfrac{\\mathbf{a}\\cdot\\mathbf{b}}{|\\mathbf{a}||\\mathbf{b}|}",
+      "\\mathbf{r} = \\mathbf{a} + \\lambda\\mathbf{d}",
     ],
   },
 ];
@@ -159,7 +165,9 @@ export default function Page() {
       <ArcSectorSection />
       <TrigContextSection />
       <VoronoiSection />
-      <ComingSoonCard />
+      <HLDivider />
+      <GraphTheorySection />
+      <VectorsSection />
       <UnitSummary />
     </main>
   );

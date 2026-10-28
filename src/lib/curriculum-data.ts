@@ -314,11 +314,12 @@ export const aiCurriculum: CurriculumData = {
         "Voronoi diagrams",
       ],
       hlTopics: [
-        "3D geometry & spatial reasoning",
         "Graph theory",
+        "Vectors in 3D",
       ],
       contents: [
         { title: "Lesson", status: "available", href: "/ai/unit-3/lesson" },
+        { title: "Practice Problems", status: "available", href: "/ai/unit-3/practice/1" },
         {
           title: "Summative Revision Papers (Q&A)",
           status: "available",
