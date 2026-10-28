@@ -291,7 +291,7 @@ Red `HighlightBox` (general binomial series). One `FormulaBox` (negative/fractio
 | AA Unit 6: Calculus | ⏳ | ⏳ | ⏳ |
 | AI Unit 1: Number & Algebra | 🟡 Topics 1–2 + summative revision (sequences, rounding, bounds, % error) | ✅ Financial (interactive) + 7 exportable review papers | ⏳ |
 | AI Unit 2: Functions & Modelling | 🟡 Functions, linear, quadratic (2.5), exponential and log form (1.5), other models (SL, awaiting review) | ⏳ | ⏳ |
-| AI Unit 3: Geometry & Trigonometry | 🟡 Lines, 3D & solids, trigonometry, arc & sector, trig in context, Voronoi (SL) + HL graph theory and vectors (awaiting review) | ✅ Interactive practice ids 1–6 + 7 exportable review papers (trigonometry, arc & sector, 3D, lines & Voronoi, solids, trig in context, mixed) | ⏳ |
+| AI Unit 3: Geometry & Trigonometry | 🟡 Lines, 3D & solids, trigonometry, arc & sector, trig in context, Voronoi (SL) + HL graph theory and vectors (awaiting review) | ✅ Interactive practice ids 1–8 + 9 exportable review papers (trigonometry, arc & sector, 3D, lines & Voronoi, solids, trig in context, mixed, HL graph theory, HL vectors) | ⏳ |
 | AI Unit 4: Statistics & Probability | 🟡 Data, measures (4.2, 4.3), regression, probability (4.5, 4.6), distributions (4.7, 4.8), tests (SL, awaiting review) | ⏳ | ⏳ |
 | AI Unit 5: Calculus & Technology | 🟡 Derivative (5.3), integration and area (5.5), trapezoidal rule (5.8), optimisation (SL, awaiting review) | ⏳ | ⏳ |
 

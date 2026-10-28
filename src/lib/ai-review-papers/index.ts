@@ -30,6 +30,8 @@ import derivativeTangent from "./derivativeTangent";
 import integrationArea from "./integrationArea";
 import trigContext from "./trigContext";
 import unit3Mixed from "./unit3Mixed";
+import graphTheory from "./graphTheory";
+import vectors3d from "./vectors3d";
 
 export const aiReviewPapers: AiReviewPaper[] = [
   arithmetic,
@@ -62,6 +64,8 @@ export const aiReviewPapers: AiReviewPaper[] = [
   integrationArea,
   trigContext,
   unit3Mixed,
+  graphTheory,
+  vectors3d,
 ];
 
 export const getAiReviewPaper = (slug: string) =>

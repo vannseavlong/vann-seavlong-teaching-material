@@ -45,6 +45,8 @@ const PRACTICE_TOPICS: Record<string, { id: string; title: string }[]> = {
     { id: "4", title: "Arc Length & Sector Area" },
     { id: "5", title: "Trigonometry in Context" },
     { id: "6", title: "Voronoi Diagrams" },
+    { id: "7", title: "Graph Theory (HL)" },
+    { id: "8", title: "Vectors in 3D (HL)" },
   ],
 };
 

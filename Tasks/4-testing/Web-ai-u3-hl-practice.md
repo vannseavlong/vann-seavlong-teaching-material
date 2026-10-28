@@ -4,11 +4,11 @@
 - **Owner:** SNLRLONG
 - **Started / updated:** 2026-10-28 / 2026-10-28
 - **Tier:** T2 · new route (practice/[id]), edits shared sidebar and curriculum data
-- **Touches:** src/app/ai/unit-3/lesson/**, src/app/ai/unit-3/practice/**, src/lib/curriculum-data.ts, src/lib/sidebar-data.ts, CLAUDE.md (tracker row)
+- **Touches:** src/lib/ai-review-papers/**, src/app/ai/unit-3/lesson/**, src/app/ai/unit-3/practice/**, src/lib/curriculum-data.ts, src/lib/sidebar-data.ts, CLAUDE.md (tracker row)
 - **Plan:** Tasks/_plans/Web-ai-sl-completion.md
 
 ## Goal
-HL graph theory and HL vectors sections on the Unit 3 lesson; interactive reveal-key practice ids 1 to 6 (30 problems); confirm the 18 SL hours.
+HL graph theory and HL vectors sections on the Unit 3 lesson; interactive reveal-key practice ids 1 to 8 (40 problems; 7 graph theory, 8 vectors added 2026-10-28) and exportable papers graph-theory (session 30) and vectors-3d (session 31); confirm the 18 SL hours.
 
 ## Decisions
 - SL hours: 18 confirmed by a public summary of the AI guide (other sources agree). HL hours left at 46: sources disagree (46 or 35), not confirmed.
