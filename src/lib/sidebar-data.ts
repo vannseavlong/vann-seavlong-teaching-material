@@ -37,6 +37,15 @@ const PRACTICE_TOPICS: Record<string, { id: string; title: string }[]> = {
     { id: "4", title: "Chemistry G10 NaHCO3" },
     { id: "5", title: "Sequences & Patterns" },
   ],
+  "aa/3": [
+    { id: "1", title: "Trig Ratios & Unit Circle" },
+    { id: "2", title: "Sine & Cosine Rules" },
+    { id: "3", title: "Trig Graphs" },
+    { id: "4", title: "Trig Equations" },
+    { id: "5", title: "Trig Identities (HL)" },
+    { id: "6", title: "Complex Trig Equations (HL)" },
+    { id: "7", title: "Modelling with Trigonometry (HL)" },
+  ],
   "ai/1": [{ id: "2", title: "Financial Mathematics" }],
   "ai/3": [
     { id: "1", title: "Lines in 2D" },
