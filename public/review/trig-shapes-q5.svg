@@ -1,0 +1,15 @@
+<svg width="580" height="290" viewBox="0 0 580 290" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="580" height="290" fill="white"/>
+<path d="M110.00 245.00L374.00 245.00L344.91 38.03L191.19 28.74Z" fill="#DBEAFE" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
+<path d="M110.00 245.00L344.91 38.03" stroke="#63738C" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<path d="M370.10 217.27L368.69 217.51L367.29 217.81L365.91 218.19L364.55 218.64L363.22 219.16L361.91 219.74L360.64 220.39L359.40 221.11L358.20 221.88L357.04 222.72L355.92 223.62L354.85 224.57L353.83 225.57L352.87 226.63L351.96 227.73L351.10 228.88L350.31 230.07L349.58 231.30L348.91 232.57L348.31 233.87L347.77 235.19L347.31 236.55L346.91 237.92L346.58 239.32L346.33 240.72L346.15 242.14L346.04 243.57L346.00 245.00" stroke="#DB2626" stroke-width="2" stroke-linejoin="round"/>
+<text fill="#DB2626" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="313" y="224.5">82&#xb0;</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="220" y="272.5">120 m</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="367" y="147">95 m</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="250" y="22.8">70 m</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="98.6" y="142.3">105 m</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="90.5" y="258.5">A</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="383" y="258.5">B</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="353.4" y="35.5">C</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="171.7" y="26.2">D</tspan></text>
+</svg>

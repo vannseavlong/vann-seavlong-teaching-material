@@ -1,0 +1,12 @@
+<svg width="580" height="260" viewBox="0 0 580 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="580" height="260" fill="white"/>
+<path d="M150.00 215.00L374.00 215.00L437.13 85.57L213.13 85.57Z" fill="#DBEAFE" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
+<path d="M180.00 215.00L179.96 213.48L179.85 211.96L179.65 210.45L179.38 208.95L179.04 207.47L178.62 206.00L178.13 204.56L177.56 203.15L176.92 201.76L176.22 200.41L175.44 199.10L174.60 197.83L173.70 196.61L172.73 195.43L171.71 194.30L170.63 193.22L169.50 192.20L168.32 191.24L167.09 190.34L165.82 189.51L164.50 188.74L163.15 188.04" stroke="#DB2626" stroke-width="2" stroke-linejoin="round"/>
+<text fill="#DB2626" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="182.5" y="206.5">64&#xb0;</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="244.5" y="242.5">14 m</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="146" y="155.7">9 m</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="128.5" y="224.5">A</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="385" y="224.5">B</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="447.6" y="87">C</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="191.6" y="87">D</tspan></text>
+</svg>

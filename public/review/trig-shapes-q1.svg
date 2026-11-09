@@ -1,0 +1,9 @@
+<svg width="580" height="240" viewBox="0 0 580 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="580" height="240" fill="white"/>
+<path d="M150.00 195.00L430.00 195.00L290.00 81.86Z" fill="#DBEAFE" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="268.5" y="222.5">14 cm</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="182" y="133.5">9 cm</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="362" y="133.5">9 cm</tspan></text>
+<path d="M214 134.43L226 142.43" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
+<path d="M354 142.43L366 134.43" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
+</svg>

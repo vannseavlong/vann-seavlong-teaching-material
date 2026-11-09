@@ -18,6 +18,7 @@ const paper: AiReviewPaper = {
     {
       n: 1, section: "A",
       instruction: "In this question, set the GDC to degree mode and give answers correct to three significant figures.",
+      figure: { src: "/review/trig-shapes-q1.svg", alt: "Isosceles triangle with base 14 cm and equal sides 9 cm", width: 580, height: 240 },
       ctx: [m`A triangular sign is isosceles. Its base is \(14\ \text{cm}\) and each of its equal sides is \(9\ \text{cm}\).`],
       parts: [
         part("a", 2, m`Find the size of a base angle of the sign.`, [m`\[\cos\theta = \dfrac{7}{9} \Rightarrow \theta = 38.9^{\circ}\]`], "38.9°", "Marks: (M1) right-angled triangle with half the base 7 and hypotenuse 9, (A1) 38.9."),
@@ -28,6 +29,7 @@ const paper: AiReviewPaper = {
     {
       n: 2, section: "A",
       instruction: "In this question, give answers correct to three significant figures.",
+      figure: { src: "/review/trig-shapes-q2.svg", alt: "Parallelogram ABCD with AB 14 m, AD 9 m and angle DAB 64 degrees", width: 580, height: 260 },
       ctx: [m`A field \(ABCD\) is a parallelogram with \(AB = 14\ \text{m}\) and \(AD = 9\ \text{m}\). Angle \(DAB = 64^{\circ}\).`],
       parts: [
         part("a", 2, m`Calculate the area of the field.`, [m`\[A = 14 \times 9 \times \sin 64^{\circ} = 113\ \text{m}^2\]`], "113 m²", "Marks: (M1) ab sin(theta), (A1) 113."),
@@ -37,6 +39,7 @@ const paper: AiReviewPaper = {
     {
       n: 3, section: "A",
       instruction: "In this question, give answers correct to three significant figures.",
+      figure: { src: "/review/trig-shapes-q3.svg", alt: "Regular octagon with a dashed line of 15 cm from the centre O to a corner", width: 580, height: 290 },
       ctx: [m`A table top is a regular octagon. The distance from the centre to each corner is \(15\ \text{cm}\).`],
       parts: [
         part("a", 2, m`Find the length of one side of the table top.`, [m`\[s = 2(15)\sin 22.5^{\circ} = 11.5\ \text{cm}\]`], "11.5 cm", "Marks: (M1) half the central angle 22.5, (A1) 11.5."),
@@ -47,6 +50,7 @@ const paper: AiReviewPaper = {
     {
       n: 4, section: "A",
       instruction: "In this question, give answers correct to three significant figures.",
+      figure: { src: "/review/trig-shapes-q4.svg", alt: "Rectangle 10 m long and 6 m wide with a semicircle of diameter 6 m on one end", width: 580, height: 290 },
       ctx: [m`A garden bed is a rectangle \(10\ \text{m}\) long and \(6\ \text{m}\) wide with a semicircle added on one of the \(6\ \text{m}\) ends. The diameter of the semicircle is \(6\ \text{m}\).`],
       parts: [
         part("a", 3, m`Calculate the area of the bed.`, [m`\[A = 10 \times 6 + \tfrac12\pi(3^2) = 60 + 14.14\]`, m`\[A = 74.1\ \text{m}^2\]`], "74.1 m²", "Marks: (A1) 60, (M1) half circle area, (A1) 74.1."),
@@ -56,6 +60,7 @@ const paper: AiReviewPaper = {
     {
       n: 5, section: "B",
       instruction: "In this question, set the GDC to degree mode, store values for later parts and give answers correct to three significant figures.",
+      figure: { src: "/review/trig-shapes-q5.svg", alt: "Quadrilateral ABCD with AB 120 m, BC 95 m, CD 70 m, DA 105 m, angle ABC 82 degrees and the diagonal AC dashed", width: 580, height: 290 },
       ctx: [m`A plot of land \(ABCD\) has \(AB = 120\ \text{m}\), \(BC = 95\ \text{m}\), \(CD = 70\ \text{m}\) and \(DA = 105\ \text{m}\). Angle \(ABC = 82^{\circ}\). The diagonal \(AC\) is drawn (diagram not to scale).`],
       parts: [
         part("a", 3, m`Find the length of \(AC\).`, [m`\[AC^2 = 120^2 + 95^2 - 2(120)(95)\cos 82^{\circ}\]`, m`\[AC^2 = 20252 \Rightarrow AC = 142\ \text{m}\]`], "142 m", "Marks: (M1) cosine rule, (A1) correct substitution, (A1) 142."),
@@ -68,6 +73,7 @@ const paper: AiReviewPaper = {
     {
       n: 6, section: "B",
       instruction: "In this question, give answers correct to three significant figures.",
+      figure: { src: "/review/trig-shapes-q6.svg", alt: "Sector OAB of radius 12 m and angle 70 degrees joined to triangle OBC with OC 18 m and angle BOC 55 degrees, chord AB dashed", width: 580, height: 270 },
       ctx: [m`A park bed has a sector \(OAB\) with centre \(O\), radius \(12\ \text{m}\) and angle \(AOB = 70^{\circ}\). A triangle \(OBC\) is joined to the sector along the radius \(OB\), with \(OC = 18\ \text{m}\) and angle \(BOC = 55^{\circ}\). The chord \(AB\) cuts a segment from the sector (diagram not to scale).`],
       parts: [
         part("a", 2, m`Find the area of the sector \(OAB\).`, [m`\[A = \dfrac{70}{360}\pi(12^2) = 88.0\ \text{m}^2\]`], "88.0 m²", "Marks: (M1) fraction 70/360 of the circle, (A1) 88.0."),

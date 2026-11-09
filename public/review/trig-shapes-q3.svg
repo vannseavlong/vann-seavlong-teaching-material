@@ -1,0 +1,8 @@
+<svg width="580" height="290" viewBox="0 0 580 290" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="580" height="290" fill="white"/>
+<path d="M400.87 99.08L335.92 34.13L244.08 34.13L179.13 99.08L179.13 190.92L244.08 255.87L335.92 255.87L400.87 190.92Z" fill="#DBEAFE" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
+<path d="M290.00 145.00L400.87 99.08" stroke="#63738C" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<circle cx="290" cy="145" r="3.5" fill="#0F1729"/>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="270" y="162.5">O</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="314" y="91.5">15 cm</tspan></text>
+</svg>

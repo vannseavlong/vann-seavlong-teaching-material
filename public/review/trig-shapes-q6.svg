@@ -1,0 +1,16 @@
+<svg width="580" height="270" viewBox="0 0 580 270" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="580" height="270" fill="white"/>
+<path d="M200.00 235.00L344.00 235.00L343.81 227.67L343.25 220.36L342.32 213.09L341.03 205.88L339.36 198.74L337.34 191.70L334.95 184.77L332.22 177.96L329.15 171.31L325.74 164.82L322.01 158.51L317.96 152.40L313.60 146.51L308.95 140.84L304.02 135.42L298.82 130.26L293.36 125.37L287.66 120.76L281.74 116.44L275.60 112.44L269.26 108.75L262.75 105.39L256.07 102.37L249.25 99.68Z" fill="#DBEAFE" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
+<path d="M200.00 235.00L249.25 99.68L76.11 58.06Z" fill="#EDF2FC" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
+<path d="M344.00 235.00L249.25 99.68" stroke="#63738C" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<path d="M230.00 235.00L229.96 233.47L229.84 231.95L229.65 230.44L229.38 228.93L229.03 227.45L228.61 225.98L228.12 224.53L227.55 223.12L226.91 221.73L226.20 220.38L225.42 219.07L224.57 217.79L223.67 216.56L222.70 215.38L221.67 214.25L220.59 213.18L219.45 212.16L218.26 211.20L217.03 210.30L215.75 209.47L214.43 208.70L213.07 208.00L211.68 207.37L210.26 206.81" stroke="#DB2626" stroke-width="2" stroke-linejoin="round"/>
+<path d="M213.68 197.41L211.77 196.77L209.82 196.22L207.85 195.78L205.86 195.43L203.85 195.19L201.84 195.04L199.82 195.00L197.80 195.06L195.78 195.22L193.78 195.49L191.79 195.85L189.82 196.32L187.88 196.88L185.97 197.54L184.10 198.30L182.27 199.15L180.48 200.09L178.74 201.12L177.06 202.23" stroke="#DB2626" stroke-width="2" stroke-linejoin="round"/>
+<text fill="#DB2626" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="239.5" y="214.5">70&#xb0;</tspan></text>
+<text fill="#DB2626" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="165" y="188.5">55&#xb0;</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="255" y="258.5">12 m</tspan></text>
+<text fill="#2563EB" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500"><tspan x="95" y="156">18 m</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="196" y="256.5">O</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="352.5" y="244.5">A</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="256" y="95">B</tspan></text>
+<text fill="#0F1729" xml:space="preserve" font-family="Inter, Arial, sans-serif" font-size="15"><tspan x="58.6" y="57.5">C</tspan></text>
+</svg>
