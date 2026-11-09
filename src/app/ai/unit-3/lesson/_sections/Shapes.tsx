@@ -1,3 +1,4 @@
+import Link from "next/link";
 import HighlightBox from "@/components/ui/HighlightBox";
 import { InlineMath } from "@/components/ui/Math";
 import { FormulaBox, FormulaRow, StepBox, WorkedExample, Practice, SLTag, LessonSection, Keys, CalcSteps, Diagram } from "./helpers";
@@ -271,6 +272,22 @@ export default function ShapesSection() {
           </>
         }
       />
+      <div className="my-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <Link
+          href="/ai/unit-3/practice/9"
+          className="rounded-xl border border-slate-200 border-l-4 border-l-aa-primary bg-white px-5 py-4 hover:bg-slate-50"
+        >
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Interactive practice</p>
+          <p className="font-semibold text-navy-900">Trigonometry in Shapes, 10 problems →</p>
+        </Link>
+        <Link
+          href="/review/ai-sl/trig-shapes"
+          className="rounded-xl border border-slate-200 border-l-4 border-l-aa-primary bg-white px-5 py-4 hover:bg-slate-50"
+        >
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Exercise sheet</p>
+          <p className="font-semibold text-navy-900">Exam-style paper with mark scheme, 52 marks →</p>
+        </Link>
+      </div>
     </LessonSection>
   );
 }
