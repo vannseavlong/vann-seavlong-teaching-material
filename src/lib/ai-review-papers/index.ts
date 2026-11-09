@@ -32,6 +32,7 @@ import trigContext from "./trigContext";
 import unit3Mixed from "./unit3Mixed";
 import graphTheory from "./graphTheory";
 import vectors3d from "./vectors3d";
+import trigShapes from "./trigShapes";
 
 export const aiReviewPapers: AiReviewPaper[] = [
   arithmetic,
@@ -66,6 +67,7 @@ export const aiReviewPapers: AiReviewPaper[] = [
   unit3Mixed,
   graphTheory,
   vectors3d,
+  trigShapes,
 ];
 
 export const getAiReviewPaper = (slug: string) =>
