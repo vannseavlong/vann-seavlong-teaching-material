@@ -1,0 +1,22 @@
+<svg width="580" height="300" viewBox="0 0 580 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="580" height="300" fill="white"/>
+<path d="M219.0 256.66L270.98 274.85L341.97 268.19L361.0 243.34L361.0 54.34L309.02 36.15L238.03 42.81L219.0 67.66Z" fill="#DBEAFE" stroke="None" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M361.0 54.34L309.02 36.15L238.03 42.81L219.0 67.66L270.98 85.85L341.97 79.19Z" fill="#EFF5FF" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M361.0 243.34L361.0 54.34" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M219.0 256.66L219.0 67.66" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M270.98 274.85L270.98 85.85" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M341.97 268.19L341.97 79.19" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M309.02 225.15L309.02 36.15" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M238.03 231.81L238.03 42.81" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M219.0 256.66L270.98 274.85" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M270.98 274.85L341.97 268.19" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M341.97 268.19L361.0 243.34" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M361.0 243.34L309.02 225.15" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M309.02 225.15L238.03 231.81" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M238.03 231.81L219.0 256.66" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M219.0 256.66L361.0 54.34" stroke="#DC2626" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="306.47" y="289.52" fill="#2563EB" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle" dominant-baseline="central">3.5 cm</text>
+<text x="391.0" y="148.84" fill="#2563EB" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle" dominant-baseline="central">9 cm</text>
+<text x="205.0" y="260.66" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">P</text>
+<text x="375.0" y="50.34" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">Q</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg width="580" height="300" viewBox="0 0 580 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="580" height="300" fill="white"/>
+<path d="M186.63 240.05L312.57 249.81L290.0 71.0Z" fill="#DBEAFE" stroke="None" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M312.57 249.81L393.37 209.95L290.0 71.0Z" fill="#EFF5FF" stroke="None" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M186.63 240.05L312.57 249.81" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M312.57 249.81L393.37 209.95" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 71.0L186.63 240.05" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 71.0L312.57 249.81" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 71.0L393.37 209.95" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M186.63 240.05L267.43 200.19" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M267.43 200.19L393.37 209.95" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 71.0L267.43 200.19" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M186.63 240.05L393.37 209.95" stroke-dasharray="6 5" stroke="#64748B" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M312.57 249.81L267.43 200.19" stroke-dasharray="6 5" stroke="#64748B" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 71.0L290.0 225.0" stroke-dasharray="6 5" stroke="#DC2626" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="290.0" cy="225.0" r="3.2" fill="#0F172A"/>
+<text x="308.0" y="158.0" fill="#DC2626" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle" dominant-baseline="central">7 m</text>
+<text x="172.63" y="244.05" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">A</text>
+<text x="308.57" y="265.81" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">B</text>
+<text x="407.37" y="213.95" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">C</text>
+<text x="279.43" y="190.19" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">D</text>
+<text x="290.0" y="55.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">V</text>
+<text x="306.0" y="237.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">M</text>
+</svg>

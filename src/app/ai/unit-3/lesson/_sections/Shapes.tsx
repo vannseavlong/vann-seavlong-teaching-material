@@ -272,7 +272,7 @@ export default function ShapesSection() {
           </>
         }
       />
-      <div className="my-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="my-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
         <Link
           href="/ai/unit-3/practice/9"
           className="rounded-xl border border-slate-200 border-l-4 border-l-aa-primary bg-white px-5 py-4 hover:bg-slate-50"
@@ -286,6 +286,13 @@ export default function ShapesSection() {
         >
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Exercise sheet</p>
           <p className="font-semibold text-navy-900">Exam-style paper with mark scheme, 52 marks →</p>
+        </Link>
+        <Link
+          href="/review/ai-sl/trig-shapes-3d"
+          className="rounded-xl border border-slate-200 border-l-4 border-l-aa-primary bg-white px-5 py-4 hover:bg-slate-50"
+        >
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Exercise sheet, harder</p>
+          <p className="font-semibold text-navy-900">Shapes in 3D solids, 62 marks →</p>
         </Link>
       </div>
     </LessonSection>

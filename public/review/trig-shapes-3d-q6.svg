@@ -1,0 +1,27 @@
+<svg width="580" height="300" viewBox="0 0 580 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="580" height="300" fill="white"/>
+<path d="M155.54 229.41L253.97 268.78L388.43 254.37L424.46 200.59L290.0 101.2Z" fill="#DBEAFE" stroke="None" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M253.97 268.78L388.43 254.37L290.0 101.2Z" fill="#EFF5FF" stroke="None" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 101.2L424.46 200.59" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 101.2L155.54 229.41" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 101.2L253.97 268.78" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 101.2L388.43 254.37" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 101.2L326.03 161.22" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 101.2L191.57 175.63" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M155.54 229.41L253.97 268.78" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M253.97 268.78L388.43 254.37" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M388.43 254.37L424.46 200.59" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M424.46 200.59L326.03 161.22" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M326.03 161.22L191.57 175.63" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M191.57 175.63L155.54 229.41" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 101.2L290.0 215.0" stroke-dasharray="6 5" stroke="#64748B" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 215.0L321.2 261.58" stroke-dasharray="6 5" stroke="#64748B" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M290.0 101.2L321.2 261.58" stroke="#DC2626" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="290.0" cy="215.0" r="3.2" fill="#0F172A"/>
+<circle cx="321.2" cy="261.58" r="3.2" fill="#0F172A"/>
+<text x="383.23" y="146.89" fill="#2563EB" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle" dominant-baseline="central">3.1 m</text>
+<text x="178.76" y="257.1" fill="#2563EB" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle" dominant-baseline="central">2.4 m</text>
+<text x="290.0" y="85.2" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">V</text>
+<text x="276.0" y="209.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">M</text>
+<text x="323.2" y="277.58" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">N</text>
+</svg>

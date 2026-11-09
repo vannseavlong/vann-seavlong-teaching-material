@@ -1,0 +1,33 @@
+<svg width="580" height="300" viewBox="0 0 580 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="580" height="300" fill="white"/>
+<path d="M110.0 245.0L398.0 245.0L398.0 137.0L110.0 137.0Z" fill="#EFF5FF" stroke="None" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M398.0 245.0L475.94 200.0L475.94 92.0L398.0 137.0Z" fill="#EFF5FF" stroke="None" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M110.0 137.0L398.0 137.0L475.94 92.0L187.94 92.0Z" fill="#EFF5FF" stroke="None" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M398.0 245.0L187.94 200.0L110.0 137.0Z" fill="#FEE2E2" fill-opacity="0.7" stroke="None" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M110.0 245.0L398.0 245.0" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M398.0 245.0L475.94 200.0" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M475.94 200.0L475.94 92.0" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M475.94 92.0L187.94 92.0" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M187.94 92.0L110.0 137.0" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M110.0 137.0L110.0 245.0" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M398.0 245.0L398.0 137.0" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M398.0 137.0L475.94 92.0" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M110.0 137.0L398.0 137.0" stroke="#2563EB" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M110.0 245.0L187.94 200.0" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M187.94 200.0L475.94 200.0" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M187.94 200.0L187.94 92.0" stroke-dasharray="6 5" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M398.0 245.0L110.0 137.0" stroke="#DC2626" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M398.0 245.0L187.94 200.0" stroke-dasharray="6 5" stroke="#DC2626" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M187.94 200.0L110.0 137.0" stroke-dasharray="6 5" stroke="#DC2626" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="254.0" y="263.0" fill="#2563EB" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle" dominant-baseline="central">8 m</text>
+<text x="460.97" y="232.5" fill="#2563EB" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle" dominant-baseline="central">5 m</text>
+<text x="497.94" y="146.0" fill="#2563EB" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle" dominant-baseline="central">3 m</text>
+<text x="96.0" y="251.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">A</text>
+<text x="402.0" y="261.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">B</text>
+<text x="489.94" y="204.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">C</text>
+<text x="173.94" y="194.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">D</text>
+<text x="96.0" y="135.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">E</text>
+<text x="402.0" y="121.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">F</text>
+<text x="489.94" y="88.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">G</text>
+<text x="181.94" y="76.0" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" dominant-baseline="central">H</text>
+</svg>

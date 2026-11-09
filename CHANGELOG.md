@@ -2,6 +2,12 @@
 
 Merges to `main` across all projects, newest first. Tags: `[Web]`. Format and rules: `Tasks/README.md`.
 
+## 2026-11-09 [Web] AI Unit 3 trigonometry in shapes, harder 3D sheet
+- Owner: SNLRLONG · Task: Web-ai-u3-shapes-3d-paper (T-0066)
+- New exercise sheet `/review/ai-sl/trig-shapes-3d` (session 33, 6 questions, 62 marks): tent prism, hexagonal prism, rhombus-based pyramid, cone from a sector, cuboid triangle, hexagonal gazebo roof.
+- Six 3D diagrams designed in Figma, shipped as SVG in `public/review/`; linked from the shapes lesson.
+- Not yet done: browser check of the paper and its Export PDF modes.
+
 ## 2026-11-09 [Web] AI Unit 3 trigonometry in shapes
 - Owner: SNLRLONG · Tasks: Web-ai-u3-shapes-visuals, -lesson, -practice, -paper, -wrapup · Commit: 3f182e7, 00c0db9, 05f5373, 3dd6da9, f4ffb6d
 - New lesson topic 4B "Trigonometry in Shapes" (5 formula groups, 6 inline-SVG diagrams, 7 worked examples, 5 practice blocks).
