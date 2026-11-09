@@ -6,6 +6,7 @@ import LinesSection from "./_sections/Lines";
 import Solids3DSection from "./_sections/Solids3D";
 import TrigonometrySection from "./_sections/Trigonometry";
 import ArcSectorSection from "./_sections/ArcSector";
+import ShapesSection from "./_sections/Shapes";
 import TrigContextSection from "./_sections/TrigContext";
 import VoronoiSection from "./_sections/Voronoi";
 import GraphTheorySection from "./_sections/GraphTheory";
@@ -14,7 +15,7 @@ import VectorsSection from "./_sections/Vectors";
 export const metadata: Metadata = {
   title: "Unit 3: Geometry & Trigonometry | AI Lesson | IB Mathematics AI",
   description:
-    "Lesson notes for IB Mathematics AI SL Unit 3: lines in 2D, 3D distance and solids, trigonometry, arc length and sector area, trigonometry in context and Voronoi diagrams, plus HL graph theory and vectors.",
+    "Lesson notes for IB Mathematics AI SL Unit 3: lines in 2D, 3D distance and solids, trigonometry, arc length and sector area, trigonometry in shapes, trigonometry in context and Voronoi diagrams, plus HL graph theory and vectors.",
 };
 
 function LessonHero() {
@@ -48,7 +49,7 @@ function LessonHero() {
         </p>
 
         <div className="flex gap-6 text-sm text-ai-light flex-wrap">
-          <span>6 SL topics, 2 HL topics</span>
+          <span>7 SL topics, 2 HL topics</span>
           <span>Set the GDC to DEGREE mode before any trig question</span>
         </div>
       </div>
@@ -93,6 +94,13 @@ const SUMMARY = [
       "\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B} = \\dfrac{c}{\\sin C}",
       "c^2 = a^2 + b^2 - 2ab\\cos C",
       "A = \\tfrac12 ab\\sin C",
+    ],
+  },
+  {
+    title: "Shapes",
+    formulas: [
+      "A = ab\\sin\\theta \\text{ (parallelogram)},\\; A = \\tfrac12 n r^2 \\sin\\dfrac{360°}{n}",
+      "s = 2r\\sin\\dfrac{180°}{n}",
     ],
   },
   {
@@ -163,6 +171,7 @@ export default function Page() {
       <Solids3DSection />
       <TrigonometrySection />
       <ArcSectorSection />
+      <ShapesSection />
       <TrigContextSection />
       <VoronoiSection />
       <HLDivider />
