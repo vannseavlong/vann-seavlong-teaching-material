@@ -2,6 +2,13 @@
 
 Merges to `main` across all projects, newest first. Tags: `[Web]`. Format and rules: `Tasks/README.md`.
 
+## 2026-11-09 [Web] AI Unit 3 trigonometry in shapes
+- Owner: SNLRLONG · Tasks: Web-ai-u3-shapes-visuals, -lesson, -practice, -paper, -wrapup · Commit: 3f182e7, 00c0db9, 05f5373, 3dd6da9, f4ffb6d
+- New lesson topic 4B "Trigonometry in Shapes" (5 formula groups, 6 inline-SVG diagrams, 7 worked examples, 5 practice blocks).
+- Interactive practice id 9 (10 problems) and exportable exercise sheet `/review/ai-sl/trig-shapes` (52 marks).
+- Linked in sidebar, curriculum topic list and progress table.
+- Not yet done: browser check of lesson, practice and paper; paper diagrams are text only; practice navigator lists id 9 last.
+
 ## 2026-10-18 [Web] UI consistency, A4/Web mode, docs sidebar
 - Owner: SNLRLONG · Tasks: Web-display-mode, Web-docs-sidebar, Web-decolor-worksheets, Web-decolor-review, Web-neutral-shared-ui · Commit: dev
 - `?mode=a4|web` display mode with Navbar toggle, on worksheets and review only; A4 mode is black/white portrait, chrome hidden.
