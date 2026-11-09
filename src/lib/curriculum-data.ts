@@ -310,6 +310,7 @@ export const aiCurriculum: CurriculumData = {
         "3D distance & solids",
         "Trigonometry",
         "Arc length & sector area",
+        "Trigonometry in shapes",
         "Trigonometry in context",
         "Voronoi diagrams",
       ],
