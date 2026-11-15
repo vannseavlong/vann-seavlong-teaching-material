@@ -1,77 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { reviewPapers, type ReviewPaper } from "@/lib/review-data";
+import MaterialsByCourse from "@/components/materials/MaterialsByCourse";
+import { listResources } from "@/lib/catalog";
 
 export const metadata: Metadata = {
-  title: "Review Papers | IB Teaching Materials",
+  title: "Review papers",
   description:
-    "Topical review papers with exercise questions and full answer sheets, organised by topic across the AA and AI curricula.",
+    "Topic review papers in IB exam style, each with a full worked answer sheet, grouped by course and unit.",
 };
 
-function PaperCard({ paper }: { paper: ReviewPaper }) {
-  return (
-    <Link
-      href={paper.status === "available" ? paper.href : "#"}
-      className="block bg-white rounded-2xl border border-slate-200 hover:border-aa-primary p-6 transition-colors group"
-    >
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap gap-2 mb-3">
-            <span className="text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-[#1e3a5f]/10 text-[#1e3a5f]">
-              {paper.topic}
-            </span>
-            <span className="text-xs text-slate-400 font-medium self-center">{paper.course}</span>
-            {paper.status === "available" ? (
-              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-white text-aa-primary border border-aa-primary">
-                Available
-              </span>
-            ) : (
-              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-400">
-                Coming Soon
-              </span>
-            )}
-          </div>
-          <h2 className="text-lg font-bold text-navy-900 mb-1 group-hover:underline">{paper.title}</h2>
-          <p className="text-slate-500 text-sm mb-4">{paper.subtitle}</p>
-          <p className="text-xs text-slate-400">{paper.questionCount} questions · Exercise + Answer Sheet</p>
-        </div>
-        <div className="text-right flex-shrink-0">
-          <p className="text-2xl font-bold text-navy-900">{paper.marks}</p>
-          <p className="text-xs text-slate-400 uppercase tracking-wide">marks</p>
-        </div>
-      </div>
-    </Link>
-  );
-}
-
 export default function ReviewPage() {
+  const items = listResources().filter((r) => r.href.startsWith("/review/"));
   return (
-    <main className="min-h-screen pt-16">
-      <div className="bg-[#1e3a5f] text-white py-12 px-6">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-sky-300 text-xs font-bold uppercase tracking-widest mb-3">
-            Topical Practice Papers
-          </p>
-          <h1 className="text-2xl font-bold mb-3">Review</h1>
-          <p className="text-white/70 text-sm max-w-2xl leading-relaxed">
-            Exam-style review papers for focused topic practice — each set pairs a clean exercise
-            paper with a fully worked answer sheet, following IB assessment style.
+    <main className="pt-14 bg-surface min-h-screen">
+      <header className="border-b border-line bg-surface-alt">
+        <div className="max-w-[1100px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
+          <h1 className="text-2xl sm:text-3xl font-bold text-ink">Review papers</h1>
+          <p className="mt-2 text-ink-muted max-w-[68ch]">
+            Exam-style papers by unit, each with a worked answer sheet. Switch to A4 to print or export.{" "}
+            <Link href="/practice" className="text-accent hover:underline">All practice and papers</Link>
           </p>
         </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto px-6 py-10">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-bold text-navy-900">
-            All Review Papers
-            <span className="ml-2 text-sm font-normal text-slate-400">({reviewPapers.length})</span>
-          </h2>
-        </div>
-        <div className="grid gap-5">
-          {reviewPapers.map((paper) => (
-            <PaperCard key={paper.id} paper={paper} />
-          ))}
-        </div>
+      </header>
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 pb-12">
+        <MaterialsByCourse items={items} />
       </div>
     </main>
   );

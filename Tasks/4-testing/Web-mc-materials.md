@@ -2,6 +2,7 @@
 
 - **ID:** T-0072
 - **Owner:** SNLRLONG
+- **Claimed by:** claude, 2026-11-16
 - **Started / updated:** 2026-11-16 / 2026-11-16
 - **Due:** none
 - **Tier:** T2 · new route, changes two list pages
@@ -13,13 +14,13 @@
 One hub at `/practice` that lists every material grouped by kind, with purpose, difficulty, marks, time, calculator and answers shown before opening. `/worksheets` and `/review` become filtered views of the same list component.
 
 ## Done when
-- [ ] Sections in the plan's fixed kind order; empty kinds hidden
-- [ ] Filter by course and kind in the URL query
-- [ ] Each row: title, course, kind, difficulty, marks or questions, minutes, calculator, "answers included", "interactive"
-- [ ] `/worksheets` and `/review` keep their URLs, list the same items as today, and keep the A4 toggle behaviour
-- [ ] Hidden resources (tutor page) never listed
-- [ ] No existing URL changed; `npm run build` passes
-- [ ] Only the Touches files changed
+- [x] Sections in the plan's fixed kind order; empty kinds hidden
+- [x] Filter by course and kind in the URL query
+- [x] Each row: title, course, kind, difficulty, marks or questions, minutes, calculator, "answers included", "interactive"
+- [x] `/worksheets` and `/review` keep their URLs, list the same items as today, and keep the A4 toggle behaviour
+- [x] Hidden resources (tutor page) never listed
+- [x] No existing URL changed; `npm run build` passes
+- [x] Only the Touches files changed
 
 ## Gates (T2)
 - G1 scope: diff only touches the paths above
@@ -35,3 +36,5 @@ One hub at `/practice` that lists every material grouped by kind, with purpose, 
 `/practice` with filters, `/worksheets`, `/review` (compare counts with before: 3 worksheets, 36 papers).
 
 ## Feedback
+Built 2026-11-16: `/practice` groups 63 materials by kind with course/kind filters in the URL; `/worksheets` (3 items) and `/review` (36 papers) list the same items as before, grouped by course and unit, in catalog course order. A4 toggle still shows on both. Hidden tutor page never listed.
+Not verified by agent: keyboard-only walk, screen reader, real phone. G5 fresh review pending.
