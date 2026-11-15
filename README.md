@@ -1,6 +1,6 @@
-# IB Math Guide
+# Techie Club
 
-A teaching website for IB Mathematics, built by **VANN Seavlong**. It helps Grade 11 students choose between the **Analysis & Approaches (AA)** and **Applications & Interpretation (AI)** pathways, then gives them lessons, interactive practice, worksheets and mock papers for the one they pick.
+A learning website built by **VANN Seavlong** for the courses he teaches: IB Diploma Mathematics **Analysis & Approaches (AA)** and **Applications & Interpretation (AI)**, AIA Mathematics (Grade 6 and 9) and other materials. Students browse by curriculum, grade and subject, then open lessons, interactive practice, worksheets, revision papers and formula recaps. Adding a course is a data edit: see [Docs/architecture/content-model.md](Docs/architecture/content-model.md).
 
 - **Repository:** https://github.com/vannseavlong/vann-seavlong-teaching-material
 - **Live site:** `<ADD DEPLOYED URL>` (also set as `NEXT_PUBLIC_SITE_URL`, see below)

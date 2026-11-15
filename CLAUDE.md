@@ -1,8 +1,8 @@
-# IB Teaching Material Platform
+# Techie Club (teaching material platform)
 
 ## Project Overview
-A Next.js website for IB Mathematics teaching content, created by VANN Seavlong.
-The platform serves as a comprehensive guide and resource hub for Grade 11 IB students choosing between and studying the AA and AI math pathways.
+A Next.js learning site by VANN Seavlong for the courses he teaches: IB DP Mathematics AA and AI (Grade 11), AIA Mathematics (Grade 6, Grade 9) and other materials. Students-only content site: no accounts, no backend.
+Content is organised as **Curriculum → Course → Unit → Topic → Resource**; the model and the add-content recipes are in `Docs/architecture/content-model.md`. Plan: `Tasks/_plans/Web-multi-curriculum.md`.
 
 ## Tech Stack
 - **Framework:** Next.js 16 (App Router, TypeScript)
@@ -15,51 +15,29 @@ The platform serves as a comprehensive guide and resource hub for Grade 11 IB st
 ## Project Structure
 
 ```
-teaching-material-ib/
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx          # Root layout (Navbar + Footer)
-│   │   ├── globals.css         # Tailwind + custom theme tokens
-│   │   ├── page.tsx            # Homepage (AA vs AI guide)
-│   │   ├── aa/page.tsx         # AA Curriculum page
-│   │   └── ai/page.tsx         # AI Curriculum page
-│   ├── components/
-│   │   ├── ui/                 # Reusable UI primitives
-│   │   │   ├── Card.tsx        # Card, CardTitle, CardGrid
-│   │   │   ├── ComparisonTable.tsx
-│   │   │   ├── FAQ.tsx         # Expandable FAQ accordion
-│   │   │   ├── Hero.tsx        # Hero banner
-│   │   │   ├── HighlightBox.tsx # Colored callout box
-│   │   │   ├── Math.tsx        # InlineMath + BlockMath (KaTeX SSR)
-│   │   │   ├── Section.tsx     # Section wrapper with label/title/intro
-│   │   │   ├── Tag.tsx         # Colored pill/badge
-│   │   │   └── TopicGrid.tsx   # Grid of topic items
-│   │   ├── layout/
-│   │   │   ├── Navbar.tsx      # Top navigation (client component)
-│   │   │   └── Footer.tsx      # Footer
-│   │   ├── home/               # Homepage section components
-│   │   │   ├── SectionWhatIsIBMath.tsx
-│   │   │   ├── SectionTwoPathways.tsx
-│   │   │   ├── SectionAADetail.tsx
-│   │   │   ├── SectionAIDetail.tsx
-│   │   │   ├── SectionSLvsHL.tsx
-│   │   │   ├── SectionComparison.tsx
-│   │   │   ├── SectionCareers.tsx
-│   │   │   ├── SectionDecisionGuide.tsx
-│   │   │   └── SectionFAQ.tsx
-│   │   └── curriculum/
-│   │       └── CurriculumPage.tsx  # Shared curriculum layout (AA & AI)
-│   ├── app/
-│   │   └── aa/
-│   │       └── unit-1/
-│   │           ├── lesson/page.tsx          # AA Unit 1 Algebra — full lesson (DONE)
-│   │           └── practice/
-│   │               └── [id]/
-│   │                   ├── page.tsx          # Server wrapper (metadata + notFound guard)
-│   │                   └── PracticeClient.tsx # Interactive client component (DONE: ids 1–3)
-│   └── lib/
-│       └── curriculum-data.ts  # Curriculum unit data + types
-└── ...
+src/
+├── app/
+│   ├── layout.tsx, globals.css      # Root layout (Navbar with search index, Footer), theme tokens
+│   ├── page.tsx                     # Learning home (curriculum chips, courses by grade, recently added)
+│   ├── browse/  curricula/[curriculum]/  courses/[course]/   # Course discovery; generic course page
+│   ├── practice/  reference/  search/                        # Materials hub, formula recaps, search
+│   ├── ib/aa-vs-ai/                 # AA vs AI decision guide (was the homepage)
+│   ├── aa/, ai/                     # IB course pages (/aa, /ai) + unit lessons and practice
+│   ├── worksheets/, review/         # Worksheets and review papers (A4 mode)
+│   ├── sitemap.ts, robots.ts, not-found.tsx, error.tsx
+├── content/                         # Course data per curriculum: ib-dp/, aia/, others/, subjects.ts
+├── components/
+│   ├── ui/                          # Card, Hero, Section, HighlightBox, Tag, Math (KaTeX), FAQ...
+│   ├── layout/                      # Navbar, Footer, Sidebar, SidebarNav, ModeProvider/Toggle
+│   ├── course/                      # CoursePage, CourseRow, IbCourseExtras, BrowseFilters
+│   ├── materials/                   # ResourceRow, MaterialsByCourse, MaterialsFilter
+│   ├── search/  nav/  home-learn/  home/ (guide sections)  review/
+└── lib/
+    ├── catalog/                     # Content model types, selectors, assertCatalog()
+    ├── curriculum-data.ts           # IB AA/AI unit facts (adapted by src/content/ib-dp)
+    ├── sidebar-data.ts              # Course sidebar built from the catalog
+    ├── ai-review-papers/, review-data.ts, worksheet-data.ts, site.ts, display-mode.ts
+scripts/route-audit.mjs              # Crawl + legacy-route check (see Docs/architecture/content-model.md)
 ```
 
 ## Design System
@@ -72,6 +50,7 @@ teaching-material-ib/
 | `navy-*`    | Primary dark text | `text-navy-900`   |
 | `warn-*`    | Warning (yellow)  | `bg-warn-bg`      |
 | `danger-*`  | Danger (red)      | `border-danger-primary` |
+| `ink*`, `surface*`, `line*`, `accent*` | Semantic tokens; **new components use only these** | `text-ink-muted`, `bg-surface-alt`, `border-line`, `bg-accent` |
 
 ### Component Variants
 - **Card:** `variant="aa" | "ai" | "info" | "warn" | "default"`
@@ -82,44 +61,32 @@ teaching-material-ib/
 
 ## Pages
 
-### Homepage (`/`)
-The "AA vs AI Decision Guide" — 9 sections converted from slide deck content:
-1. What Is IB Math
-2. Two Pathways
-3. AA Detail
-4. AI Detail
-5. SL vs HL
-6. Side-by-Side Comparison
-7. Career Pathways
-8. Decision Guide (flowchart)
-9. FAQ
+### Home (`/`)
+Curriculum chips (All, IB DP, AIA, Others; choice remembered in localStorage), courses grouped by grade, and "Recently added" (newest `addedOn`). Kept simple by owner decision.
 
-### AA Curriculum (`/aa`)
-Full curriculum breakdown for Analysis & Approaches. Uses `CurriculumPage` component with `aaCurriculum` data. Includes 5 units, each with resource slots for:
-- Lesson
-- Practice Problems + Answer Sheet after done
+### Browse, curriculum and course pages
+- `/browse`: all courses, filters `?curriculum=&level=&subject=`.
+- `/curricula/[id]`: one curriculum's courses by grade.
+- `/courses/[id]`: generic `CoursePage` (units, topics, materials per unit). `/aa` and `/ai` use the same `CoursePage` plus `IbCourseExtras` (SL/HL hours, mock sets from `mockSets`, exam structure). `/courses/ib-dp-math-aa|ai` redirect to `/aa`, `/ai`.
 
-Each AA and AI has Mock Test/Exam Preparation where owner can create 1 set or more set of paper. Each set has 3 paper following IB guide line standard
+### Materials
+`/practice` (all materials by kind, filters `?course=&kind=`), `/worksheets` and `/review` (catalog views, A4 mode), `/reference` (unit formula recaps, `#summary` on each lesson), `/search` (+ dialog on `/`).
 
-### AI Curriculum (`/ai`)
-Same structure as AA, using `aiCurriculum` data from `curriculum-data.ts`.
+### AA vs AI guide (`/ib/aa-vs-ai`)
+The 9 sections in `src/components/home/` (What Is IB Math, Two Pathways, AA Detail, AI Detail, SL vs HL, Comparison, Careers, Decision Guide, FAQ).
 
 ## How to Add Content
 
-### Adding lesson/practice/test content to a unit:
-1. Edit `src/lib/curriculum-data.ts`
-2. Find the relevant unit in `aaCurriculum` or `aiCurriculum`
-3. Update the `contents` array — change `status` to `"available"` and add `href` path
-4. Create the corresponding page/component as needed
+Start with `Docs/architecture/content-model.md` (recipes for a resource, a course, a curriculum). `npm run build` fails with a list of problems if the catalog data is inconsistent.
 
-### Adding a new page (e.g., a lesson page):
-- Create route under `src/app/aa/unit-1/lesson/page.tsx` (or similar)
-- Use the shared `Section`, `Card`, `HighlightBox` components for consistency
-- Update `curriculum-data.ts` to link to it
+### IB AA/AI lesson or practice for a unit:
+1. Edit `src/lib/curriculum-data.ts`: in the unit's `contents`, set `status: "available"` and `href`.
+2. Lesson topics: add `[anchor, title]` rows to `LESSON_TOPICS` in `src/content/ib-dp/index.ts` (anchors = section ids on the lesson page). Sidebar, course page and search pick them up.
+3. Practice sets: add `{ id, title, topic, addedOn }` to `PRACTICE_TOPICS` in the same file.
+4. Create the page following the conventions below.
 
-### Adding new units or sections:
-- Add to the `units` array in `curriculum-data.ts`
-- The `CurriculumPage` component will render them automatically
+### Anything else (AIA, Others, a new curriculum):
+Add `Course` / `Resource` objects in `src/content/<curriculum>/index.ts` (see the doc). Non-IB courses render at `/courses/<id>` with no new page file.
 
 ## Lesson Page Convention (established with AA Unit 1)
 
@@ -217,7 +184,8 @@ const PRACTICE_DATA: Record<string, PracticeSet> = { "1": ..., "2": ..., "3": ..
 1. Add a new entry to `PRACTICE_DATA` in `PracticeClient.tsx` with the next `id`. **Generate a new hard-to-guess `revealKey`** (10-char alphanumeric, e.g. `"K9TZ4WRX2M"`).
 2. Add `{ id: "N" }` to `generateStaticParams()` in `page.tsx`.
 3. Add `id` to the `TITLES` map in `page.tsx`.
-4. No changes to `curriculum-data.ts` needed (the entry point `/unit-N/practice/1` stays the same).
+4. Add the set to `PRACTICE_TOPICS` in `src/content/ib-dp/index.ts` (sidebar, course page, `/practice`, search).
+5. No changes to `curriculum-data.ts` needed (the entry point `/unit-N/practice/1` stays the same).
 
 ### Updating curriculum-data.ts when practice is ready:
 ```ts
@@ -294,6 +262,9 @@ Red `HighlightBox` (general binomial series). One `FormulaBox` (negative/fractio
 | AI Unit 3: Geometry & Trigonometry | 🟡 Lines, 3D & solids, trigonometry, arc & sector, trig in shapes, trig in context, Voronoi (SL) + HL graph theory and vectors (awaiting review) | ✅ Interactive practice ids 1–9 (id 9 = trig in shapes) + 10 exportable review papers (trigonometry, arc & sector, shapes, 3D, lines & Voronoi, solids, trig in context, mixed, HL graph theory, HL vectors) | ⏳ |
 | AI Unit 4: Statistics & Probability | 🟡 Data, measures (4.2, 4.3), regression, probability (4.5, 4.6), distributions (4.7, 4.8), tests (SL, awaiting review) | ⏳ | ⏳ |
 | AI Unit 5: Calculus & Technology | 🟡 Derivative (5.3), integration and area (5.5), trapezoidal rule (5.8), optimisation (SL, awaiting review) | ⏳ | ⏳ |
+| AIA Grade 6 Mathematics | ⏳ | ⏳ | ⏳ |
+| AIA Grade 9 Mathematics | ⏳ | ⏳ | ⏳ |
+| Others (G10 Physics, G10 Maths, G10 Chemistry, Area & Volume) | n/a | ✅ 3 worksheets/tests + Chemistry practice (`/aa/unit-1/practice/4`) | n/a |
 
 ## Notation: follow the IB AI SL formula booklet
 Use the booklet's symbols in all AI lessons, papers and practice: `u_n = u_1 + (n-1)d`, `S_n`, `u_n = u_1 r^{n-1}`, `FV = PV(1 + r/(100k))^{kn}` (k = periods per year, n = years, r% nominal annual rate), `\varepsilon = |(v_A - v_E)/v_E| \times 100\%` (v_E exact, v_A approximate), `a^x = b \Leftrightarrow x = \log_a b`. The booklet prints no sum to infinity, so it stays labelled as an extension. GDC TVM labels (N, I%, PV, PMT, FV, P/Y, C/Y) are used only in GDC steps.
@@ -302,7 +273,7 @@ Use the booklet's symbols in all AI lessons, papers and practice: `u_n = u_1 + (
 Data-driven, exportable Q&A papers (same Export PDF → Question / Q&A flow as `/review/paper-N`).
 - Data: `src/lib/ai-review-papers.ts` (one `AiReviewPaper` per session; `\( \)` inline math, `\[ \]` block math).
 - Renderer: `src/components/review/DataPaper.tsx`; route: `src/app/review/ai-sl/[slug]/page.tsx`.
-- Papers auto-appear on `/review` via `src/lib/review-data.ts`. To add one, append to `aiReviewPapers`.
+- Papers auto-appear on `/review`, `/practice`, the AI course page and search. To add one, append to `aiReviewPapers` and add its date to `PAPER_ADDED` in `src/content/ib-dp/index.ts`.
 - Lesson sections live in `src/app/ai/unit-1/lesson/page.tsx` (`RevisionPlan` + Arithmetic, Geometric, Rounding, Bounds, Percentage Error).
 
 ## Future Plans

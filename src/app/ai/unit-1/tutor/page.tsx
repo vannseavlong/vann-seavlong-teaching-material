@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Unit 1 Tutor Plan | IB Mathematics AI",
   description: "Tutor-only session plan for the AI Unit 1 summative revision papers.",
+  robots: { index: false, follow: false },
 };
 
 const REVISION_SESSIONS = [

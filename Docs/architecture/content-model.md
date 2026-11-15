@@ -52,3 +52,10 @@ Change its `courseId` (and `unitId`). The URL does not change.
 - Ids are permanent: other data and saved links depend on them. Change titles freely.
 - `hidden: true` keeps a page in the catalog (breadcrumbs work) but out of every list, search and the sitemap. Use it for tutor-only pages.
 - Text in descriptions follows the content rules in `AGENTS.md` (no filler, no em-dash).
+
+## Checking routes after a change
+```
+npm run build && npx next start -p 4817        # shell 1
+node scripts/route-audit.mjs http://localhost:4817 c377ce5   # shell 2
+```
+The audit crawls from `/`, follows every internal link, checks each page returns 200 and each `#anchor` exists on its page, then requests every route that existed at the given git ref (`c377ce5` = last commit before the multi-curriculum migration). Exit code 1 lists what is broken.
