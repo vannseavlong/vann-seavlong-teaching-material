@@ -63,7 +63,7 @@ const others: ContentPack = {
       id: "others-chem-nahco3-practice",
       kind: "topic-exercise",
       title: "NaHCO₃ Experiment",
-      description: "Enter a final answer for each problem, finish to get the key, then compare with the model answers.",
+      description: "",
       courseId: "others-g10-chemistry",
       href: "/aa/unit-1/practice/4",
       status: "available",

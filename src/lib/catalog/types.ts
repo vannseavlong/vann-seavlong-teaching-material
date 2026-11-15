@@ -82,6 +82,7 @@ export type Resource = {
   id: string;
   kind: ResourceKind;
   title: string;
+  /** One specific line; may be empty when the title and facts say enough */
   description: string;
   courseId: string;
   unitId?: string;
