@@ -1,11 +1,7 @@
-import { sidebarTrees } from "@/lib/sidebar-data";
+import { sidebarTree } from "@/lib/sidebar-data";
 import SidebarNav from "./SidebarNav";
 
-export default function Sidebar({ pathway }: { pathway: "aa" | "ai" }) {
-  return (
-    <>
-      <SidebarNav tree={sidebarTrees[pathway]} />
-      {/* Reserve the sidebar column on desktop; removed in A4 mode */}
-    </>
-  );
+/** Left course navigation (units, lesson topics, practice). The tree is built on the server. */
+export default function Sidebar({ courseId }: { courseId: string }) {
+  return <SidebarNav tree={sidebarTree(courseId)} />;
 }

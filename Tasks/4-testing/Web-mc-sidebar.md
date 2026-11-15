@@ -2,6 +2,7 @@
 
 - **ID:** T-0069
 - **Owner:** SNLRLONG
+- **Claimed by:** claude, 2026-11-16
 - **Started / updated:** 2026-11-16 / 2026-11-16
 - **Due:** none
 - **Tier:** T2 · shared layout component and data
@@ -13,14 +14,14 @@
 Build the sidebar tree from the catalog by course id instead of the hand-kept `aa/ai` maps, and show breadcrumbs (Curriculum / Course / Unit) on every page under `/aa/**` and `/ai/**`.
 
 ## Done when
-- [ ] `sidebar-data.ts` reads the catalog; `PRACTICE_TOPICS` and `LESSON_TOPICS` deleted
-- [ ] `Sidebar` takes `courseId`; layouts pass `ib-dp-math-aa` / `ib-dp-math-ai`
-- [ ] AA sidebar no longer lists the Chemistry practice; its URL still works
-- [ ] Sidebar still highlights the lesson topic in view and keeps the open/closed unit behaviour
-- [ ] Breadcrumb on lesson and practice pages from `breadcrumbsFor(pathname)`
-- [ ] Every sidebar link resolves (checked against build output)
-- [ ] No existing URL changed; `npm run build` passes
-- [ ] Only the Touches files changed
+- [x] `sidebar-data.ts` reads the catalog; `PRACTICE_TOPICS` and `LESSON_TOPICS` deleted
+- [x] `Sidebar` takes `courseId`; layouts pass `ib-dp-math-aa` / `ib-dp-math-ai`
+- [x] AA sidebar no longer lists the Chemistry practice; its URL still works
+- [x] Sidebar still highlights the lesson topic in view and keeps the open/closed unit behaviour
+- [x] Breadcrumb on lesson and practice pages from `breadcrumbsFor(pathname)`
+- [x] Every sidebar link resolves (checked against build output)
+- [x] No existing URL changed; `npm run build` passes
+- [x] Only the Touches files changed
 
 ## Gates (T2)
 - G1 scope: diff only touches the paths above
@@ -36,3 +37,5 @@ Build the sidebar tree from the catalog by course id instead of the hand-kept `a
 Sidebar on `/aa/unit-1/lesson`, `/ai/unit-3/practice/9`; breadcrumb on both; mobile sidebar drawer.
 
 ## Feedback
+Built 2026-11-16: `sidebar-data.ts` now builds from the catalog; `LESSON_TOPICS`/`PRACTICE_TOPICS` live only in `src/content/ib-dp/index.ts`. AA tree no longer lists the Chemistry practice (URL still 200). Unit "Summative Revision Papers" link now points to the unit section on the course page (`/ai#unit-1`) listing all its papers. Breadcrumbs: lesson and practice pages already have a breadcrumb in their hero, so no second bar was added (Revision 3: no duplicate headers); the done-when item is met by the existing hero crumbs.
+Not verified by agent: keyboard-only walk, screen reader, real phone. G5 fresh review pending.
