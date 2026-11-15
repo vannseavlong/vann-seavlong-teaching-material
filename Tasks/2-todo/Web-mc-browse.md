@@ -19,7 +19,7 @@ Students browse all courses, filter by curriculum, level and subject, and open a
 - [ ] `CoursePage` shows tracks (SL/HL) and IB mock sets only when the data has them; coming-soon units show one label
 - [ ] `/aa` and `/ai` show the same content as before (all units, topics, resource links), in the new layout
 - [ ] Redirects `/courses/ib-dp-math-aa` to `/aa` and `/courses/ib-dp-math-ai` to `/ai`
-- [ ] Cambridge coming-soon course renders an empty state, not an error
+- [ ] AIA coming-soon courses render an empty state, not an error
 - [ ] No existing URL changed; `npm run build` passes
 - [ ] Only the Touches files changed
 
@@ -34,6 +34,6 @@ Students browse all courses, filter by curriculum, level and subject, and open a
 - G8 commit format; G11 changelog after approval
 
 ## What to check (user)
-`/browse` with each filter, `/curricula/ib-dp`, `/curricula/intl-school`, `/aa`, `/ai`, the Cambridge course page, mobile widths.
+`/browse` with each filter, `/curricula/ib-dp`, `/curricula/aia`, `/curricula/others`, `/aa`, `/ai`, an AIA course page, mobile widths.
 
 ## Feedback

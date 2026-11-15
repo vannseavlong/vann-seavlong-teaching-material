@@ -10,12 +10,12 @@
 - **Plan:** Tasks/_plans/Web-multi-curriculum.md
 
 ## Goal
-Replace the homepage with a learning home (curriculum picker, courses by level, recently added, recommended). Move the AA vs AI guide to `/ib/aa-vs-ai` using the existing `src/components/home/*` sections unchanged.
+Replace the homepage with a simple learning home (curriculum picker, courses by level, recently added). Move the AA vs AI guide to `/ib/aa-vs-ai` using the existing `src/components/home/*` sections unchanged.
 
 ## Done when
 - [ ] Curriculum picker chips; choice saved in `localStorage` inside try/catch; page works with storage blocked
 - [ ] Courses for the chosen curriculum grouped by level, each row links to the course `href`
-- [ ] "Recently added" shows the 6 newest resources by `addedOn`; "Recommended" shows `featured` resources
+- [ ] "Recently added" shows the 6 newest resources by `addedOn`
 - [ ] IB block links to `/ib/aa-vs-ai`; that page renders the 9 existing sections and has its own metadata
 - [ ] Server-rendered first paint shows all curricula (no blank state before JS)
 - [ ] Text follows AGENTS.md content rules (no filler, no em-dash)

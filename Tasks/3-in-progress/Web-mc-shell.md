@@ -2,10 +2,11 @@
 
 - **ID:** T-0068
 - **Owner:** SNLRLONG
+- **Claimed by:** claude, 2026-11-16
 - **Started / updated:** 2026-11-16 / 2026-11-16
 - **Due:** none
 - **Tier:** T2 · edits shared layout components and globals.css
-- **Depends on:** Open question 1 in the plan (site name)
+- **Depends on:** none (site name decided: Techie Club)
 - **Touches:** src/app/globals.css, src/app/layout.tsx, src/app/not-found.tsx, src/app/error.tsx, src/app/opengraph-image.tsx, src/app/twitter-image.tsx, src/lib/site.ts, src/components/layout/Navbar.tsx, src/components/layout/Footer.tsx, src/components/nav/Breadcrumbs.tsx, src/components/search/SearchButton.tsx (stub)
 - **Plan:** Tasks/_plans/Web-multi-curriculum.md
 

@@ -56,13 +56,12 @@ type Resource = {
   marks?: number; questionCount?: number; durationMinutes?: number; calculator?: boolean;
   hasAnswers: boolean; interactive?: boolean; printable?: boolean;
   addedOn: string;                       // YYYY-MM-DD, drives "Recently added"
-  featured?: boolean;                    // drives "Recommended"
   hidden?: boolean;                      // in catalog for breadcrumbs, not listed (tutor page)
 };
 ```
 
 - Data lives in `src/content/<curriculum>/*.ts` (one file per course). UI never hard-codes course facts.
-- `src/lib/catalog/` exposes selectors only: `getCurriculum`, `getCourse`, `listCourses(filter)`, `listResources(filter)`, `breadcrumbsFor(href)`, `searchIndex()`, `recentlyAdded(n)`, `featured()`.
+- `src/lib/catalog/` exposes selectors only: `getCurriculum`, `getCourse`, `listCourses(filter)`, `listResources(filter)`, `breadcrumbsFor(href)`, `searchIndex()`, `recentlyAdded(n)`.
 - `assertCatalog()` runs at module load and throws during `next build` on duplicate ids, dangling `courseId/unitId/topicIds`, or a `Resource.href` that is not a known route prefix. This is the integrity test (see G3 note).
 - IB AA/AI: in wave 1, `curriculum-data.ts`, `review-data.ts` and `worksheet-data.ts` stay the place the owner edits; `src/content/ib-dp/*.ts` adapts them into the model, so nothing is edited twice. `sidebar-data.ts` is rebuilt on the catalog (Web-mc-sidebar), which removes its hand-kept maps.
 - The documented contract goes to `Docs/architecture/content-model.md` (one place; CLAUDE.md links to it).
@@ -100,7 +99,7 @@ Redirects (`next.config.ts`): `/courses/ib-dp-math-aa` → `/aa`, `/courses/ib-d
 | Unknown URL shows a helpful 404 with search and browse links | new (`not-found.tsx`) |
 
 ## Screens and states
-- **Home:** short welcome line; curriculum picker (chips, remembered in `localStorage` with try/catch, works without it); course list for the chosen curriculum grouped by level; "Recently added" (6 newest `addedOn`); "Recommended" (`featured`); link to the AA vs AI guide inside the IB block. Empty state per curriculum with no courses: "Materials for this curriculum are coming soon" + link to browse.
+- **Home:** short welcome line; curriculum picker (chips, remembered in `localStorage` with try/catch, works without it); course list for the chosen curriculum grouped by level; "Recently added" (6 newest `addedOn`); link to the AA vs AI guide inside the IB block. Empty state per curriculum with no courses: "Materials for this curriculum are coming soon" + link to browse.
 - **Browse:** filter bar (3 selects, mobile: stacked) + list of course rows (not a card grid). Empty filter result: message + "Clear filters".
 - **Course page:** header (curriculum and level line, title, one-line description, tracks); unit list as an accordion on mobile, open list on desktop; each unit shows topics and its materials with kind label. Units with nothing available show "Coming soon" once, not per item.
 - **Materials hub:** sections by kind in a fixed order (Lessons, Topic exercises, Worksheets, Exam-style questions, Revision papers, Mock exams, Quizzes, Tests, Answers); each row shows course, difficulty, marks or questions, time, calculator, "answers included", "interactive". Kinds with no items are not shown.
@@ -121,8 +120,8 @@ Redirects (`next.config.ts`): `/courses/ib-dp-math-aa` → `/aa`, `/courses/ib-d
 | Gap | Decision and why |
 |---|---|
 | No design frames exist | Build from the brief and the neutral palette contract above; the owner reviews visually in testing (G4/G9). No new visual language is invented beyond the tokens above. |
-| Grade 10 content has no named curriculum (Physics "10SCI", "Grade 10 AA Foundation", Chemistry G10) | Seed a curriculum `intl-school` "International School" with level `grade-10` and courses `g10-science`, `g10-mathematics` until the owner names it (Open question 3). Renaming is a data edit. |
-| Chemistry G10 practice is AA Unit 1 practice id 4 | URL stays `/aa/unit-1/practice/4`; the catalog files it under `g10-science`, and the AA sidebar stops listing it (Web-mc-sidebar). The practice page's own topic navigator still shows it; fixing that is in the backlog file (touches `PracticeClient.tsx`). |
+| Grade 10 content has no named curriculum (Physics "10SCI", "Grade 10 AA Foundation", Chemistry G10) | Owner decision 3: they go to the `others` group (levels `grade-10` and none). Moving one is a data edit. |
+| Chemistry G10 practice is AA Unit 1 practice id 4 | URL stays `/aa/unit-1/practice/4`; the catalog files it under `others`, and the AA sidebar stops listing it (Web-mc-sidebar). The practice page's own topic navigator still shows it; fixing that is in the backlog file (touches `PracticeClient.tsx`). |
 | `addedOn` dates do not exist | Fill once from `git log --diff-filter=A` of each route file (Web-mc-catalog). |
 | Course structure duplicated in 4 files | Wave 1: catalog adapts the existing files (one edit point stays per fact); sidebar maps move into `src/content/ib-dp/*`. Full move of AA/AI unit data into `src/content` is backlog, after the owner has used the new files. |
 | Shared lesson kit | 5 diverging helper copies plus 2 AA single-file pages. Refactoring them is large and risks the content. Backlog, one unit per task. Wave 1 only adds breadcrumbs and catalog-driven sidebar around the existing lesson body. |
@@ -131,17 +130,17 @@ Redirects (`next.config.ts`): `/courses/ib-dp-math-aa` → `/aa`, `/courses/ib-d
 | Git branch: `AGENTS.md` says `main`, this skill says `dev` | `AGENTS.md` governs git workflow, so tasks commit to `main`. |
 | `CLAUDE.md` file tree and progress table are stale and IB-only | Web-mc-qa updates them and links `Docs/architecture/content-model.md` for "How to add content". |
 
-## Open questions (with recommendation; planning did not stop for them)
-1. **Site name.** Today "IB Math Guide". Recommend **"VANN Seavlong Learning"** (matches the repo, not tied to one curriculum). Lives in one constant in `site.ts`, so it can change later. Needed before Web-mc-shell is committed.
-2. **Homepage.** Recommend the new learning home on `/` and the AA vs AI guide at `/ib/aa-vs-ai`, linked from Home and the IB curriculum page. Alternative: keep the guide on `/` and put the home on `/learn` (worse for new students).
-3. **Curricula and level names to seed.** Which curriculum do the Grade 10 materials belong to (school MYP, Cambridge Lower Secondary, a school programme)? Recommend the owner names it; until then `International School / Grade 10`. Also confirm the first new curriculum to add (recommend Cambridge IGCSE Mathematics, as a `coming-soon` course with no content, so the browse and empty states are exercised).
-4. **Recommended lessons.** Recommend owner-curated `featured: true` flags (no algorithm). Initial picks: AA Unit 1 lesson, AI Unit 1 lesson, AI Unit 3 practice.
+## Decisions (owner, 2026-11-16)
+1. **Site name: "Techie Club".**
+2. **Homepage:** learning home on `/`, AA vs AI guide moves to `/ib/aa-vs-ai`. Keep the home simple.
+3. **Curricula now:** IB DP (Grade 11: Maths AA, Maths AI) and **AIA** (Grade 6 Mathematics, Grade 9 Mathematics, both `coming-soon` until content exists). Material that does not belong to either goes to an **Others** group: the Grade 10 Physics worksheet, Grade 10 Maths test, Area and Volume sheet and Chemistry G10 practice. No Cambridge placeholder.
+4. **No "Recommended" section** and no new lesson design for now. `featured` is dropped from the model; home shows curricula, courses and "Recently added" only.
 
 ## Task breakdown
 | # | Task | ID | Depends on | Parallel group | Tier | Size |
 |---|---|---|---|---|---|---|
 | 1 | Web-mc-catalog: content model, adapters, selectors, integrity check, `Docs/architecture/content-model.md` | T-0067 | none | A | T2 | M |
-| 2 | Web-mc-shell: tokens, Navbar, mobile menu, Footer, Breadcrumbs (props only), site name, OG images, 404, error | T-0068 | Open question 1 | A | T2 | M |
+| 2 | Web-mc-shell: tokens, Navbar, mobile menu, Footer, Breadcrumbs (props only), site name, OG images, 404, error | T-0068 | none | A | T2 | M |
 | 3 | Web-mc-sidebar: sidebar from catalog, breadcrumbs on `/aa/**` `/ai/**` layouts | T-0069 | 1, 2 | B | T2 | S |
 | 4 | Web-mc-browse: `/browse`, `/curricula/[c]`, `/courses/[c]`, `CoursePage` replacing `CurriculumPage`, `/aa` `/ai` on it, redirects | T-0070 | 1, 2 | B | T2 | L |
 | 5 | Web-mc-home: new `/`, move guide to `/ib/aa-vs-ai` | T-0071 | 1, 2 | B | T2 | M |
