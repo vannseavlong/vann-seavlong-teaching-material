@@ -2,6 +2,7 @@
 
 - **ID:** T-0071
 - **Owner:** SNLRLONG
+- **Claimed by:** claude, 2026-11-16
 - **Started / updated:** 2026-11-16 / 2026-11-16
 - **Due:** none
 - **Tier:** T2 · replaces the homepage route
@@ -13,14 +14,14 @@
 Replace the homepage with a simple learning home (curriculum picker, courses by level, recently added). Move the AA vs AI guide to `/ib/aa-vs-ai` using the existing `src/components/home/*` sections unchanged.
 
 ## Done when
-- [ ] Curriculum picker chips; choice saved in `localStorage` inside try/catch; page works with storage blocked
-- [ ] Courses for the chosen curriculum grouped by level, each row links to the course `href`
-- [ ] "Recently added" shows the 6 newest resources by `addedOn`
-- [ ] IB block links to `/ib/aa-vs-ai`; that page renders the 9 existing sections and has its own metadata
-- [ ] Server-rendered first paint shows all curricula (no blank state before JS)
-- [ ] Text follows AGENTS.md content rules (no filler, no em-dash)
-- [ ] No existing URL changed; `npm run build` passes
-- [ ] Only the Touches files changed
+- [x] Curriculum picker chips; choice saved in `localStorage` inside try/catch; page works with storage blocked
+- [x] Courses for the chosen curriculum grouped by level, each row links to the course `href`
+- [x] "Recently added" shows the 6 newest resources by `addedOn`
+- [x] IB block links to `/ib/aa-vs-ai`; that page renders the 9 existing sections and has its own metadata
+- [x] Server-rendered first paint shows all curricula (no blank state before JS)
+- [x] Text follows AGENTS.md content rules (no filler, no em-dash)
+- [x] No existing URL changed; `npm run build` passes
+- [x] Only the Touches files changed
 
 ## Gates (T2)
 - G1 scope: diff only touches the paths above
@@ -36,3 +37,5 @@ Replace the homepage with a simple learning home (curriculum picker, courses by 
 `/` on desktop and phone, switching curriculum, reload keeps the choice, `/ib/aa-vs-ai`.
 
 ## Feedback
+Built 2026-11-16: `/` is the learning home (curriculum chips, courses by grade, Recently added); guide at `/ib/aa-vs-ai` (200, own metadata, 9 sections unchanged). Chip choice stored in localStorage inside try/catch. First paint shows all curricula. Screenshots at 1280 and 375 checked.
+Not verified by agent: keyboard-only walk, screen reader, real phone. G5 fresh review pending.
