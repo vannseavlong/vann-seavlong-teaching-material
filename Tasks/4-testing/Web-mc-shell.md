@@ -14,16 +14,16 @@
 New site chrome for a multi-curriculum site: semantic colour tokens, navbar (Browse, Practice, Reference, Search) with a mobile menu, footer, a props-only Breadcrumbs component, neutral site name and metadata, 404 and error pages.
 
 ## Done when
-- [ ] Semantic tokens from the plan added to `@theme`; old `aa-*` `ai-*` `navy-*` tokens unchanged
-- [ ] Navbar: brand, Browse, Practice, Reference, Search button (stub that links to `/search`); menu button under `md`; A4 toggle still shows on worksheets and review
-- [ ] Navbar links still keep `?mode=` per `withMode()` rules
-- [ ] Footer lists curricula from the catalog plus Practice and Reference
-- [ ] `Breadcrumbs` takes `items: {label, href?}[]`, renders `nav aria-label="Breadcrumb"` with an ordered list, truncates middle items on mobile
-- [ ] Site name, title, description, keywords and OG/Twitter text no longer say IB only
-- [ ] `not-found.tsx` with search and browse links; `error.tsx` with retry
-- [ ] No horizontal scroll at 360px width; focus ring visible on every nav control
-- [ ] No existing URL changed; `npm run build` passes
-- [ ] Only the Touches files changed
+- [x] Semantic tokens from the plan added to `@theme`; old `aa-*` `ai-*` `navy-*` tokens unchanged
+- [x] Navbar: brand, Browse, Practice, Reference, Search button (stub that links to `/search`); menu button under `md`; A4 toggle still shows on worksheets and review
+- [x] Navbar links still keep `?mode=` per `withMode()` rules
+- [x] Footer lists curricula from the catalog plus Practice and Reference
+- [x] `Breadcrumbs` takes `items: {label, href?}[]`, renders `nav aria-label="Breadcrumb"` with an ordered list, truncates middle items on mobile
+- [x] Site name, title, description, keywords and OG/Twitter text no longer say IB only
+- [x] `not-found.tsx` with search and browse links; `error.tsx` with retry
+- [x] No horizontal scroll at 360px width; focus ring visible on every nav control
+- [x] No existing URL changed; `npm run build` passes
+- [x] Only the Touches files changed
 
 ## Gates (T2)
 - G1 scope: diff only touches the paths above
@@ -39,3 +39,4 @@ New site chrome for a multi-curriculum site: semantic colour tokens, navbar (Bro
 Header and footer on any page, mobile menu at phone width, `/does-not-exist`.
 
 ## Feedback
+Built 2026-11-16: `npm run build` passes (all existing routes prerendered), eslint clean on touched files. Footer and breadcrumbs link to `/curricula/<id>`, `/browse`, `/practice`, `/reference`, `/search`: those routes arrive with group B tasks; until then they 404 (now a helpful 404). Not verified in a browser: 360px layout, focus rings, mobile menu (user test).

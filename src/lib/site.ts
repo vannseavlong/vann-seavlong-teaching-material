@@ -5,8 +5,8 @@ export const SITE_URL =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000");
 
-export const SITE_NAME = "IB Math Guide";
-export const SITE_TITLE = "IB Mathematics AA vs AI — Which Path Is Right for You?";
+export const SITE_NAME = "Techie Club";
+export const SITE_TITLE = "Techie Club: lessons, practice and revision papers";
 export const SITE_DESCRIPTION =
-  "A clear, honest guide for Grade 11 IB students choosing between Analysis & Approaches and Applications & Interpretation, with lessons, practice sets and mock papers.";
+  "Lessons, interactive practice, worksheets, revision papers and formula sheets for IB Diploma Mathematics AA and AI, AIA Mathematics and more.";
 export const AUTHOR = "VANN Seavlong";

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { SITE_NAME } from "@/lib/site";
 
-export const alt = "IB Mathematics AA vs AI — lessons, practice and mock papers";
+export const alt = "Techie Club: lessons, practice and revision papers";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -26,19 +26,19 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", fontSize: 88, fontWeight: 700, lineHeight: 1.05 }}>
-            IB Mathematics
+            Learn, practise,
           </div>
           <div style={{ display: "flex", fontSize: 88, fontWeight: 700, lineHeight: 1.05, color: "#7fb2ea" }}>
-            AA vs AI
+            revise.
           </div>
           <div style={{ display: "flex", fontSize: 32, color: "#c5d3e6", marginTop: 28, maxWidth: 900 }}>
-            Choose your pathway, then study it: lessons, practice sets and mock papers.
+            Lessons, interactive practice, revision papers and formula sheets.
           </div>
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
           <div style={{ display: "flex", gap: 16 }}>
-            {["Analysis & Approaches", "Applications & Interpretation"].map((t) => (
+            {["IB Diploma", "AIA", "Mathematics"].map((t) => (
               <div
                 key={t}
                 style={{

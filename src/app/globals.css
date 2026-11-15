@@ -40,6 +40,19 @@
   --color-phys-bg: #fff7ed;
   --color-phys-text: #7c2d12;
 
+  /* Semantic tokens: new components use only these. Plan: Tasks/_plans/Web-multi-curriculum.md */
+  --color-ink: #1a365d;
+  --color-ink-body: #2d3748;
+  --color-ink-muted: #4a5568;
+  --color-ink-faint: #718096;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f7fafc;
+  --color-line: #e2e8f0;
+  --color-line-strong: #cbd5e0;
+  --color-accent: #2b6cb0;
+  --color-accent-strong: #2a4365;
+  --color-accent-soft: #ebf4ff;
+
   --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 

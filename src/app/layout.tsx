@@ -21,8 +21,10 @@ export const metadata: Metadata = {
     "IB Mathematics",
     "Analysis and Approaches",
     "Applications and Interpretation",
-    "IB AA vs AI",
-    "IB math lessons",
+    "AIA Mathematics",
+    "math lessons",
+    "practice papers",
+    "formula sheets",
   ],
   openGraph: {
     type: "website",
