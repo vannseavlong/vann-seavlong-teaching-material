@@ -18,3 +18,5 @@ Work that wave 1 deliberately left out. Turn each row into a task in `2-todo/` w
 | First non-IB course content | Course chosen by owner (plan Open question 3). | T1 to T2 |
 | Quizzes and tests | New resource kinds already exist in the model; needs a UI. | T2 |
 | Decolor lessons and practice | Existing backlog T-0001. | T1 |
+| Lesson pages scroll sideways on phones | At 375px `/aa/unit-1/lesson` is 538px wide, `/aa/unit-3/lesson` 693px, `/ai/unit-1/lesson` 697px (wide tables, long KaTeX lines, SVG). Pre-existing, inside lesson bodies. Fix with the lesson kit (overflow-x wrappers). | T1 |
+| FormulaSheet reading component | Planned in Web-mc-search-reference; build with the first data-driven formula sheet. | T1 |

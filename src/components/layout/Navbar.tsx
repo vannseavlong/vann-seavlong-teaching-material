@@ -10,6 +10,7 @@ import ModeToggle from "./ModeToggle";
 import SearchButton from "@/components/search/SearchButton";
 import { supportsA4, withMode } from "@/lib/display-mode";
 import { SITE_NAME } from "@/lib/site";
+import type { SearchEntry } from "@/lib/catalog/types";
 
 type NavItem = {
   label: string;
@@ -27,7 +28,7 @@ const mainNav: NavItem[] = [
 const isActive = (pathname: string, item: NavItem) =>
   item.match.some((p) => pathname === p || pathname.startsWith(p + "/"));
 
-export default function Navbar() {
+export default function Navbar({ searchEntries }: { searchEntries?: SearchEntry[] }) {
   const pathname = usePathname();
   const { mode } = useDisplayMode();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -70,7 +71,7 @@ export default function Navbar() {
         </ul>
 
         {supportsA4(pathname) && <ModeToggle />}
-        <SearchButton />
+        <SearchButton entries={searchEntries} />
 
         <button
           type="button"

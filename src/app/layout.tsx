@@ -6,6 +6,7 @@ import "katex/dist/katex.min.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Inter } from "next/font/google";
+import { searchIndex } from "@/lib/catalog";
 import { AUTHOR, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -53,7 +54,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased" suppressHydrationWarning>
         <ModeProvider>
-          <Navbar />
+          <Navbar searchEntries={searchIndex()} />
           {children}
           <Footer />
           {/* Floating calculator widget (https://bubble-calculator.web.app), web mode only */}
