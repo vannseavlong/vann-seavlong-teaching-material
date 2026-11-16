@@ -69,21 +69,33 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
     ]),
   );
 
+  const f = paper.frame;
+  const showLesson = !f || paper.lessonHref;
+  const sectionNote = (s: "A" | "B") =>
+    f?.sectionNotes?.[s] ??
+    (s === "A"
+      ? "Answer all questions. Answers must be written within the answer boxes provided."
+      : "Answer all questions in the answer booklet provided. Please start each question on a new page.");
+
   return (
     <AnswerRevealProvider>
       <main className="min-h-screen pt-16">
         <PaperHero
           topic={paper.topic}
-          course="AI SL — Unit 1 Number &amp; Algebra"
+          backHref={f?.backHref}
+          backLabel={f ? "← Course" : undefined}
+          course={f?.heroCourse ?? "AI SL — Unit 1 Number & Algebra"}
           title={paper.title}
           subtitle={`${paper.subtitle} — Exercise & Answer Sheet`}
           stats={`${paper.questions.length} Questions · ${total} Marks · ~${paper.minutes} min`}
-          note="GDC allowed. Attempt each part, then tap Show Answer to check against the worked solution."
+          note={f?.note ?? "GDC allowed. Attempt each part, then tap Show Answer to check against the worked solution."}
           meta={`${total} marks · ${paper.questions.length} questions`}
           extra={
+            showLesson && (
             <Link href={`${paper.lessonHref ?? "/ai/unit-1/lesson"}#${paper.lessonAnchor}`} className="a4-hide print:hidden text-sm text-sky-300 hover:underline">
               Revise the lesson →
             </Link>
+            )
           }
         />
 
@@ -91,11 +103,11 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
 
         <PaperSheet
           title={`${paper.title} — ${paper.subtitle}`}
-          course="IB Mathematics: Applications and Interpretation"
-          level="Standard Level — Summative Revision"
+          course={f?.sheetCourse ?? "IB Mathematics: Applications and Interpretation"}
+          level={f?.sheetLevel ?? "Standard Level — Summative Revision"}
           duration={`${paper.minutes} minutes`}
           marks={total}
-          instructions={["Answer all questions.", "Show all working; a GDC may be used.", "Give non-exact answers correct to 3 significant figures unless told otherwise."]}
+          instructions={f?.instructions ?? ["Answer all questions.", "Show all working; a GDC may be used.", "Give non-exact answers correct to 3 significant figures unless told otherwise."]}
         >
           <section id="exercise" className="scroll-mt-28">
             <PartHeader
@@ -111,11 +123,7 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
                 {q.section && q.section !== paper.questions[qi - 1]?.section && (
                   <div className="mt-10 mb-2 border-b border-slate-300 pb-2">
                     <h2 className="text-xl font-bold text-navy-900">Section {q.section}</h2>
-                    <p className="text-sm text-slate-600">
-                      {q.section === "A"
-                        ? "Answer all questions. Answers must be written within the answer boxes provided."
-                        : "Answer all questions in the answer booklet provided. Please start each question on a new page."}
-                    </p>
+                    <p className="text-sm text-slate-600">{sectionNote(q.section)}</p>
                   </div>
                 )}
                 <QuestionBanner n={q.n} marks={questionMarks(q)} />
@@ -203,7 +211,11 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
           </section>
 
           <SummaryTable rows={summaryRows} />
-          <PaperFooterNav paperLabel={`${paper.title} — ${paper.subtitle}`} />
+          <PaperFooterNav
+            paperLabel={`${paper.title} — ${paper.subtitle}`}
+            backHref={f?.backHref}
+            backLabel={f?.backLabel}
+          />
         </PaperSheet>
       </main>
     </AnswerRevealProvider>

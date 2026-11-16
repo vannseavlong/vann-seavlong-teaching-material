@@ -223,14 +223,22 @@ export function StickyPaperNav() {
   );
 }
 
-export function PaperFooterNav({ paperLabel }: { paperLabel: string }) {
+export function PaperFooterNav({
+  paperLabel,
+  backHref = "/review",
+  backLabel = "← All Review Papers",
+}: {
+  paperLabel: string;
+  backHref?: string;
+  backLabel?: string;
+}) {
   return (
     <div className="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
       <Link
-        href="/review"
+        href={backHref}
         className="print:hidden a4-hide text-sm text-slate-500 hover:text-aa-primary font-medium transition-colors"
       >
-        ← All Review Papers
+        {backLabel}
       </Link>
       <p className="text-xs text-slate-400">{paperLabel}</p>
     </div>
@@ -249,7 +257,11 @@ export function PaperHero({
   note,
   meta,
   extra,
+  backHref = "/review",
+  backLabel = "← Review",
 }: {
+  backHref?: string;
+  backLabel?: string;
   topic: string;
   course: string;
   title: string;
@@ -263,8 +275,8 @@ export function PaperHero({
     <div className="bg-[#1e3a5f] text-white py-10 px-6 print:hidden">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-wrap items-center gap-3 mb-3">
-          <Link href="/review" className="a4-hide text-sky-300 text-xs font-bold uppercase tracking-widest hover:underline">
-            ← Review
+          <Link href={backHref} className="a4-hide text-sky-300 text-xs font-bold uppercase tracking-widest hover:underline">
+            {backLabel}
           </Link>
           <span className="a4-hide text-white/30">|</span>
           <span className="text-xs bg-white/15 text-white px-2.5 py-1 rounded-full font-semibold">{topic}</span>

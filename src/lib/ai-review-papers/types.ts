@@ -55,6 +55,25 @@ export type ReviewQuestion = {
   parts: ReviewPart[];
 };
 
+/** Header text for papers outside IB AI SL (e.g. AIA tests). Omit for IB AI papers to keep their defaults. */
+export type PaperFrame = {
+  /** Course line in the web hero */
+  heroCourse: string;
+  /** Course line on the printed A4 header */
+  sheetCourse: string;
+  /** Level line on the printed A4 header */
+  sheetLevel: string;
+  /** Note under the hero stats */
+  note: string;
+  /** Bullets on the printed A4 header */
+  instructions: string[];
+  /** Line under each section heading */
+  sectionNotes?: Partial<Record<"A" | "B", string>>;
+  /** Footer back link */
+  backHref: string;
+  backLabel: string;
+};
+
 export type AiReviewPaper = {
   slug: string;
   /** Revision session number (1-based) */
@@ -69,6 +88,8 @@ export type AiReviewPaper = {
   lessonHref?: string;
   /** Credit line for questions adapted from another author; shown above the exercise and in the PDF export */
   source?: string;
+  /** Non-IB header text; when set, the lesson link is hidden unless lessonHref is given */
+  frame?: PaperFrame;
   questions: ReviewQuestion[];
 };
 

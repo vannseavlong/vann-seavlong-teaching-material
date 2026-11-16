@@ -1,7 +1,26 @@
 // AIA content. Add units to a course and resources below as materials are written.
-import type { ContentPack } from "@/lib/catalog/types";
+import type { ContentPack, Resource } from "@/lib/catalog/types";
+import { aiaTests } from "@/lib/aia-tests";
+import { paperMarks } from "@/lib/ai-review-papers/types";
 
 export const AIA = "aia";
+
+const testResources: Resource[] = aiaTests.map(({ courseId, addedOn, calculator, paper }) => ({
+  id: `aia-${paper.slug}`,
+  kind: "test",
+  title: paper.title,
+  description: `${paper.topic}.`,
+  courseId,
+  href: `/review/aia/${paper.slug}`,
+  status: "available",
+  marks: paperMarks(paper),
+  questionCount: paper.questions.length,
+  durationMinutes: paper.minutes,
+  calculator,
+  hasAnswers: true,
+  printable: true,
+  addedOn,
+}));
 
 const aia: ContentPack = {
   curricula: [
@@ -28,7 +47,7 @@ const aia: ContentPack = {
       description: "Lessons and practice for AIA Grade 6 Mathematics.",
       href: "/courses/aia-g6-math",
       units: [],
-      status: "coming-soon",
+      status: "available",
     },
     {
       id: "aia-g9-math",
@@ -40,10 +59,10 @@ const aia: ContentPack = {
       description: "Lessons and practice for AIA Grade 9 Mathematics.",
       href: "/courses/aia-g9-math",
       units: [],
-      status: "coming-soon",
+      status: "available",
     },
   ],
-  resources: [],
+  resources: testResources,
 };
 
 export default aia;
