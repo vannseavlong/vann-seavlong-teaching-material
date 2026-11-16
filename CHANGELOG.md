@@ -2,6 +2,12 @@
 
 Merges to `main` across all projects, newest first. Tags: `[Web]`. Format and rules: `Tasks/README.md`.
 
+## 2026-11-16 [Web] Techie Club logo and new OG image
+- Owner: SNLRLONG · Task: Web-brand-logo · Commit: c1f4046
+- New logo (white "T" inside a light-blue "C" on a navy tile) as `LogoMark` in `src/components/ui/Logo.tsx`; shown in the navbar and footer.
+- New favicon.ico, icon.svg and apple-icon.png generated from the same mark.
+- OG image (also used for Twitter) now leads with the logo and wordmark.
+
 ## 2026-11-16 [Web] AIA Grade 6 and Grade 9 mathematics tests
 - Owner: SNLRLONG · Task: Web-aia-tests-g6-g9 · Commit: 358504d
 - New tests `/review/aia/g6-test-1` (no calculator, 60 min, 61 marks) and `/review/aia/g9-test-1` (calculator, 75 min, 69 marks), each with worked answers and Export PDF.

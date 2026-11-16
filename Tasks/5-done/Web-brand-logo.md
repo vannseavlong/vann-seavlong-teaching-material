@@ -13,6 +13,7 @@ Give Techie Club a logo (a "T" inside a "C" on a navy tile) and use it in the na
 - [x] icon.svg, apple-icon.png (180 px), favicon.ico (16/32/48) generated from the same mark
 - [x] OG image (also used for Twitter) leads with the logo and wordmark
 - [x] `npm run build` passes
-- [ ] User checks navbar, footer, browser tab icon and a link preview after deploy
+- [x] User checks navbar, footer, browser tab icon and a link preview after deploy
 
 ## Feedback
+- 2026-11-16: approved by owner, pushed to main.
