@@ -10,6 +10,7 @@ import ModeToggle from "./ModeToggle";
 import SearchButton from "@/components/search/SearchButton";
 import { supportsA4, withMode } from "@/lib/display-mode";
 import { SITE_NAME } from "@/lib/site";
+import { LogoMark } from "@/components/ui/Logo";
 import type { SearchEntry } from "@/lib/catalog/types";
 
 type NavItem = {
@@ -49,7 +50,8 @@ export default function Navbar({ searchEntries }: { searchEntries?: SearchEntry[
   return (
     <nav aria-label="Main" className="fixed top-0 left-0 right-0 z-50 bg-surface border-b border-line">
       <div className="max-w-[1200px] mx-auto flex items-center gap-3 px-4 sm:px-6 h-14">
-        <Link href={withMode("/", mode)} className="font-semibold text-base text-ink whitespace-nowrap mr-auto md:mr-4">
+        <Link href={withMode("/", mode)} className="flex items-center gap-2 font-semibold text-base text-ink whitespace-nowrap mr-auto md:mr-4">
+          <LogoMark size={28} />
           {SITE_NAME}
         </Link>
 

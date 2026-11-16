@@ -1,13 +1,17 @@
 import Link from "next/link";
 import { curricula } from "@/lib/catalog";
 import { AUTHOR, SITE_NAME } from "@/lib/site";
+import { LogoMark } from "@/components/ui/Logo";
 
 export default function Footer() {
   return (
     <footer className="print:hidden bg-navy-900 text-white/70 py-10 px-4 sm:px-6 text-sm">
       <div className="max-w-[1100px] mx-auto grid gap-8 sm:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <p className="font-semibold text-white">{SITE_NAME}</p>
+          <p className="flex items-center gap-2 font-semibold text-white">
+            <LogoMark size={28} className="rounded-[7px] ring-1 ring-white/25" />
+            {SITE_NAME}
+          </p>
           <p className="mt-1 max-w-xs">Lessons, practice, revision papers and formula sheets for the courses I teach.</p>
         </div>
         <nav aria-label="Curricula">
