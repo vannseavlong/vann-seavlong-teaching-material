@@ -13,6 +13,7 @@ First AIA materials: one mixed-topics test each for Grade 6 (no calculator, 60 m
 - [x] Tests at /review/aia/g6-test-1 and /review/aia/g9-test-1, listed on the AIA course pages, /practice and search
 - [x] AIA Grade 6 and Grade 9 courses set to available
 - [x] Every answer verified numerically; no em-dash; `npm run build` passes
-- [ ] User checks both tests (web, A4 mode, Export PDF Q and Q&A)
+- [x] User checks both tests (web, A4 mode, Export PDF Q and Q&A)
 
 ## Feedback
+- 2026-11-16: approved by owner, pushed to main.

@@ -2,6 +2,12 @@
 
 Merges to `main` across all projects, newest first. Tags: `[Web]`. Format and rules: `Tasks/README.md`.
 
+## 2026-11-16 [Web] AIA Grade 6 and Grade 9 mathematics tests
+- Owner: SNLRLONG · Task: Web-aia-tests-g6-g9 · Commit: 358504d
+- New tests `/review/aia/g6-test-1` (no calculator, 60 min, 61 marks) and `/review/aia/g9-test-1` (calculator, 75 min, 69 marks), each with worked answers and Export PDF.
+- Optional `PaperFrame` on review papers lets non-IB tests reuse `DataPaper`; IB AI papers unchanged.
+- AIA Grade 6 and Grade 9 courses now available; tests listed on course pages, `/practice` and search.
+
 ## 2026-11-09 [Web] AI Unit 3 trigonometry in shapes, harder 3D sheet
 - Owner: SNLRLONG · Task: Web-ai-u3-shapes-3d-paper (T-0066)
 - New exercise sheet `/review/ai-sl/trig-shapes-3d` (session 33, 6 questions, 62 marks): tent prism, hexagonal prism, rhombus-based pyramid, cone from a sector, cuboid triangle, hexagonal gazebo roof.
