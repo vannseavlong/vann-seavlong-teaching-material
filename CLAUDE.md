@@ -9,6 +9,7 @@ Content is organised as **Curriculum → Course → Unit → Topic → Resource*
 - **Styling:** Tailwind CSS v4 (inline `@theme` tokens in `globals.css`)
 - **Math rendering:** KaTeX v0.16 via `src/components/ui/Math.tsx` (`InlineMath`, `BlockMath`). CSS imported in `layout.tsx`.
 - **Location:** `/home/longcelot/TeachingMaterial/IB/teaching-material-ib/` // This depend on the machine that work on this.
+- **UI primitives:** shadcn (Radix) in `src/components/shadcn` (Select, Dialog, Command, Sheet, Collapsible, Accordion, DropdownMenu, ToggleGroup). Do not use native `<select>`, `<dialog>`, `<details>` or `type="search"` inputs; use these, or `Reveal` (`src/components/ui/Reveal.tsx`) for show/hide solutions.
 - **Package manager:** npm
 - **Build:** `npm run build` / **Dev:** `npm run dev`
 

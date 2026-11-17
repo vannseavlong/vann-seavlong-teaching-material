@@ -2,6 +2,20 @@
 
 Merges to `main` across all projects, newest first. Tags: `[Web]`. Format and rules: `Tasks/README.md`.
 
+## 2026-11-17 [Web] UI audit: shadcn components, phone layout and maths fixes
+- Owner: SNLRLONG · Task: Tasks/5-done/Web-ui-shadcn-audit.md
+- Native dropdowns, dialogs, search inputs and show/hide blocks replaced with shadcn (Radix) components: filters, search palette (`/`, Ctrl+K), mobile menu and course "Units" sheets, Export PDF menu, FAQ, Reveal Solution.
+- No page scrolls sideways on phones any more (lesson steps, long maths, worksheet labels); papers render `\[ \]` maths inside text (graph-theory Q5 showed raw LaTeX).
+- Smaller fixes: navbar gap above papers, focus boxes inside components, clock emoji, "NOTswitch".
+- Needs: `npm install` (new deps: radix-ui, cmdk, lucide-react, clsx, tailwind-merge, class-variance-authority, tw-animate-css).
+
+## 2026-11-16 [Web] Multi-curriculum Techie Club site
+- Owner: SNLRLONG · Tasks: Web-mc-catalog, -shell, -sidebar, -browse, -home, -materials, -search-reference, -qa · Commits: af2d4c5 to d215a6b
+- Content model Curriculum, Course, Unit, Topic, Resource (`src/content`, `src/lib/catalog`, `Docs/architecture/content-model.md`); IB DP, AIA and Others.
+- New learning home, /browse, /curricula, /courses, /practice, /reference, search; AA vs AI guide moved to /ib/aa-vs-ai; sitemap and robots.
+- All 75 pre-migration URLs still work (route audit script).
+- Needs: none
+
 ## 2026-11-16 [Web] Techie Club logo and new OG image
 - Owner: SNLRLONG · Task: Web-brand-logo · Commit: c1f4046
 - New logo (white "T" inside a light-blue "C" on a navy tile) as `LogoMark` in `src/components/ui/Logo.tsx`; shown in the navbar and footer.

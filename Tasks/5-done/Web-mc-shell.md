@@ -2,7 +2,6 @@
 
 - **ID:** T-0068
 - **Owner:** SNLRLONG
-- **Claimed by:** claude, 2026-11-16
 - **Started / updated:** 2026-11-16 / 2026-11-16
 - **Due:** none
 - **Tier:** T2 · edits shared layout components and globals.css

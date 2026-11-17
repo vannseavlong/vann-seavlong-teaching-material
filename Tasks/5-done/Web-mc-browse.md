@@ -2,7 +2,6 @@
 
 - **ID:** T-0070
 - **Owner:** SNLRLONG
-- **Claimed by:** claude, 2026-11-16
 - **Started / updated:** 2026-11-16 / 2026-11-16
 - **Due:** none
 - **Tier:** T2 · new routes, replaces shared CurriculumPage

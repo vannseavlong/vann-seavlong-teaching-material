@@ -2,7 +2,6 @@
 
 - **ID:** T-0071
 - **Owner:** SNLRLONG
-- **Claimed by:** claude, 2026-11-16
 - **Started / updated:** 2026-11-16 / 2026-11-16
 - **Due:** none
 - **Tier:** T2 · replaces the homepage route
