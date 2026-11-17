@@ -3,9 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowDown01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import { ArrowRight01Icon, Book02Icon } from "@hugeicons/core-free-icons";
 import type { SidebarTree } from "@/lib/sidebar-data";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/shadcn/collapsible";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/shadcn/sheet";
+import { NAV_COURSE_SLOT } from "./Navbar";
 
 function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void }) {
   const pathname = usePathname();
@@ -14,8 +18,8 @@ function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void
   const [manual, setManual] = useState<Record<number, boolean>>({});
 
   // Highlight the lesson topic in view (IntersectionObserver) or from the hash.
+  // State resets per page: SidebarNav keys <Tree> by pathname.
   useEffect(() => {
-    setActiveId(null);
     const ids = tree.units
       .flatMap((u) => u.items)
       .filter((i) => i.anchor && i.href?.split("#")[0] === pathname)
@@ -61,7 +65,7 @@ function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void
             : "text-navy-900 hover:bg-slate-50"
         }`}
       >
-        {tree.shortName} Curriculum
+        Maths {tree.shortName} overview
       </Link>
       <ul className="space-y-1">
         {tree.units.map((u) => {
@@ -70,17 +74,14 @@ function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void
           const panelId = `unit-${tree.pathway}-${u.unit}`;
           return (
             <li key={u.unit} className="mt-3">
-              <button
-                type="button"
-                onClick={() => setManual((m) => ({ ...m, [u.unit]: !open }))}
-                aria-expanded={open}
-                aria-controls={panelId}
-                className={`w-full flex items-center gap-1.5 px-3 py-1.5 rounded-md text-left text-xs uppercase tracking-wide hover:bg-slate-50 ${inUnit ? "font-semibold text-navy-900" : "font-medium text-slate-500"}`}
+              <Collapsible open={open} onOpenChange={(o) => setManual((m) => ({ ...m, [u.unit]: o }))}>
+              <CollapsibleTrigger
+                className={`group w-full flex items-center gap-1.5 px-3 py-1.5 rounded-md text-left text-xs uppercase tracking-wide hover:bg-slate-50 ${inUnit ? "font-semibold text-navy-900" : "font-medium text-slate-500"}`}
               >
-                <HugeiconsIcon icon={open ? ArrowDown01Icon : ArrowRight01Icon} size={14} strokeWidth={2} className="shrink-0" />
+                <HugeiconsIcon icon={ArrowRight01Icon} size={14} strokeWidth={2} className="shrink-0 transition-transform group-data-[state=open]:rotate-90" />
                 <span>Unit {u.unit}: {u.title}</span>
-              </button>
-              {open && (
+              </CollapsibleTrigger>
+              <CollapsibleContent>
                 <ul id={panelId} className="ml-3 mt-1 border-l border-slate-200 space-y-0.5">
                   {u.items.map((item, idx) => {
                     const active = item.anchor
@@ -124,7 +125,8 @@ function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void
                     );
                   })}
                 </ul>
-              )}
+              </CollapsibleContent>
+              </Collapsible>
             </li>
           );
         })}
@@ -133,35 +135,52 @@ function Tree({ tree, onNavigate }: { tree: SidebarTree; onNavigate?: () => void
   );
 }
 
+/** Mobile trigger lives in the navbar slot; the tree opens in a left sheet. Desktop: fixed left column. */
 export default function SidebarNav({ tree }: { tree: SidebarTree }) {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [slot, setSlot] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- the navbar slot exists only after mount
+    setSlot(document.getElementById(NAV_COURSE_SLOT));
+  }, []);
+
   return (
     <>
-      {/* Mobile toggle */}
-      <button
-        type="button"
-        onClick={() => setMobileOpen((o) => !o)}
-        aria-expanded={mobileOpen}
-        aria-controls="docs-sidebar"
-        className="a4-hide lg:hidden fixed bottom-4 left-4 z-40 rounded-full bg-aa-primary text-white text-sm font-medium px-4 py-2 shadow"
-      >
-        {mobileOpen ? "Close menu" : "Units menu"}
-      </button>
-      {mobileOpen && (
-        <div
-          className="a4-hide lg:hidden fixed inset-0 top-14 z-30 bg-black/30"
-          onClick={() => setMobileOpen(false)}
-          aria-hidden
-        />
-      )}
+      {slot &&
+        createPortal(
+          <button
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            className="a4-hide flex items-center gap-1.5 rounded-md border border-line px-2.5 py-1.5 text-sm text-ink-muted hover:border-line-strong hover:text-ink"
+          >
+            <HugeiconsIcon icon={Book02Icon} size={16} strokeWidth={1.8} />
+            Units
+          </button>,
+          slot
+        )}
+
+      <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+        <SheetContent side="left" className="w-80 max-w-[85vw] gap-0 p-0 lg:hidden">
+          <SheetHeader className="border-b border-line px-4 py-3">
+            <SheetTitle className="text-ink">Maths {tree.shortName}</SheetTitle>
+            <SheetDescription className="sr-only">Units, lesson topics and practice</SheetDescription>
+          </SheetHeader>
+          <div className="overflow-y-auto p-3">
+            <Suspense fallback={null}>
+              <Tree key={pathname} tree={tree} onNavigate={() => setMobileOpen(false)} />
+            </Suspense>
+          </div>
+        </SheetContent>
+      </Sheet>
+
       <aside
         id="docs-sidebar"
-        className={`a4-hide fixed top-14 bottom-0 left-0 z-30 w-64 overflow-y-auto bg-white border-r border-slate-200 p-3 transition-transform lg:translate-x-0 ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className="a4-hide hidden lg:block fixed top-14 bottom-0 left-0 z-30 w-64 overflow-y-auto bg-white border-r border-slate-200 p-3"
       >
         <Suspense fallback={null}>
-          <Tree tree={tree} onNavigate={() => setMobileOpen(false)} />
+          <Tree key={pathname} tree={tree} />
         </Suspense>
       </aside>
     </>

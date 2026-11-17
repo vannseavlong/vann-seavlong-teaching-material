@@ -1,5 +1,5 @@
 // Types and helpers for the AI SL summative revision papers.
-// Text conventions (see RichText in DataPaper.tsx): \( ... \) inline KaTeX, \[ ... \] block KaTeX (whole string).
+// Text conventions (see RichText in DataPaper.tsx): \( ... \) inline KaTeX; \[ ... \] display KaTeX, either the whole string or inside text (renders on its own line).
 // Plain "$" is a dollar sign. `final` strings are plain text (no LaTeX).
 
 export type ReviewPart = {

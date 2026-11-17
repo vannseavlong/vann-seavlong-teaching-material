@@ -6,6 +6,7 @@ import { BlockMath } from "@/components/ui/Math";
 import { ProblemVisual, type Visual } from "./FinanceVisuals";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Idea01Icon } from "@hugeicons/core-free-icons";
+import Reveal from "@/components/ui/Reveal";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -760,15 +761,16 @@ function ProblemCard({
         <ProblemBody problem={problem} />
 
         {problem.hint && (
-          <details className="mb-4 group">
-            <summary className="list-none cursor-pointer text-xs font-semibold text-ai-primary hover:underline w-fit select-none">
-              <span className="group-open:hidden"><HugeiconsIcon icon={Idea01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" />Show hint</span>
-              <span className="hidden group-open:inline"><HugeiconsIcon icon={Idea01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" />Hide hint</span>
-            </summary>
+          <Reveal
+            label={<><HugeiconsIcon icon={Idea01Icon} size={16} strokeWidth={1.8} className="mr-1" />Show hint</>}
+            openLabel={<><HugeiconsIcon icon={Idea01Icon} size={16} strokeWidth={1.8} className="mr-1" />Hide hint</>}
+            className="mb-4"
+            triggerClassName="w-fit text-xs text-ai-primary"
+          >
             <div className="mt-2 bg-warn-bg border border-warn-primary rounded-lg px-4 py-3 text-sm text-navy-900">
               {problem.hint}
             </div>
-          </details>
+          </Reveal>
         )}
 
         <div>
@@ -832,15 +834,15 @@ function AnswerCompareCard({
         <DifficultyBadge level={problem.difficulty} />
       </div>
 
-      <details className="border-b border-slate-100 bg-slate-50 group">
-        <summary className="cursor-pointer select-none px-6 py-2.5 text-xs font-semibold text-slate-500 hover:text-navy-900">
-          <span className="group-open:hidden">Show question again</span>
-          <span className="hidden group-open:inline">Hide question</span>
-        </summary>
-        <div className="px-6 pt-2 pb-4">
-          <ProblemBody problem={problem} />
-        </div>
-      </details>
+      <Reveal
+        label="Show question again"
+        openLabel="Hide question"
+        className="border-b border-slate-100 bg-slate-50"
+        triggerClassName="px-6 py-2.5 text-xs text-slate-500 hover:text-navy-900 hover:no-underline"
+        contentClassName="px-6 pt-2 pb-4"
+      >
+        <ProblemBody problem={problem} />
+      </Reveal>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
         <div className="px-6 py-5">

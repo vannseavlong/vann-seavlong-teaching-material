@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 import HighlightBox from "@/components/ui/HighlightBox";
 import { BlockMath, InlineMath } from "@/components/ui/Math";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Task01Icon } from "@hugeicons/core-free-icons";
+import { Clock01Icon, Task01Icon } from "@hugeicons/core-free-icons";
+import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Unit 1: Algebra — AA Lesson | IB Mathematics AA",
@@ -58,7 +59,7 @@ function StepBox({ n, children }: { n: number; children: ReactNode }) {
       <span className="flex-shrink-0 w-7 h-7 rounded-full bg-aa-primary text-white text-sm font-bold flex items-center justify-center mt-0.5">
         {n}
       </span>
-      <div className="flex-1 text-slate-500 leading-relaxed">{children}</div>
+      <div className="flex-1 min-w-0 text-slate-500 leading-relaxed">{children}</div>
     </div>
   );
 }
@@ -96,19 +97,18 @@ function Practice({
         </p>
         <div className="text-navy-900">{problem}</div>
       </div>
-      <details className="bg-warn-bg">
-        <summary className="list-none cursor-pointer px-6 py-3 border-t border-warn-primary">
-          <span className="text-sm font-semibold text-aa-primary hover:underline">
-            ▶ Reveal Solution
-          </span>
-        </summary>
-        <div className="px-6 pb-6 pt-4 border-t border-warn-primary">
+      <Reveal
+        label="Reveal Solution"
+        openLabel="Hide Solution"
+        className="bg-warn-bg"
+        triggerClassName="px-6 py-3 border-t border-warn-primary text-aa-primary"
+        contentClassName="px-6 pb-6 pt-4 border-t border-warn-primary"
+      >
           <p className="text-xs font-bold uppercase tracking-wider text-aa-text mb-3">
             Solution
           </p>
           <div className="text-slate-500 space-y-2">{answer}</div>
-        </div>
-      </details>
+      </Reveal>
     </div>
   );
 }
@@ -163,8 +163,8 @@ function LessonHero() {
         </p>
 
         <div className="flex gap-6 text-sm text-aa-light flex-wrap">
-          <span>⏱ SL: 19 hours</span>
-          <span>⏱ HL: 39 hours</span>
+          <span><HugeiconsIcon icon={Clock01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" />SL: 19 hours</span>
+          <span><HugeiconsIcon icon={Clock01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" />HL: 39 hours</span>
           <span><HugeiconsIcon icon={Task01Icon} size={16} strokeWidth={1.8} className="inline-block align-text-bottom mr-1" /> 11 topics</span>
         </div>
       </div>

@@ -6,6 +6,7 @@
 // content in <AnswerRevealProvider> and use these pieces from PaperKit.tsx.
 
 import { createContext, useContext, useState, type ReactNode } from "react";
+import { ChevronDownIcon } from "lucide-react";
 
 type AnswerRevealContextValue = {
   globalOpen: boolean;
@@ -91,7 +92,8 @@ export function AnswerToggleButton({ id }: { id: string }) {
           : "bg-aa-primary text-white hover:opacity-90"
       }`}
     >
-      {open ? "Hide Answer ▲" : "Show Answer ▼"}
+      {open ? "Hide Answer" : "Show Answer"}
+      <ChevronDownIcon aria-hidden className={`size-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
     </button>
   );
 }

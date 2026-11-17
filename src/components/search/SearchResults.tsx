@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { SearchEntry } from "@/lib/catalog/types";
+import { Input } from "@/components/shadcn/input";
 import { TYPE_HEADING, groupResults, searchEntries } from "./match";
 
 /** Full results for /search?q= ; the field updates the URL so results can be shared. */
@@ -18,10 +19,12 @@ export default function SearchResults({ entries }: { entries: SearchEntry[] }) {
     <>
       <form role="search" action="/search" onSubmit={(e) => e.preventDefault()} className="pb-5 border-b border-line">
         <label htmlFor="q" className="sr-only">Search</label>
-        <input
+        <Input
           id="q"
           name="q"
-          type="search"
+          type="text"
+          inputMode="search"
+          enterKeyHint="search"
           defaultValue={q}
           autoFocus
           onChange={(e) => {
@@ -29,7 +32,7 @@ export default function SearchResults({ entries }: { entries: SearchEntry[] }) {
             router.replace(v ? `${pathname}?q=${encodeURIComponent(v)}` : pathname, { scroll: false });
           }}
           placeholder="Search courses, topics, papers"
-          className="w-full rounded-md border border-line bg-surface px-4 py-3 text-base text-ink focus:border-accent outline-none"
+          className="h-12 bg-surface px-4 text-base text-ink"
         />
       </form>
       {q && (

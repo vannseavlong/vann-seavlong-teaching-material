@@ -2,6 +2,7 @@
 
 import { Fragment, type ReactNode } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import FilterSelect from "@/components/nav/FilterSelect";
 
 type Option = { id: string; name: string };
 type Row = { id: string; courseId: string; node: ReactNode };
@@ -35,36 +36,11 @@ export default function MaterialsFilter({
     .filter((g) => g.rows.length > 0);
   const total = shown.reduce((n, g) => n + g.rows.length, 0);
 
-  const select = (id: string, label: string, value: string, opts: Option[], all: string) => (
-    <label htmlFor={id} className="flex flex-col gap-1 text-xs font-medium text-ink-muted min-w-0">
-      {label}
-      <select
-        id={id}
-        value={value}
-        onChange={(e) => set(id, e.target.value)}
-        className="w-full rounded-md border border-line bg-surface px-3 py-2 text-sm text-ink focus:border-accent"
-      >
-        <option value="">{all}</option>
-        {opts.map((o) => (
-          <option key={o.id} value={o.id}>
-            {o.name}
-          </option>
-        ))}
-      </select>
-    </label>
-  );
-
   return (
     <>
       <div className="grid gap-3 sm:grid-cols-2 pb-5 border-b border-line">
-        {select("course", "Course", course, courses, "All courses")}
-        {select(
-          "kind",
-          "Type",
-          kind,
-          groups.map((g) => ({ id: g.kind, name: g.heading })),
-          "All types"
-        )}
+        <FilterSelect label="Course" value={course} options={courses} allLabel="All courses" onChange={(v) => set("course", v)} />
+        <FilterSelect label="Type" value={kind} options={groups.map((g) => ({ id: g.kind, name: g.heading }))} allLabel="All types" onChange={(v) => set("kind", v)} />
       </div>
       <p className="mt-4 text-sm text-ink-faint" aria-live="polite">
         {total} material{total === 1 ? "" : "s"}

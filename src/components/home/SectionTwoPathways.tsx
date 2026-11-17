@@ -43,7 +43,7 @@ export default function SectionTwoPathways() {
 
       <HighlightBox variant="red">
         <strong className="text-navy-900">Important:</strong> You do{" "}
-        <strong>NOT</strong> switch between AA and AI once you&apos;ve started. You
+        <strong>NOT</strong>{" "}switch between AA and AI once you&apos;ve started. You
         study one pathway for the full two years. Choose wisely based on your
         strengths and goals.
       </HighlightBox>

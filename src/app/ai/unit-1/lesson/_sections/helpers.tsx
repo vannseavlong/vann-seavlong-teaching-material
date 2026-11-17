@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { InlineMath } from "@/components/ui/Math";
+import Reveal from "@/components/ui/Reveal";
 
 // ─── Reusable page-level helpers ─────────────────────────────────────────────
 
@@ -42,7 +43,7 @@ export function StepBox({ n, children }: { n: number; children: ReactNode }) {
       <span className="flex-shrink-0 w-7 h-7 rounded-full bg-ai-primary text-white text-sm font-bold flex items-center justify-center mt-0.5">
         {n}
       </span>
-      <div className="flex-1 text-slate-500 leading-relaxed">{children}</div>
+      <div className="flex-1 min-w-0 text-slate-500 leading-relaxed">{children}</div>
     </div>
   );
 }
@@ -80,19 +81,18 @@ export function Practice({
         </p>
         <div className="text-navy-900">{problem}</div>
       </div>
-      <details className="bg-warn-bg">
-        <summary className="list-none cursor-pointer px-6 py-3 border-t border-warn-primary">
-          <span className="text-sm font-semibold text-ai-primary hover:underline">
-            ▶ Reveal Solution
-          </span>
-        </summary>
-        <div className="px-6 pb-6 pt-4 border-t border-warn-primary">
+      <Reveal
+        label="Reveal Solution"
+        openLabel="Hide Solution"
+        className="bg-warn-bg"
+        triggerClassName="px-6 py-3 border-t border-warn-primary text-ai-primary"
+        contentClassName="px-6 pb-6 pt-4 border-t border-warn-primary"
+      >
           <p className="text-xs font-bold uppercase tracking-wider text-ai-text mb-3">
             Solution
           </p>
           <div className="text-slate-500 space-y-2">{answer}</div>
-        </div>
-      </details>
+      </Reveal>
     </div>
   );
 }

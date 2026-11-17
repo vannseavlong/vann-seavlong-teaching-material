@@ -1,34 +1,31 @@
 "use client";
 
+import { ToggleGroup, ToggleGroupItem } from "@/components/shadcn/toggle-group";
 import { useDisplayMode } from "./ModeProvider";
 
+/** Web / A4 display switch (shadcn ToggleGroup). */
 export default function ModeToggle() {
   const { mode, setMode } = useDisplayMode();
-  const options = [
-    { value: "web", label: "Web" },
-    { value: "a4", label: "A4" },
-  ] as const;
   return (
-    <div
-      role="group"
+    <ToggleGroup
+      type="single"
+      value={mode}
+      onValueChange={(v) => (v === "web" || v === "a4") && setMode(v)}
       aria-label="Display mode"
-      className="flex shrink-0 rounded-md border border-slate-200 p-0.5 text-xs"
+      className="shrink-0 rounded-md border border-line p-0.5"
     >
-      {options.map((o) => (
-        <button
+      {[
+        { value: "web", label: "Web" },
+        { value: "a4", label: "A4" },
+      ].map((o) => (
+        <ToggleGroupItem
           key={o.value}
-          type="button"
-          aria-pressed={mode === o.value}
-          onClick={() => setMode(o.value)}
-          className={`px-2.5 py-1 rounded transition-colors ${
-            mode === o.value
-              ? "bg-aa-primary text-white font-medium"
-              : "text-slate-500 hover:text-navy-900"
-          }`}
+          value={o.value}
+          className="h-6 min-w-0 rounded px-2.5 text-xs text-ink-muted shadow-none !rounded hover:bg-transparent hover:text-ink data-[state=on]:bg-accent data-[state=on]:font-medium data-[state=on]:text-white"
         >
           {o.label}
-        </button>
+        </ToggleGroupItem>
       ))}
-    </div>
+    </ToggleGroup>
   );
 }

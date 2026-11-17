@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { ToggleGroup, ToggleGroupItem } from "@/components/shadcn/toggle-group";
 
 const STORAGE_KEY = "tc-curriculum";
 
@@ -45,23 +46,23 @@ export default function CurriculumPicker({ panels }: { panels: Panel[] }) {
 
   return (
     <>
-      <div role="group" aria-label="Curriculum" className="flex flex-wrap gap-2">
+      <ToggleGroup
+        type="single"
+        value={selected}
+        onValueChange={(v) => v && choose(v)}
+        aria-label="Curriculum"
+        className="flex flex-wrap gap-2"
+      >
         {chips.map((c) => (
-          <button
+          <ToggleGroupItem
             key={c.id}
-            type="button"
-            aria-pressed={selected === c.id}
-            onClick={() => choose(c.id)}
-            className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
-              selected === c.id
-                ? "border-accent bg-accent text-white"
-                : "border-line bg-surface text-ink-body hover:border-line-strong"
-            }`}
+            value={c.id}
+            className="h-auto flex-none rounded-full border border-line bg-surface px-4 py-1.5 text-sm font-normal text-ink-body shadow-none !rounded-full hover:border-line-strong hover:bg-surface data-[state=on]:border-accent data-[state=on]:bg-accent data-[state=on]:text-white"
           >
             {c.name}
-          </button>
+          </ToggleGroupItem>
         ))}
-      </div>
+      </ToggleGroup>
       <div className="mt-6">
         {panels.map((p) => (
           <div key={p.id} hidden={selected !== "all" && selected !== p.id}>

@@ -68,7 +68,7 @@ function Q({ n, children }: { n: number; children: React.ReactNode }) {
 function AnsLine({ label, wide = false }: { label: string; wide?: boolean }) {
   return (
     <div className="flex items-center gap-2 my-1.5">
-      <span className="font-bold text-sm text-navy-900 whitespace-nowrap">{label}</span>
+      <span className="font-bold text-sm text-navy-900 sm:whitespace-nowrap">{label}</span>
       <input
         type="text"
         aria-label={label}
@@ -1166,7 +1166,7 @@ function Session4() {
 
 export default function AreaVolumePage() {
   return (
-    <main className="min-h-screen pt-16">
+    <main className="min-h-screen pt-14">
       {/* Hero */}
       <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-10 px-6">
         <div className="max-w-4xl mx-auto">
@@ -1196,7 +1196,7 @@ export default function AreaVolumePage() {
       </div>
 
       {/* Sticky session navigator */}
-      <div className="a4-hide sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
+      <div className="a4-hide sticky top-14 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
         <div className="max-w-4xl mx-auto px-6 py-2 flex gap-2 overflow-x-auto">
           {[
             { id: "session-1", label: "Session 1 — Basic Shapes" },

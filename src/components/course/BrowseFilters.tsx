@@ -2,6 +2,7 @@
 
 import { Fragment, type ReactNode } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import FilterSelect from "@/components/nav/FilterSelect";
 
 type Option = { id: string; name: string };
 type Row = { id: string; curriculumId: string; levelIds: string[]; subjectId: string; node: ReactNode };
@@ -43,31 +44,12 @@ export default function BrowseFilters({
   );
   const filtered = Boolean(curriculum || level || subject);
 
-  const select = (id: string, label: string, value: string, opts: Option[], all: string) => (
-    <label htmlFor={id} className="flex flex-col gap-1 text-xs font-medium text-ink-muted min-w-0">
-      {label}
-      <select
-        id={id}
-        value={value}
-        onChange={(e) => set(id, e.target.value)}
-        className="w-full rounded-md border border-line bg-surface px-3 py-2 text-sm text-ink focus:border-accent"
-      >
-        <option value="">{all}</option>
-        {opts.map((o) => (
-          <option key={o.id} value={o.id}>
-            {o.name}
-          </option>
-        ))}
-      </select>
-    </label>
-  );
-
   return (
     <>
       <div className="grid gap-3 sm:grid-cols-3 pb-5 border-b border-line">
-        {select("curriculum", "Curriculum", curriculum, options.curricula, "All curricula")}
-        {select("level", "Grade", level, levelOptions, "All grades")}
-        {select("subject", "Subject", subject, options.subjects, "All subjects")}
+        <FilterSelect label="Curriculum" value={curriculum} options={options.curricula} allLabel="All curricula" onChange={(v) => set("curriculum", v)} />
+        <FilterSelect label="Grade" value={level} options={levelOptions} allLabel="All grades" onChange={(v) => set("level", v)} />
+        <FilterSelect label="Subject" value={subject} options={options.subjects} allLabel="All subjects" onChange={(v) => set("subject", v)} />
       </div>
       <p className="mt-4 text-sm text-ink-faint" aria-live="polite">
         {shown.length} course{shown.length === 1 ? "" : "s"}

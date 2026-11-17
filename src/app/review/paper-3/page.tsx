@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default function ReviewPaper3() {
   return (
     <AnswerRevealProvider>
-      <main className="min-h-screen pt-16">
+      <main className="min-h-screen pt-14">
         <PaperHero
           topic="Sequences &amp; Series"
           course="AI — Unit 1 Number &amp; Algebra (Topic 5)"

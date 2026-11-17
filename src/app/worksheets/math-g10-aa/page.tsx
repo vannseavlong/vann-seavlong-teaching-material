@@ -741,7 +741,7 @@ function Session4() {
 
 export default function MathG10AAWorksheet() {
   return (
-    <main className="min-h-screen pt-16">
+    <main className="min-h-screen pt-14">
       {/* Hero */}
       <div className="bg-slate-50 border-b border-slate-200 text-navy-900 py-10 px-6">
         <div className="max-w-4xl mx-auto">
@@ -771,7 +771,7 @@ export default function MathG10AAWorksheet() {
       </div>
 
       {/* Sticky session navigator */}
-      <div className="a4-hide sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
+      <div className="a4-hide sticky top-14 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 ">
         <div className="max-w-4xl mx-auto px-6 py-2 flex gap-2 overflow-x-auto">
           {[
             { id: "session-1", label: "Session 1 — Indices & Surds" },

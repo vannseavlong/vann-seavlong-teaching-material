@@ -1,33 +1,30 @@
 "use client";
 
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/shadcn/accordion";
+
 type FAQItem = {
   question: string;
   answer: string;
 };
 
+/** Expandable FAQ (shadcn Accordion; several can be open at once). */
 export default function FAQ({ items }: { items: FAQItem[] }) {
   return (
-    <div className="space-y-3">
+    <Accordion type="multiple" className="space-y-3">
       {items.map((item, i) => (
-        <details
+        <AccordionItem
           key={i}
-          className="bg-white border border-slate-200 a4:border-black rounded-xl overflow-hidden group"
+          value={`faq-${i}`}
+          className="overflow-hidden rounded-xl border border-slate-200 bg-white a4:border-black"
         >
-          <summary className="px-6 py-4 cursor-pointer font-semibold text-navy-900 list-none flex items-center gap-3 [&::-webkit-details-marker]:hidden">
-            <span className="text-xl text-aa-primary a4:text-black font-bold shrink-0 w-6 text-center group-open:hidden">
-              +
-            </span>
-            <span className="text-xl text-aa-primary a4:text-black font-bold shrink-0 w-6 text-center hidden group-open:inline">
-              &minus;
-            </span>
+          <AccordionTrigger className="px-6 py-4 text-base font-semibold text-navy-900 hover:no-underline hover:bg-slate-50">
             {item.question}
-          </summary>
-          <div
-            className="px-6 pb-5 pl-[3.25rem] text-slate-500 text-sm"
-            dangerouslySetInnerHTML={{ __html: item.answer }}
-          />
-        </details>
+          </AccordionTrigger>
+          <AccordionContent className="px-6 pb-5 text-sm text-slate-500">
+            <div dangerouslySetInnerHTML={{ __html: item.answer }} />
+          </AccordionContent>
+        </AccordionItem>
       ))}
-    </div>
+    </Accordion>
   );
 }

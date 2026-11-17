@@ -58,7 +58,7 @@ function PendulumDiagram() {
 export default function ReviewPaper1() {
   return (
     <AnswerRevealProvider>
-      <main className="min-h-screen pt-16">
+      <main className="min-h-screen pt-14">
         <PaperHero
           topic="Sequences &amp; Series"
           course="AA — Unit 1 Algebra (Topic 5)"

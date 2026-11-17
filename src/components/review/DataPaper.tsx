@@ -1,6 +1,6 @@
 import { Fragment, ReactNode } from "react";
 import Link from "next/link";
-import { BlockMath, InlineMath } from "@/components/ui/Math";
+import { BlockMath, DisplayMathInline, InlineMath } from "@/components/ui/Math";
 import { AnswerRevealProvider } from "./AnswerReveal";
 import {
   PartHeader,
@@ -30,15 +30,18 @@ function RichText({ text }: { text: string }): ReactNode {
   const block = text.match(/^\\\[([\s\S]+)\\\]$/);
   if (block) return <BlockMath math={block[1]} />;
 
-  const pieces = text.split(/\\\(([\s\S]+?)\\\)/);
+  // Text may mix inline \( \) and display \[ \] maths; display parts render as block spans.
+  const segments = text.split(/\\\[([\s\S]+?)\\\]/);
   return (
     <>
-      {pieces.map((piece, i) =>
-        i % 2 === 1 ? (
-          <InlineMath key={i} math={piece} />
+      {segments.map((seg, si) =>
+        si % 2 === 1 ? (
+          <DisplayMathInline key={si} math={seg} />
         ) : (
-          <Fragment key={i}>{piece}</Fragment>
-        ),
+          seg.split(/\\\(([\s\S]+?)\\\)/).map((piece, i) =>
+            i % 2 === 1 ? <InlineMath key={`${si}-${i}`} math={piece} /> : <Fragment key={`${si}-${i}`}>{piece}</Fragment>
+          )
+        )
       )}
     </>
   );
@@ -79,7 +82,7 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
 
   return (
     <AnswerRevealProvider>
-      <main className="min-h-screen pt-16">
+      <main className="min-h-screen pt-14">
         <PaperHero
           topic={paper.topic}
           backHref={f?.backHref}

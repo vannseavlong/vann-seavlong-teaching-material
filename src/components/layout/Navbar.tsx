@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Cancel01Icon, Menu01Icon } from "@hugeicons/core-free-icons";
+import { Menu01Icon } from "@hugeicons/core-free-icons";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/shadcn/sheet";
 import { useDisplayMode } from "./ModeProvider";
 import ModeToggle from "./ModeToggle";
 import SearchButton from "@/components/search/SearchButton";
@@ -26,6 +27,9 @@ const mainNav: NavItem[] = [
   { label: "Reference", href: "/reference", match: ["/reference"] },
 ];
 
+/** Course pages render their mobile "Units" menu button into this slot (see SidebarNav). */
+export const NAV_COURSE_SLOT = "nav-course-slot";
+
 const isActive = (pathname: string, item: NavItem) =>
   item.match.some((p) => pathname === p || pathname.startsWith(p + "/"));
 
@@ -33,14 +37,6 @@ export default function Navbar({ searchEntries }: { searchEntries?: SearchEntry[
   const pathname = usePathname();
   const { mode } = useDisplayMode();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  // Close the mobile menu on Escape (links close it on click).
-  useEffect(() => {
-    if (!menuOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [menuOpen]);
 
   const linkClass = (active: boolean) =>
     `text-sm px-3 py-1.5 rounded-md whitespace-nowrap transition-colors ${
@@ -72,40 +68,45 @@ export default function Navbar({ searchEntries }: { searchEntries?: SearchEntry[
           })}
         </ul>
 
+        <div id={NAV_COURSE_SLOT} className="flex lg:hidden empty:hidden" />
         {supportsA4(pathname) && <ModeToggle />}
         <SearchButton entries={searchEntries} />
 
-        <button
-          type="button"
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-expanded={menuOpen}
-          aria-controls="main-menu"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          className="md:hidden -mr-1 p-2 rounded-md text-ink-muted hover:bg-surface-alt hover:text-ink"
-        >
-          <HugeiconsIcon icon={menuOpen ? Cancel01Icon : Menu01Icon} size={20} strokeWidth={1.8} />
-        </button>
+        <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+          <SheetTrigger
+            aria-label="Open menu"
+            className="md:hidden -mr-1 rounded-md p-2 text-ink-muted hover:bg-surface-alt hover:text-ink"
+          >
+            <HugeiconsIcon icon={Menu01Icon} size={20} strokeWidth={1.8} />
+          </SheetTrigger>
+          <SheetContent side="right" className="w-72 gap-0 p-0">
+            <SheetHeader className="border-b border-line px-5 py-4">
+              <SheetTitle className="flex items-center gap-2 text-ink">
+                <LogoMark size={24} />
+                {SITE_NAME}
+              </SheetTitle>
+              <SheetDescription className="sr-only">Site navigation</SheetDescription>
+            </SheetHeader>
+            <ul className="space-y-1 p-3">
+              {[{ label: "Home", href: "/", match: [] as string[] }, ...mainNav].map((item) => {
+                const active = item.href === "/" ? pathname === "/" : isActive(pathname, item);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={withMode(item.href, mode)}
+                      aria-current={active ? "page" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`block ${linkClass(active)} py-2.5 text-[15px]`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </SheetContent>
+        </Sheet>
       </div>
-
-      {menuOpen && (
-        <ul id="main-menu" className="md:hidden border-t border-line bg-surface px-4 py-3 space-y-1 shadow-sm">
-          {[{ label: "Home", href: "/", match: [] as string[] }, ...mainNav].map((item) => {
-            const active = item.href === "/" ? pathname === "/" : isActive(pathname, item);
-            return (
-              <li key={item.href}>
-                <Link
-                  href={withMode(item.href, mode)}
-                  aria-current={active ? "page" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className={`block ${linkClass(active)} py-2.5`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
     </nav>
   );
 }

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import Breadcrumbs from "@/components/nav/Breadcrumbs";
 import ResourceRow from "@/components/materials/ResourceRow";
+import ShowMore from "./ShowMore";
 import {
   RESOURCE_KIND_ORDER,
   breadcrumbsFor,
@@ -28,17 +29,11 @@ function MaterialList({ items }: { items: Resource[] }) {
         ))}
       </ul>
       {rest.length > 0 && (
-        <details className="group/more">
-          <summary className="cursor-pointer list-none py-2 text-sm font-medium text-accent hover:underline">
-            <span className="group-open/more:hidden">Show {rest.length} more</span>
-            <span className="hidden group-open/more:inline">Show fewer</span>
-          </summary>
-          <ul className="border-t border-line">
-            {rest.map((r) => (
-              <ResourceRow key={r.id} r={r} />
-            ))}
-          </ul>
-        </details>
+        <ShowMore count={rest.length}>
+          {rest.map((r) => (
+            <ResourceRow key={r.id} r={r} />
+          ))}
+        </ShowMore>
       )}
     </>
   );
