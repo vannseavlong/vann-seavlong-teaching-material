@@ -2,6 +2,11 @@
 
 Merges to `main` across all projects, newest first. Tags: `[Web]`. Format and rules: `Tasks/README.md`.
 
+## 2026-11-18 [Web] AIA Grade 6 Arithmetic Operations: Explain & Practice sheet
+- Owner: SNLRLONG · Task: Web-aia-g6-arithmetic · Commit: 98affd7
+- New sheet `/review/aia/g6-arithmetic-operations`: 7 explanation blocks (operations, properties, BIDMAS, written methods, decimals, negatives, estimation) with worked examples, then 13 practice questions (75 marks) with worked answers.
+- Review papers accept optional `explain` blocks, shown before the questions and in both PDF exports.
+
 ## 2026-11-17 [Web] UI audit: shadcn components, phone layout and maths fixes
 - Owner: SNLRLONG · Task: Tasks/5-done/Web-ui-shadcn-audit.md
 - Native dropdowns, dialogs, search inputs and show/hide blocks replaced with shadcn (Radix) components: filters, search palette (`/`, Ctrl+K), mobile menu and course "Units" sheets, Export PDF menu, FAQ, Reveal Solution.
