@@ -23,6 +23,7 @@ import {
   questionMarks,
   type AiReviewPaper,
 } from "@/lib/ai-review-papers";
+import type { ExplainBlock } from "@/lib/ai-review-papers/types";
 
 // ─── Renders text with \( inline \) math; a whole-string \[ block \] is display math ──
 
@@ -59,6 +60,76 @@ function Step({ text }: { text: string }) {
         </p>
       )}
     </AnswerStep>
+  );
+}
+
+// ─── Explanation blocks (key ideas + fully shown worked examples) ─────────────
+
+function Explain({ blocks }: { blocks: ExplainBlock[] }) {
+  return (
+    <section id="explain" className="scroll-mt-28">
+      <PartHeader variant="exercise" label="Explanation" note="Read the key ideas and worked examples first" />
+      <div className="space-y-8">
+        {blocks.map((b, bi) => (
+          <div key={b.id} id={b.id} className="scroll-mt-28">
+            <h3 className="text-lg font-bold text-navy-900 border-b-2 border-navy-900 pb-2 mb-3">
+              {bi + 1}. {b.title}
+            </h3>
+            <ul className="list-disc pl-5 space-y-1.5 text-sm text-slate-700">
+              {b.points.map((pt, i) => (
+                <li key={i}>
+                  <RichText text={pt} />
+                </li>
+              ))}
+            </ul>
+            {b.table && (
+              <div className="overflow-x-auto my-4">
+                <table className="w-full text-sm border-collapse">
+                  <thead>
+                    <tr>
+                      {b.table.head.map((h, i) => (
+                        <th key={i} className="bg-slate-50 border border-slate-300 px-3 py-2 text-left font-semibold text-navy-900">
+                          <RichText text={h} />
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {b.table.rows.map((r, ri) => (
+                      <tr key={ri}>
+                        {r.map((c, ci) => (
+                          <td key={ci} className="border border-slate-300 px-3 py-2 text-slate-700">
+                            <RichText text={c} />
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            {b.examples?.map((ex, ei) => (
+              <div key={ei} className="mt-4 border-l-4 border-aa-primary bg-slate-50 rounded-r-lg px-4 py-3 a4:break-inside-avoid">
+                <p className="text-xs font-bold uppercase tracking-wider text-aa-primary mb-1">Worked example</p>
+                <p className="text-sm font-medium text-navy-900 mb-2">
+                  <RichText text={ex.q} />
+                </p>
+                <div className="space-y-1 text-sm text-slate-700">
+                  {ex.steps.map((st, si) => (
+                    <div key={si}>
+                      <RichText text={st} />
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm font-bold text-navy-900 mt-2">
+                  Answer: <RichText text={ex.answer} />
+                </p>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -102,7 +173,7 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
           }
         />
 
-        <StickyPaperNav />
+        <StickyPaperNav hasExplain={!!paper.explain?.length} />
 
         <PaperSheet
           title={`${paper.title} — ${paper.subtitle}`}
@@ -112,6 +183,8 @@ export default function DataPaper({ paper }: { paper: AiReviewPaper }) {
           marks={total}
           instructions={f?.instructions ?? ["Answer all questions.", "Show all working; a GDC may be used.", "Give non-exact answers correct to 3 significant figures unless told otherwise."]}
         >
+          {paper.explain?.length ? <Explain blocks={paper.explain} /> : null}
+
           <section id="exercise" className="scroll-mt-28">
             <PartHeader
               variant="exercise"

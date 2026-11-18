@@ -4,12 +4,21 @@
 import type { AiReviewPaper } from "@/lib/ai-review-papers/types";
 import g6Test1 from "./g6Test1";
 import g9Test1 from "./g9Test1";
+import g6Arithmetic from "./g6Arithmetic";
 
-export type AiaTest = { courseId: string; addedOn: string; calculator: boolean; paper: AiReviewPaper };
+export type AiaTest = {
+  courseId: string;
+  addedOn: string;
+  calculator: boolean;
+  /** Catalog kind; defaults to "test" */
+  kind?: "test" | "worksheet";
+  paper: AiReviewPaper;
+};
 
 export const aiaTests: AiaTest[] = [
   { courseId: "aia-g6-math", addedOn: "2026-11-16", calculator: false, paper: g6Test1 },
   { courseId: "aia-g9-math", addedOn: "2026-11-16", calculator: true, paper: g9Test1 },
+  { courseId: "aia-g6-math", addedOn: "2026-11-18", calculator: false, kind: "worksheet", paper: g6Arithmetic },
 ];
 
 export const getAiaTest = (slug: string) => aiaTests.find((t) => t.paper.slug === slug)?.paper;

@@ -74,6 +74,18 @@ export type PaperFrame = {
   backLabel: string;
 };
 
+/** Worked example shown in full (not hidden) in an explanation block */
+export type ExplainExample = { q: string; steps: string[]; answer: string };
+
+/** Teaching block shown before the questions on an "Explain & Practice" sheet */
+export type ExplainBlock = {
+  id: string;
+  title: string;
+  points: string[];
+  table?: { head: string[]; rows: string[][] };
+  examples?: ExplainExample[];
+};
+
 export type AiReviewPaper = {
   slug: string;
   /** Revision session number (1-based) */
@@ -90,6 +102,8 @@ export type AiReviewPaper = {
   source?: string;
   /** Non-IB header text; when set, the lesson link is hidden unless lessonHref is given */
   frame?: PaperFrame;
+  /** Optional explanation section rendered before the questions */
+  explain?: ExplainBlock[];
   questions: ReviewQuestion[];
 };
 

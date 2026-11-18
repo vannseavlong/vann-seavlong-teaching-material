@@ -5,11 +5,11 @@ import { paperMarks } from "@/lib/ai-review-papers/types";
 
 export const AIA = "aia";
 
-const testResources: Resource[] = aiaTests.map(({ courseId, addedOn, calculator, paper }) => ({
+const testResources: Resource[] = aiaTests.map(({ courseId, addedOn, calculator, kind = "test", paper }) => ({
   id: `aia-${paper.slug}`,
-  kind: "test",
+  kind,
   title: paper.title,
-  description: `${paper.topic}.`,
+  description: kind === "worksheet" ? `${paper.subtitle}: key ideas, worked examples and practice.` : `${paper.topic}.`,
   courseId,
   href: `/review/aia/${paper.slug}`,
   status: "available",
